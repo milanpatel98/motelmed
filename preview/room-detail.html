@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" class="mm-shell-html">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title id="rd-page-title">Room — Motel Mediteran</title>
+    <meta name="description" content="Room details at Motel Mediteran, Escondido CA." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/mm-topbar.css?v=14" />
+    <link rel="stylesheet" href="css/mm-footer.css?v=5" />
+    <link rel="stylesheet" href="css/room-detail.css?v=17" />
+    <style>
+      .mm-burger__line {
+        stroke: #0a0a0a !important;
+        stroke-width: 2px !important;
+        vector-effect: non-scaling-stroke;
+      }
+    </style>
+  </head>
+  <body class="mm-shell mm-room-detail">
+    <div class="mm-topbar-sentinel" aria-hidden="true"></div>
+    <div class="mm-topbar-spacer" aria-hidden="true"></div>
+    <header class="mm-topbar" aria-label="Site header">
+      <button
+        class="mm-topbar__menu"
+        type="button"
+        id="mm-menu-btn"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mm-site-nav"
+        aria-haspopup="true"
+      >
+        <svg class="mm-burger" width="68" height="20" viewBox="0 0 68 20" aria-hidden="true" focusable="false">
+          <line class="mm-burger__line" x1="0" y1="2.5" x2="68" y2="2.5" stroke="#0a0a0a" stroke-width="2" />
+          <line class="mm-burger__line" x1="0" y1="10" x2="68" y2="10" stroke="#0a0a0a" stroke-width="2" />
+          <line class="mm-burger__line" x1="0" y1="17.5" x2="68" y2="17.5" stroke="#0a0a0a" stroke-width="2" />
+        </svg>
+      </button>
+      <a class="mm-topbar__brand" href="index.html" aria-label="Motel Mediteran Home">
+        <span class="mm-topbar__logo" aria-hidden="true">MM</span>
+        <span class="mm-topbar__loc">Escondido, California</span>
+      </a>
+      <div class="mm-topbar__right">
+        <a
+          class="mm-topbar__cta"
+          href="http://www.booking.com/hotel/us/motel-mediteran.html?aid=330843;lang=en;pb=1"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Check availability</a
+        >
+        <div class="mm-topbar__lang" aria-label="Language">
+          <button class="mm-lang is-active" type="button" aria-label="English">EN</button>
+          <span class="mm-lang__sep" aria-hidden="true"></span>
+          <button class="mm-lang" type="button" aria-label="Spanish">ES</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="mm-nav" id="mm-site-nav" data-mm-nav aria-hidden="true">
+      <button type="button" class="mm-nav__backdrop" data-mm-nav-close aria-label="Close menu"></button>
+      <nav class="mm-nav__panel" aria-label="Site pages">
+        <button type="button" class="mm-nav__x" data-mm-nav-close aria-label="Close menu">
+          <span aria-hidden="true">×</span>
+        </button>
+        <ul class="mm-nav__list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="rooms.html" aria-current="page">Rooms and suites</a></li>
+          <li><a href="things-to-do.html">Things to do</a></li>
+          <li><a href="amenities.html">Amenities</a></li>
+          <li><a href="directions.html">Directions</a></li>
+          <li><a href="hotel-policies.html">Hotel policies</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Hero -->
+    <section class="rd-hero" aria-label="Room hero">
+      <div class="rd-hero__wrap">
+        <img
+          id="rd-hero-img"
+          class="rd-hero__img"
+          src=""
+          alt=""
+          decoding="async"
+          fetchpriority="high"
+        />
+        <div id="rd-hero-label" class="rd-hero__label"></div>
+      </div>
+    </section>
+
+    <main id="main">
+      <!-- Back link — directly below hero image -->
+      <a class="rd-back" href="rooms.html" aria-label="Back to Rooms and Suites">
+        <img class="rd-back__arrow" src="assets/rooms/hero-arrow-prev.svg" alt="" width="52" height="8" decoding="async" />
+        Rooms &amp; Suites
+      </a>
+
+      <!-- Room info -->
+      <section class="rd-content" aria-label="Room details">
+        <!-- Left: name, specs, reserve -->
+        <div class="rd-left">
+          <h1 id="rd-room-name" class="rd-room-name rd-fade"></h1>
+          <div id="rd-specs" class="rd-specs rd-fade"></div>
+          <div class="rd-rule"></div>
+          <a id="rd-reserve" class="rd-reserve" href="#" target="_blank" rel="noopener noreferrer">Reserve</a>
+        </div>
+
+        <!-- Right: description + features -->
+        <div class="rd-right">
+          <p id="rd-desc" class="rd-desc rd-fade"></p>
+          <div class="rd-section-rule rd-fade"></div>
+          <div class="rd-features-heading rd-fade">What's included</div>
+          <ul id="rd-bullets" class="rd-features rd-fade"></ul>
+        </div>
+      </section>
+
+      <!-- Divider -->
+      <div class="rd-divider rd-fade">
+        <div class="rd-divider__line"></div>
+      </div>
+
+      <!-- Photo gallery -->
+      <section class="rd-gallery rd-fade" aria-label="Room photos">
+        <!-- Frame: arrows live here, clip handles overflow -->
+        <div class="rd-gallery__frame">
+          <div class="rd-gallery__clip">
+            <div id="rd-gallery-track" class="rd-gallery__track"></div>
+            <div id="rd-counter" class="rd-gallery__counter"></div>
+          </div>
+          <button id="rd-prev" class="rd-gallery__arrow rd-gallery__arrow--prev" type="button" aria-label="Previous photo">
+            <img src="assets/rooms/hero-arrow-prev.svg" alt="" width="76" height="12" decoding="async" />
+          </button>
+          <button id="rd-next" class="rd-gallery__arrow rd-gallery__arrow--next" type="button" aria-label="Next photo">
+            <img src="assets/rooms/hero-arrow-next.svg" alt="" width="76" height="12" decoding="async" />
+          </button>
+        </div>
+        <!-- Thumbnail filmstrip -->
+        <div id="rd-thumbs" class="rd-thumbs" aria-label="Photo thumbnails"></div>
+        <!-- Dot indicators -->
+        <div id="rd-dots" class="rd-dots" aria-label="Photo indicators"></div>
+      </section>
+
+    </main>
+
+    <footer class="mm-footer">
+      <div class="mm-footer__inner">
+        <div class="mm-footer__brand-col">
+          <img
+            class="mm-footer__logo"
+            src="assets/mm-logo-mark.png"
+            alt=""
+            width="72"
+            height="72"
+            decoding="async"
+          />
+          <p class="mm-footer__brand">Motel Mediteran</p>
+          <p class="mm-footer__meta">
+            2336 S. Escondido Blvd<br />
+            Escondido, CA 92025<br />
+            Phone <a href="tel:+17607432300">760-743-2300</a>
+          </p>
+          <a
+            class="mm-footer__ig"
+            href="https://www.instagram.com/motelmediteran/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Motel Mediteran on Instagram"
+            ><img
+              class="mm-footer__ig-icon"
+              src="assets/icon-instagram.svg"
+              alt=""
+              width="22"
+              height="22"
+              decoding="async"
+          /></a>
+        </div>
+        <div>
+          <p class="mm-footer__h">Quick links</p>
+          <ul class="mm-footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rooms.html">Rooms and suites</a></li>
+            <li><a href="things-to-do.html">Things to do</a></li>
+            <li><a href="amenities.html">Amenities</a></li>
+            <li><a href="directions.html">Directions</a></li>
+            <li><a href="hotel-policies.html">Hotel policies</a></li>
+            <li><a href="accessibility.html">Accessibility</a></li>
+            <li><a href="faqs.html">FAQs</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="mm-footer__h">Stay with us</p>
+          <p class="mm-footer__note">
+            Free parking, Wi‑Fi, and a pool — plus a central North County location minutes from the Safari Park. Book
+            directly for our best availability.
+          </p>
+          <a
+            class="mm-footer__book"
+            href="http://www.booking.com/hotel/us/motel-mediteran.html?aid=330843;lang=en;pb=1"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Book a room</a
+          >
+        </div>
+      </div>
+      <p class="mm-footer__copy">© Motel Mediteran · Escondido, California</p>
+    </footer>
+
+    <script src="js/mm-topbar.js?v=12"></script>
+    <script src="js/room-detail.js?v=9"></script>
+  </body>
+</html>

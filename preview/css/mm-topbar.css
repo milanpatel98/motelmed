@@ -1,0 +1,545 @@
+/* Shared site chrome — LINE-style top bar + slide nav (use on all preview pages) */
+:root {
+  --mm-ink: #0a0a0a;
+  --mm-paper: #f8f8f6;
+  --mm-shell-pad: clamp(16px, 3vw, 48px);
+  --mm-topbar-h: 128px;
+  --mm-logo-size: 58px;
+}
+
+html.mm-shell-html,
+body.mm-shell {
+  height: 100%;
+}
+
+html.mm-shell-html {
+  overflow-x: clip;
+}
+
+body.mm-shell {
+  margin: 0;
+}
+
+/* Fixed paper grain (site-texture.png) — add class mm-texture-bg on <body> */
+body.mm-texture-bg {
+  background: var(--mm-paper);
+}
+
+body.mm-texture-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("../assets/site-texture.png?v=2") repeat;
+  background-size: 560px auto;
+  opacity: 0.38;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.mm-texture-bg #main.mm-content-page {
+  background: transparent;
+}
+
+/* Empty shell pages — fill viewport below the fixed bar */
+#main.mm-content-page.mm-dir--blank {
+  min-height: calc(100vh - var(--mm-topbar-h));
+  box-sizing: border-box;
+}
+
+body.mm-texture-bg > main {
+  position: relative;
+  z-index: 1;
+}
+
+body.mm-texture-bg > footer.site-footer,
+body.mm-texture-bg > footer.mm-footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* In-flow strip so IntersectionObserver toggles at scroll top (no clip that collapses to 0×0) */
+.mm-topbar-sentinel {
+  height: 1px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Reserves the same vertical space the bar used when it was in-flow (bar is fixed) */
+.mm-topbar-spacer {
+  height: var(--mm-topbar-h);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.mm-topbar {
+  min-height: var(--mm-topbar-h);
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: clamp(14px, 2vw, 22px);
+  padding: 0 max(var(--mm-shell-pad), env(safe-area-inset-right)) 0 0;
+  padding-left: 0;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition:
+    background-color 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+/* WP/block themes often set a solid header background — force clear bar at scroll top */
+body.mm-shell:not(.is-scrolled) .mm-topbar {
+  background-color: transparent !important;
+  border-bottom-color: transparent !important;
+  box-shadow: none !important;
+}
+
+body.mm-shell.is-scrolled .mm-topbar {
+  background-color: #fff !important;
+  border-bottom-color: rgba(10, 10, 10, 0.1) !important;
+  box-shadow: 0 1px 0 rgba(10, 10, 10, 0.06) !important;
+}
+
+.mm-topbar__menu {
+  position: relative;
+  flex: 0 0 auto;
+  width: auto;
+  height: var(--mm-topbar-h);
+  margin: 0;
+  padding: 0 14px 0 env(safe-area-inset-left, 0px);
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: var(--mm-ink);
+}
+
+.mm-topbar__menu:focus-visible {
+  outline: 2px solid rgba(16, 16, 16, 0.45);
+  outline-offset: 3px;
+}
+
+.mm-burger {
+  display: block;
+  flex-shrink: 0;
+}
+
+.mm-burger__line {
+  stroke: currentColor;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  shape-rendering: geometricPrecision;
+}
+
+.mm-topbar__brand {
+  position: relative;
+  flex: 0 1 auto;
+  min-width: 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--mm-ink);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(12px, 1.6vw, 18px);
+  letter-spacing: 0.22em;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.mm-topbar__logo {
+  width: var(--mm-logo-size);
+  height: var(--mm-logo-size);
+  flex: 0 0 auto;
+  border: 1px solid rgba(16, 16, 16, 0.55);
+  display: grid;
+  place-items: center;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", Times, serif;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.mm-topbar__loc {
+  letter-spacing: 0.26em;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(10, 10, 10, 0.88);
+}
+
+.mm-topbar__right {
+  position: relative;
+  flex: 0 0 auto;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(14px, 2vw, 22px);
+}
+
+.mm-topbar__cta {
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 10px;
+  font-weight: 700;
+  border: 1px solid rgba(10, 10, 10, 0.88);
+  padding: 11px clamp(18px, 2.2vw, 28px);
+  border-radius: 999px;
+  color: var(--mm-ink);
+  background: transparent;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.mm-topbar__cta:hover {
+  background: #0a0a0a;
+  color: #fff;
+  border-color: #0a0a0a;
+}
+
+.mm-topbar__lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: rgba(16, 16, 16, 0.72);
+}
+
+.mm-lang__sep {
+  display: inline-block;
+  width: 1px;
+  height: 30px;
+  flex-shrink: 0;
+  background: rgba(10, 10, 10, 0.38);
+  user-select: none;
+}
+
+.mm-lang {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(16, 16, 16, 0.55);
+}
+
+.mm-lang.is-active {
+  color: rgba(16, 16, 16, 0.92);
+}
+
+/*
+ * Home: fixed transparent bar stacks over whatever is *behind* it in the viewport.
+ * The in-flow spacer is normally white (body bg), so the bar looked solid white.
+ * Collapse the spacer and pull the hero cover up so the dark image sits under the bar.
+ */
+body.mm-home .mm-topbar-spacer {
+  height: 0;
+}
+
+body.mm-home #main .wp-block-group.is-style-section-3:first-child > .wp-block-cover.alignfull {
+  margin-top: calc(-1 * var(--mm-topbar-h));
+  position: relative;
+  z-index: 1;
+}
+
+/* Home: dark hero under transparent bar — light chrome until scrolled */
+body.mm-home:not(.is-scrolled) .mm-topbar {
+  color: #f4f4f2;
+  background-color: transparent !important;
+}
+
+body.mm-home:not(.is-scrolled) .mm-topbar__logo {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #f4f4f2;
+}
+
+body.mm-home:not(.is-scrolled) .mm-topbar__loc {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Home only: phone before Check availability */
+body.mm-home .mm-topbar__phone {
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--mm-ink);
+  white-space: nowrap;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+body.mm-home:not(.is-scrolled) .mm-topbar__phone {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+body.mm-home .mm-topbar__phone:hover {
+  opacity: 0.75;
+}
+
+body.mm-home:not(.is-scrolled) .mm-topbar__phone:hover {
+  opacity: 1;
+  color: #fff;
+}
+
+body.mm-home:not(.is-scrolled) .mm-topbar__cta {
+  color: #f4f4f2;
+  border-color: rgba(255, 255, 255, 0.78);
+}
+
+body.mm-home:not(.is-scrolled) .mm-topbar__cta:hover {
+  background: #fff;
+  color: #0a0a0a;
+  border-color: #fff;
+}
+
+body.mm-home:not(.is-scrolled) .mm-lang {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+body.mm-home:not(.is-scrolled) .mm-lang.is-active {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+body.mm-home:not(.is-scrolled) .mm-lang__sep {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+body.mm-home:not(.is-scrolled) .mm-burger__line {
+  stroke: #f4f4f2 !important;
+}
+
+/* Scroll lock while menu is open — see mm-topbar.js */
+body.mm-nav-open {
+  overscroll-behavior: none;
+}
+
+.mm-nav {
+  position: fixed;
+  top: var(--mm-topbar-h);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  pointer-events: none;
+  visibility: hidden;
+  transition: visibility 0.3s;
+}
+
+.mm-nav.is-open {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.mm-nav__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  background: rgba(10, 10, 10, 0.38);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+
+.mm-nav.is-open .mm-nav__backdrop {
+  opacity: 1;
+}
+
+.mm-nav__panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  height: 100%;
+  width: min(380px, 92vw);
+  box-sizing: border-box;
+  padding: 28px 28px 32px;
+  background: var(--mm-paper);
+  box-shadow: 6px 0 32px rgba(0, 0, 0, 0.12);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.mm-nav.is-open .mm-nav__panel {
+  transform: translateX(0);
+}
+
+.mm-nav__x {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--mm-ink);
+  display: grid;
+  place-items: center;
+}
+
+.mm-nav__x:focus-visible {
+  outline: 2px solid rgba(16, 16, 16, 0.45);
+  outline-offset: 2px;
+}
+
+.mm-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 40px 0 0;
+}
+
+.mm-nav__list li {
+  border-bottom: 1px solid rgba(10, 10, 10, 0.12);
+}
+
+.mm-nav__list a {
+  display: block;
+  padding: 18px 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--mm-ink);
+}
+
+.mm-nav__list a:hover {
+  color: rgba(10, 10, 10, 0.55);
+}
+
+@media (max-width: 860px) {
+  :root {
+    --mm-topbar-h: 84px;
+    --mm-logo-size: 48px;
+  }
+
+  .mm-topbar {
+    min-height: var(--mm-topbar-h);
+    gap: 10px;
+    padding: 0 clamp(14px, 4vw, 22px) 0 0;
+    padding-left: 0;
+  }
+
+  .mm-topbar__brand {
+    gap: 8px;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+  }
+
+  .mm-topbar__logo {
+    width: var(--mm-logo-size);
+    height: var(--mm-logo-size);
+    font-size: 11px;
+  }
+
+  .mm-topbar__loc {
+    font-size: 8px;
+    letter-spacing: 0.16em;
+    font-weight: 700;
+  }
+
+  .mm-topbar__lang {
+    display: none;
+  }
+
+  .mm-topbar__cta {
+    padding: 9px 12px;
+    letter-spacing: 0.12em;
+    font-size: 8px;
+    font-weight: 700;
+  }
+
+  body.mm-home .mm-topbar__phone {
+    font-size: 8px;
+    letter-spacing: 0.08em;
+  }
+
+  .mm-topbar__menu {
+    width: auto;
+    height: var(--mm-topbar-h);
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: 12px;
+  }
+
+  .mm-burger {
+    width: 58px;
+    height: auto;
+  }
+
+  .mm-topbar__right {
+    gap: 8px;
+  }
+}
+
+/* Phones: home stacks phone + CTA + long location — hide nonessential row items */
+@media (max-width: 640px) {
+  body.mm-home .mm-topbar__phone {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .mm-topbar {
+    gap: 6px;
+    padding-right: max(10px, env(safe-area-inset-right));
+  }
+
+  .mm-topbar__loc {
+    display: none;
+  }
+
+  .mm-topbar__brand {
+    gap: 0;
+  }
+
+  .mm-topbar__cta {
+    padding: 8px 10px;
+    letter-spacing: 0.1em;
+    font-size: 7px;
+    font-weight: 800;
+  }
+
+  .mm-topbar__right {
+    flex-shrink: 0;
+    gap: 6px;
+  }
+
+  .mm-topbar__menu {
+    padding-right: 6px;
+    flex-shrink: 0;
+  }
+
+  .mm-burger {
+    width: 52px;
+  }
+}

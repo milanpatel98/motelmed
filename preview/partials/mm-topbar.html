@@ -1,0 +1,65 @@
+<!--
+  Canonical markup for the shared LINE-style top bar + slide-out nav.
+  Copy into each page after the skip link (or first in <body>):
+  - Set <html class="mm-shell-html"> and add class mm-shell on <body> (plus page-specific classes).
+  - Optional: add body class mm-home when the first screen is a dark hero so the transparent bar uses light chrome.
+  - Link css/mm-topbar.css?v=14 and js/mm-topbar.js?v=12 (before page-specific CSS/JS).
+  - Link css/mm-footer.css?v=5 after mm-topbar for the shared white footer bar; place the <footer class="mm-footer"> block before scripts (see directions.html).
+  - On one nav link per page, add aria-current="page".
+-->
+<div class="mm-topbar-sentinel" aria-hidden="true"></div>
+<div class="mm-topbar-spacer" aria-hidden="true"></div>
+<header class="mm-topbar" aria-label="Site header">
+  <button
+    class="mm-topbar__menu"
+    type="button"
+    id="mm-menu-btn"
+    aria-label="Open menu"
+    aria-expanded="false"
+    aria-controls="mm-site-nav"
+    aria-haspopup="true"
+  >
+    <svg class="mm-burger" width="68" height="20" viewBox="0 0 68 20" aria-hidden="true" focusable="false">
+      <line class="mm-burger__line" x1="0" y1="2.5" x2="68" y2="2.5" stroke="#0a0a0a" stroke-width="2" />
+      <line class="mm-burger__line" x1="0" y1="10" x2="68" y2="10" stroke="#0a0a0a" stroke-width="2" />
+      <line class="mm-burger__line" x1="0" y1="17.5" x2="68" y2="17.5" stroke="#0a0a0a" stroke-width="2" />
+    </svg>
+  </button>
+  <a class="mm-topbar__brand" href="index.html" aria-label="Motel Mediteran Home">
+    <span class="mm-topbar__logo" aria-hidden="true">MM</span>
+    <span class="mm-topbar__loc">Escondido, California</span>
+  </a>
+  <div class="mm-topbar__right">
+    <a
+      class="mm-topbar__cta"
+      href="http://www.booking.com/hotel/us/motel-mediteran.html?aid=330843;lang=en;pb=1"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Check availability</a
+    >
+    <div class="mm-topbar__lang" aria-label="Language">
+      <button class="mm-lang is-active" type="button" aria-label="English">EN</button>
+      <span class="mm-lang__sep" aria-hidden="true"></span>
+      <button class="mm-lang" type="button" aria-label="Spanish">ES</button>
+    </div>
+  </div>
+</header>
+
+<div class="mm-nav" id="mm-site-nav" data-mm-nav aria-hidden="true">
+  <button type="button" class="mm-nav__backdrop" data-mm-nav-close aria-label="Close menu"></button>
+  <nav class="mm-nav__panel" aria-label="Site pages">
+    <button type="button" class="mm-nav__x" data-mm-nav-close aria-label="Close menu">
+      <span aria-hidden="true">×</span>
+    </button>
+    <ul class="mm-nav__list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="rooms.html">Rooms and suites</a></li>
+      <li><a href="things-to-do.html">Things to do</a></li>
+      <li><a href="amenities.html">Amenities</a></li>
+      <li><a href="directions.html">Directions</a></li>
+      <li><a href="hotel-policies.html">Hotel policies</a></li>
+      <li><a href="accessibility.html">Accessibility</a></li>
+      <li><a href="faqs.html">FAQs</a></li>
+    </ul>
+  </nav>
+</div>
