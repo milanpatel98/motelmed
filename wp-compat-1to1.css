@@ -1,0 +1,1292 @@
+/* Static preview: layout + polish (WordPress injects these via global-styles + layout). */
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 12px;
+  background: var(--wp--preset--color--theme-1);
+  color: var(--wp--preset--color--theme-5);
+  padding: 12px 16px;
+  z-index: 100000;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  left: 12px;
+}
+
+/*
+ * Page gutters: alignfull strips are 100% wide; alignwide had no horizontal inset,
+ * so images sat flush to the screen. Add root padding on main section wrappers.
+ * Skip: hero (section-3) and blocks that already set padding-left in inline styles.
+ */
+main.wp-block-group
+  > .wp-block-group.alignfull:not(.is-style-section-3):not([style*="padding-left"]) {
+  padding-left: var(--wp--style--root--padding-left);
+  padding-right: var(--wp--style--root--padding-right);
+  box-sizing: border-box;
+}
+
+/* Slightly stronger minimum gutter on small screens (token can shrink via min()) */
+@media (max-width: 600px) {
+  main.wp-block-group
+    > .wp-block-group.alignfull:not(.is-style-section-3):not([style*="padding-left"]) {
+    padding-left: max(var(--wp--style--root--padding-left), 1.25rem);
+    padding-right: max(var(--wp--style--root--padding-right), 1.25rem);
+  }
+}
+
+/* --- Cover inner: constrain like theme "layout": constrained --- */
+.wp-block-cover__inner-container {
+  width: 100%;
+  max-width: var(--wp--style--global--wide-size);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+/* --- Header row (theme.json: flex, space-between) --- */
+header.wp-block-group.alignwide {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+header.wp-block-group.alignwide > .wp-block-group:first-child {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+header.wp-block-group.alignwide > .wp-block-group:first-child > .wp-block-group {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+}
+
+header.wp-block-group.alignwide > .wp-block-group:last-child {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.wp-block-group p:empty {
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Columns --- */
+.wp-block-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--30) var(--wp--preset--spacing--60);
+  box-sizing: border-box;
+}
+
+.wp-block-columns.alignwide {
+  max-width: var(--wp--style--global--wide-size);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wp-block-column {
+  min-width: 0;
+  flex-grow: 1;
+}
+
+@media (min-width: 782px) {
+  .wp-block-column[style*="flex-basis:66.66%"] {
+    flex: 1 1 55%;
+    max-width: 66.66%;
+  }
+  .wp-block-column[style*="flex-basis:33.33%"] {
+    flex: 1 1 30%;
+    max-width: 33.33%;
+  }
+  .wp-block-column[style*="flex-basis:40%"] {
+    flex: 1 1 38%;
+    max-width: 40%;
+  }
+  .wp-block-column[style*="flex-basis:30%"] {
+    flex: 1 1 28%;
+    max-width: 30%;
+  }
+}
+
+.are-vertically-aligned-center {
+  align-items: center;
+}
+
+/* Welcome row: stacked title + quote typography (matches live layout).
+   Columns use are-vertically-aligned-center so the heading sits centered between
+   the quote paragraph’s top and bottom on wide layouts. */
+.home-welcome-heading {
+  font-weight: 500;
+  line-height: 1;
+  margin: 0;
+  text-align: left;
+}
+
+.home-welcome-line1 {
+  display: block;
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3.8vw, 2.25rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.home-welcome-socal {
+  display: block;
+  margin-top: 0.16em;
+  font-size: clamp(2.1rem, 5.5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.home-welcome-quote {
+  font-size: clamp(0.875rem, 1.35vw, 1rem);
+  line-height: 1.6;
+  font-style: italic;
+  color: #2a2a2a;
+  margin: 0;
+  max-width: 22em;
+  margin-left: auto;
+  display: flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.home-welcome-quote__text {
+  display: block;
+  transition: opacity 0.45s ease;
+}
+
+.home-welcome-quote__text.is-hidden {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-welcome-quote__text {
+    transition: none;
+  }
+}
+
+@media (min-width: 782px) {
+  .home-welcome-quote {
+    text-align: right;
+  }
+}
+
+@media (max-width: 781px) {
+  .home-welcome-quote {
+    max-width: none;
+    margin-left: 0;
+    text-align: left;
+    margin-top: 1rem;
+  }
+}
+
+/* Very narrow: avoid horizontal overflow from nowrap + clamp() titles */
+@media (max-width: 380px) {
+  .home-welcome-line1,
+  .home-welcome-socal {
+    white-space: normal;
+  }
+}
+
+.is-vertically-aligned-bottom {
+  align-self: flex-end;
+}
+
+/* --- Horizontal image band (Welcome / attractions row) --- */
+/* Fixed gutters (~16px): no space-between — keeps gaps even on wide screens */
+.wp-block-group.alignwide:has(> .wp-block-image) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.wp-block-group.alignwide:has(> .wp-block-image) .wp-block-image {
+  flex: 1 1 0;
+  min-width: min(100%, 200px);
+  max-width: 100%;
+}
+
+.wp-block-group.alignwide:has(> .wp-block-image) .wp-block-image img {
+  width: 100% !important;
+  display: block;
+}
+
+/* --- Amenities grid row (figures + nested groups) --- */
+.wp-block-group.is-style-section-1 > .wp-block-group.alignwide {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+/* Equal-width slots: plain figures + inner image stacks */
+.wp-block-group.is-style-section-1 > .wp-block-group.alignwide > .wp-block-image,
+.wp-block-group.is-style-section-1 > .wp-block-group.alignwide > .wp-block-group {
+  flex: 1 1 0;
+  min-width: min(100%, 140px);
+}
+
+.wp-block-group.is-style-section-1 > .wp-block-group.alignwide > .wp-block-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.wp-block-group.is-style-section-1 > .wp-block-group.alignwide .wp-block-image img {
+  width: 100% !important;
+  display: block;
+}
+
+.wp-block-group.is-style-section-1 .wp-block-group.alignwide figure {
+  flex: 0 1 auto;
+  width: 100%;
+  margin: 0;
+}
+
+/* Prevent accidental horizontal page panning */
+@supports (overflow: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+}
+
+@supports not (overflow: clip) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* --- Amenities: carousel + navy icon tile → faded photo + copy on hover / focus --- */
+.home-amenities-carousel {
+  width: 100%;
+  overflow: visible;
+}
+
+/* Single watermark layer for both Amenities + next section */
+.wp-block-group.alignfull.is-style-section-1 {
+  position: relative;
+  overflow: visible;
+}
+
+.wp-block-group.alignfull.is-style-section-1::before {
+  content: "";
+  position: absolute;
+  /*
+   * Let it spill outside the section (as a watermark), but rely on
+   * html/body overflow-x clipping to prevent horizontal scrolling.
+   */
+  /* Extend well past next section so watermark doesn't “stop” mid-page */
+  inset: -260px -140px -900px -540px;
+  opacity: 0.22;
+  /*
+   * Cross-browser fallback:
+   * - draw the transparent PNG directly
+   * - tint it to the same navy via filter (so it reads on light backgrounds)
+   */
+  background: url("assets/logo_transparent_hd.png") no-repeat calc(-18vw) calc(46% + 420px);
+  background-size: min(3050px, 235vw) auto;
+  mix-blend-mode: multiply;
+  filter: brightness(0) saturate(100%) invert(14%) sepia(15%) saturate(2700%) hue-rotate(190deg)
+    brightness(0.55) contrast(1.2);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Prefer masks when supported (closest match to Safari) */
+@supports ((-webkit-mask-image: url("x")) or (mask-image: url("x"))) {
+  .wp-block-group.alignfull.is-style-section-1::before {
+    background: none;
+    mix-blend-mode: normal;
+    filter: none;
+    background-color: rgba(26, 45, 74, 0.22);
+    -webkit-mask-image: url("assets/logo_transparent_hd.png");
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: calc(-18vw) calc(46% + 420px);
+    -webkit-mask-size: min(3050px, 235vw) auto;
+    mask-image: url("assets/logo_transparent_hd.png");
+    mask-repeat: no-repeat;
+    mask-position: calc(-18vw) calc(46% + 420px);
+    mask-size: min(3050px, 235vw) auto;
+  }
+}
+
+.wp-block-group.alignfull.is-style-section-1 > * {
+  position: relative;
+  z-index: 1;
+}
+
+/*
+ * The next section after Amenities has a white background that would hide the
+ * watermark. Make it slightly translucent so the watermark still reads, while
+ * keeping text legible.
+ */
+/* Make the whole “For you and your family / For Business Travel” section transparent */
+.home-about-watermark-zone,
+.home-about-watermark-zone * {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* (Watermark is drawn once on the section-1 wrapper above) */
+
+.home-amenities-carousel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.home-amenities-carousel__viewport {
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.home-amenities-cards {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 16px;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 2px; /* room for focus ring */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbar, keep scrollability */
+.home-amenities-cards::-webkit-scrollbar {
+  height: 0;
+}
+.home-amenities-cards {
+  scrollbar-width: none;
+}
+
+.home-amenities-cards > .home-amenity-card {
+  position: relative;
+  /* Match the old “4-up” sizing. */
+  flex: 0 0 calc((100% - (16px * 3)) / 4);
+  min-width: 220px;
+  min-height: clamp(260px, 34vw, 400px);
+  border-radius: 18px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  outline: none;
+  scroll-snap-align: start;
+}
+
+.home-amenity-card__photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.08);
+  transition: opacity 0.45s ease, transform 0.55s ease;
+  opacity: 0;
+}
+
+.home-amenity-card__photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    165deg,
+    rgba(26, 45, 74, 0.38) 0%,
+    rgba(26, 45, 74, 0.52) 42%,
+    rgba(12, 24, 42, 0.78) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.home-amenity-card:hover .home-amenity-card__photo,
+.home-amenity-card:focus-visible .home-amenity-card__photo {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.home-amenity-card:hover .home-amenity-card__photo::after,
+.home-amenity-card:focus-visible .home-amenity-card__photo::after {
+  opacity: 1;
+}
+
+.home-amenity-card__idle {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: #1a2d4a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  transition: opacity 0.4s ease;
+}
+
+.home-amenity-card:hover .home-amenity-card__idle,
+.home-amenity-card:focus-visible .home-amenity-card__idle {
+  opacity: 0;
+}
+
+.home-amenity-card__icon {
+  color: #fff;
+  display: flex;
+}
+
+.home-amenity-card__label {
+  font-family: var(--wp--preset--font-family--inter), system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.home-amenity-card__hover {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.9rem, 2.8vw, 1.35rem);
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.38s ease 0.04s;
+  color: #fff;
+}
+
+.home-amenity-card:hover .home-amenity-card__hover,
+.home-amenity-card:focus-visible .home-amenity-card__hover {
+  opacity: 1;
+}
+
+.home-amenity-card__hover-icon {
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 0.25rem;
+  display: flex;
+}
+
+.home-amenity-card__title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  line-height: 1.15;
+  color: #fff;
+}
+
+.home-amenity-card__body {
+  font-family: var(--wp--preset--font-family--inter), system-ui, sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin: 0 0 1rem;
+  max-width: 28ch;
+  color: rgba(255, 255, 255, 0.93);
+}
+
+.home-amenity-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  font-family: var(--wp--preset--font-family--inter), system-ui, sans-serif;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  padding: 0.5rem 1rem;
+}
+
+.home-amenity-card:focus-visible {
+  box-shadow: 0 0 0 3px #fff, 0 0 0 6px #1a2d4a;
+}
+
+/* Pager (reference): flex line + gap + hollow dots / hollow pill + “n / m” */
+.home-amenities-carousel__pager {
+  margin-top: 18px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/*
+ * Line stops shorter; dots + “n / m” centered on the 4th visible card (≈ 7/8 of row).
+ * --amenities-pager-anchor: horizontal center of that card; --amenities-pager-line-inset: gap past anchor for cluster.
+ */
+.home-amenities-carousel__pager-bar {
+  --amenities-pager-blue: #1a2d4a;
+  --amenities-pager-anchor: 87.5%;
+  --amenities-pager-line-inset: clamp(5.1rem, 14vw, 6.6rem);
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-height: 1.35rem;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.home-amenities-carousel__line-track {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(var(--amenities-pager-anchor) - var(--amenities-pager-line-inset));
+  max-width: calc(100% - 2rem);
+  min-width: 2rem;
+  height: 2px;
+  background-color: var(--amenities-pager-blue);
+  border: 0;
+  border-radius: 1px;
+}
+
+.home-amenities-carousel__pager-controls {
+  position: absolute;
+  left: var(--amenities-pager-anchor);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: clamp(6px, 1vw, 10px);
+}
+
+@media (max-width: 781px) {
+  .home-amenities-carousel__pager-bar {
+    --amenities-pager-anchor: 75%;
+    --amenities-pager-line-inset: clamp(4.5rem, 18vw, 6rem);
+  }
+}
+
+@media (max-width: 520px) {
+  .home-amenities-carousel__pager-bar {
+    --amenities-pager-anchor: 50%;
+    --amenities-pager-line-inset: clamp(4.25rem, 32vw, 5.75rem);
+  }
+}
+
+.home-amenities-carousel__dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.home-amenities-carousel__dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  margin: 0;
+  border-radius: 999px;
+  box-sizing: border-box;
+  border: 1px solid var(--amenities-pager-blue);
+  background: transparent;
+  color: inherit;
+  flex-shrink: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  font: inherit;
+  line-height: 0;
+  vertical-align: middle;
+  transition: width 0.22s ease, border-radius 0.22s ease;
+}
+
+.home-amenities-carousel__dot:focus {
+  outline: none;
+}
+
+.home-amenities-carousel__dot:focus-visible {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--amenities-pager-blue);
+}
+
+.home-amenities-carousel__dot.is-active {
+  width: 26px;
+  height: 7px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid var(--amenities-pager-blue);
+}
+
+.home-amenities-carousel__count {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.05rem, 1.65vw, 1.38rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--amenities-pager-blue);
+  letter-spacing: 0.04em;
+  min-width: 2.5rem;
+  margin-left: 0;
+  justify-content: flex-end;
+}
+
+.home-amenities-carousel__count-slash {
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-amenity-card__photo,
+  .home-amenity-card__idle,
+  .home-amenity-card__hover,
+  .home-amenity-card__photo::after {
+    transition-duration: 0.01ms;
+  }
+  .home-amenities-cards {
+    scroll-behavior: auto;
+  }
+}
+
+@media (max-width: 781px) {
+  .home-amenities-cards {
+    gap: 12px;
+  }
+  .home-amenities-cards > .home-amenity-card {
+    /* 2-up on tablets/large phones */
+    flex-basis: calc((100% - 12px) / 2);
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 520px) {
+  .home-amenities-cards > .home-amenity-card {
+    flex-basis: 100%;
+  }
+  .home-amenities-carousel__pager {
+    margin-top: 12px;
+  }
+}
+
+/* --- Navigation --- */
+.wp-block-navigation__container {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+  align-items: center;
+}
+
+.wp-block-navigation-item__content {
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.wp-block-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+header .wp-block-buttons.is-layout-flex {
+  justify-content: flex-end;
+}
+
+/* --- Jetpack stars --- */
+.wp-block-jetpack-rating-star span {
+  color: var(--wp--preset--color--theme-4);
+  font-size: 1.25rem;
+}
+
+.wp-block-jetpack-rating-star.is-style-filled span {
+  color: #212121;
+}
+
+/* Site title only: sign font (Google Font "Rye"); all other text stays Inter */
+h1.wp-block-site-title.site-title--sign {
+  font-family: var(--wp--preset--font-family--sign);
+  font-weight: 400;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.wp-block-site-title.site-title--sign a {
+  font-family: inherit;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+/* --- Cover typography --- */
+.wp-block-cover .wp-block-site-title a,
+.wp-block-cover .wp-block-navigation-item__content,
+.wp-block-cover .wp-block-navigation-item__label {
+  color: #fefefe;
+}
+
+.wp-block-cover .wp-block-site-title.site-title--sign a {
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Header: phone icon + number (site title replaced in build) */
+.site-header-call {
+  margin: 0;
+}
+
+.header-phone-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: clamp(0.88rem, 2.2vw, 1.02rem);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: inherit;
+}
+
+.header-phone-icon svg {
+  display: block;
+}
+
+.wp-block-cover .header-phone-link {
+  color: #fefefe;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+}
+
+.header-phone-link:hover {
+  opacity: 0.9;
+}
+
+.wp-block-cover .wp-block-button.is-style-outline .wp-block-button__link {
+  color: #fefefe;
+  border-color: rgba(255, 255, 255, 0.85);
+}
+
+/* --- Footer --- */
+footer.site-footer-container .wp-block-social-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+footer.site-footer-container .wp-block-social-link a {
+  text-decoration: none;
+}
+
+/* Reviews columns */
+.wp-block-group.alignfull .wp-block-columns.alignwide {
+  max-width: var(--wp--style--global--wide-size);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- Google reviews (dynamic JSON + rotation) --- */
+.google-reviews-wrap {
+  width: 100%;
+}
+
+.google-reviews-loading {
+  margin: 0 0 1rem;
+  color: #555;
+}
+
+.google-reviews-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+  align-items: flex-start;
+}
+
+.google-reviews-row .google-reviews-column {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.google-reviews-row .is-testimonial-review {
+  margin: 0.5rem 0;
+}
+
+.google-reviews-avatar {
+  margin: 0.5rem 0 0.25rem;
+}
+
+.google-reviews-avatar--placeholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 100px;
+  background: var(--wp--preset--color--theme-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0 0.25rem;
+}
+
+.google-reviews-initial {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--wp--preset--color--theme-4);
+}
+
+.google-reviews-time {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.google-reviews-attribution {
+  margin: 1.25rem 0 0;
+  color: #555;
+}
+
+.google-reviews-attribution a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* --- Location showcase (map + right text panel) --- */
+.location-feature {
+  position: relative;
+  min-height: clamp(440px, 56vw, 640px);
+  overflow: hidden;
+  background: #f2f2f4;
+}
+
+.location-feature__map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ececf1;
+  background-image:
+    url("assets/location-map-art.svg"),
+    linear-gradient(to bottom, #f1f1f5 0%, #ececf1 100%);
+  background-size:
+    cover,
+    100% 100%;
+  background-position:
+    center,
+    0 0;
+}
+
+.location-feature__map::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(246, 246, 249, 0.08);
+}
+
+.location-feature__map::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(160deg, transparent 0 47%, rgba(139, 158, 182, 0.24) 48% 52%, transparent 53% 100%),
+    linear-gradient(8deg, transparent 0 54%, rgba(160, 178, 197, 0.18) 55% 59%, transparent 60% 100%);
+  opacity: 0.28;
+}
+
+.location-feature__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.22) 0 22%, rgba(255, 255, 255, 0.56) 50%, rgba(248, 248, 250, 0.7) 100%),
+    linear-gradient(to right, rgba(248, 248, 250, 0.08) 0 42%, rgba(248, 248, 250, 0.26) 60%, rgba(248, 248, 250, 0.38) 100%);
+}
+
+.location-feature__pin {
+  position: absolute;
+  left: clamp(36%, 41vw, 47%);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  background: #232a67;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 14px 30px rgba(28, 32, 90, 0.32);
+  animation: none !important;
+  transition: none !important;
+  will-change: auto;
+}
+
+.location-feature__pin span {
+  font-size: 0.92rem;
+  letter-spacing: 0.03em;
+  font-weight: 600;
+}
+
+.location-feature__content {
+  position: relative;
+  z-index: 2;
+  min-height: inherit;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: clamp(2rem, 6vw, 4.5rem) 0;
+}
+
+.location-feature__panel {
+  width: min(100%, 420px);
+  color: #292b3d;
+  background: rgba(248, 248, 251, 0.2);
+  backdrop-filter: blur(2px);
+}
+
+.location-feature__eyebrow {
+  margin: 0 0 0.6rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #3e3f57;
+}
+
+.location-feature__heading {
+  margin: 0;
+  font-family: "Times New Roman", Georgia, serif;
+  color: #1f2a66;
+  font-size: clamp(2.4rem, 5vw, 4.3rem);
+  line-height: 0.96;
+  letter-spacing: -0.01em;
+  max-width: 10ch;
+}
+
+.location-feature__copy {
+  margin: 1.4rem 0 1.6rem;
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  line-height: 1.6;
+  color: #2f2f3f;
+  max-width: 33ch;
+}
+
+.location-feature .wp-block-button.is-style-outline .wp-block-button__link {
+  color: #1f2a66;
+  border-color: rgba(31, 42, 102, 0.46);
+  background: rgba(255, 255, 255, 0.45);
+  padding: 0.72rem 1.6rem;
+}
+
+.location-feature .wp-block-button.is-style-outline .wp-block-button__link:hover {
+  background: rgba(255, 255, 255, 0.66);
+}
+
+@media (max-width: 900px) {
+  .location-feature__content {
+    justify-content: flex-start;
+    padding: 2.2rem 0;
+  }
+
+  .location-feature__panel {
+    width: min(100%, 520px);
+  }
+
+  .location-feature__pin {
+    left: 52%;
+    top: 36%;
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* Prevent horizontal scroll from fixed-width figures on small screens */
+.wp-block-image.is-resized img {
+  max-width: 100%;
+  height: auto !important;
+}
+
+@media (max-width: 781px) {
+  header.wp-block-group.alignwide {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  header.wp-block-group.alignwide > .wp-block-group:last-child {
+    justify-content: flex-start;
+    width: 100%;
+  }
+}
+
+
+/* --- Motion style inspired by modern resort sites --- */
+@media (prefers-reduced-motion: no-preference) {
+  .wp-block-cover__image-background {
+    transform: scale(1.03);
+    transition: transform 1200ms ease;
+  }
+
+  .is-inview .wp-block-cover__image-background {
+    transform: scale(1);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 700ms ease, transform 700ms ease;
+    will-change: opacity, transform;
+  }
+
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .wp-block-button__link,
+  .wp-block-navigation-item__content {
+    transition: transform 200ms ease, opacity 200ms ease, background-color 220ms ease;
+  }
+
+  .wp-block-button__link:hover {
+    transform: translateY(-1px);
+  }
+}
+
+
+/* ---- Home image tightening (WP export preview) ---- */
+.wp-block-image img {
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.wp-block-image.is-resized img {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.wp-block-group.is-style-section-1 > .wp-block-group.alignwide {
+  gap: 16px;
+}
+
+.wp-element-caption {
+  margin-top: 6px;
+  line-height: 1.35;
+}
+
+.wp-block-columns.alignwide {
+  gap: var(--wp--preset--spacing--20) var(--wp--preset--spacing--40);
+}
+
+/* Welcome + quote row: generous space between title block and quote (like reference) */
+.wp-block-columns.alignwide.are-vertically-aligned-center {
+  column-gap: clamp(2rem, 6vw, 4.5rem);
+  row-gap: var(--wp--preset--spacing--30);
+  align-items: center;
+}
+
+@media (max-width: 781px) {
+  .wp-block-group.alignwide:has(> .wp-block-image),
+  .wp-block-group.is-style-section-1 > .wp-block-group.alignwide {
+    gap: 12px;
+  }
+}
+
+/* --- Home: full-bleed map → white fade + right copy (reference 1:1 layout) --- */
+.home-location-strip-wrap {
+  background: #ffffff;
+}
+
+.home-location-strip--bleed {
+  position: relative;
+  min-height: clamp(440px, 56vw, 720px);
+  overflow: hidden;
+}
+
+.home-location-map-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Reference: no Gaussian blur — only white fade (right + soft bottom vignette). */
+.home-location-map-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 58%,
+      rgba(255, 255, 255, 0.35) 82%,
+      rgba(255, 255, 255, 0.92) 100%
+    ),
+    linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 40%,
+      rgba(255, 255, 255, 0.12) 48%,
+      rgba(255, 255, 255, 0.55) 56%,
+      rgba(255, 255, 255, 0.92) 66%,
+      #ffffff 76%,
+      #ffffff 100%
+    );
+}
+
+/* Let clicks reach the map/zoom; only the text block captures pointer events. */
+.home-location-copy {
+  position: relative;
+  z-index: 2;
+  min-height: clamp(440px, 56vw, 720px);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  max-width: var(--wp--style--global--wide-size);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  padding-left: var(--wp--style--root--padding-left, var(--wp--custom--gap--horizontal));
+  padding-right: var(--wp--style--root--padding-right, var(--wp--custom--gap--horizontal));
+  pointer-events: none;
+}
+
+.home-location-copy-inner {
+  max-width: min(22rem, 100%);
+  padding: clamp(0.75rem, 2vw, 1.5rem) 0;
+  pointer-events: auto;
+}
+
+@media (min-width: 901px) {
+  .home-location-copy-inner {
+    margin-right: clamp(1.25rem, 3.5vw, 2.75rem);
+  }
+}
+
+.home-location-eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #1a2d4a;
+}
+
+.home-location-heading {
+  margin: 0 0 1.1rem;
+  color: #1a2d4a;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.35rem, 4.5vw, 3.15rem);
+  line-height: 1.08;
+}
+
+.home-location-body {
+  margin: 0 0 1.15rem;
+  color: #1a2d4a;
+  line-height: 1.75;
+  font-size: 0.98rem;
+  font-weight: 450;
+}
+
+.home-location-address {
+  margin: 0 0 1.5rem;
+  color: #1a2d4a;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.home-location-address a {
+  color: #1a2d4a;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.home-location-cta .wp-block-button__link {
+  font-family: var(--wp--preset--font-family--inter), system-ui, -apple-system, sans-serif !important;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  line-height: 1.2;
+  color: #1a2d4a !important;
+  border-color: #1a2d4a !important;
+  background: transparent !important;
+  border-radius: 0;
+  padding: 15px 1.5rem !important;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.home-location-cta .wp-block-button__link:hover,
+.home-location-cta .wp-block-button__link:focus-visible {
+  background: #0a0a0a !important;
+  color: #fff !important;
+  border-color: #0a0a0a !important;
+}
+
+.home-location-btn-arrow {
+  display: inline-block;
+  margin-left: 0.45em;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+@media (max-width: 900px) {
+  .home-location-strip--bleed {
+    min-height: 0;
+  }
+
+  .home-location-map-layer {
+    position: relative;
+    height: clamp(300px, 62vw, 420px);
+  }
+
+  .home-location-map-gradient {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 42%,
+      rgba(255, 255, 255, 0.5) 72%,
+      #ffffff 92%
+    );
+  }
+
+  .home-location-copy {
+    min-height: 0;
+    justify-content: flex-start;
+    padding-top: 0;
+    padding-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .home-location-copy-inner {
+    max-width: 100%;
+    padding-top: 0.25rem;
+  }
+}

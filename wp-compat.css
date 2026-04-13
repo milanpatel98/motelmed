@@ -1,0 +1,96 @@
+/**
+ * Static preview tweaks so Assembler-like markup matches WordPress output more closely.
+ */
+
+/* Flex layout classes used in exported templates */
+.is-layout-flex {
+  display: flex;
+}
+
+.wp-block-navigation .wp-block-navigation__container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.wp-block-navigation-item__content {
+  text-decoration: none;
+  font-size: var(--wp--preset--font-size--small);
+  line-height: 1.3;
+}
+
+/* Hero / cover: light text for header + menu */
+.wp-block-cover .wp-block-site-title a {
+  color: #fefefe;
+  text-decoration: none;
+}
+
+.wp-block-cover .wp-block-navigation-item__content,
+.wp-block-cover .wp-block-navigation-item__label {
+  color: #fefefe;
+}
+
+.wp-block-cover .has-small-font-size a {
+  color: #fefefe !important;
+}
+
+.wp-block-cover .wp-block-button.is-style-outline .wp-block-button__link:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+/* Site title sizing similar to theme.json core/site-title */
+.wp-block-site-title {
+  margin: 0;
+  font-size: var(--wp--preset--font-size--medium);
+  font-weight: 550;
+  line-height: 1.3;
+}
+
+/* Jetpack rating stars (not in core block CSS) */
+.wp-block-jetpack-rating-star span {
+  color: var(--wp--preset--color--theme-4);
+  font-size: 1.25rem;
+}
+
+.wp-block-jetpack-rating-star.is-style-filled span {
+  color: #212121;
+}
+
+/* Social links block basics */
+.wp-block-social-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0;
+}
+
+.wp-block-social-links a {
+  color: inherit;
+}
+
+/* Caption text */
+.wp-element-caption {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* Mobile: stack nav */
+@media (max-width: 781px) {
+  .wp-block-cover .wp-block-group.alignwide.is-layout-flex {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 1rem;
+  }
+
+  .wp-block-navigation .wp-block-navigation__container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" class="mm-shell-html">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Rooms — Motel Mediteran</title>
+    <meta name="description" content="Rooms & suites at Motel Mediteran." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/mm-topbar.css?v=26" />
+    <link rel="stylesheet" href="css/mm-footer.css?v=6" />
+    <link rel="stylesheet" href="css/mm-booking-strip.css?v=55" />
+    <link rel="stylesheet" href="css/rooms.css?v=r167" />
+    <!-- Do not set hero max-width: none — it kills the inset column. Suites chevrons + burger only. -->
+    <style>
+      .mm-shell-html body.mm-rooms button.mm-arrow {
+        background: none !important;
+        background-image: none !important;
+      }
+      .mm-burger__line {
+        stroke: #0a0a0a !important;
+        stroke-width: 2px !important;
+        vector-effect: non-scaling-stroke;
+      }
+    </style>
+  </head>
+  <body class="mm-shell mm-rooms">
+    <div class="mm-topbar-sentinel" aria-hidden="true"></div>
+    <div class="mm-topbar-spacer" aria-hidden="true"></div>
+    <div class="mm-book-data" hidden>
+      <input type="hidden" id="mm-book-checkin" name="checkin" value="" autocomplete="off" />
+      <input type="hidden" id="mm-book-checkout" name="checkout" value="" autocomplete="off" />
+      <input type="hidden" id="mm-book-guests-state" value='[{"adults":2,"children":0}]' autocomplete="off" />
+      <input type="hidden" id="mm-book-no-rooms" value="1" autocomplete="off" />
+      <input type="hidden" id="mm-book-group-adults" value="2" autocomplete="off" />
+      <input type="hidden" id="mm-book-group-children" value="0" autocomplete="off" />
+    </div>
+    <div id="mm-booking-inline" class="mm-booking-inline mm-booking-inline--sentinel" aria-hidden="true"></div>
+    <header class="mm-topbar" aria-label="Site header">
+      <button
+        class="mm-topbar__menu"
+        type="button"
+        id="mm-menu-btn"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mm-site-nav"
+        aria-haspopup="true"
+      >
+        <svg class="mm-burger" width="68" height="20" viewBox="0 0 68 20" aria-hidden="true" focusable="false">
+          <line class="mm-burger__line" x1="0" y1="2.5" x2="68" y2="2.5" stroke="#0a0a0a" stroke-width="2" />
+          <line class="mm-burger__line" x1="0" y1="10" x2="68" y2="10" stroke="#0a0a0a" stroke-width="2" />
+          <line class="mm-burger__line" x1="0" y1="17.5" x2="68" y2="17.5" stroke="#0a0a0a" stroke-width="2" />
+        </svg>
+      </button>
+      <a class="mm-topbar__brand notranslate" href="index.html" aria-label="Motel Mediteran Home">
+        <span class="mm-topbar__logo" aria-hidden="true">MM</span>
+        <span class="mm-topbar__loc">Escondido, California</span>
+      </a>
+      <div class="mm-topbar__right">
+        <a
+          class="mm-topbar__cta"
+          href="book.html"
+         
+         
+          >Check availability</a
+        >
+        <div class="mm-topbar__lang" aria-label="Language">
+          <button class="mm-lang is-active" type="button" aria-label="English">EN</button>
+          <span class="mm-lang__sep" aria-hidden="true"></span>
+          <button class="mm-lang" type="button" data-mm-lang="es" aria-label="Spanish">ES</button>
+        </div>
+      </div>
+    </header>
+
+    <div
+      class="mm-nav"
+      id="mm-site-nav"
+      data-mm-nav
+      aria-hidden="true"
+    >
+      <button type="button" class="mm-nav__backdrop" data-mm-nav-close aria-label="Close menu"></button>
+      <nav class="mm-nav__panel" aria-label="Site pages">
+        <button type="button" class="mm-nav__x" data-mm-nav-close aria-label="Close menu">
+          <span aria-hidden="true">×</span>
+        </button>
+        <ul class="mm-nav__list">
+          <li><a href="index.html">Home</a></li>
+          <li>
+            <a href="rooms.html" class="notranslate" translate="no" aria-current="page"
+              ><span class="mm-nav__i18n-en">Rooms and suites</span
+              ><span class="mm-nav__i18n-es" lang="es">Habitaciones</span></a
+            >
+          </li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="things-to-do.html">Things to do</a></li>
+          <li><a href="amenities.html">Amenities</a></li>
+          <li><a href="directions.html">Directions</a></li>
+          <li><a href="hotel-policies.html">Hotel policies</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <section class="mm-hero" aria-label="Rooms hero">
+      <div class="mm-hero__media" data-mm-slider="hero">
+        <div class="mm-hero__frame">
+          <button class="mm-arrow mm-arrow--prev" type="button" aria-label="Previous image">
+            <img
+              class="mm-arrow__img"
+              src="assets/rooms/hero-arrow-prev.svg"
+              alt=""
+              width="59"
+              height="8"
+              decoding="async"
+            />
+          </button>
+          <div class="mm-hero__stage"></div>
+          <button class="mm-arrow mm-arrow--next" type="button" aria-label="Next image">
+            <img
+              class="mm-arrow__img"
+              src="assets/rooms/hero-arrow-next.svg"
+              alt=""
+              width="59"
+              height="8"
+              decoding="async"
+            />
+          </button>
+        </div>
+        <div class="mm-hero__below">
+          <div class="mm-dots" aria-label="Slide dots" data-mm-dots></div>
+          <div class="mm-caption-rail" aria-live="polite">
+            <div class="mm-caption-track"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="mm-page" id="main">
+      <section class="mm-intro" aria-label="Rooms & Suites introduction">
+        <h1 class="mm-title notranslate" translate="no">
+          <span class="mm-nav__i18n-en">Rooms &amp; Suites</span><span class="mm-nav__i18n-es" lang="es">Habitaciones y suites</span>
+        </h1>
+        <div class="mm-subtitle">Make yourself at home</div>
+        <p class="mm-lead">
+          Updated non-smoking rooms in Escondido, designed for comfort and
+          <span class="mm-lead__ul">easy stays</span> near I‑15.
+        </p>
+        <div class="mm-down" aria-hidden="true"></div>
+      </section>
+
+      <section class="mm-section" id="suites">
+        <h2 class="mm-h2 notranslate" translate="no">Suites</h2>
+        <div class="mm-wide" data-mm-slider="suites">
+          <div class="mm-wide__frame">
+            <button class="mm-arrow mm-arrow--prev" type="button" aria-label="Previous suite">
+              <img
+                class="mm-arrow__img"
+                src="assets/rooms/suites-arrow-prev.svg"
+                alt=""
+                width="59"
+                height="8"
+                decoding="async"
+              />
+            </button>
+            <div class="mm-wide__stage"></div>
+            <button class="mm-arrow mm-arrow--next" type="button" aria-label="Next suite">
+              <img
+                class="mm-arrow__img"
+                src="assets/rooms/suites-arrow-next.svg"
+                alt=""
+                width="59"
+                height="8"
+                decoding="async"
+              />
+            </button>
+          </div>
+
+          <div class="mm-suite-meta-rail" aria-live="polite">
+            <div class="mm-suite-meta-track"></div>
+          </div>
+        </div>
+
+        <div class="mm-suite-detail-rail" aria-live="polite">
+          <div class="mm-suite-detail-track">
+            <div class="mm-suite-detail-slide">
+              <div class="mm-detail">
+                <h3 class="mm-detail__title">Features</h3>
+                <p class="mm-detail__text">
+                  Spacious king suite with kitchen conveniences, flexible lounging space, and modern essentials for longer, comfortable stays.
+                </p>
+                <button class="mm-viewall" type="button" aria-expanded="false" data-mm-viewall>
+                  <span class="mm-viewall__label">View all <span class="mm-plus" aria-hidden="true">+</span></span>
+                </button>
+                <div class="mm-box" data-mm-viewall-panel hidden>
+                  <ul class="mm-list">
+                    <li>Sleeps 4</li>
+                    <li>Living area</li>
+                    <li>Fireplace</li>
+                    <li>Dining area</li>
+                    <li>Kitchen with 2 stovetops</li>
+                    <li>Full size refrigerator</li>
+                    <li>Microwave</li>
+                    <li>Utensils provided</li>
+                    <li>King bed</li>
+                    <li>Queen bed</li>
+                    <li>In-room jacuzzi hot tub</li>
+                    <li>Flat screen TV</li>
+                    <li>Non-smoking</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mm-section" id="rooms">
+        <h2 class="mm-h2 notranslate" translate="no">
+          <span class="mm-nav__i18n-en">Rooms</span><span class="mm-nav__i18n-es" lang="es">Habitaciones</span>
+        </h2>
+        <div class="mm-wide" data-mm-slider="rooms">
+          <div class="mm-wide__frame">
+            <button class="mm-arrow mm-arrow--prev" type="button" aria-label="Previous room">
+              <img
+                class="mm-arrow__img"
+                src="assets/rooms/suites-arrow-prev.svg"
+                alt=""
+                width="59"
+                height="8"
+                decoding="async"
+              />
+            </button>
+            <div class="mm-wide__stage"></div>
+            <button class="mm-arrow mm-arrow--next" type="button" aria-label="Next room">
+              <img
+                class="mm-arrow__img"
+                src="assets/rooms/suites-arrow-next.svg"
+                alt=""
+                width="59"
+                height="8"
+                decoding="async"
+              />
+            </button>
+          </div>
+
+          <div class="mm-suite-meta-rail" aria-live="polite">
+            <div class="mm-suite-meta-track"></div>
+          </div>
+        </div>
+
+        <div class="mm-suite-detail-rail is-collapsed" aria-live="polite">
+          <div class="mm-suite-detail-track">
+            <div class="mm-suite-detail-slide">
+              <div class="mm-detail">
+                <h3 class="mm-detail__title">Features</h3>
+                <p class="mm-detail__text">
+                  Standard king room with a clean layout and practical essentials for restful overnight stays.
+                </p>
+                <button class="mm-viewall" type="button" aria-expanded="false" data-mm-viewall>
+                  <span class="mm-viewall__label">View all <span class="mm-plus" aria-hidden="true">+</span></span>
+                </button>
+                <div class="mm-box" data-mm-viewall-panel hidden>
+                  <ul class="mm-list">
+                    <li>Sleeps 2</li>
+                    <li>Comfy king size bed</li>
+                    <li>Microwave</li>
+                    <li>Refrigerator</li>
+                    <li>Flat screen TV</li>
+                    <li>Non-smoking</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mm-section" id="ada">
+        <h2 class="mm-h2">ADA</h2>
+        <div class="mm-room">
+          <div class="mm-room__media">
+            <img src="assets/motel-pics/King%20accessible/1.png" alt="ADA Accessible room at Motel Mediteran" />
+          </div>
+          <div class="mm-row mm-row--border">
+            <div class="mm-row__name">ADA accessible</div>
+            <div class="mm-row__actions">
+              <a class="mm-pill" href="room-detail.html?room=ada">View rooms</a>
+              <a class="mm-pill mm-pill--dark" href="book.html" data-book-room="ada" data-book-name="ADA Accessible Room" data-book-price="99" data-book-thumb="assets/motel-pics/King%20accessible/1.png">Reserve</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mm-ada">
+          <p class="mm-ada__lead">
+            Accessible accommodations designed for comfort and convenience, with mobility-friendly features for a smooth and restful stay.
+          </p>
+          <div class="mm-ada__types-title">Accessible Room Types</div>
+          <ul class="mm-ada__types-list">
+            <li>Mobility Accessible King, Roll-In Shower</li>
+            <li>Mobility Accessible Queen, Roll-In Shower</li>
+            <li>Mobility 2 Queen Bed Room, Roll-In Shower</li>
+          </ul>
+          <div class="mm-ada__grid mm-box">
+            <div>
+              <div class="mm-box__title">Mobility Accessible room(s) have the following non-inclusive list of accessible features:</div>
+              <ul class="mm-list">
+                <li>Toilet with grab bars and lowered vanity</li>
+                <li>Roll-in shower with grab bars (as indicated in room type)</li>
+                <li>Lowered light switches for easy eccess</li>
+              </ul>
+            </div>
+            <div>
+              <div class="mm-box__title">Room features:</div>
+              <ul class="mm-list">
+                <li>King size bed or Queen size bed or 2 Queen size bed</li>
+                <li>Refrigerator</li>
+                <li>Microwave</li>
+                <li>Flat screen-TV</li>
+                <li>Non Smoking</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mm-section" id="general">
+        <h2 class="mm-h2">Know before you go</h2>
+        <div class="mm-accordion">
+          <details class="mm-q">
+            <summary>Are rooms pet-friendly?</summary>
+            <div class="mm-a">To keep stays comfortable for all guests, we currently welcome service animals only.</div>
+          </details>
+          <details class="mm-q">
+            <summary>Do rooms include free Wi‑Fi?</summary>
+            <div class="mm-a">Yes. Complimentary high-speed Wi‑Fi is included throughout your stay.</div>
+          </details>
+          <details class="mm-q">
+            <summary>What accessibility features do the ADA rooms have?</summary>
+            <div class="mm-a">
+              Depending on room configuration, ADA accommodations include practical mobility supports such as bathroom
+              grab bars and a roll-in shower.
+            </div>
+          </details>
+          <details class="mm-q">
+            <summary>What is the cancellation policy?</summary>
+            <div class="mm-a">
+              Cancellations should be made at least 48 hours before 3:00 PM on the arrival date to avoid charges. Late changes may
+              incur one night room and tax.
+            </div>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <aside class="mm-booking-strip mm-booking-strip--dock" id="mm-booking-compact" role="complementary" aria-label="Book your stay" aria-hidden="true">
+      <div class="mm-booking-strip__inner">
+        <div class="mm-booking-strip__summary">
+          <div class="mm-booking-strip__summary-track">
+            <span class="mm-booking-strip__name notranslate" translate="no">Motel Mediteran</span>
+            <span class="mm-booking-strip__sep" aria-hidden="true">|</span>
+            <span class="mm-booking-strip__dates"><span class="mm-booking-strip__range" id="mm-book-compact-range" aria-live="polite"></span></span>
+            <span class="mm-booking-strip__sep" aria-hidden="true">|</span>
+            <span class="mm-booking-strip__meta" id="mm-book-compact-guests" aria-live="polite">1 Room · 2 Guests</span>
+            <a class="mm-booking-strip__change" id="mm-booking-strip-change" href="index.html#mm-booking-inline">Change</a>
+          </div>
+        </div>
+        <div class="mm-booking-strip__action">
+          <a
+            class="mm-booking-strip__cta mm-booking-sync"
+            href="book.html"
+           
+           
+            ><svg
+              class="mm-booking-strip__cta-draw"
+              viewBox="0 0 100 40"
+              preserveAspectRatio="none"
+              overflow="visible"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                class="mm-booking-strip__cta-draw-path"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="butt"
+                stroke-linejoin="miter"
+                d="M 1 1 L 99 1 L 99 39 L 1 39 Z"
+              />
+            </svg>
+            <span class="mm-booking-strip__cta-text">Reserve</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <footer class="mm-footer">
+      <div class="mm-footer__inner">
+        <div class="mm-footer__brand-col">
+          <img
+            class="mm-footer__logo"
+            src="assets/mm-logo-mark.png"
+            alt=""
+            width="72"
+            height="72"
+            decoding="async"
+          />
+          <p class="mm-footer__brand"><span class="notranslate" translate="no">Motel Mediteran</span></p>
+          <p class="mm-footer__meta">
+            2336 S. Escondido Blvd<br />
+            Escondido, CA 92025<br />
+            Phone <a href="tel:+17607432300">760-743-2300</a>
+          </p>
+          <a
+            class="mm-footer__ig"
+            href="https://www.instagram.com/motelmediteran/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Motel Mediteran on Instagram"
+            ><img
+              class="mm-footer__ig-icon"
+              src="assets/icon-instagram.svg"
+              alt=""
+              width="22"
+              height="22"
+              decoding="async"
+          /></a>
+        </div>
+        <div>
+          <p class="mm-footer__h">Quick links</p>
+          <ul class="mm-footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rooms.html" class="notranslate" translate="no" aria-current="page"><span class="mm-nav__i18n-en">Rooms and suites</span><span class="mm-nav__i18n-es" lang="es">Habitaciones</span></a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="things-to-do.html">Things to do</a></li>
+            <li><a href="amenities.html">Amenities</a></li>
+            <li><a href="directions.html">Directions</a></li>
+            <li><a href="hotel-policies.html">Hotel policies</a></li>
+            <li><a href="accessibility.html">Accessibility</a></li>
+            <li><a href="faqs.html">FAQs</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="mm-footer__h">Stay with us</p>
+          <p class="mm-footer__note">
+            Free parking, Wi‑Fi, and a pool—plus a central North County location minutes from the Safari Park. Book
+            directly for our best availability.
+          </p>
+          <a
+            class="mm-footer__book"
+            href="book.html"
+           
+           
+            >Book a room</a
+          >
+        </div>
+      </div>
+      <p class="mm-footer__copy">© <span class="notranslate" translate="no">Motel Mediteran</span> · Escondido, California</p>
+    </footer>
+
+    <script src="js/mm-lang.js?v=5"></script>
+    <script src="js/mm-booking-dock.js?v=11"></script>
+    <script src="js/mm-booking-calendar.js?v=5"></script>
+    <script src="js/mm-booking-guests.js?v=1"></script>
+    <script src="js/mm-topbar.js?v=13"></script>
+    <script src="js/rooms.js?v=r64"></script>
+    <script src="js/mm-chat-widget.js?v=41"></script>
+  </body>
+</html>

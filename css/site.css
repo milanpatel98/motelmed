@@ -1,0 +1,1957 @@
+/*
+ * Motel Mediteran preview — styled to match WordPress "Assembler" theme
+ * (see ../site-export/theme.json + templates/home.html)
+ */
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rye&display=swap");
+
+:root {
+  /* theme.json palette */
+  --wp--preset--color--theme-1: #ffffff;
+  --wp--preset--color--theme-2: #eeeeee;
+  --wp--preset--color--theme-3: #bbbbbb;
+  --wp--preset--color--theme-4: #1e1e1e;
+  --wp--preset--color--theme-5: #000000;
+
+  --wp--preset--font-family--inter: "Inter", system-ui, sans-serif;
+  --wp--preset--font-family--sign: "Rye", Georgia, "Times New Roman", serif;
+  --wp--preset--font-size--small: 16px;
+  --wp--preset--font-size--medium: clamp(20px, 1.25rem + 0.5vw, 24px);
+  --wp--preset--font-size--large: 38px;
+  --wp--preset--font-size--x-large: clamp(36px, 5vw, 60px);
+  --wp--preset--font-size--xx-large: clamp(40px, 6vw, 80px);
+
+  --wp--preset--spacing--20: min(
+    calc(10px * (2.5 * 1) * 1px),
+    calc(2.5 * 1 * 2vw)
+  );
+  --wp--preset--spacing--30: min(
+    calc(10px * (2.5 * 2) * 1px),
+    calc(2.5 * 2 * 1vw)
+  );
+  --wp--preset--spacing--40: min(
+    calc(10px * (2.5 * 3) * 1px),
+    calc(2.5 * 3 * 1vw)
+  );
+  --wp--preset--spacing--50: min(
+    calc(10px * (2.5 * 4) * 1px),
+    calc(2.5 * 4 * 1vw)
+  );
+  --wp--preset--spacing--60: min(
+    calc(10px * (2.5 * 5) * 1px),
+    calc(2.5 * 5 * 1vw)
+  );
+  --wp--preset--spacing--80: min(
+    calc(10px * (2.5 * 7) * 1px),
+    calc(2.5 * 7 * 1vw)
+  );
+
+  --content-size: 620px;
+  --wide-size: 1440px;
+  --header-h: 64px;
+  --cover-overlay: #010101;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.roomsx-html,
+html.roomsx-html body.roomsx-body {
+  background: #f3f3f1 url("../assets/site-texture.png?v=2") repeat fixed !important;
+  background-size: 560px auto !important;
+}
+
+body {
+  margin: 0;
+  font-family: var(--wp--preset--font-family--inter);
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--wp--preset--color--theme-4);
+  background: var(--wp--preset--color--theme-1);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Rooms page v2: closer to reference --- */
+.roomsx-body {
+  background: transparent !important;
+}
+
+.roomsx-page {
+  background: transparent;
+  border-top: 1px solid rgba(0, 0, 0, 0.18);
+  position: relative;
+  z-index: 1;
+}
+
+.roomsx-page::before {
+  content: none;
+}
+
+.roomsx-body .site-header.roomsx-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(243, 243, 241, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+.roomsx-body .site-header.roomsx-header .site-header__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.roomsx-body .site-header.roomsx-header .site-nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Match reference: no inline nav links on rooms header */
+.roomsx-body .site-header.roomsx-header .site-nav__links {
+  display: none !important;
+}
+
+.roomsx-body .site-header.roomsx-header .header-phone-link {
+  display: none !important;
+}
+
+.roomsx-brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 11px;
+  font-weight: 800;
+  color: #111;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+
+.roomsx-reserve {
+  margin-left: auto;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid #111;
+  background: transparent !important;
+  color: #111 !important;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.roomsx-body .site-header.roomsx-header .nav-toggle {
+  z-index: 2;
+}
+
+.roomsx-reserve:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+.roomsx-title {
+  font-size: clamp(52px, 6.4vw, 92px);
+  line-height: 0.92;
+}
+
+.roomsx-heading {
+  font-size: clamp(38px, 4.4vw, 66px);
+}
+
+.roomsx-btn {
+  padding: 10px 22px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+.roomsx-slider__arrow {
+  width: 66px;
+  height: 56px;
+  border-radius: 0;
+  border: 0;
+  background: transparent;
+  display: grid;
+  place-items: center;
+}
+
+.roomsx-slider__arrow:focus-visible {
+  outline: 2px solid rgba(16, 16, 16, 0.55);
+  outline-offset: 3px;
+}
+
+.roomsx-slider__arrow:hover {
+  background: transparent;
+}
+
+.roomsx-arrowicon {
+  width: 60px;
+  height: 10px;
+  background: url("../assets/line-arrow.svg") center / contain no-repeat;
+  opacity: 0.9;
+}
+
+.roomsx-arrowicon--left {
+  transform: rotate(180deg);
+}
+
+.roomsx-arrowicon--right {
+  transform: rotate(0deg);
+}
+
+.roomsx-slider__arrow--prev {
+  left: 0;
+}
+
+.roomsx-slider__arrow--next {
+  right: 0;
+}
+
+.roomsx-slider__meta {
+  background: rgba(243, 243, 241, 0.96);
+  border-color: rgba(16, 16, 16, 0.22);
+}
+
+.roomsx-room__actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.roomsx-room__content {
+  align-items: center;
+}
+
+.roomsx-room__content p {
+  margin-top: 8px;
+}
+
+.roomsx-top {
+  padding: 14px 0 18px;
+}
+
+.roomsx-top__under {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.roomsx-dots {
+  margin-top: 0;
+}
+
+.roomsx-top__name {
+  margin: 16px 0 0;
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  font-size: 10px;
+  font-weight: 800;
+  color: rgba(16, 16, 16, 0.86);
+}
+
+.roomsx-titleblock {
+  padding: 28px 0 20px;
+}
+
+.roomsx-down {
+  width: 1px;
+  height: 44px;
+  margin: 14px auto 0;
+  position: relative;
+}
+
+.roomsx-down img {
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  width: 64px;
+  height: auto;
+  transform: translateX(-50%) rotate(90deg);
+  opacity: 0.9;
+}
+
+.roomsx-showcase,
+.roomsx-features,
+.roomsx-collection,
+.roomsx-faq {
+  padding: 34px 0;
+}
+
+.roomsx-heading {
+  margin-bottom: 16px;
+}
+
+.roomsx-feature-intro {
+  margin-bottom: 14px;
+}
+
+.roomsx-down__line {
+  position: absolute;
+  inset: 0;
+  background: rgba(16, 16, 16, 0.28);
+}
+
+.roomsx-down__chev {
+  display: none;
+}
+
+.roomsx-viewall {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px auto 16px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  font-size: 10px;
+  font-weight: 800;
+  color: rgba(16, 16, 16, 0.86);
+  width: 100%;
+}
+
+.roomsx-viewall__icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.roomsx-feature-list--full {
+  margin-bottom: 16px;
+}
+
+.roomsx-ada {
+  margin-top: clamp(26px, 3.4vw, 44px);
+}
+
+.roomsx-ada__title {
+  text-align: center;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  margin: 0 0 8px;
+  font-size: clamp(34px, 4.2vw, 58px);
+}
+
+.roomsx-ada__lead {
+  text-align: center;
+  max-width: 76ch;
+  margin: 0 auto 18px;
+  color: rgba(16, 16, 16, 0.78);
+}
+
+.roomsx-ada__box {
+  border: 1px solid rgba(16, 16, 16, 0.26);
+  padding: 18px 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.roomsx-ada__box strong {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 10px;
+}
+
+.roomsx-ada__box ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+}
+
+.roomsx-wrap {
+  width: min(1240px, calc(100% - 72px));
+  margin: 0 auto;
+}
+
+.roomsx-wrap--narrow {
+  width: min(850px, calc(100% - 72px));
+}
+
+.roomsx-title,
+.roomsx-heading,
+.roomsx-room__content h3,
+.roomsx-slider__name {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  color: #181818;
+}
+
+.roomsx-title {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(46px, 6vw, 82px);
+  letter-spacing: -0.015em;
+  line-height: 0.98;
+}
+
+.roomsx-kicker {
+  margin: 10px 0 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.roomsx-subtitle {
+  margin: 22px auto 0;
+  max-width: 66ch;
+  text-align: center;
+  font-size: 15px;
+  color: rgba(24, 24, 24, 0.76);
+}
+
+.roomsx-divider {
+  width: 1px;
+  height: 56px;
+  margin: 22px auto 0;
+  background: rgba(24, 24, 24, 0.28);
+}
+
+.roomsx-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: 1px solid #101010;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.roomsx-btn--ghost {
+  background: transparent;
+  color: #101010;
+}
+
+.roomsx-btn--primary {
+  background: #000;
+  color: #fff;
+}
+
+.roomsx-hero,
+.roomsx-showcase,
+.roomsx-features,
+.roomsx-collection,
+.roomsx-faq {
+  padding: 34px 0;
+}
+
+.roomsx-heading {
+  margin: 0 0 16px;
+  font-size: clamp(36px, 4.1vw, 62px);
+  text-align: center;
+}
+
+.roomsx-slider {
+  position: relative;
+}
+
+.roomsx-slider__track {
+  position: relative;
+  overflow: hidden;
+  min-height: min(62vw, 640px);
+}
+
+.roomsx-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 320ms ease, transform 320ms ease;
+  pointer-events: none;
+}
+
+.roomsx-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.roomsx-slide img {
+  width: 100%;
+  height: min(62vw, 640px);
+  object-fit: cover;
+  display: block;
+}
+
+.roomsx-slider__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 54px;
+  height: 54px;
+  border: 0;
+  background: transparent;
+  color: rgba(16, 16, 16, 0.8);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.roomsx-slider__arrow--prev {
+  left: -10px;
+}
+
+.roomsx-slider__arrow--next {
+  right: -10px;
+}
+
+.roomsx-slider__meta {
+  margin-top: 0;
+  border: 1px solid rgba(16, 16, 16, 0.17);
+  border-top: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 18px 22px;
+}
+
+.roomsx-slider__name {
+  margin: 0;
+  font-size: clamp(28px, 3vw, 44px);
+}
+
+.roomsx-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.roomsx-dots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 16px;
+}
+
+.roomsx-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  border: 0;
+  background: rgba(0, 0, 0, 0.32);
+  cursor: pointer;
+  padding: 0;
+}
+
+.roomsx-dot.is-active {
+  background: #111;
+}
+
+.roomsx-features {
+  border-top: 1px solid rgba(16, 16, 16, 0.14);
+  border-bottom: 1px solid rgba(16, 16, 16, 0.14);
+}
+
+.roomsx-feature-intro {
+  max-width: 72ch;
+  margin: 0 auto 24px;
+  text-align: center;
+  color: rgba(16, 16, 16, 0.8);
+}
+
+.roomsx-feature-list {
+  border: 1px solid rgba(16, 16, 16, 0.24);
+  padding: 18px 22px;
+  columns: 2;
+  column-gap: 44px;
+}
+
+.roomsx-feature-list span {
+  display: block;
+  margin: 0 0 10px;
+  position: relative;
+  padding-left: 14px;
+  break-inside: avoid;
+}
+
+.roomsx-feature-list span::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  background: #111;
+}
+
+.roomsx-room {
+  margin-bottom: clamp(30px, 4.6vw, 64px);
+}
+
+.roomsx-room img {
+  width: 100%;
+  height: min(56vw, 640px);
+  object-fit: cover;
+  display: block;
+}
+
+.roomsx-room__row {
+  margin-top: 0;
+  border-top: 1px solid rgba(16, 16, 16, 0.22);
+  padding: 14px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.roomsx-room__row h3 {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(30px, 3.4vw, 46px);
+  line-height: 0.95;
+}
+
+.roomsx-room__desc {
+  margin: 12px auto 0;
+  max-width: 74ch;
+  text-align: center;
+  color: rgba(16, 16, 16, 0.78);
+}
+
+.roomsx-faq .roomsx-heading {
+  margin-bottom: 22px;
+}
+
+.roomsx-qa {
+  border: 1px solid rgba(16, 16, 16, 0.32);
+  margin-bottom: 10px;
+}
+
+.roomsx-qa summary {
+  list-style: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.24em;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 12px 36px;
+  position: relative;
+}
+
+.roomsx-qa summary::after {
+  content: "+";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  letter-spacing: 0;
+}
+
+.roomsx-qa[open] summary {
+  background: #000;
+  color: #fff;
+}
+
+.roomsx-qa[open] summary::after {
+  content: "-";
+}
+
+.roomsx-qa p {
+  margin: 0;
+  padding: 18px 20px;
+  text-align: center;
+}
+
+@media (max-width: 960px) {
+  .roomsx-wrap,
+  .roomsx-wrap--narrow {
+    width: min(1240px, calc(100% - 34px));
+  }
+
+  .roomsx-room__row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .roomsx-slider__meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 700px) {
+  .roomsx-feature-list {
+    columns: 1;
+  }
+
+  .roomsx-slider__arrow {
+    width: 42px;
+    height: 42px;
+    font-size: 20px;
+  }
+
+  .roomsx-ada__box {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Directions v3: from-scratch layout --- */
+.dir3-hero {
+  padding: clamp(42px, 6vw, 92px) var(--wp--preset--spacing--40) clamp(24px, 3vw, 40px);
+  border-bottom: 1px solid rgba(26, 45, 74, 0.08);
+  background:
+    radial-gradient(1000px 320px at 50% 0%, rgba(111, 182, 184, 0.18), transparent 70%),
+    #fff;
+}
+
+.dir3-wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.dir3-eyebrow {
+  margin: 0 0 8px;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(26, 45, 74, 0.62);
+}
+
+.dir3-title {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(40px, 5.2vw, 68px);
+  line-height: 1.02;
+  color: #1a2d4a;
+}
+
+.dir3-lead {
+  margin: 10px 0 0;
+  font-size: clamp(16px, 1.1vw, 20px);
+  color: rgba(26, 45, 74, 0.78);
+}
+
+.dir3-main {
+  padding: clamp(28px, 4vw, 46px) var(--wp--preset--spacing--40) clamp(52px, 7vw, 82px);
+}
+
+.dir3-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 460px) 1fr;
+  gap: clamp(16px, 2.5vw, 28px);
+  align-items: stretch;
+}
+
+.dir3-panel {
+  border: 1px solid rgba(26, 45, 74, 0.10);
+  border-radius: 20px;
+  box-shadow: 0 18px 48px rgba(26, 45, 74, 0.09);
+  background: #fff;
+  padding: clamp(18px, 2vw, 24px);
+}
+
+.dir3-panel__title {
+  margin: 0 0 10px;
+  font-size: clamp(24px, 2.1vw, 32px);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  line-height: 1.1;
+}
+
+.dir3-panel__text {
+  margin: 0 0 14px;
+  color: rgba(26, 45, 74, 0.78);
+}
+
+.dir3-meta {
+  margin: 0;
+}
+
+.dir3-meta > div {
+  padding: 10px 0;
+  border-top: 1px dashed rgba(26, 45, 74, 0.16);
+}
+
+.dir3-meta dt {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: rgba(26, 45, 74, 0.55);
+}
+
+.dir3-meta dd {
+  margin: 6px 0 0;
+  color: #1a2d4a;
+  font-weight: 550;
+}
+
+.dir3-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.dir3-btn {
+  border-radius: 999px;
+  padding: 11px 16px;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.dir3-btn--primary {
+  background: #1a2d4a;
+  border: 1px solid #1a2d4a;
+  color: #fff;
+}
+
+.dir3-btn--ghost {
+  background: rgba(26, 45, 74, 0.06);
+  border: 1px solid rgba(26, 45, 74, 0.14);
+  color: #1a2d4a;
+}
+
+.dir3-mapWrap {
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid rgba(26, 45, 74, 0.10);
+  box-shadow: 0 18px 48px rgba(26, 45, 74, 0.09);
+  min-height: clamp(420px, 60vh, 680px);
+}
+
+.dir3-map {
+  width: 100%;
+  height: 100%;
+  min-height: clamp(420px, 60vh, 680px);
+  border: 0;
+  display: block;
+}
+
+@media (max-width: 960px) {
+  .dir3-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Directions page shell --- */
+.directions-page {
+  background: var(--wp--preset--color--theme-1);
+}
+
+/* Keep old classes intact; legacy directions-* */
+.directions-hero {
+  --directions-accent: #6fb6b8;
+  padding: clamp(44px, 6vw, 92px) var(--wp--preset--spacing--40);
+  text-align: center;
+  background: var(--wp--preset--color--theme-1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.directions-hero__inner,
+.directions-contact__inner {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.directions-hero__title {
+  margin: 0 0 14px 0;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  color: color-mix(in srgb, var(--directions-accent) 78%, #000);
+}
+
+.directions-hero__lede {
+  margin: 0 0 18px 0;
+  font-size: clamp(16px, 1.15vw, 20px);
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--wp--preset--color--theme-4) 75%, #000);
+}
+
+.directions-hero__body {
+  margin: 0 0 26px 0;
+  max-width: 60ch;
+  color: color-mix(in srgb, var(--wp--preset--color--theme-4) 72%, #000);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.directions-hero__cta {
+  margin-top: 6px;
+}
+
+.directions-map {
+  padding: 0;
+  background: var(--wp--preset--color--theme-1);
+}
+
+.directions-map__frame {
+  /* Full-bleed map like the reference */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  height: clamp(420px, 56vh, 640px);
+  background: #cfe1e3; /* soft “seafoam” behind tiles while loading */
+  overflow: hidden;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.directions-map__embed {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.directions-bottom-cta {
+  display: flex;
+  justify-content: center;
+  padding: clamp(28px, 4vw, 46px) var(--wp--preset--spacing--40);
+  background: var(--wp--preset--color--theme-1);
+}
+
+.directions-bottom-cta__btn {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  padding: 12px 18px;
+}
+
+.btn--solid-dark {
+  background: var(--wp--preset--color--theme-4);
+  color: var(--wp--preset--color--theme-1);
+  border: 1px solid var(--wp--preset--color--theme-4);
+}
+
+.btn--solid-dark:hover {
+  filter: brightness(0.92);
+}
+
+.directions-contact {
+  background: #56c3c6;
+  color: #fff;
+  padding: clamp(34px, 5vw, 54px) var(--wp--preset--spacing--40);
+}
+
+.directions-contact__block {
+  border-top: 0;
+  padding-top: 0;
+  max-width: 720px;
+}
+
+.directions-contact__name {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.directions-contact__details {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.directions-contact a {
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration-color: rgba(255, 255, 255, 0.7);
+}
+
+.directions-contact a:hover {
+  text-decoration-color: rgba(255, 255, 255, 1);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+a {
+  color: currentColor;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 12px;
+  background: var(--wp--preset--color--theme-1);
+  color: var(--wp--preset--color--theme-5);
+  padding: 12px 16px;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  left: 12px;
+}
+
+/* —— Header (Assembler: inside hero = on dark; subpages = solid) —— */
+.site-header {
+  position: relative;
+  z-index: 10;
+}
+
+.site-header--solid {
+  position: sticky;
+  top: 0;
+  background: var(--wp--preset--color--theme-5);
+  color: var(--wp--preset--color--theme-1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.site-header--overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  background: transparent;
+  color: var(--wp--preset--color--theme-1);
+}
+
+.site-header__inner {
+  max-width: var(--wide-size);
+  margin: 0 auto;
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--40);
+  min-height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.site-brand {
+  font-size: var(--wp--preset--font-size--medium);
+  font-weight: 550;
+  line-height: 1.3;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Site title only: sign font (Rye); rest of page stays Inter */
+.site-brand.site-brand--sign {
+  font-family: var(--wp--preset--font-family--sign);
+  font-weight: 400;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.site-brand:hover {
+  opacity: 0.92;
+}
+
+/* Phone in header (matches home hero header treatment) */
+.header-phone-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  font-family: var(--wp--preset--font-family--inter);
+  font-weight: 600;
+  font-size: clamp(0.88rem, 2vw, 1rem);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: inherit;
+}
+
+.header-phone-link:hover {
+  opacity: 0.9;
+}
+
+.header-phone-icon svg {
+  display: block;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.site-nav__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav__links a {
+  display: block;
+  padding: 8px 10px;
+  font-size: var(--wp--preset--font-size--small);
+  line-height: 1.3;
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.92;
+}
+
+.site-header--solid .site-nav__links a:hover,
+.site-header--solid .site-nav__links a[aria-current="page"] {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.site-header--overlay .site-nav__links a:hover,
+.site-header--overlay .site-nav__links a[aria-current="page"] {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+
+/* Assembler buttons: radius 0, blur on wp-element-button */
+.wp-element-button,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--wp--preset--font-family--inter);
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: 450;
+  padding: 16px 24px;
+  border-radius: 0;
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border, background-color, color, box-shadow, opacity, filter;
+  transition-duration: 0.15s;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(30px);
+}
+
+.btn--primary-dark {
+  background: var(--wp--preset--color--theme-4);
+  color: var(--wp--preset--color--theme-1);
+  border-color: var(--wp--preset--color--theme-4);
+}
+
+.btn--primary-dark:hover {
+  background: color-mix(in srgb, var(--wp--preset--color--theme-5) 85%, #000);
+  color: var(--wp--preset--color--theme-1);
+}
+
+.btn--primary-light {
+  background: var(--wp--preset--color--theme-1);
+  color: var(--wp--preset--color--theme-5);
+  border-color: var(--wp--preset--color--theme-1);
+}
+
+.btn--primary-light:hover {
+  background: color-mix(in srgb, var(--wp--preset--color--theme-1) 85%, #000);
+}
+
+/* Outline = is-style-outline in Assembler */
+.btn--outline-light {
+  background: transparent;
+  color: var(--wp--preset--color--theme-1);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(30px);
+}
+
+.btn--outline-light:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.btn--outline-dark {
+  background: transparent;
+  color: var(--wp--preset--color--theme-4);
+  border: 1px solid var(--wp--preset--color--theme-4);
+}
+
+.btn--outline-dark:hover {
+  background: var(--wp--preset--color--theme-4);
+  color: var(--wp--preset--color--theme-1);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: 0;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  width: 22px;
+  height: 2px;
+  background: currentColor;
+}
+
+@media (max-width: 782px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .site-nav {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    background: var(--wp--preset--color--theme-5);
+    padding: var(--wp--preset--spacing--30);
+    flex-direction: column;
+    align-items: stretch;
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .site-nav.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .site-nav__links {
+    flex-direction: column;
+  }
+
+  .site-nav .wp-element-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* —— Layout utilities (alignwide / constrained) —— */
+.alignwide {
+  max-width: var(--wide-size);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--wp--preset--spacing--40);
+  padding-right: var(--wp--preset--spacing--40);
+}
+
+.alignfull {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main > .section--constrained {
+  max-width: var(--content-size);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--wp--preset--spacing--40);
+  padding-right: var(--wp--preset--spacing--40);
+}
+
+/* —— Hero cover (home.html) —— */
+.wp-block-cover--hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: stretch;
+  color: var(--wp--preset--color--theme-1);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.wp-block-cover--hero .wp-block-cover__media {
+  position: absolute;
+  inset: 0;
+}
+
+.wp-block-cover--hero .wp-block-cover__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.wp-block-cover--hero .wp-block-cover__overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--cover-overlay);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.wp-block-cover--hero .wp-block-cover__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--wide-size);
+  margin: 0 auto;
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--40)
+    var(--wp--preset--spacing--60);
+  display: flex;
+  flex-direction: column;
+  min-height: 70vh;
+}
+
+.wp-block-cover--hero .hero-spacer-top {
+  height: clamp(80px, 18vh, 265px);
+  flex-shrink: 0;
+}
+
+.wp-block-cover--hero .hero-content {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.wp-block-cover--hero h1,
+.wp-block-cover--hero .hero-title {
+  font-family: var(--wp--preset--font-family--inter);
+  font-size: var(--wp--preset--font-size--xx-large);
+  font-weight: 500;
+  line-height: 1;
+  margin: 0 0 var(--wp--preset--spacing--30);
+  color: #fefefe;
+}
+
+.wp-block-cover--hero .hero-lead {
+  margin: 0 0 var(--wp--preset--spacing--40);
+  color: #fefefe;
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.wp-block-cover--hero .wp-block-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.wp-block-cover--hero .wp-block-button__width-50 {
+  min-width: min(100%, 280px);
+}
+
+/* —— Section-1 gray (Amenities block) —— */
+.is-style-section-1 {
+  background: var(--wp--preset--color--theme-2);
+  color: var(--wp--preset--color--theme-5);
+  margin: 0;
+  padding: var(--wp--preset--spacing--60) 0;
+}
+
+/* Default section spacing */
+.section-block {
+  padding: var(--wp--preset--spacing--60) 0;
+  margin: 0;
+}
+
+/* Headings like theme */
+/* Small label (not in Assembler theme.json; useful for sections) */
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--wp--preset--color--theme-4) 75%, transparent);
+  margin: 0 0 0.5rem;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--wp--preset--font-family--inter);
+  font-weight: 500;
+  line-height: 1;
+  margin: 0 0 var(--wp--preset--spacing--20);
+}
+
+h2 {
+  font-size: var(--wp--preset--font-size--x-large);
+}
+
+h3 {
+  font-size: var(--wp--preset--font-size--medium);
+  line-height: 1.2;
+}
+
+.intro-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--60)
+    var(--wp--preset--spacing--40);
+  align-items: center;
+  margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.intro-columns__main {
+  flex: 1 1 55%;
+  min-width: 280px;
+}
+
+.intro-columns__aside {
+  flex: 1 1 30%;
+  min-width: 240px;
+}
+
+.intro-columns__main h2 {
+  margin-bottom: 0.25rem;
+}
+
+.intro-columns__aside p {
+  margin: 0;
+  font-size: 18px;
+}
+
+.image-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--20);
+  justify-content: space-between;
+}
+
+.image-row figure {
+  flex: 1 1 200px;
+  margin: 0;
+  max-width: 100%;
+}
+
+.image-row img {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+}
+
+.image-row figcaption {
+  font-size: 14px;
+  margin-top: 8px;
+  font-weight: 400;
+  color: var(--wp--preset--color--theme-4);
+}
+
+.gallery-flex {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--wp--preset--spacing--20);
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.gallery-flex figure {
+  flex: 0 0 auto;
+  width: min(284px, 85vw);
+  margin: 0;
+}
+
+.gallery-flex img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+}
+
+.about-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--30);
+  align-items: flex-end;
+}
+
+.about-columns__text {
+  flex: 1 1 40%;
+  min-width: 280px;
+}
+
+.about-columns__img {
+  flex: 1 1 28%;
+  min-width: 200px;
+}
+
+.about-columns__img img {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+}
+
+.about-columns p {
+  margin: 0 0 1rem;
+}
+
+.about-columns h3 {
+  margin-top: 1.5rem;
+}
+
+.about-columns h3:first-child {
+  margin-top: 0;
+}
+
+/* Reviews (Jetpack-style) */
+.reviews-section {
+  padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--40);
+  max-width: var(--wide-size);
+  margin: 0 auto;
+}
+
+.reviews-section h2 {
+  margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--wp--preset--spacing--40);
+}
+
+.review-card .stars {
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.review-card p {
+  margin: 0 0 12px;
+}
+
+.review-card .name {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Footer (parts/footer.html) */
+.site-footer {
+  padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--40);
+  max-width: var(--wide-size);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.site-footer__inner {
+  max-width: var(--wide-size);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-meta {
+  font-size: var(--wp--preset--font-size--small);
+  line-height: 1.65;
+}
+
+.site-footer p {
+  margin: 0 0 var(--wp--preset--spacing--30);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--wp--preset--spacing--40);
+}
+
+.social-links a {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.credit {
+  font-size: 14px;
+  color: color-mix(in srgb, var(--wp--preset--color--theme-4) 75%, transparent);
+}
+
+.credit a {
+  text-decoration: underline;
+}
+
+/* Page hero (inner pages) */
+.page-title-block {
+  padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--40)
+    var(--wp--preset--spacing--40);
+  text-align: center;
+  max-width: var(--wide-size);
+  margin: 0 auto;
+}
+
+.page-title-block h1 {
+  font-size: var(--wp--preset--font-size--large);
+}
+
+.page-title-block .lead {
+  max-width: 42rem;
+  margin: var(--wp--preset--spacing--20) auto 0;
+}
+
+/* Rooms / amenities utilities */
+.card-grid-wp {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--wp--preset--spacing--30);
+}
+
+.room-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.room-gallery a {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--wp--preset--color--theme-3);
+}
+
+.room-gallery img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.room-gallery a:hover img {
+  transform: scale(1.03);
+}
+
+.split-room {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--40);
+  align-items: flex-start;
+  padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--40);
+  max-width: var(--wide-size);
+  margin: 0 auto;
+}
+
+.split-room > * {
+  flex: 1 1 320px;
+}
+
+.split-room:nth-child(even) {
+  background: var(--wp--preset--color--theme-2);
+}
+
+.accordion details {
+  border: 1px solid var(--wp--preset--color--theme-3);
+  margin-bottom: 12px;
+  background: var(--wp--preset--color--theme-1);
+}
+
+.accordion summary {
+  padding: 16px 20px;
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+}
+
+.accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion .accordion__body {
+  padding: 0 20px 20px;
+  color: var(--wp--preset--color--theme-4);
+}
+
+.accordion .accordion__body ol {
+  padding-left: 1.25rem;
+}
+
+/* —— Compatibility: inner pages built with earlier class names —— */
+.section {
+  padding: var(--wp--preset--spacing--50) 0;
+}
+
+.section__inner {
+  max-width: var(--wide-size);
+  margin: 0 auto;
+  padding-left: var(--wp--preset--spacing--40);
+  padding-right: var(--wp--preset--spacing--40);
+}
+
+.split {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--40);
+  align-items: flex-start;
+}
+
+.split > * {
+  flex: 1 1 300px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.gallery a {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--wp--preset--color--theme-3);
+}
+
+.gallery img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.gallery a:hover img {
+  transform: scale(1.03);
+}
+
+.lead {
+  margin: 0 0 1rem;
+  font-size: 18px;
+  color: color-mix(in srgb, var(--wp--preset--color--theme-4) 88%, transparent);
+}
+
+.page-hero {
+  background: var(--wp--preset--color--theme-1);
+  color: var(--wp--preset--color--theme-4);
+  padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--40);
+  text-align: center;
+  border-bottom: 1px solid var(--wp--preset--color--theme-3);
+}
+
+.page-hero__inner {
+  max-width: var(--wide-size);
+  margin: 0 auto;
+}
+
+.page-hero .eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--wp--preset--color--theme-4);
+  opacity: 0.85;
+}
+
+.page-hero h1 {
+  font-size: var(--wp--preset--font-size--large);
+  margin-bottom: var(--wp--preset--spacing--20);
+}
+
+/* Location block — light, map + copy (your resort reference) */
+.location-block {
+  background: #eef1f6;
+  padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--40);
+}
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--wp--preset--spacing--40);
+  max-width: var(--wide-size);
+  margin: 0 auto;
+  align-items: center;
+}
+
+@media (max-width: 782px) {
+  .location-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.location-map {
+  border: 1px solid var(--wp--preset--color--theme-3);
+  min-height: 320px;
+  background: var(--wp--preset--color--theme-1);
+}
+
+.location-map iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  border: 0;
+}
+
+.location-copy .eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--wp--preset--color--theme-4);
+}
+
+/* Alias used on directions.html (light strip — matches Mapbox light map) */
+.location-strip {
+  background: #fafbfd;
+  padding: var(--wp--preset--spacing--60) 0;
+}
+
+.location-strip__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--wp--preset--spacing--40);
+  align-items: center;
+  max-width: var(--wide-size);
+  margin: 0 auto;
+  padding: 0 var(--wp--preset--spacing--40);
+}
+
+.location-strip .location-map {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0 16px 48px rgba(15, 23, 42, 0.07);
+}
+
+.location-strip .location-copy h2,
+.location-heading-serif {
+  color: #1a2d4a;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.location-strip .location-copy p {
+  color: #3a3f4d;
+}
+
+.location-strip .location-copy strong {
+  color: #2f3542;
+}
+
+.location-strip .location-copy a:not(.btn--outline-dark) {
+  color: #1a2d4a;
+}
+
+.location-strip .location-copy .eyebrow {
+  color: #1a2d4a;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+}
+
+.location-strip .btn--outline-dark {
+  color: #1a2d4a;
+  border-color: rgba(26, 45, 74, 0.45);
+}
+
+.location-strip .btn--outline-dark:hover {
+  background: rgba(26, 45, 74, 0.06);
+  color: #1a2d4a;
+  border-color: rgba(26, 45, 74, 0.65);
+}
+
+@media (max-width: 782px) {
+  .location-strip__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.feature-list li {
+  padding: 6px 0 6px 1.25rem;
+  position: relative;
+}
+
+.feature-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 6px;
+  height: 6px;
+  background: var(--wp--preset--color--theme-4);
+}
+
+
+/* ---- Image polish: tighter + cleaner ---- */
+:root {
+  --img-radius: 10px;
+  --img-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.gallery {
+  gap: 8px;
+}
+
+.gallery a {
+  border: 1px solid rgba(30, 30, 30, 0.12);
+  border-radius: var(--img-radius);
+  overflow: hidden;
+  background: #fff;
+}
+
+.gallery img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.section__inner.split {
+  gap: var(--wp--preset--spacing--30);
+}
+
+.room-gallery a,
+.image-row figure,
+.gallery-flex figure,
+.about-columns__img img,
+.location-map {
+  border-radius: var(--img-radius);
+  overflow: hidden;
+}
+
+.image-row figure,
+.gallery-flex figure,
+.location-map {
+  box-shadow: var(--img-shadow);
+}
+
+.image-row {
+  gap: 12px;
+}
+
+.gallery-flex {
+  gap: 12px;
+}
+
+.gallery-flex figure {
+  width: min(260px, 82vw);
+}
+
+.card-grid-wp {
+  gap: 12px;
+}
+
+@media (max-width: 781px) {
+  .gallery {
+    gap: 6px;
+  }
+
+  .image-row,
+  .gallery-flex {
+    gap: 8px;
+  }
+}

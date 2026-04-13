@@ -1,0 +1,190 @@
+/**
+ * Global styles derived from site-export/theme.json (Assembler / Motel export).
+ * Mimics WordPress global-styles CSS variables.
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --wp--custom--spacing-unit: 10;
+  --wp--custom--spacing-increment: 2.5;
+  --wp--custom--gap--horizontal: 2.5rem;
+  --wp--style--root--padding-left: var(--wp--preset--spacing--40);
+  --wp--style--root--padding-right: var(--wp--preset--spacing--40);
+  --wp--style--global--content-size: 620px;
+  --wp--style--global--wide-size: 1440px;
+
+  --wp--preset--color--theme-1: #ffffff;
+  --wp--preset--color--theme-2: #eeeeee;
+  --wp--preset--color--theme-3: #bbbbbb;
+  --wp--preset--color--theme-4: #1e1e1e;
+  --wp--preset--color--theme-5: #000000;
+
+  --wp--preset--font-family--inter: "Inter", system-ui, -apple-system, sans-serif;
+  /* Vintage motel signage (approx. physical sign); paired with Google Font "Rye" */
+  --wp--preset--font-family--sign: "Rye", Georgia, "Times New Roman", serif;
+
+  --wp--preset--spacing--20: min(
+    calc(var(--wp--custom--spacing-unit) * var(--wp--custom--spacing-increment) * 1 * 1px),
+    calc(var(--wp--custom--spacing-increment) * 1 * 2vw)
+  );
+  --wp--preset--spacing--30: min(
+    calc(var(--wp--custom--spacing-unit) * var(--wp--custom--spacing-increment) * 2 * 1px),
+    calc(var(--wp--custom--spacing-increment) * 2 * 1vw)
+  );
+  --wp--preset--spacing--40: min(
+    calc(var(--wp--custom--spacing-unit) * var(--wp--custom--spacing-increment) * 3 * 1px),
+    calc(var(--wp--custom--spacing-increment) * 3 * 1vw)
+  );
+  --wp--preset--spacing--50: min(
+    calc(var(--wp--custom--spacing-unit) * var(--wp--custom--spacing-increment) * 4 * 1px),
+    calc(var(--wp--custom--spacing-increment) * 4 * 1vw)
+  );
+  --wp--preset--spacing--60: min(
+    calc(var(--wp--custom--spacing-unit) * var(--wp--custom--spacing-increment) * 5 * 1px),
+    calc(var(--wp--custom--spacing-increment) * 5 * 1vw)
+  );
+  --wp--preset--spacing--70: min(
+    calc(var(--wp--custom--spacing-unit) * var(--wp--custom--spacing-increment) * 6 * 1px),
+    calc(var(--wp--custom--spacing-increment) * 6 * 1vw)
+  );
+  --wp--preset--spacing--80: min(
+    calc(var(--wp--custom--spacing-unit) * var(--wp--custom--spacing-increment) * 7 * 1px),
+    calc(var(--wp--custom--spacing-increment) * 7 * 1vw)
+  );
+
+  --wp--preset--font-size--small: 16px;
+  --wp--preset--font-size--medium: clamp(20px, 1.25rem + 0.5vw, 24px);
+  --wp--preset--font-size--large: 38px;
+  --wp--preset--font-size--x-large: 60px;
+  --wp--preset--font-size--xx-large: clamp(40px, 6vw, 80px);
+}
+
+body {
+  margin: 0;
+  background: var(--wp--preset--color--theme-1);
+  color: var(--wp--preset--color--theme-4);
+  font-family: var(--wp--preset--font-family--inter);
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: 400;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* theme.json styles.elements.heading */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.wp-block-heading {
+  font-family: var(--wp--preset--font-family--inter);
+  font-weight: 500;
+}
+
+/* Site title = h1 in Assembler; do NOT use giant hero size */
+h1.wp-block-site-title,
+.wp-block-site-title {
+  font-size: var(--wp--preset--font-size--medium);
+  font-weight: 550;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.wp-block-site-title a {
+  text-decoration: none;
+}
+
+h1:not(.wp-block-site-title),
+.wp-block-post-title {
+  font-size: var(--wp--preset--font-size--xx-large);
+  line-height: 1;
+}
+
+h2 {
+  font-size: var(--wp--preset--font-size--x-large);
+  line-height: 1;
+}
+
+h2.has-large-font-size {
+  font-size: var(--wp--preset--font-size--large);
+}
+
+h2.has-xx-large-font-size,
+.wp-block-heading.has-xx-large-font-size {
+  font-size: var(--wp--preset--font-size--xx-large) !important;
+  line-height: 1;
+}
+
+.has-xx-large-font-size {
+  font-size: var(--wp--preset--font-size--xx-large);
+  line-height: 1;
+}
+
+h3,
+.wp-block-heading.level-3 {
+  font-size: var(--wp--preset--font-size--medium);
+  line-height: 1.2;
+}
+
+/* Group variation section-1 */
+.wp-block-group.is-style-section-1 {
+  background-color: var(--wp--preset--color--theme-2);
+  color: var(--wp--preset--color--theme-5);
+}
+
+/* Section-3 wrapper (dark context) — text defaults */
+.wp-block-group.is-style-section-3 {
+  background-color: var(--wp--preset--color--theme-5);
+  color: var(--wp--preset--color--theme-1);
+}
+
+/* theme.json button defaults */
+.wp-element-button,
+.wp-block-button__link {
+  border-radius: 0;
+  font-family: var(--wp--preset--font-family--inter);
+  font-weight: 450;
+  font-size: var(--wp--preset--font-size--small);
+  padding: 16px 24px;
+}
+
+.wp-block-button__link {
+  background-color: var(--wp--preset--color--theme-4);
+  color: var(--wp--preset--color--theme-1);
+}
+
+.wp-block-button__link:hover {
+  background-color: color-mix(in srgb, var(--wp--preset--color--theme-5) 85%, #000);
+  color: var(--wp--preset--color--theme-1);
+}
+
+.wp-block-button.is-style-outline .wp-block-button__link {
+  background: transparent;
+  color: var(--wp--preset--color--theme-1);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  padding: 15px 23px;
+}
+
+.wp-block-cover .wp-block-button.is-style-outline .wp-block-button__link {
+  color: #fefefe;
+}
+
+/* Wide / full helpers */
+.alignwide {
+  max-width: var(--wp--style--global--wide-size);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.alignfull {
+  max-width: none;
+}
+
+.wp-block-group.alignfull {
+  width: 100%;
+}

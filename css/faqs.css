@@ -1,0 +1,206 @@
+@font-face {
+  font-family: "Lydian BT";
+  src: url("../assets/fonts/lydian/LydianBTRoman.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+:  --mm-faq-ink: #0a0a0a;
+:  --mm-faq-paper: #ffffff;
+:  --mm-faq-muted: rgba(10, 10, 10, 0.62);
+:  --mm-faq-rule: rgba(10, 10, 10, 0.18);
+:  --mm-faq-rule-strong: rgba(10, 10, 10, 0.32);
+:  --mm-faq-panel: rgba(255, 255, 255, 0.52);
+:  --mm-faq-display: "Lydian BT", "Lydian MT", Didot, Georgia, serif;
+:  --mm-faq-sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+:  --mm-faq-serif: "Cormorant Garamond", Georgia, "Times New Roman", Times, serif;
+:}
+
+body.mm-faqs {
+  color: var(--mm-faq-ink);
+}
+
+.mm-faqs__main {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 70px) 18px 90px;
+}
+
+.mm-faqs__hero {
+  padding-bottom: clamp(18px, 3.5vw, 34px);
+  border-bottom: 1px solid var(--mm-faq-rule);
+  margin-bottom: clamp(22px, 4vw, 44px);
+}
+
+.mm-faqs__kicker {
+  font-family: var(--mm-faq-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 10px;
+  font-weight: 800;
+  margin: 0 0 10px;
+  color: var(--mm-faq-muted);
+}
+
+.mm-faqs__title {
+  margin: 0;
+  font-family: "Lydian BT", "LydianBTRoman", "Lydian MT", Didot, Georgia, serif !important;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.04;
+  font-size: clamp(40px, 6vw, 68px);
+  text-transform: uppercase;
+}
+
+.mm-faqs__lead {
+  margin: 12px 0 0;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", Times, serif;
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.58;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: rgba(16, 16, 16, 0.86);
+  max-width: min(82ch, 92vw);
+}
+
+.mm-faqs__group + .mm-faqs__group {
+  margin-top: clamp(22px, 3.8vw, 40px);
+}
+
+.mm-faqs__groupTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 10px;
+  font-family: var(--mm-faq-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--mm-faq-ink);
+}
+
+.mm-faqs__ico {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  color: var(--mm-faq-ink);
+}
+
+.mm-faqs__list {
+  border: 1px solid var(--mm-faq-rule-strong);
+  background: var(--mm-faq-panel);
+}
+
+.mm-q {
+  border-top: 1px solid var(--mm-faq-rule);
+  background: transparent;
+}
+.mm-q:first-child {
+  border-top: none;
+}
+
+.mm-q summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 46px 18px 20px;
+  /* Block + absolute “+” (not CSS Grid): Google Translate injects extra nodes inside
+     <summary>; grid would treat each as a column and break the row (brand name + “ES”
+     jumping beside the chevron). */
+  display: block;
+  font-family: var(--mm-faq-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--mm-faq-ink);
+  position: relative;
+}
+
+.mm-q summary::-webkit-details-marker {
+  display: none;
+}
+
+.mm-q summary::after {
+  content: "+";
+  font-family: var(--mm-faq-sans);
+  letter-spacing: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(calc(-50% - 1px));
+  opacity: 0.88;
+  transition: opacity 180ms ease;
+}
+
+.mm-q summary::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  right: 46px;
+  bottom: 10px;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 420ms ease;
+}
+
+.mm-q[open] summary::after {
+  content: "−";
+  opacity: 1;
+}
+
+.mm-q summary:focus-visible {
+  outline: 2px solid var(--mm-faq-ink);
+  outline-offset: 2px;
+}
+
+.mm-q summary:hover {
+  background: transparent;
+}
+
+.mm-q[open] {
+  background: transparent;
+}
+
+.mm-q summary:hover::before,
+.mm-q[open] summary::before {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+.mm-a {
+  padding: 2px 20px 20px;
+}
+
+.mm-faqs .mm-a p {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", Times, serif !important;
+  font-size: clamp(15px, 1.2vw, 18px) !important;
+  line-height: 1.58 !important;
+  font-weight: 500 !important;
+  color: rgba(16, 16, 16, 0.86) !important;
+  max-width: min(82ch, 92vw) !important;
+}
+
+@media (max-width: 560px) {
+  .mm-q summary {
+    padding: 16px 44px 16px 14px;
+    letter-spacing: 0.14em;
+    font-size: 10px;
+  }
+  .mm-a {
+    padding: 0 14px 16px;
+  }
+  .mm-faqs .mm-a p {
+    font-size: 15px;
+  }
+}
+
