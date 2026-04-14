@@ -81,6 +81,7 @@
     if (!lbOk) return;
     if (!vis) vis = getVisible();
     var item = vis[currentIdx];
+    if (!item) return;
     var img = item.querySelector("img");
     lbImg.src = img.src;
     lbImg.alt = img.alt;

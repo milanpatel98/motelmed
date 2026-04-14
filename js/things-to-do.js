@@ -74,6 +74,14 @@
         }
       }
       apply();
+      // Persist active filter in URL hash so back/refresh restores selection
+      try {
+        var active = null;
+        for (var k = 0; k < filters.length; k++) {
+          if (filters[k].checked) { active = filters[k].value; break; }
+        }
+        history.replaceState(null, "", active ? "#" + active : window.location.pathname + window.location.search);
+      } catch (_) {}
     });
   }
 

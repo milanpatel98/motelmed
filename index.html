@@ -89,7 +89,7 @@
 
 <main id="main" class="wp-block-group" style="margin-top:0;margin-bottom:0">
 <div class="wp-block-group alignfull is-style-section-3" style="margin-top:0;margin-bottom:0">
-<div class="wp-block-cover alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--20);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--20);padding-left:var(--wp--preset--spacing--40)"><span aria-hidden="true" class="wp-block-cover__background has-background-dim" style="background-color:#010101"></span><img class="wp-block-cover__image-background wp-image-14" alt="" src="https://motel54.wordpress.com/wp-content/uploads/2024/08/wilkins-morales-elcpjek_unk-unsplash.jpg" style="object-position:50% 95%" data-object-fit="cover" data-object-position="50% 95%" /><div class="wp-block-cover__inner-container">
+<div class="wp-block-cover alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--20);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--20);padding-left:var(--wp--preset--spacing--40)"><span aria-hidden="true" class="wp-block-cover__background has-background-dim" style="background-color:#010101"></span><img class="wp-block-cover__image-background wp-image-14" id="mm-hero-bg" alt="" src="assets/home-hero/hero-1.jpg" style="object-position:50% 50%;transition:opacity 1.2s ease" data-object-fit="cover" /><div class="wp-block-cover__inner-container">
 
 <div class="mm-home-hero-flex-fill" aria-hidden="true"></div>
 
@@ -486,5 +486,32 @@
 <script src="js/home-amenities-carousel.js?v=7"></script>
 <script src="google-reviews.js?v=2" defer></script>
 <script src="js/mm-chat-widget.js?v=41"></script>
+<script>
+(function () {
+  var images = [
+    "assets/home-hero/hero-1.jpg",
+    "assets/home-hero/hero-2.jpg",
+    "assets/home-hero/hero-3.jpg",
+    "assets/home-hero/hero-4.jpg",
+    "assets/home-hero/hero-5.jpg",
+    "assets/home-hero/hero-6.jpg",
+    "assets/home-hero/hero-7.jpg"
+  ];
+  var el = document.getElementById("mm-hero-bg");
+  if (!el) return;
+  // Start at a random image
+  var idx = Math.floor(Math.random() * images.length);
+  el.src = images[idx];
+  // Rotate every 2 minutes with a crossfade
+  setInterval(function () {
+    idx = (idx + 1) % images.length;
+    el.style.opacity = "0";
+    setTimeout(function () {
+      el.src = images[idx];
+      el.style.opacity = "1";
+    }, 1200);
+  }, 2 * 60 * 1000);
+})();
+</script>
 </body>
 </html>

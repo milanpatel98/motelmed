@@ -674,7 +674,7 @@ body.mm-book-page .mm-topbar {
 }
 
 .mm-bk-dates__day {
-  font-family: var(--bk-serif);
+  font-family: var(--bk-sans);
   font-size: 56px;
   font-weight: 400;
   color: var(--bk-ink);
@@ -2104,4 +2104,63 @@ body.mm-book-page .mm-topbar {
   .mm-bk-card-logo { width: 36px; height: 22px; }
   .mm-bk-room-card__name { font-size: 16px; }
   .mm-bk-dates__day { font-size: 24px; }
+}
+
+/* ── Room photo lightbox ─────────────────────────────────────── */
+#bk-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,.93);
+  align-items: center;
+  justify-content: center;
+}
+#bk-lightbox.is-open { display: flex; }
+.bk-lb__img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 4px;
+  display: block;
+}
+.bk-lb__close {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 6px;
+  opacity: .7;
+  transition: opacity .2s;
+}
+.bk-lb__close:hover { opacity: 1; }
+.bk-lb__close svg { width: 26px; height: 26px; display: block; }
+.bk-lb__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 12px;
+  opacity: .6;
+  transition: opacity .2s;
+}
+.bk-lb__nav:hover { opacity: 1; }
+.bk-lb__nav svg { width: 32px; height: 32px; display: block; }
+.bk-lb__prev { left: 16px; }
+.bk-lb__next { right: 16px; }
+.bk-lb__counter {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,.6);
+  font-family: var(--bk-sans);
+  font-size: 12px;
+  letter-spacing: .05em;
 }

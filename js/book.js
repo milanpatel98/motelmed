@@ -199,17 +199,29 @@
     var cin  = parseYmd(cinParam);
     var cout = parseYmd(coutParam);
 
-    // Fallback: existing booking strip localStorage
-    if (!cin || !cout) {
-      try {
-        var raw = localStorage.getItem("mm-booking-persist");
-        if (raw) {
-          var stored = JSON.parse(raw);
-          cin  = cin  || parseYmd(stored.checkin);
-          cout = cout || parseYmd(stored.checkout);
+    // Fallback: existing booking strip localStorage (dates + guests)
+    try {
+      var raw = localStorage.getItem("mm-booking-persist");
+      if (raw) {
+        var stored = JSON.parse(raw);
+        cin  = cin  || parseYmd(stored.checkin);
+        cout = cout || parseYmd(stored.checkout);
+        // Sync rooms & guests from homepage booking bar
+        if (stored.guestsState) {
+          try {
+            var roomsArr = JSON.parse(stored.guestsState);
+            if (Array.isArray(roomsArr) && roomsArr.length) {
+              state.rooms    = roomsArr.length;
+              state.adults   = roomsArr.reduce(function (s, r) { return s + (parseInt(r.adults, 10) || 0); }, 0);
+              state.children = roomsArr.reduce(function (s, r) { return s + (parseInt(r.children, 10) || 0); }, 0);
+            }
+          } catch (_) {}
+        } else {
+          if (stored.groupAdults)   state.adults   = Math.max(1, parseInt(stored.groupAdults, 10)   || 2);
+          if (stored.groupChildren) state.children = Math.max(0, parseInt(stored.groupChildren, 10) || 0);
         }
-      } catch (e) {}
-    }
+      }
+    } catch (e) {}
 
     if (cin && cout && cout > cin) {
       state.checkin  = cin;
@@ -227,6 +239,14 @@
         sessionStorage.removeItem("mm_bk_room"); // consume once
       }
     } catch (e) {}
+
+    // ── Sync guest dropdowns to state ───────────────────────────────
+    var roomSel  = document.getElementById("bk-rooms");
+    var adultSel = document.getElementById("bk-adults");
+    var childSel = document.getElementById("bk-children");
+    if (roomSel)  roomSel.value  = String(state.rooms);
+    if (adultSel) adultSel.value = String(state.adults);
+    if (childSel) childSel.value = String(state.children);
   }
 
   // ── Init ───────────────────────────────────────────────────────
@@ -344,6 +364,7 @@
     bindSummaryContinue();
     bindBookNow();
     initFormValidation();
+    initExpandButtons();
     updateStepNav();
 
     // Dates may be pre-filled from homepage — guest always reviews on calendar first
@@ -764,28 +785,24 @@
     var el = document.getElementById("bk-cancel-notice");
     if (!el || !state.checkin) return;
 
-    // Cancellation deadline = midnight the day before check-in
-    var deadline = new Date(state.checkin.getTime());
-    deadline.setDate(deadline.getDate() - 1);
-    deadline.setHours(23, 59, 59, 0);
+    // Cancellation deadline = 48 hours before check-in at 3:00 PM
+    var checkinTime = new Date(state.checkin.getTime());
+    checkinTime.setHours(15, 0, 0, 0); // 3:00 PM check-in
+    var deadline = new Date(checkinTime.getTime() - 48 * 60 * 60 * 1000); // minus 48 hours
 
-    var now = today(); // already midnight
-    var checkinMidnight = new Date(state.checkin.getTime());
-    checkinMidnight.setHours(0, 0, 0, 0);
+    var now = new Date();
     var DAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     var MONTHS_FULL = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-    if (now < checkinMidnight) {
+    if (now < deadline) {
       // Cancellation still possible
-      var dl = new Date(state.checkin.getTime());
-      dl.setDate(dl.getDate() - 1);
-      var dlStr = DAYS[dl.getDay()] + ", " + MONTHS_FULL[dl.getMonth()] + " " + dl.getDate();
+      var dlStr = DAYS[deadline.getDay()] + ", " + MONTHS_FULL[deadline.getMonth()] + " " + deadline.getDate() + " at 3:00 PM";
       el.innerHTML =
         '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 14A6 6 0 108 2a6 6 0 000 12z" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v3.5L10 10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>' +
         "Free cancellation before <strong>" + dlStr + "</strong>";
       el.className = "mm-bk-cancel-notice mm-bk-cancel-notice--free";
     } else {
-      // Check-in is today or past — no cancellation
+      // Within 48 hours of check-in — no cancellation
       el.innerHTML =
         '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 14A6 6 0 108 2a6 6 0 000 12z" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="8" cy="11" r="0.6" fill="currentColor"/></svg>' +
         "Non-refundable — cancellation is no longer available for these dates.";
@@ -1171,6 +1188,85 @@
   function show(id) {
     var el = document.getElementById(id);
     if (el) el.style.display = "";
+  }
+
+  // ── Room card photo lightbox ────────────────────────────────────
+  function initExpandButtons() {
+    var overlay = document.createElement("div");
+    overlay.id = "bk-lightbox";
+    overlay.innerHTML =
+      '<button class="bk-lb__close" aria-label="Close">' +
+        '<svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="4" x2="18" y2="18"/><line x1="18" y1="4" x2="4" y2="18"/></svg>' +
+      '</button>' +
+      '<button class="bk-lb__nav bk-lb__prev" aria-label="Previous">' +
+        '<svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2"><polyline points="14 4 6 11 14 18"/></svg>' +
+      '</button>' +
+      '<img class="bk-lb__img" src="" alt="" />' +
+      '<button class="bk-lb__nav bk-lb__next" aria-label="Next">' +
+        '<svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2"><polyline points="8 4 16 11 8 18"/></svg>' +
+      '</button>' +
+      '<div class="bk-lb__counter"></div>';
+    document.body.appendChild(overlay);
+
+    var lbImg     = overlay.querySelector(".bk-lb__img");
+    var lbCounter = overlay.querySelector(".bk-lb__counter");
+    var currentImgs = [];
+    var currentIdx  = 0;
+
+    function openLightbox(imgs, idx) {
+      currentImgs = imgs;
+      currentIdx  = idx;
+      showSlide();
+      overlay.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      overlay.classList.remove("is-open");
+      document.body.style.overflow = "";
+    }
+
+    function showSlide() {
+      lbImg.src = currentImgs[currentIdx];
+      lbCounter.textContent = (currentIdx + 1) + " / " + currentImgs.length;
+    }
+
+    overlay.querySelector(".bk-lb__close").addEventListener("click", closeLightbox);
+    overlay.querySelector(".bk-lb__prev").addEventListener("click", function () {
+      currentIdx = (currentIdx - 1 + currentImgs.length) % currentImgs.length;
+      showSlide();
+    });
+    overlay.querySelector(".bk-lb__next").addEventListener("click", function () {
+      currentIdx = (currentIdx + 1) % currentImgs.length;
+      showSlide();
+    });
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) closeLightbox();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (!overlay.classList.contains("is-open")) return;
+      if (e.key === "Escape")    closeLightbox();
+      if (e.key === "ArrowLeft") { currentIdx = (currentIdx - 1 + currentImgs.length) % currentImgs.length; showSlide(); }
+      if (e.key === "ArrowRight"){ currentIdx = (currentIdx + 1) % currentImgs.length; showSlide(); }
+    });
+
+    // Wire expand buttons
+    document.querySelectorAll(".mm-bk-room-card").forEach(function (card) {
+      var expandBtn = card.querySelector(".mm-bk-room-card__expand");
+      var imgWrap   = card.querySelector(".mm-bk-room-card__img-wrap");
+      if (!expandBtn || !imgWrap) return;
+      expandBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var photos = [];
+        try { photos = JSON.parse(imgWrap.getAttribute("data-photos") || "[]"); } catch (_) {}
+        var idx = parseInt(imgWrap.getAttribute("data-idx") || "0", 10);
+        if (!photos.length) {
+          var img = imgWrap.querySelector("img");
+          if (img) photos = [img.getAttribute("src")];
+        }
+        openLightbox(photos, Math.max(0, idx));
+      });
+    });
   }
 
 })();
