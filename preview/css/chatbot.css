@@ -1,0 +1,465 @@
+/* ── Motel Mediteran — Marcos Chatbot Widget ── */
+
+/* Button — square, line style */
+.mm-chat-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 52px;
+  height: 52px;
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.18);
+  transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease, border-color 220ms ease;
+}
+.mm-chat-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.26);
+}
+.mm-chat-btn svg {
+  display: block;
+}
+/* Open/close glyphs share one slot — no opacity crossfade or both show at once */
+.mm-chat-btn .mm-chat-icon-open,
+.mm-chat-btn .mm-chat-icon-close {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: none;
+}
+.mm-chat-btn .mm-chat-icon-open {
+  opacity: 1;
+}
+.mm-chat-btn .mm-chat-icon-close {
+  opacity: 0;
+}
+.mm-chat-btn.is-open .mm-chat-icon-open {
+  opacity: 0;
+}
+.mm-chat-btn.is-open .mm-chat-icon-close {
+  opacity: 1;
+}
+
+/* Notification dot */
+.mm-chat-btn__dot {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  width: 7px;
+  height: 7px;
+  background: #fff;
+  border-radius: 0;
+  transition: opacity 200ms ease;
+}
+.mm-chat-btn.is-open .mm-chat-btn__dot,
+.mm-chat-btn.dot-hidden .mm-chat-btn__dot {
+  opacity: 0;
+}
+
+/* After scroll: keep the hero’s solid black tile; here it’s only the line icon (dark) in a hairline frame — no second “filled” launcher */
+body.is-scrolled .mm-chat-btn {
+  background: transparent;
+  border: 1px solid rgba(10, 10, 10, 0.38);
+  box-shadow: none;
+}
+body.is-scrolled .mm-chat-btn:hover,
+body.is-scrolled .mm-chat-btn:focus-visible {
+  background: #fff;
+  /* Full border shorthand so the hairline stays visible on white (light alpha was invisible). */
+  border: 1px solid rgba(10, 10, 10, 0.32);
+  box-shadow:
+    0 0 0 1px rgba(10, 10, 10, 0.06),
+    0 2px 16px rgba(0, 0, 0, 0.1);
+}
+body.is-scrolled .mm-chat-btn svg path,
+body.is-scrolled .mm-chat-btn svg line,
+body.is-scrolled .mm-chat-btn svg polyline {
+  stroke: #0a0a0a;
+}
+body.is-scrolled .mm-chat-btn .mm-chat-btn__dot {
+  background: #0a0a0a;
+}
+
+/* Panel — sharp corners, thin border */
+.mm-chat-panel {
+  position: fixed;
+  bottom: 92px;
+  right: 28px;
+  width: 356px;
+  max-height: 560px;
+  background: #fafaf9;
+  border: 1px solid rgba(10, 10, 10, 0.12);
+  border-radius: 0;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.14), 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  z-index: 8999;
+  overflow: hidden;
+  transform-origin: bottom right;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.mm-chat-panel.is-hidden {
+  opacity: 0;
+  transform: scale(0.96) translateY(10px);
+  pointer-events: none;
+}
+
+/* Header */
+.mm-chat-header {
+  background: #0a0a0a;
+  color: #fff;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.mm-chat-header__restart {
+  margin-left: auto;
+  background: none;
+  border: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  padding: 6px;
+  opacity: 0.35;
+  transition: opacity 150ms ease;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+}
+.mm-chat-header__restart:hover { opacity: 0.8; }
+.mm-chat-header__avatar {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  display: grid;
+  place-items: center;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: #fff;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.mm-chat-header__info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.mm-chat-header__name {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+/* Subheader: smaller than thread copy (13px) + composer */
+.mm-chat-header__status {
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.45;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.5);
+}
+.mm-chat-header__brand {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
+}
+.mm-chat-header__sep {
+  display: inline-block;
+  padding: 0 0.28em;
+  color: rgba(255, 255, 255, 0.38);
+  font-weight: 400;
+}
+.mm-chat-header__tagline {
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.48);
+}
+
+/* Messages */
+.mm-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  scroll-behavior: smooth;
+  background: #fafaf9;
+  overscroll-behavior: contain;
+}
+.mm-chat-messages::-webkit-scrollbar { width: 3px; }
+.mm-chat-messages::-webkit-scrollbar-track { background: transparent; }
+.mm-chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(10, 10, 10, 0.12);
+  border-radius: 2px;
+}
+
+/* Message bubbles */
+.mm-chat-msg {
+  display: flex;
+  flex-direction: column;
+  max-width: 86%;
+  animation: mm-msg-in 160ms ease;
+}
+.mm-chat-msg--bot  { align-self: flex-start; align-items: flex-start; }
+.mm-chat-msg--user { align-self: flex-end;   align-items: flex-end; }
+
+@keyframes mm-msg-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.mm-chat-bubble {
+  padding: 9px 13px;
+  border-radius: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  word-break: break-word;
+}
+.mm-chat-msg--bot .mm-chat-bubble {
+  background: #fff;
+  color: #0a0a0a;
+  border: 1px solid rgba(10, 10, 10, 0.1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+.mm-chat-msg--user .mm-chat-bubble {
+  background: #0a0a0a;
+  color: #ffffff;
+  border: 1px solid #0a0a0a;
+}
+
+/* Timestamp */
+.mm-chat-ts {
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  color: rgba(10, 10, 10, 0.28);
+  letter-spacing: 0.04em;
+  margin-top: 3px;
+  padding: 0 2px;
+}
+.mm-chat-msg--user .mm-chat-ts {
+  text-align: right;
+}
+
+/* Typing indicator */
+.mm-chat-typing {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 13px;
+  background: #fff;
+  border: 1px solid rgba(10, 10, 10, 0.1);
+  width: fit-content;
+  align-self: flex-start;
+  animation: mm-msg-in 180ms ease;
+}
+.mm-chat-typing span {
+  width: 5px;
+  height: 5px;
+  background: rgba(10, 10, 10, 0.3);
+  border-radius: 0;
+  animation: mm-dot 1.2s infinite ease-in-out;
+}
+.mm-chat-typing span:nth-child(2) { animation-delay: 0.18s; }
+.mm-chat-typing span:nth-child(3) { animation-delay: 0.36s; }
+
+@keyframes mm-dot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.3; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* Page link */
+.mm-chat-page-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: "Inter", sans-serif;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(10, 10, 10, 0.4);
+  border-bottom: 1px solid rgba(10, 10, 10, 0.18);
+  padding-bottom: 1px;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+.mm-chat-page-link:hover {
+  color: #0a0a0a;
+  border-color: rgba(10, 10, 10, 0.55);
+}
+
+/* Quick replies */
+.mm-chat-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 5px 0 2px;
+  align-self: flex-start;
+  max-width: 100%;
+}
+.mm-chat-quick__btn {
+  background: transparent;
+  border: 1px solid rgba(10, 10, 10, 0.2);
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 5px 10px;
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #0a0a0a;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-tap-highlight-color: transparent;
+}
+.mm-chat-quick__btn:hover,
+.mm-chat-quick__btn:active {
+  background: #0a0a0a;
+  border-color: #0a0a0a;
+  color: #fff;
+}
+
+/* Footer / input — compact single-line field */
+.mm-chat-footer {
+  border-top: 1px solid rgba(10, 10, 10, 0.1);
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  background: #fff;
+}
+
+/*
+ * Theme export (site-export-style.css) targets all input[type=text]:
+ *   border-radius: 6px;  :focus { outline: 1px solid currentColor; }  min-height: 42px; …
+ * That overrides this widget → rounded box + double line (border + outline).
+ * Scope + !important beats global selectors on index.html and similar pages.
+ */
+.mm-chat-panel input.mm-chat-input {
+  flex: 1;
+  min-width: 0;
+  min-height: 0 !important;
+  height: 36px;
+  width: auto !important;
+  max-width: none;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  border: 1px solid rgba(10, 10, 10, 0.14) !important;
+  border-radius: 0 !important;
+  -webkit-border-radius: 0 !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  padding: 0 10px !important;
+  font-family: "Inter", sans-serif !important;
+  /* Match .mm-chat-bubble — one consistent reading size in the thread */
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1.35 !important;
+  letter-spacing: 0.01em !important;
+  color: #0a0a0a !important;
+  background: #fafaf9 !important;
+  background-color: #fafaf9 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: none !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  outline: none !important;
+  outline-offset: 0 !important;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+.mm-chat-panel input.mm-chat-input:focus,
+.mm-chat-panel input.mm-chat-input:focus-visible {
+  border-color: rgba(10, 10, 10, 0.45) !important;
+  background: #fff !important;
+  background-color: #fff !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.mm-chat-panel input.mm-chat-input::placeholder {
+  font-size: 13px !important;
+  color: rgba(10, 10, 10, 0.3) !important;
+  letter-spacing: 0.01em !important;
+  opacity: 1 !important;
+}
+
+/* Send button — square, aligned to input height */
+.mm-chat-send {
+  width: 36px;
+  height: 36px;
+  background: #0a0a0a;
+  border: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity 150ms ease;
+}
+.mm-chat-send:hover { opacity: 0.75; }
+.mm-chat-send:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+/* Tablet / small desktop */
+@media (max-width: 520px) {
+  .mm-chat-panel {
+    right: 14px;
+    bottom: 86px;
+    width: calc(100vw - 28px);
+    max-height: 74vh;
+  }
+  .mm-chat-btn {
+    right: 16px;
+    bottom: 20px;
+  }
+}
+
+/* Phone */
+@media (max-width: 400px) {
+  .mm-chat-panel {
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    max-height: 90vh;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.14);
+  }
+  .mm-chat-btn {
+    right: 16px;
+    bottom: 20px;
+  }
+}

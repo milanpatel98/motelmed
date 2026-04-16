@@ -1,0 +1,271 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Spectral & Rethink Sans (Serif/Sans) (Sophisticated)",
+	"personality": [
+		"sophisticated"
+	],
+	"keywords": [
+		"serif",
+		"mixed",
+		"clean",
+		"minimal",
+		"light",
+		"editorial",
+		"thin",
+		"modern"
+	],
+	"settings": {
+		"typography": {
+			"fontFamilies": [
+				{
+					"fontFace": [
+						{
+							"src": "https://fonts.wp.com/s/rethinksans/v5/AMODz4SDuXOMCPfdoglY9JQuWHBGG0X45DmqkmFRCEvmma-aua4.woff2",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"fontFamily": "Rethink Sans"
+						},
+						{
+							"src": "https://fonts.wp.com/s/rethinksans/v5/AMOFz4SDuXOMCPfdoglY9JQEUUK5wyyTfpeth6kS4A3smI2fqa7iVQ.woff2",
+							"fontWeight": "400",
+							"fontStyle": "italic",
+							"fontFamily": "Rethink Sans"
+						},
+						{
+							"src": "https://fonts.wp.com/s/rethinksans/v5/AMODz4SDuXOMCPfdoglY9JQuWHBGG0X45DmqklNRCEvmma-aua4.woff2",
+							"fontWeight": "500",
+							"fontStyle": "normal",
+							"fontFamily": "Rethink Sans"
+						},
+						{
+							"src": "https://fonts.wp.com/s/rethinksans/v5/AMOFz4SDuXOMCPfdoglY9JQEUUK5wyyTfpeth6kS0g3smI2fqa7iVQ.woff2",
+							"fontWeight": "500",
+							"fontStyle": "italic",
+							"fontFamily": "Rethink Sans"
+						},
+						{
+							"src": "https://fonts.wp.com/s/rethinksans/v5/AMODz4SDuXOMCPfdoglY9JQuWHBGG0X45Dmqkr9WCEvmma-aua4.woff2",
+							"fontWeight": "600",
+							"fontStyle": "normal",
+							"fontFamily": "Rethink Sans"
+						},
+						{
+							"src": "https://fonts.wp.com/s/rethinksans/v5/AMOFz4SDuXOMCPfdoglY9JQEUUK5wyyTfpeth6kSPgrsmI2fqa7iVQ.woff2",
+							"fontWeight": "600",
+							"fontStyle": "italic",
+							"fontFamily": "Rethink Sans"
+						}
+					],
+					"fontFamily": "\"Rethink Sans\", sans-serif",
+					"name": "Rethink Sans",
+					"slug": "rethink-sans"
+				},
+				{
+					"fontFace": [
+						{
+							"src": "https://fonts.wp.com/s/spectral/v14/rnCs-xNNww_2s0amA9uSsF3DY_etWWIJ.woff2",
+							"fontWeight": "300",
+							"fontStyle": "normal",
+							"fontFamily": "Spectral"
+						},
+						{
+							"src": "https://fonts.wp.com/s/spectral/v14/rnCu-xNNww_2s0amA9M8qtHEafaPXHIJErY.woff2",
+							"fontWeight": "300",
+							"fontStyle": "italic",
+							"fontFamily": "Spectral"
+						},
+						{
+							"src": "https://fonts.wp.com/s/spectral/v14/rnCr-xNNww_2s0amA-M7mHnOSOuk.woff2",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"fontFamily": "Spectral"
+						},
+						{
+							"src": "https://fonts.wp.com/s/spectral/v14/rnCt-xNNww_2s0amA9M8knjsTfukQHs.woff2",
+							"fontWeight": "400",
+							"fontStyle": "italic",
+							"fontFamily": "Spectral"
+						},
+						{
+							"src": "https://fonts.wp.com/s/spectral/v14/rnCs-xNNww_2s0amA9vKsV3DY_etWWIJ.woff2",
+							"fontWeight": "500",
+							"fontStyle": "normal",
+							"fontFamily": "Spectral"
+						},
+						{
+							"src": "https://fonts.wp.com/s/spectral/v14/rnCu-xNNww_2s0amA9M8qonFafaPXHIJErY.woff2",
+							"fontWeight": "500",
+							"fontStyle": "italic",
+							"fontFamily": "Spectral"
+						},
+						{
+							"src": "https://fonts.wp.com/s/spectral/v14/rnCs-xNNww_2s0amA9vmtl3DY_etWWIJ.woff2",
+							"fontWeight": "600",
+							"fontStyle": "normal",
+							"fontFamily": "Spectral"
+						},
+						{
+							"src": "https://fonts.wp.com/s/spectral/v14/rnCu-xNNww_2s0amA9M8qqXCafaPXHIJErY.woff2",
+							"fontWeight": "600",
+							"fontStyle": "italic",
+							"fontFamily": "Spectral"
+						}
+					],
+					"fontFamily": "\"Spectral\", serif",
+					"name": "Spectral",
+					"slug": "spectral"
+				}
+			],
+			"fontSizes": [
+				{
+					"name": "Small",
+					"size": "16px",
+					"slug": "small",
+					"fluid": {
+						"min": "15px",
+						"max": "16px"
+					}
+				},
+				{
+					"name": "Medium",
+					"size": "18px",
+					"slug": "medium",
+					"fluid": {
+						"min": "17px",
+						"max": "18px"
+					}
+				},
+				{
+					"name": "Large",
+					"size": "28px",
+					"slug": "large",
+					"fluid": {
+						"min": "24px",
+						"max": "28px"
+					}
+				},
+				{
+					"name": "Extra Large",
+					"size": "62px",
+					"slug": "x-large",
+					"fluid": {
+						"min": "40px",
+						"max": "62px"
+					}
+				},
+				{
+					"name": "2X Large",
+					"size": "74px",
+					"slug": "xx-large",
+					"fluid": {
+						"min": "44px",
+						"max": "74px"
+					}
+				},
+				{
+					"name": "3X Large",
+					"size": "150px",
+					"slug": "xxx-large",
+					"fluid": {
+						"min": "40px",
+						"max": "150px"
+					}
+				}
+			]
+		}
+	},
+	"styles": {
+		"blocks": {
+			"core/site-title": {
+				"typography": {
+					"fontSize": "24px",
+					"fontFamily": "var(--wp--preset--font-family--spectral)",
+					"fontWeight": "400",
+					"lineHeight": {
+						"ref": "styles.blocks.core/navigation.typography.lineHeight"
+					}
+				}
+			},
+			"core/navigation": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"fontFamily": "var(--wp--preset--font-family--spectral)",
+					"fontWeight": "400",
+					"lineHeight": "1.4"
+				}
+			},
+			"core/site-tagline": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"fontFamily": "var(--wp--preset--font-family--spectral)",
+					"fontWeight": "400"
+				}
+			}
+		},
+		"elements": {
+			"button": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"fontFamily": "var(--wp--preset--font-family--spectral)"
+				}
+			},
+			"heading": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--spectral)",
+					"fontWeight": "300",
+					"letterSpacing": "-0.04em"
+				}
+			},
+			"h1": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--xx-large)",
+					"fontWeight": "300"
+				}
+			},
+			"h2": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--x-large)",
+					"fontWeight": "300",
+					"letterSpacing": "-0.03em"
+				}
+			},
+			"h3": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--large)",
+					"fontFamily": "var(--wp--preset--font-family--rethink-sans)",
+					"fontWeight": "400",
+					"letterSpacing": "0"
+				}
+			},
+			"h4": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"fontWeight": "400",
+					"letterSpacing": "0"
+				}
+			},
+			"h5": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"fontWeight": "400",
+					"letterSpacing": "0"
+				}
+			},
+			"h6": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--small)",
+					"fontWeight": "500",
+					"letterSpacing": "0"
+				}
+			}
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--rethink-sans)",
+			"fontSize": "var(--wp--preset--font-size--medium)",
+			"fontWeight": "400",
+			"lineHeight": "1.55",
+			"letterSpacing": "-0.015em"
+		}
+	}
+}

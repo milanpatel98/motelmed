@@ -1,0 +1,211 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Figtree & Inter (Sans/Sans) (Bold)",
+	"personality": [
+		"bold"
+	],
+	"keywords": [
+		"sans-serif",
+		"geometric",
+		"expressive",
+		"business",
+		"sporty"
+	],
+	"settings": {
+		"typography": {
+			"fontFamilies": [
+				{
+					"fontFace": [
+						{
+							"fontFamily": "Figtree",
+							"fontStyle": "normal",
+							"fontWeight": "400 800",
+							"src": [
+								"file:./assets/fonts/figtree/Figtree-VariableFont_wght.woff2"
+							]
+						},
+						{
+							"fontFamily": "Figtree",
+							"fontStyle": "italic",
+							"fontWeight": "400 800",
+							"src": [
+								"file:./assets/fonts/figtree/Figtree-Italic-VariableFont_wght.woff2"
+							]
+						}
+					],
+					"fontFamily": "\"Figtree\", sans-serif",
+					"name": "Figtree",
+					"slug": "figtree"
+				},
+				{
+					"fontFace": [
+						{
+							"fontFamily": "Inter",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "100 800",
+							"src": [
+								"file:./assets/fonts/inter/InterVariable.woff2"
+							]
+						},
+						{
+							"fontFamily": "Inter",
+							"fontStretch": "normal",
+							"fontStyle": "italic",
+							"fontWeight": "100 800",
+							"src": [
+								"file:./assets/fonts/inter/InterVariable-Italic.woff2"
+							]
+						}
+					],
+					"fontFamily": "\"Inter\", sans-serif",
+					"name": "Inter",
+					"slug": "inter"
+				}
+			],
+			"fontSizes": [
+				{
+					"name": "Small",
+					"size": "18px",
+					"slug": "small",
+					"fluid": {
+						"min": "17px",
+						"max": "18px"
+					}
+				},
+				{
+					"name": "Medium",
+					"size": "23px",
+					"slug": "medium",
+					"fluid": {
+						"min": "20px",
+						"max": "23px"
+					}
+				},
+				{
+					"name": "Large",
+					"size": "30px",
+					"slug": "large",
+					"fluid": {
+						"min": "28px",
+						"max": "30px"
+					}
+				},
+				{
+					"name": "Extra Large",
+					"size": "58px",
+					"slug": "x-large",
+					"fluid": {
+						"min": "36px",
+						"max": "58px"
+					}
+				},
+				{
+					"name": "2X Large",
+					"size": "80px",
+					"slug": "xx-large",
+					"fluid": {
+						"min": "48px",
+						"max": "80px"
+					}
+				},
+				{
+					"name": "3X Large",
+					"size": "150px",
+					"slug": "xxx-large",
+					"fluid": {
+						"min": "40px",
+						"max": "150px"
+					}
+				}
+			]
+		}
+	},
+	"styles": {
+		"blocks": {
+			"core/site-title": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--small)",
+					"fontWeight": "550",
+					"fontStyle": "normal",
+					"letterSpacing": "0.01em",
+					"lineHeight": {
+						"ref": "styles.blocks.core/navigation.typography.lineHeight"
+					}
+				}
+			},
+			"core/site-tagline": {
+				"typography": {
+					"fontSize": "15px",
+					"fontWeight": "400"
+				}
+			},
+			"core/navigation": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--small)",
+					"fontFamily": "var(--wp--preset--font-family--figtree)",
+					"fontWeight": "550",
+					"letterSpacing": "0.01em",
+					"lineHeight": "1.3"
+				}
+			}
+		},
+		"elements": {
+			"button": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--figtree)",
+					"fontSize": "var(--wp--preset--font-size--small)",
+					"fontWeight": "700",
+					"fontStyle": "italic",
+					"letterSpacing": "-0.015em"
+				}
+			},
+			"heading": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--figtree)",
+					"fontWeight": "800",
+					"fontStyle": "italic",
+					"letterSpacing": "-0.025em",
+					"lineHeight": "1"
+				}
+			},
+			"h1": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--xx-large)"
+				}
+			},
+			"h2": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--x-large)"
+				}
+			},
+			"h3": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--large)"
+				}
+			},
+			"h4": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)"
+				}
+			},
+			"h5": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)"
+				}
+			},
+			"h6": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--small)"
+				}
+			}
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--inter)",
+			"fontWeight": "350",
+			"lineHeight": "1.75",
+			"fontSize": "17px"
+		}
+	}
+}

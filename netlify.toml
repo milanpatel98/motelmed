@@ -1,0 +1,13 @@
+# Netlify — static preview site (HTML/CSS/JS in /preview)
+[build]
+  command = "node scripts/build-chat-dataset.cjs"
+  publish = "preview"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Optional: discourage search engines (does not password-protect the URL)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

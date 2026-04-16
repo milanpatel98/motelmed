@@ -137,11 +137,11 @@ body.mm-rooms .mm-page {
   display: block;
   flex-shrink: 0;
   object-fit: cover;
-  object-position: center center;
+  object-position: center 64%;
   user-select: none;
   -webkit-user-drag: none;
   transform: scale(1.01);
-  transform-origin: center;
+  transform-origin: center 70%;
 }
 
 .mm-hero__media {
@@ -476,7 +476,7 @@ body.mm-rooms .mm-page {
   padding-top: clamp(78px, 8.8vw, 120px);
 }
 
-/* Push General Information lower; match Rooms content serif style */
+/* Push “Know before you go” lower; match Rooms content serif style */
 #general {
   padding-top: clamp(96px, 11vw, 168px);
 }
@@ -1078,6 +1078,40 @@ body.mm-rooms .mm-page {
   color: rgba(16, 16, 16, 0.82);
 }
 
+/* “Know before you go” — mobile: was14px + 0.3em tracking (too wide); left-align + calmer scale */
+@media (max-width: 700px) {
+  #general > .mm-h2 {
+    font-size: clamp(18px, 4.8vw, 24px);
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+
+  #general .mm-accordion .mm-q summary {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    line-height: 1.45;
+    font-weight: 700;
+    padding: 14px 40px 14px 16px;
+    min-height: 0;
+    justify-content: flex-start;
+    text-align: left;
+    hyphens: none;
+    -webkit-hyphens: none;
+  }
+
+  #general .mm-accordion .mm-q summary::after {
+    right: 12px;
+    font-size: 15px;
+  }
+
+  #general .mm-accordion .mm-a {
+    padding: 14px 16px 16px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+}
+
 @media (max-width: 860px) {
   :root {
     --mm-hero-img-h: min(82vw, 560px);
@@ -1249,11 +1283,6 @@ body.mm-rooms .mm-page {
   /* ADA section */
   #ada .mm-row__actions {
     justify-content: flex-start;
-  }
-
-  /* Accordion */
-  .mm-q summary {
-    font-size: 14px;
   }
 
   /* Hero arrows: smaller, fully inside */

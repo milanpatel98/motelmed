@@ -164,6 +164,18 @@ footer.mm-footer .mm-footer__logo {
   text-align: center;
 }
 
+/* Interior pages: invisible 1px anchor next to header (legacy hook for optional scroll UI). */
+.mm-booking-inline.mm-booking-inline--sentinel {
+  height: 1px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+
 @media (max-width: 860px) {
   .mm-footer__inner {
     grid-template-columns: 1fr;

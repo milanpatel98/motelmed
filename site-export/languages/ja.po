@@ -1,0 +1,1770 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WordPress.com - Themes - Assembler\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-02-26T00:43:15+00:00\n"
+"PO-Revision-Date: 2026-02-25 20:08:49+0000\n"
+"Language: ja_JP\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+
+#: patterns/footer.php:69
+msgid "(123) 456-7890"
+msgstr "(123) 456-7890"
+
+#: patterns/header.php:26
+msgid "Learn more"
+msgstr "続きを読む"
+
+#: patterns/header.php
+msgctxt "Pattern description"
+msgid "Header with site title, navigation, and call-to-action button."
+msgstr "サイトのタイトル、ナビゲーション、行動喚起ボタンを含むヘッダー。"
+
+#: patterns/header.php
+msgctxt "Pattern title"
+msgid "Header"
+msgstr "ヘッダー"
+
+#. translators: %1$s: WordPress.org link opening tag, %2$s: the closing tag.
+#: patterns/footer.php:83
+msgid "Designed with %1$sWordPress%2$s"
+msgstr "%1$sWordPress%2$s でデザイン"
+
+#: patterns/footer.php:65
+msgid "hi@example.com"
+msgstr "hi@example.com"
+
+#: patterns/footer.php:39
+msgid "Hours"
+msgstr "時"
+
+#: patterns/footer.php:47
+msgid "Monday—Friday"
+msgstr "月曜日から金曜日"
+
+#: patterns/footer.php:51
+msgid "8am — 6pm"
+msgstr "午前8時〜午後6時"
+
+#: patterns/footer.php:57
+msgid "Contact"
+msgstr "お問い合わせ"
+
+#: patterns/footer.php:33
+msgid "San Francisco, CA 12345"
+msgstr "San Francisco, CA 12345"
+
+#: patterns/footer.php:29
+msgid "123 Example Street"
+msgstr "123 Example Street"
+
+#: patterns/footer.php:21
+msgid "Location"
+msgstr "所在地"
+
+#: patterns/footer.php
+msgctxt "Pattern description"
+msgid "Footer with location, hours, and contact information."
+msgstr "位置情報、営業時間、連絡先を含むフッター。"
+
+#: patterns/footer.php
+msgctxt "Pattern title"
+msgid "Footer"
+msgstr "フッター"
+
+#: styles/typography/sophisticated/urbanist-poppins.json
+msgctxt "Font family name"
+msgid "Urbanist"
+msgstr "Urbanist"
+
+#: styles/typography/sophisticated/urbanist-poppins.json
+msgctxt "Style variation name"
+msgid "Urbanist & Poppins (Sans/Sans) (Sophisticated)"
+msgstr "Urbanist & Poppins (Sans/Sans) (Sophisticated)"
+
+#: styles/typography/sophisticated/spectral-rethink.json
+msgctxt "Font family name"
+msgid "Spectral"
+msgstr "Spectral"
+
+#: styles/typography/sophisticated/spectral-rethink.json
+msgctxt "Font family name"
+msgid "Rethink Sans"
+msgstr "Rethink Sans"
+
+#: styles/typography/sophisticated/spectral-rethink.json
+msgctxt "Style variation name"
+msgid "Spectral & Rethink Sans (Serif/Sans) (Sophisticated)"
+msgstr "Spectral & Rethink Sans (Serif/Sans) (Sophisticated)"
+
+#: styles/typography/sophisticated/lucette-dm-mono.json
+msgctxt "Font family name"
+msgid "DM Mono"
+msgstr "DM Mono"
+
+#: styles/typography/sophisticated/lucette-dm-mono.json
+msgctxt "Font family name"
+msgid "Lucette"
+msgstr "Lucette"
+
+#: styles/typography/sophisticated/lucette-dm-mono.json
+msgctxt "Style variation name"
+msgid "Lucette & DM Mono (Serif/Mono) (Sophisticated)"
+msgstr "Lucette & DM Mono (Serif/Mono) (Sophisticated)"
+
+#: styles/typography/sophisticated/ibarra-nova-inter.json
+msgctxt "Style variation name"
+msgid "Ibarra Real Nova & Inter (Serif/Sans) (Sophisticated)"
+msgstr "Ibarra Real Nova & Inter (Serif/Sans) (Sophisticated)"
+
+#: styles/typography/sophisticated/fraunces-inter.json
+msgctxt "Font family name"
+msgid "Fraunces"
+msgstr "Fraunces"
+
+#: styles/typography/sophisticated/fraunces-inter.json
+msgctxt "Style variation name"
+msgid "Fraunces & Inter (Serif/Sans) (Sophisticated)"
+msgstr "Fraunces & Inter (Serif/Sans) (Sophisticated)"
+
+#: styles/typography/sophisticated/abel-ibarra-real-nova.json
+msgctxt "Font family name"
+msgid "Abel"
+msgstr "Abel"
+
+#: styles/typography/sophisticated/abel-ibarra-real-nova.json
+msgctxt "Style variation name"
+msgid "Abel & Ibarra Real Nova (Sans/Serif) (Sophisticated)"
+msgstr "Abel & Ibarra Real Nova (Sans/Serif) (Sophisticated)"
+
+#: styles/typography/professional/newsreader-pt-serif.json
+msgctxt "Font family name"
+msgid "PT Serif"
+msgstr "PT Serif"
+
+#: styles/typography/professional/newsreader-pt-serif.json
+msgctxt "Font family name"
+msgid "Newsreader"
+msgstr "Newsreader"
+
+#: styles/typography/professional/newsreader-pt-serif.json
+msgctxt "Style variation name"
+msgid "Newsreader & PT Serif (Serif/Serif) (Professional)"
+msgstr "Newsreader & PT Serif (Serif/Serif) (Professional)"
+
+#: styles/typography/professional/manrope-poppins.json
+#: styles/typography/sophisticated/urbanist-poppins.json
+msgctxt "Font family name"
+msgid "Poppins"
+msgstr "Poppins"
+
+#: styles/typography/professional/manrope-poppins.json
+msgctxt "Font family name"
+msgid "Manrope"
+msgstr "Manrope"
+
+#: styles/typography/professional/manrope-poppins.json
+msgctxt "Style variation name"
+msgid "Manrope & Poppins (Sans/Sans) (Professional)"
+msgstr "Manrope & Poppins (Sans/Sans) (Professional)"
+
+#: styles/typography/professional/gabarito-ibarra-real-nova.json
+#: styles/typography/sophisticated/abel-ibarra-real-nova.json
+#: styles/typography/sophisticated/ibarra-nova-inter.json
+msgctxt "Font family name"
+msgid "Ibarra Real Nova"
+msgstr "Ibarra Real Nova"
+
+#: styles/typography/professional/gabarito-ibarra-real-nova.json
+msgctxt "Style variation name"
+msgid "Gabarito & Ibarra Real Nova (Sans/Serif) (Professional)"
+msgstr "Gabarito & Ibarra Real Nova (Sans/Serif) (Professional)"
+
+#: styles/typography/professional/familjen-arimo.json
+msgctxt "Font family name"
+msgid "Arimo"
+msgstr "Arimo"
+
+#: styles/typography/professional/familjen-arimo.json
+msgctxt "Font family name"
+msgid "Familjen Grotesk"
+msgstr "Familjen Grotesk"
+
+#: styles/typography/professional/familjen-arimo.json
+msgctxt "Style variation name"
+msgid "Familjen & Arimo (Sans/Sans) (Professional)"
+msgstr "Familjen & Arimo (Sans/Sans) (Professional)"
+
+#: styles/typography/playful/young-serif-bitter.json
+msgctxt "Font family name"
+msgid "Young Serif"
+msgstr "Young Serif"
+
+#: styles/typography/playful/young-serif-bitter.json
+msgctxt "Style variation name"
+msgid "Young Serif & Bitter (Serif/Serif) (Playful)"
+msgstr "Young Serif & Bitter (Serif/Serif) (Playful)"
+
+#: styles/typography/playful/goblin-one-archivo.json
+msgctxt "Font family name"
+msgid "Archivo"
+msgstr "Archivo"
+
+#: styles/typography/playful/goblin-one-archivo.json
+msgctxt "Font family name"
+msgid "Goblin One"
+msgstr "Goblin One"
+
+#: styles/typography/playful/goblin-one-archivo.json
+msgctxt "Style variation name"
+msgid "Goblin One & Archivo (Sans/Sans) (Playful)"
+msgstr "Goblin One & Archivo (Sans/Sans) (Playful)"
+
+#: styles/typography/playful/calistoga-inter.json
+#: styles/typography/playful/young-serif-bitter.json
+#: styles/typography/sophisticated/abel-ibarra-real-nova.json
+msgctxt "Font family name"
+msgid "Bitter"
+msgstr "Bitter"
+
+#: styles/typography/playful/calistoga-inter.json
+msgctxt "Font family name"
+msgid "Calistoga"
+msgstr "Calistoga"
+
+#: styles/typography/playful/calistoga-inter.json
+msgctxt "Style variation name"
+msgid "Calistoga & Bitter (Serif/Serif) (Playful)"
+msgstr "Calistoga & Bitter (Serif/Serif) (Playful)"
+
+#: styles/typography/bold/space-mono.json
+msgctxt "Font family name"
+msgid "Space Mono"
+msgstr "Space Mono"
+
+#: styles/typography/bold/space-mono.json
+msgctxt "Style variation name"
+msgid "Space Mono (Mono/Mono) (Bold)"
+msgstr "Space Mono (Mono/Mono) (太字)"
+
+#: styles/typography/bold/noto-serif-ibm-plex.json
+msgctxt "Font family name"
+msgid "IBM Plex Mono"
+msgstr "IBM Plex Mono"
+
+#: styles/typography/bold/noto-serif-ibm-plex.json
+msgctxt "Font family name"
+msgid "Noto Serif"
+msgstr "Noto Serif"
+
+#: styles/typography/bold/noto-serif-ibm-plex.json
+msgctxt "Style variation name"
+msgid "Noto Serif & IBM Plex Mono (Serif/Mono) (Bold)"
+msgstr "Noto Serif & IBM Plex Mono (Serif/Mono) (太字)"
+
+#: styles/typography/bold/instrument-serif-noto-mono.json
+msgctxt "Font family name"
+msgid "Instrument Serif"
+msgstr "Instrument Serif"
+
+#: styles/typography/bold/instrument-serif-noto-mono.json
+msgctxt "Style variation name"
+msgid "Instrument Serif & Noto Mono (Serif/Mono) (Bold)"
+msgstr "Instrument Serif & Noto Mono (Serif/Mono) (太字)"
+
+#: styles/typography/bold/gabarito-noto-sans-mono.json
+#: styles/typography/bold/instrument-serif-noto-mono.json
+msgctxt "Font family name"
+msgid "Noto Sans Mono"
+msgstr "Noto Sans Mono"
+
+#: styles/typography/bold/gabarito-noto-sans-mono.json
+#: styles/typography/professional/gabarito-ibarra-real-nova.json
+msgctxt "Font family name"
+msgid "Gabarito"
+msgstr "Gabarito"
+
+#: styles/typography/bold/gabarito-noto-sans-mono.json
+msgctxt "Style variation name"
+msgid "Gabarito & Noto Sans Mono (Sans/Mono) (Bold)"
+msgstr "Gabarito & Noto Sans Mono (Sans/Mono) (太字)"
+
+#: styles/typography/bold/fjalla-roboto.json
+msgctxt "Font family name"
+msgid "Fjalla One"
+msgstr "Fjalla One"
+
+#: styles/typography/bold/fjalla-roboto.json
+msgctxt "Font family name"
+msgid "Roboto"
+msgstr "Roboto"
+
+#: styles/typography/bold/fjalla-roboto.json
+msgctxt "Style variation name"
+msgid "Fjalla & Roboto (Sans/Sans) (Bold)"
+msgstr "Fjalla & Roboto (Sans/Sans) (太字)"
+
+#: styles/typography/bold/figtree-inter.json
+msgctxt "Font family name"
+msgid "Figtree"
+msgstr "Figtree"
+
+#: styles/typography/bold/figtree-inter.json
+msgctxt "Style variation name"
+msgid "Figtree & Inter (Sans/Sans) (Bold)"
+msgstr "Figtree & Inter (Sans/Sans) (太字)"
+
+#: styles/colors/42-salmon.json
+msgctxt "Style variation name"
+msgid "Salmon"
+msgstr "サーモン"
+
+#: styles/colors/41-zenith.json
+msgctxt "Style variation name"
+msgid "Zenith"
+msgstr "ゼニス"
+
+#: styles/colors/40-golden.json
+msgctxt "Style variation name"
+msgid "Golden"
+msgstr "ゴールデン"
+
+#: styles/colors/39-fluorescent.json
+msgctxt "Style variation name"
+msgid "Fluorescent"
+msgstr "蛍光"
+
+#: styles/colors/38-emerald.json
+msgctxt "Color name"
+msgid "Color 7"
+msgstr "色7"
+
+#: styles/colors/38-emerald.json
+msgctxt "Style variation name"
+msgid "Emerald"
+msgstr "エメラルド"
+
+#: styles/colors/37-spring.json
+msgctxt "Style variation name"
+msgid "Spring"
+msgstr "春"
+
+#: styles/colors/36-amber.json
+msgctxt "Style variation name"
+msgid "Amber"
+msgstr "琥珀"
+
+#: styles/colors/35-ultraviolet.json
+msgctxt "Style variation name"
+msgid "Ultraviolet"
+msgstr "ウルトラバイオレット"
+
+#: styles/colors/34-cinnabar.json
+msgctxt "Style variation name"
+msgid "Cinnabar"
+msgstr "シナバー"
+
+#: styles/colors/33-rose.json
+msgctxt "Style variation name"
+msgid "Rose"
+msgstr "ローズ"
+
+#: styles/colors/32-citron.json
+msgctxt "Style variation name"
+msgid "Citron"
+msgstr "シトロン"
+
+#: styles/colors/31-creamsicle.json
+msgctxt "Style variation name"
+msgid "Creamsicle"
+msgstr "クリームシクル"
+
+#: styles/colors/30-tangerine.json
+msgctxt "Style variation name"
+msgid "Tangerine"
+msgstr "タンジェリン"
+
+#: styles/colors/29-fern.json
+msgctxt "Style variation name"
+msgid "Fern"
+msgstr "シダ"
+
+#: styles/colors/28-gainsboro.json
+msgctxt "Style variation name"
+msgid "Gainsboro"
+msgstr "ゲインズボロ"
+
+#: styles/colors/27-sapphire.json
+msgctxt "Style variation name"
+msgid "Sapphire"
+msgstr "サファイア"
+
+#: styles/colors/26-blueberry.json
+msgctxt "Style variation name"
+msgid "Blueberry"
+msgstr "ブルーベリー"
+
+#: styles/colors/25-maritime.json
+msgctxt "Style variation name"
+msgid "Maritime"
+msgstr "マリタイム"
+
+#: styles/colors/24-sand.json
+msgctxt "Style variation name"
+msgid "Sand"
+msgstr "サンド"
+
+#: styles/colors/23-cornflower.json
+msgctxt "Style variation name"
+msgid "Cornflower"
+msgstr "コーンフラワー"
+
+#: styles/colors/22-dawn.json
+msgctxt "Style variation name"
+msgid "Dawn"
+msgstr "夜明け"
+
+#: styles/colors/21-terracotta.json
+msgctxt "Style variation name"
+msgid "Terracotta"
+msgstr "テラコッタ"
+
+#: styles/colors/20-periwinkle.json
+msgctxt "Style variation name"
+msgid "Periwinkle"
+msgstr "ツルニチニチソウ"
+
+#: styles/colors/19-pear.json
+msgctxt "Style variation name"
+msgid "Pear"
+msgstr "梨"
+
+#: styles/colors/18-hunter.json
+msgctxt "Style variation name"
+msgid "Hunter"
+msgstr "ハンター"
+
+#: styles/colors/17-blush.json
+msgctxt "Style variation name"
+msgid "Blush"
+msgstr "ブラッシュ"
+
+#: styles/colors/16-mauve.json
+msgctxt "Style variation name"
+msgid "Mauve"
+msgstr "モーブ"
+
+#: styles/colors/15-meadow.json
+msgctxt "Style variation name"
+msgid "Meadow"
+msgstr "メドウ"
+
+#: styles/colors/14-pewter.json
+msgctxt "Style variation name"
+msgid "Pewter"
+msgstr "ピューター"
+
+#: styles/colors/13-eclipse.json
+msgctxt "Style variation name"
+msgid "Eclipse"
+msgstr "エクリプス"
+
+#: styles/colors/12-linen.json
+msgctxt "Style variation name"
+msgid "Linen"
+msgstr "リネン"
+
+#: styles/colors/11-canvas.json
+msgctxt "Style variation name"
+msgid "Canvas"
+msgstr "キャンバス"
+
+#: styles/colors/10-onyx.json
+msgctxt "Style variation name"
+msgid "Onyx"
+msgstr "オニキス"
+
+#: styles/colors/09-noir.json
+msgctxt "Style variation name"
+msgid "Noir"
+msgstr "ノワール"
+
+#: styles/colors/08-sandstone.json
+#: styles/colors/19-pear.json
+#: styles/colors/38-emerald.json
+msgctxt "Duotone name"
+msgid "Duotone 3"
+msgstr "デュオトーン3"
+
+#: styles/colors/08-sandstone.json
+msgctxt "Style variation name"
+msgid "Sandstone"
+msgstr "サンドストーン"
+
+#: styles/colors/07-umber.json
+msgctxt "Style variation name"
+msgid "Umber"
+msgstr "アンバー"
+
+#: styles/colors/06-dew.json
+msgctxt "Style variation name"
+msgid "Dew"
+msgstr "露"
+
+#: styles/colors/05-forest.json
+msgctxt "Style variation name"
+msgid "Forest"
+msgstr "森"
+
+#: styles/colors/04-ash.json
+msgctxt "Style variation name"
+msgid "Ash"
+msgstr "アッシュ"
+
+#: styles/colors/03-auburn.json
+msgctxt "Style variation name"
+msgid "Auburn"
+msgstr "オーバーン"
+
+#: styles/colors/02-mulberry.json
+msgctxt "Style variation name"
+msgid "Mulberry"
+msgstr "マルベリー"
+
+#: styles/colors/01-pearl.json
+#: styles/colors/11-canvas.json
+#: styles/colors/15-meadow.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Gradient name"
+msgid "Gradient 15"
+msgstr "グラデーション15"
+
+#: styles/colors/01-pearl.json
+#: styles/colors/11-canvas.json
+#: styles/colors/15-meadow.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Gradient name"
+msgid "Gradient 14"
+msgstr "グラデーション14"
+
+#: styles/colors/01-pearl.json
+#: styles/colors/11-canvas.json
+#: styles/colors/15-meadow.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Gradient name"
+msgid "Gradient 13"
+msgstr "グラデーション13"
+
+#: styles/colors/01-pearl.json
+#: styles/colors/11-canvas.json
+#: styles/colors/15-meadow.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Gradient name"
+msgid "Gradient 12"
+msgstr "グラデーション12"
+
+#: styles/colors/01-pearl.json
+#: styles/colors/11-canvas.json
+#: styles/colors/15-meadow.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Gradient name"
+msgid "Gradient 11"
+msgstr "グラデーション11"
+
+#: styles/colors/01-pearl.json
+#: styles/colors/05-forest.json
+#: styles/colors/11-canvas.json
+#: styles/colors/13-eclipse.json
+#: styles/colors/27-sapphire.json
+#: styles/colors/36-amber.json
+#: styles/colors/38-emerald.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Color name"
+msgid "Color 6"
+msgstr "色6"
+
+#: styles/colors/01-pearl.json
+msgctxt "Style variation name"
+msgid "Pearl"
+msgstr "パール"
+
+#: styles/block/section-3.json
+#: styles/block/section-cover-3.json
+msgctxt "Style variation name"
+msgid "Style 3"
+msgstr "スタイル3"
+
+#: styles/block/section-2.json
+#: styles/block/section-cover-2.json
+msgctxt "Style variation name"
+msgid "Style 2"
+msgstr "スタイル2"
+
+#: styles/block/section-1.json
+#: styles/block/section-cover-1.json
+msgctxt "Style variation name"
+msgid "Style 1"
+msgstr "スタイル1"
+
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/05-forest.json
+#: styles/colors/09-noir.json
+#: styles/colors/10-onyx.json
+#: styles/colors/11-canvas.json
+#: styles/colors/13-eclipse.json
+#: styles/colors/14-pewter.json
+#: styles/colors/15-meadow.json
+#: styles/colors/16-mauve.json
+#: styles/colors/20-periwinkle.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/22-dawn.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/26-blueberry.json
+#: styles/colors/27-sapphire.json
+#: styles/colors/29-fern.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/37-spring.json
+#: styles/colors/38-emerald.json
+#: styles/colors/39-fluorescent.json
+#: styles/colors/40-golden.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Gradient name"
+msgid "Gradient 10"
+msgstr "グラデーション10"
+
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/05-forest.json
+#: styles/colors/09-noir.json
+#: styles/colors/10-onyx.json
+#: styles/colors/11-canvas.json
+#: styles/colors/13-eclipse.json
+#: styles/colors/14-pewter.json
+#: styles/colors/15-meadow.json
+#: styles/colors/16-mauve.json
+#: styles/colors/20-periwinkle.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/22-dawn.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/26-blueberry.json
+#: styles/colors/27-sapphire.json
+#: styles/colors/29-fern.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/37-spring.json
+#: styles/colors/38-emerald.json
+#: styles/colors/39-fluorescent.json
+#: styles/colors/40-golden.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Gradient name"
+msgid "Gradient 9"
+msgstr "グラデーション9"
+
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/05-forest.json
+#: styles/colors/09-noir.json
+#: styles/colors/10-onyx.json
+#: styles/colors/11-canvas.json
+#: styles/colors/13-eclipse.json
+#: styles/colors/14-pewter.json
+#: styles/colors/15-meadow.json
+#: styles/colors/16-mauve.json
+#: styles/colors/20-periwinkle.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/22-dawn.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/26-blueberry.json
+#: styles/colors/27-sapphire.json
+#: styles/colors/29-fern.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/37-spring.json
+#: styles/colors/38-emerald.json
+#: styles/colors/39-fluorescent.json
+#: styles/colors/40-golden.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Gradient name"
+msgid "Gradient 8"
+msgstr "グラデーション8"
+
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/05-forest.json
+#: styles/colors/09-noir.json
+#: styles/colors/10-onyx.json
+#: styles/colors/11-canvas.json
+#: styles/colors/13-eclipse.json
+#: styles/colors/14-pewter.json
+#: styles/colors/15-meadow.json
+#: styles/colors/16-mauve.json
+#: styles/colors/20-periwinkle.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/22-dawn.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/26-blueberry.json
+#: styles/colors/27-sapphire.json
+#: styles/colors/29-fern.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/37-spring.json
+#: styles/colors/38-emerald.json
+#: styles/colors/39-fluorescent.json
+#: styles/colors/40-golden.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Gradient name"
+msgid "Gradient 7"
+msgstr "グラデーション7"
+
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/04-ash.json
+#: styles/colors/05-forest.json
+#: styles/colors/06-dew.json
+#: styles/colors/07-umber.json
+#: styles/colors/08-sandstone.json
+#: styles/colors/09-noir.json
+#: styles/colors/10-onyx.json
+#: styles/colors/11-canvas.json
+#: styles/colors/12-linen.json
+#: styles/colors/13-eclipse.json
+#: styles/colors/14-pewter.json
+#: styles/colors/15-meadow.json
+#: styles/colors/16-mauve.json
+#: styles/colors/17-blush.json
+#: styles/colors/18-hunter.json
+#: styles/colors/19-pear.json
+#: styles/colors/20-periwinkle.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/22-dawn.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/26-blueberry.json
+#: styles/colors/27-sapphire.json
+#: styles/colors/28-gainsboro.json
+#: styles/colors/29-fern.json
+#: styles/colors/30-tangerine.json
+#: styles/colors/31-creamsicle.json
+#: styles/colors/32-citron.json
+#: styles/colors/33-rose.json
+#: styles/colors/34-cinnabar.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/36-amber.json
+#: styles/colors/37-spring.json
+#: styles/colors/38-emerald.json
+#: styles/colors/39-fluorescent.json
+#: styles/colors/40-golden.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Gradient name"
+msgid "Gradient 6"
+msgstr "グラデーション6"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Mini Cart"
+msgstr "ミニお買い物カゴ"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Variable Product Add to Cart With Options"
+msgstr "バリエーションのある商品の「オプションを付けてお買い物カゴに追加」"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Simple Product Add to Cart With Options"
+msgstr "シンプルな商品の「オプションを付けてお買い物カゴに追加」"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Grouped Product Add to Cart With Options"
+msgstr "グループ商品の「オプションを付けてお買い物カゴに追加」"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "External Product Add to Cart With Options"
+msgstr "外部商品の「オプションを付けてお買い物カゴに追加」"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Footer"
+msgstr "フッター"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Hero Header"
+msgstr "ヒーローヘッダー"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Header"
+msgstr "ヘッダー"
+
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/04-ash.json
+#: styles/colors/05-forest.json
+#: styles/colors/06-dew.json
+#: styles/colors/07-umber.json
+#: styles/colors/08-sandstone.json
+#: styles/colors/09-noir.json
+#: styles/colors/10-onyx.json
+#: styles/colors/11-canvas.json
+#: styles/colors/12-linen.json
+#: styles/colors/13-eclipse.json
+#: styles/colors/14-pewter.json
+#: styles/colors/15-meadow.json
+#: styles/colors/16-mauve.json
+#: styles/colors/17-blush.json
+#: styles/colors/18-hunter.json
+#: styles/colors/19-pear.json
+#: styles/colors/20-periwinkle.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/22-dawn.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/26-blueberry.json
+#: styles/colors/27-sapphire.json
+#: styles/colors/28-gainsboro.json
+#: styles/colors/29-fern.json
+#: styles/colors/30-tangerine.json
+#: styles/colors/31-creamsicle.json
+#: styles/colors/32-citron.json
+#: styles/colors/33-rose.json
+#: styles/colors/34-cinnabar.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/36-amber.json
+#: styles/colors/37-spring.json
+#: styles/colors/38-emerald.json
+#: styles/colors/39-fluorescent.json
+#: styles/colors/40-golden.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Gradient name"
+msgid "Gradient 5"
+msgstr "グラデーション5"
+
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/04-ash.json
+#: styles/colors/05-forest.json
+#: styles/colors/06-dew.json
+#: styles/colors/07-umber.json
+#: styles/colors/08-sandstone.json
+#: styles/colors/09-noir.json
+#: styles/colors/10-onyx.json
+#: styles/colors/11-canvas.json
+#: styles/colors/12-linen.json
+#: styles/colors/13-eclipse.json
+#: styles/colors/14-pewter.json
+#: styles/colors/15-meadow.json
+#: styles/colors/16-mauve.json
+#: styles/colors/17-blush.json
+#: styles/colors/18-hunter.json
+#: styles/colors/19-pear.json
+#: styles/colors/20-periwinkle.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/22-dawn.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/26-blueberry.json
+#: styles/colors/27-sapphire.json
+#: styles/colors/28-gainsboro.json
+#: styles/colors/29-fern.json
+#: styles/colors/30-tangerine.json
+#: styles/colors/31-creamsicle.json
+#: styles/colors/32-citron.json
+#: styles/colors/33-rose.json
+#: styles/colors/34-cinnabar.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/36-amber.json
+#: styles/colors/37-spring.json
+#: styles/colors/38-emerald.json
+#: styles/colors/39-fluorescent.json
+#: styles/colors/40-golden.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Gradient name"
+msgid "Gradient 4"
+msgstr "グラデーション4"
+
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/04-ash.json
+#: styles/colors/05-forest.json
+#: styles/colors/06-dew.json
+#: styles/colors/07-umber.json
+#: styles/colors/08-sandstone.json
+#: styles/colors/09-noir.json
+#: styles/colors/10-onyx.json
+#: styles/colors/11-canvas.json
+#: styles/colors/12-linen.json
+#: styles/colors/13-eclipse.json
+#: styles/colors/14-pewter.json
+#: styles/colors/15-meadow.json
+#: styles/colors/16-mauve.json
+#: styles/colors/17-blush.json
+#: styles/colors/18-hunter.json
+#: styles/colors/19-pear.json
+#: styles/colors/20-periwinkle.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/22-dawn.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/26-blueberry.json
+#: styles/colors/27-sapphire.json
+#: styles/colors/28-gainsboro.json
+#: styles/colors/29-fern.json
+#: styles/colors/30-tangerine.json
+#: styles/colors/31-creamsicle.json
+#: styles/colors/32-citron.json
+#: styles/colors/33-rose.json
+#: styles/colors/34-cinnabar.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/36-amber.json
+#: styles/colors/37-spring.json
+#: styles/colors/38-emerald.json
+#: styles/colors/39-fluorescent.json
+#: styles/colors/40-golden.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Gradient name"
+msgid "Gradient 3"
+msgstr "グラデーション3"
+
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/04-ash.json
+#: styles/colors/05-forest.json
+#: styles/colors/06-dew.json
+#: styles/colors/07-umber.json
+#: styles/colors/08-sandstone.json
+#: styles/colors/09-noir.json
+#: styles/colors/10-onyx.json
+#: styles/colors/11-canvas.json
+#: styles/colors/12-linen.json
+#: styles/colors/13-eclipse.json
+#: styles/colors/14-pewter.json
+#: styles/colors/15-meadow.json
+#: styles/colors/16-mauve.json
+#: styles/colors/17-blush.json
+#: styles/colors/18-hunter.json
+#: styles/colors/19-pear.json
+#: styles/colors/20-periwinkle.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/22-dawn.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/26-blueberry.json
+#: styles/colors/27-sapphire.json
+#: styles/colors/28-gainsboro.json
+#: styles/colors/29-fern.json
+#: styles/colors/30-tangerine.json
+#: styles/colors/31-creamsicle.json
+#: styles/colors/32-citron.json
+#: styles/colors/33-rose.json
+#: styles/colors/34-cinnabar.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/36-amber.json
+#: styles/colors/37-spring.json
+#: styles/colors/38-emerald.json
+#: styles/colors/39-fluorescent.json
+#: styles/colors/40-golden.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Gradient name"
+msgid "Gradient 2"
+msgstr "グラデーション2"
+
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/04-ash.json
+#: styles/colors/05-forest.json
+#: styles/colors/06-dew.json
+#: styles/colors/07-umber.json
+#: styles/colors/08-sandstone.json
+#: styles/colors/09-noir.json
+#: styles/colors/10-onyx.json
+#: styles/colors/11-canvas.json
+#: styles/colors/12-linen.json
+#: styles/colors/13-eclipse.json
+#: styles/colors/14-pewter.json
+#: styles/colors/15-meadow.json
+#: styles/colors/16-mauve.json
+#: styles/colors/17-blush.json
+#: styles/colors/18-hunter.json
+#: styles/colors/19-pear.json
+#: styles/colors/20-periwinkle.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/22-dawn.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/26-blueberry.json
+#: styles/colors/27-sapphire.json
+#: styles/colors/28-gainsboro.json
+#: styles/colors/29-fern.json
+#: styles/colors/30-tangerine.json
+#: styles/colors/31-creamsicle.json
+#: styles/colors/32-citron.json
+#: styles/colors/33-rose.json
+#: styles/colors/34-cinnabar.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/36-amber.json
+#: styles/colors/37-spring.json
+#: styles/colors/38-emerald.json
+#: styles/colors/39-fluorescent.json
+#: styles/colors/40-golden.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Gradient name"
+msgid "Gradient 1"
+msgstr "グラデーション1"
+
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/04-ash.json
+#: styles/colors/05-forest.json
+#: styles/colors/06-dew.json
+#: styles/colors/07-umber.json
+#: styles/colors/08-sandstone.json
+#: styles/colors/09-noir.json
+#: styles/colors/10-onyx.json
+#: styles/colors/11-canvas.json
+#: styles/colors/12-linen.json
+#: styles/colors/13-eclipse.json
+#: styles/colors/14-pewter.json
+#: styles/colors/15-meadow.json
+#: styles/colors/16-mauve.json
+#: styles/colors/17-blush.json
+#: styles/colors/18-hunter.json
+#: styles/colors/19-pear.json
+#: styles/colors/20-periwinkle.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/22-dawn.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/26-blueberry.json
+#: styles/colors/27-sapphire.json
+#: styles/colors/28-gainsboro.json
+#: styles/colors/29-fern.json
+#: styles/colors/30-tangerine.json
+#: styles/colors/31-creamsicle.json
+#: styles/colors/32-citron.json
+#: styles/colors/33-rose.json
+#: styles/colors/34-cinnabar.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/36-amber.json
+#: styles/colors/37-spring.json
+#: styles/colors/38-emerald.json
+#: styles/colors/39-fluorescent.json
+#: styles/colors/40-golden.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Gradient name"
+msgid "Text to Transparent"
+msgstr "テキストを透明にする"
+
+#: theme.json
+#: styles/typography/bold/figtree-inter.json
+#: styles/typography/bold/fjalla-roboto.json
+#: styles/typography/bold/gabarito-noto-sans-mono.json
+#: styles/typography/bold/instrument-serif-noto-mono.json
+#: styles/typography/bold/noto-serif-ibm-plex.json
+#: styles/typography/bold/space-mono.json
+#: styles/typography/playful/calistoga-inter.json
+#: styles/typography/playful/goblin-one-archivo.json
+#: styles/typography/playful/young-serif-bitter.json
+#: styles/typography/professional/familjen-arimo.json
+#: styles/typography/professional/gabarito-ibarra-real-nova.json
+#: styles/typography/professional/manrope-poppins.json
+#: styles/typography/professional/newsreader-pt-serif.json
+#: styles/typography/sophisticated/abel-ibarra-real-nova.json
+#: styles/typography/sophisticated/fraunces-inter.json
+#: styles/typography/sophisticated/ibarra-nova-inter.json
+#: styles/typography/sophisticated/lucette-dm-mono.json
+#: styles/typography/sophisticated/spectral-rethink.json
+#: styles/typography/sophisticated/urbanist-poppins.json
+msgctxt "Font size name"
+msgid "3X Large"
+msgstr "3XL"
+
+#: theme.json
+#: styles/typography/bold/figtree-inter.json
+#: styles/typography/bold/fjalla-roboto.json
+#: styles/typography/bold/gabarito-noto-sans-mono.json
+#: styles/typography/bold/instrument-serif-noto-mono.json
+#: styles/typography/bold/noto-serif-ibm-plex.json
+#: styles/typography/bold/space-mono.json
+#: styles/typography/playful/calistoga-inter.json
+#: styles/typography/playful/goblin-one-archivo.json
+#: styles/typography/playful/young-serif-bitter.json
+#: styles/typography/professional/familjen-arimo.json
+#: styles/typography/professional/gabarito-ibarra-real-nova.json
+#: styles/typography/professional/manrope-poppins.json
+#: styles/typography/professional/newsreader-pt-serif.json
+#: styles/typography/sophisticated/abel-ibarra-real-nova.json
+#: styles/typography/sophisticated/fraunces-inter.json
+#: styles/typography/sophisticated/ibarra-nova-inter.json
+#: styles/typography/sophisticated/lucette-dm-mono.json
+#: styles/typography/sophisticated/spectral-rethink.json
+#: styles/typography/sophisticated/urbanist-poppins.json
+msgctxt "Font size name"
+msgid "2X Large"
+msgstr "2XL"
+
+#: theme.json
+#: styles/typography/bold/figtree-inter.json
+#: styles/typography/bold/fjalla-roboto.json
+#: styles/typography/bold/gabarito-noto-sans-mono.json
+#: styles/typography/bold/instrument-serif-noto-mono.json
+#: styles/typography/bold/noto-serif-ibm-plex.json
+#: styles/typography/bold/space-mono.json
+#: styles/typography/playful/calistoga-inter.json
+#: styles/typography/playful/goblin-one-archivo.json
+#: styles/typography/playful/young-serif-bitter.json
+#: styles/typography/professional/familjen-arimo.json
+#: styles/typography/professional/gabarito-ibarra-real-nova.json
+#: styles/typography/professional/manrope-poppins.json
+#: styles/typography/professional/newsreader-pt-serif.json
+#: styles/typography/sophisticated/abel-ibarra-real-nova.json
+#: styles/typography/sophisticated/fraunces-inter.json
+#: styles/typography/sophisticated/ibarra-nova-inter.json
+#: styles/typography/sophisticated/lucette-dm-mono.json
+#: styles/typography/sophisticated/spectral-rethink.json
+#: styles/typography/sophisticated/urbanist-poppins.json
+msgctxt "Font size name"
+msgid "Extra Large"
+msgstr "特大"
+
+#: theme.json
+#: styles/typography/bold/figtree-inter.json
+#: styles/typography/bold/fjalla-roboto.json
+#: styles/typography/bold/gabarito-noto-sans-mono.json
+#: styles/typography/bold/instrument-serif-noto-mono.json
+#: styles/typography/bold/noto-serif-ibm-plex.json
+#: styles/typography/bold/space-mono.json
+#: styles/typography/playful/calistoga-inter.json
+#: styles/typography/playful/goblin-one-archivo.json
+#: styles/typography/playful/young-serif-bitter.json
+#: styles/typography/professional/familjen-arimo.json
+#: styles/typography/professional/gabarito-ibarra-real-nova.json
+#: styles/typography/professional/manrope-poppins.json
+#: styles/typography/professional/newsreader-pt-serif.json
+#: styles/typography/sophisticated/abel-ibarra-real-nova.json
+#: styles/typography/sophisticated/fraunces-inter.json
+#: styles/typography/sophisticated/ibarra-nova-inter.json
+#: styles/typography/sophisticated/lucette-dm-mono.json
+#: styles/typography/sophisticated/spectral-rethink.json
+#: styles/typography/sophisticated/urbanist-poppins.json
+msgctxt "Font size name"
+msgid "Medium"
+msgstr "中"
+
+#: theme.json
+#: styles/typography/bold/figtree-inter.json
+#: styles/typography/bold/fjalla-roboto.json
+#: styles/typography/bold/gabarito-noto-sans-mono.json
+#: styles/typography/bold/instrument-serif-noto-mono.json
+#: styles/typography/bold/noto-serif-ibm-plex.json
+#: styles/typography/bold/space-mono.json
+#: styles/typography/playful/calistoga-inter.json
+#: styles/typography/playful/goblin-one-archivo.json
+#: styles/typography/playful/young-serif-bitter.json
+#: styles/typography/professional/familjen-arimo.json
+#: styles/typography/professional/gabarito-ibarra-real-nova.json
+#: styles/typography/professional/manrope-poppins.json
+#: styles/typography/professional/newsreader-pt-serif.json
+#: styles/typography/sophisticated/abel-ibarra-real-nova.json
+#: styles/typography/sophisticated/fraunces-inter.json
+#: styles/typography/sophisticated/ibarra-nova-inter.json
+#: styles/typography/sophisticated/lucette-dm-mono.json
+#: styles/typography/sophisticated/spectral-rethink.json
+#: styles/typography/sophisticated/urbanist-poppins.json
+msgctxt "Font size name"
+msgid "Large"
+msgstr "大"
+
+#: theme.json
+#: styles/typography/bold/figtree-inter.json
+#: styles/typography/bold/fjalla-roboto.json
+#: styles/typography/bold/gabarito-noto-sans-mono.json
+#: styles/typography/bold/instrument-serif-noto-mono.json
+#: styles/typography/bold/noto-serif-ibm-plex.json
+#: styles/typography/bold/space-mono.json
+#: styles/typography/playful/calistoga-inter.json
+#: styles/typography/playful/goblin-one-archivo.json
+#: styles/typography/playful/young-serif-bitter.json
+#: styles/typography/professional/familjen-arimo.json
+#: styles/typography/professional/gabarito-ibarra-real-nova.json
+#: styles/typography/professional/manrope-poppins.json
+#: styles/typography/professional/newsreader-pt-serif.json
+#: styles/typography/sophisticated/abel-ibarra-real-nova.json
+#: styles/typography/sophisticated/fraunces-inter.json
+#: styles/typography/sophisticated/ibarra-nova-inter.json
+#: styles/typography/sophisticated/lucette-dm-mono.json
+#: styles/typography/sophisticated/spectral-rethink.json
+#: styles/typography/sophisticated/urbanist-poppins.json
+msgctxt "Font size name"
+msgid "Small"
+msgstr "小"
+
+#: theme.json
+#: styles/typography/bold/figtree-inter.json
+#: styles/typography/sophisticated/fraunces-inter.json
+#: styles/typography/sophisticated/ibarra-nova-inter.json
+msgctxt "Font family name"
+msgid "Inter"
+msgstr "Inter"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "2X Large"
+msgstr "2XL"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "Extra Large"
+msgstr "特大"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "Large"
+msgstr "大"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "Medium"
+msgstr "中"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "Small"
+msgstr "小"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "X-Small"
+msgstr "XS"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "2X-Small"
+msgstr "2XS"
+
+#: theme.json
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/05-forest.json
+#: styles/colors/06-dew.json
+#: styles/colors/08-sandstone.json
+#: styles/colors/10-onyx.json
+#: styles/colors/18-hunter.json
+#: styles/colors/19-pear.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/30-tangerine.json
+#: styles/colors/31-creamsicle.json
+#: styles/colors/33-rose.json
+#: styles/colors/34-cinnabar.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/36-amber.json
+#: styles/colors/38-emerald.json
+#: styles/colors/39-fluorescent.json
+msgctxt "Duotone name"
+msgid "Duotone 2"
+msgstr "デュオトーン2"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Single Product"
+msgstr "単一の商品"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Products by Attribute"
+msgstr "属性別商品"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Product Search Results"
+msgstr "商品検索結果"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Product Catalogue"
+msgstr "商品カタログ"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Page with Title"
+msgstr "タイトルなしのページ"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Page with Hero"
+msgstr "ヒーロー付きページ"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Page: Checkout"
+msgstr "ページ: 購入手続き"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Page: Cart"
+msgstr "ページ: お買い物カゴ"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Order Confirmation"
+msgstr "注文確認"
+
+#: patterns/hidden-upsells.php
+msgctxt "Pattern title"
+msgid "Upsells"
+msgstr "アップセル"
+
+#: patterns/hidden-related-products.php
+msgctxt "Pattern title"
+msgid "Related Products"
+msgstr "関連商品"
+
+#: patterns/hidden-order-confirmation-shipping-address-title.php
+msgctxt "Pattern title"
+msgid "Order confirmation shipping address title"
+msgstr "注文確認の配送先住所のタイトル"
+
+#: theme.json
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/04-ash.json
+#: styles/colors/05-forest.json
+#: styles/colors/06-dew.json
+#: styles/colors/07-umber.json
+#: styles/colors/08-sandstone.json
+#: styles/colors/09-noir.json
+#: styles/colors/10-onyx.json
+#: styles/colors/11-canvas.json
+#: styles/colors/12-linen.json
+#: styles/colors/13-eclipse.json
+#: styles/colors/14-pewter.json
+#: styles/colors/15-meadow.json
+#: styles/colors/16-mauve.json
+#: styles/colors/17-blush.json
+#: styles/colors/18-hunter.json
+#: styles/colors/19-pear.json
+#: styles/colors/20-periwinkle.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/22-dawn.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/26-blueberry.json
+#: styles/colors/27-sapphire.json
+#: styles/colors/28-gainsboro.json
+#: styles/colors/29-fern.json
+#: styles/colors/30-tangerine.json
+#: styles/colors/31-creamsicle.json
+#: styles/colors/32-citron.json
+#: styles/colors/33-rose.json
+#: styles/colors/34-cinnabar.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/36-amber.json
+#: styles/colors/37-spring.json
+#: styles/colors/38-emerald.json
+#: styles/colors/39-fluorescent.json
+#: styles/colors/40-golden.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Duotone name"
+msgid "Duotone 1"
+msgstr "デュオトーン1"
+
+#: theme.json
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/09-noir.json
+#: styles/colors/10-onyx.json
+#: styles/colors/11-canvas.json
+#: styles/colors/12-linen.json
+#: styles/colors/13-eclipse.json
+#: styles/colors/14-pewter.json
+#: styles/colors/15-meadow.json
+#: styles/colors/16-mauve.json
+#: styles/colors/17-blush.json
+#: styles/colors/19-pear.json
+#: styles/colors/20-periwinkle.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/22-dawn.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/26-blueberry.json
+#: styles/colors/27-sapphire.json
+#: styles/colors/29-fern.json
+#: styles/colors/30-tangerine.json
+#: styles/colors/31-creamsicle.json
+#: styles/colors/34-cinnabar.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/36-amber.json
+#: styles/colors/37-spring.json
+#: styles/colors/38-emerald.json
+#: styles/colors/39-fluorescent.json
+#: styles/colors/40-golden.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Color name"
+msgid "Color 5"
+msgstr "色5"
+
+#: theme.json
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/04-ash.json
+#: styles/colors/05-forest.json
+#: styles/colors/06-dew.json
+#: styles/colors/07-umber.json
+#: styles/colors/08-sandstone.json
+#: styles/colors/09-noir.json
+#: styles/colors/10-onyx.json
+#: styles/colors/11-canvas.json
+#: styles/colors/14-pewter.json
+#: styles/colors/15-meadow.json
+#: styles/colors/16-mauve.json
+#: styles/colors/17-blush.json
+#: styles/colors/18-hunter.json
+#: styles/colors/20-periwinkle.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/22-dawn.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/26-blueberry.json
+#: styles/colors/27-sapphire.json
+#: styles/colors/28-gainsboro.json
+#: styles/colors/29-fern.json
+#: styles/colors/30-tangerine.json
+#: styles/colors/32-citron.json
+#: styles/colors/33-rose.json
+#: styles/colors/34-cinnabar.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/36-amber.json
+#: styles/colors/37-spring.json
+#: styles/colors/38-emerald.json
+#: styles/colors/39-fluorescent.json
+#: styles/colors/40-golden.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Color name"
+msgid "Color 4"
+msgstr "色4"
+
+#: theme.json
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/04-ash.json
+#: styles/colors/05-forest.json
+#: styles/colors/06-dew.json
+#: styles/colors/07-umber.json
+#: styles/colors/08-sandstone.json
+#: styles/colors/09-noir.json
+#: styles/colors/10-onyx.json
+#: styles/colors/11-canvas.json
+#: styles/colors/12-linen.json
+#: styles/colors/13-eclipse.json
+#: styles/colors/14-pewter.json
+#: styles/colors/15-meadow.json
+#: styles/colors/16-mauve.json
+#: styles/colors/17-blush.json
+#: styles/colors/18-hunter.json
+#: styles/colors/19-pear.json
+#: styles/colors/20-periwinkle.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/22-dawn.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/26-blueberry.json
+#: styles/colors/27-sapphire.json
+#: styles/colors/28-gainsboro.json
+#: styles/colors/29-fern.json
+#: styles/colors/31-creamsicle.json
+#: styles/colors/32-citron.json
+#: styles/colors/33-rose.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/37-spring.json
+#: styles/colors/39-fluorescent.json
+#: styles/colors/40-golden.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Color name"
+msgid "Color 3"
+msgstr "色3"
+
+#: patterns/hidden-order-confirmation-order-details-title.php
+msgctxt "Pattern title"
+msgid "Order confirmation order details title"
+msgstr "注文確認の注文詳細のタイトル"
+
+#: patterns/hidden-order-confirmation-download-title.php
+msgctxt "Pattern title"
+msgid "Order confirmation downloads title"
+msgstr "注文確認のダウンロードのタイトル"
+
+#: patterns/hidden-order-confirmation-billing-address-title.php
+msgctxt "Pattern title"
+msgid "Order confirmation billing address title"
+msgstr "注文確認の請求先住所のタイトル"
+
+#: patterns/hidden-order-confirmation-additional-information-title.php
+msgctxt "Pattern title"
+msgid "Order confirmation additional information title"
+msgstr "注文確認の追加情報のタイトル"
+
+#: patterns/hidden-no-product-search-results.php
+msgctxt "Pattern title"
+msgid "No Product Search Results"
+msgstr "商品検索結果がありません"
+
+#: patterns/hidden-empty-mini-cart.php
+msgctxt "Pattern title"
+msgid "Empty Mini Cart"
+msgstr "空のミニお買い物カゴ"
+
+#: patterns/hidden-empty-cart-block.php
+msgctxt "Pattern title"
+msgid "Empty Card Block"
+msgstr "空のカードブロック"
+
+#: patterns/hidden-cross-sells.php
+msgctxt "Pattern title"
+msgid "Cross Sells"
+msgstr "クロスセル"
+
+#: patterns/hidden-cart-page-title.php
+msgctxt "Pattern title"
+msgid "Cart Page Title"
+msgstr "お買い物カゴページのタイトル"
+
+#: patterns/hidden-404.php
+#: patterns/hidden-no-search-results.php
+msgctxt "Pattern title"
+msgid "404"
+msgstr "404"
+
+#: theme.json
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/04-ash.json
+#: styles/colors/05-forest.json
+#: styles/colors/06-dew.json
+#: styles/colors/07-umber.json
+#: styles/colors/08-sandstone.json
+#: styles/colors/09-noir.json
+#: styles/colors/10-onyx.json
+#: styles/colors/11-canvas.json
+#: styles/colors/12-linen.json
+#: styles/colors/13-eclipse.json
+#: styles/colors/14-pewter.json
+#: styles/colors/15-meadow.json
+#: styles/colors/16-mauve.json
+#: styles/colors/18-hunter.json
+#: styles/colors/19-pear.json
+#: styles/colors/20-periwinkle.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/22-dawn.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/26-blueberry.json
+#: styles/colors/27-sapphire.json
+#: styles/colors/28-gainsboro.json
+#: styles/colors/29-fern.json
+#: styles/colors/30-tangerine.json
+#: styles/colors/31-creamsicle.json
+#: styles/colors/32-citron.json
+#: styles/colors/33-rose.json
+#: styles/colors/34-cinnabar.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/36-amber.json
+#: styles/colors/37-spring.json
+#: styles/colors/38-emerald.json
+#: styles/colors/39-fluorescent.json
+#: styles/colors/40-golden.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Color name"
+msgid "Color 2"
+msgstr "色2"
+
+#: theme.json
+#: styles/colors/01-pearl.json
+#: styles/colors/02-mulberry.json
+#: styles/colors/03-auburn.json
+#: styles/colors/04-ash.json
+#: styles/colors/05-forest.json
+#: styles/colors/06-dew.json
+#: styles/colors/07-umber.json
+#: styles/colors/08-sandstone.json
+#: styles/colors/09-noir.json
+#: styles/colors/10-onyx.json
+#: styles/colors/11-canvas.json
+#: styles/colors/12-linen.json
+#: styles/colors/13-eclipse.json
+#: styles/colors/14-pewter.json
+#: styles/colors/15-meadow.json
+#: styles/colors/16-mauve.json
+#: styles/colors/17-blush.json
+#: styles/colors/18-hunter.json
+#: styles/colors/19-pear.json
+#: styles/colors/20-periwinkle.json
+#: styles/colors/21-terracotta.json
+#: styles/colors/22-dawn.json
+#: styles/colors/23-cornflower.json
+#: styles/colors/24-sand.json
+#: styles/colors/25-maritime.json
+#: styles/colors/26-blueberry.json
+#: styles/colors/28-gainsboro.json
+#: styles/colors/29-fern.json
+#: styles/colors/30-tangerine.json
+#: styles/colors/31-creamsicle.json
+#: styles/colors/32-citron.json
+#: styles/colors/33-rose.json
+#: styles/colors/34-cinnabar.json
+#: styles/colors/35-ultraviolet.json
+#: styles/colors/37-spring.json
+#: styles/colors/39-fluorescent.json
+#: styles/colors/40-golden.json
+#: styles/colors/41-zenith.json
+#: styles/colors/42-salmon.json
+msgctxt "Color name"
+msgid "Color 1"
+msgstr "色1"
+
+#: patterns/hidden-upsells.php:19
+msgid "You might also like"
+msgstr "次のものも気に入るかもしれません:"
+
+#. Description of the theme
+#: style.css
+msgid "Assemble something beautiful."
+msgstr "美しいものを作ろう。"
+
+#: patterns/hidden-related-products.php:19
+msgid "Frequently bought together"
+msgstr "よく一緒に購入されるもの"
+
+#: patterns/hidden-order-confirmation-download-title.php:11
+msgid "Downloads"
+msgstr "ダウンロード"
+
+#: patterns/hidden-order-confirmation-order-details-title.php:11
+msgid "Order details"
+msgstr "注文詳細"
+
+#: patterns/hidden-order-confirmation-shipping-address-title.php:11
+msgid "Shipping address"
+msgstr "配送先住所"
+
+#: patterns/hidden-empty-cart-block.php:21
+msgid "Return to shop"
+msgstr "ショップに戻る"
+
+#: patterns/hidden-order-confirmation-additional-information-title.php:11
+msgid "Additional information"
+msgstr "追加情報"
+
+#: patterns/hidden-order-confirmation-billing-address-title.php:11
+msgid "Billing address"
+msgstr "請求先住所"
+
+#: patterns/hidden-no-search-results.php:11
+msgctxt "Text explaining that there are no results returned from a search"
+msgid "No search results."
+msgstr "検索結果がありません。"
+
+#. Translators: 1. is the start of a 'a' HTML element, 2. is the end of a 'a'
+#. HTML element, 3. is the start of a 'a' HTML element, 4. is the end of a 'a'
+#. HTML element
+#: patterns/hidden-no-product-search-results.php:13
+msgid "No results found. You can try %1$sclearing any filters%2$s or head to our %3$sstore's home.%4$s"
+msgstr "見つかりませんでした。 %1$sフィルターを解除%2$sするか、%3$sストアのホームに移動してみてください。%4$s"
+
+#: patterns/hidden-empty-mini-cart.php:13
+msgid "Your basket is currently empty!"
+msgstr "現在、お買い物カゴは空です。"
+
+#. Translators: 1. is the start of a 'a' HTML element, 2. is the end of a 'a'
+#. HTML element
+#: patterns/hidden-empty-cart-block.php:28
+msgid "Have an account? %1$sLog in%2$s to check out faster."
+msgstr "アカウントをお持ちですか ? %1$sログイン%2$sすると購入手続きをすばやく完了できます。"
+
+#: patterns/hidden-empty-cart-block.php:15
+msgid "Your shopping bag is empty"
+msgstr "ショッピングバッグが空です"
+
+#: patterns/hidden-cross-sells.php:19
+msgid "You might like"
+msgstr "おすすめ"
+
+#: patterns/hidden-404.php:19
+msgid "The page you are looking for does not exist."
+msgstr "お探しのページは存在しません。"
+
+#: patterns/hidden-cart-page-title.php:11
+msgid "Cart"
+msgstr "お買い物カゴ"
+
+#: patterns/hidden-404.php:15
+msgctxt "Heading for a web page that is not found"
+msgid "Page Not Found"
+msgstr "ページが見つかりません"

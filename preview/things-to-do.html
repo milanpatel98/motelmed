@@ -2,7 +2,7 @@
 <html lang="en" class="mm-shell-html">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Things to do — Motel Mediteran</title>
     <meta name="description" content="Things to do near Motel Mediteran — Escondido, CA." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,16 +12,26 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/site.css?v=ref8" />
-    <link rel="stylesheet" href="css/mm-topbar.css?v=14" />
-    <link rel="stylesheet" href="css/mm-footer.css?v=5" />
-    <link rel="stylesheet" href="css/things-to-do.css?v=19" />
-    <script defer src="js/things-to-do.js?v=4"></script>
-  </head>
+    <link rel="stylesheet" href="css/mm-topbar.css?v=20260454" />
+    <link rel="stylesheet" href="css/mm-footer.css?v=7" />
+<link rel="stylesheet" href="css/things-to-do.css?v=26" />
+    <script defer src="js/things-to-do.js?v=5"></script>
+    <script src="js/mm-page-loader.js?v=3"></script>
+</head>
   <body class="mm-shell mm-texture-bg mm-editorial">
     <a class="skip-link" href="#main">Skip to content</a>
 
     <div class="mm-topbar-sentinel" aria-hidden="true"></div>
     <div class="mm-topbar-spacer" aria-hidden="true"></div>
+    <div class="mm-book-data" hidden>
+      <input type="hidden" id="mm-book-checkin" name="checkin" value="" autocomplete="off" />
+      <input type="hidden" id="mm-book-checkout" name="checkout" value="" autocomplete="off" />
+      <input type="hidden" id="mm-book-guests-state" value='[{"adults":2,"children":0}]' autocomplete="off" />
+      <input type="hidden" id="mm-book-no-rooms" value="1" autocomplete="off" />
+      <input type="hidden" id="mm-book-group-adults" value="2" autocomplete="off" />
+      <input type="hidden" id="mm-book-group-children" value="0" autocomplete="off" />
+    </div>
+    <div id="mm-booking-inline" class="mm-booking-inline mm-booking-inline--sentinel" aria-hidden="true"></div>
     <header class="mm-topbar" aria-label="Site header">
       <button
         class="mm-topbar__menu"
@@ -33,40 +43,82 @@
         aria-haspopup="true"
       >
         <svg class="mm-burger" width="68" height="20" viewBox="0 0 68 20" aria-hidden="true" focusable="false">
-          <line class="mm-burger__line" x1="0" y1="2.5" x2="68" y2="2.5" stroke="#0a0a0a" stroke-width="2" />
-          <line class="mm-burger__line" x1="0" y1="10" x2="68" y2="10" stroke="#0a0a0a" stroke-width="2" />
-          <line class="mm-burger__line" x1="0" y1="17.5" x2="68" y2="17.5" stroke="#0a0a0a" stroke-width="2" />
-        </svg>
+        <g class="mm-burger__spin mm-burger__spin--top">
+          <g class="mm-burger__shift mm-burger__shift--top">
+          <line class="mm-burger__line" x1="0" y1="2.5" x2="68" y2="2.5" />
+        </g>
+        </g>
+        <g class="mm-burger__row mm-burger__row--mid">
+          <line class="mm-burger__line" x1="0" y1="10" x2="68" y2="10" />
+        </g>
+        <g class="mm-burger__spin mm-burger__spin--bot">
+          <g class="mm-burger__shift mm-burger__shift--bot">
+          <line class="mm-burger__line" x1="0" y1="17.5" x2="68" y2="17.5" />
+        </g>
+        </g>
+    </svg>
       </button>
-      <a class="mm-topbar__brand" href="index.html" aria-label="Motel Mediteran Home">
+      <a class="mm-topbar__brand notranslate" href="index.html" aria-label="Motel Mediteran Home">
         <span class="mm-topbar__logo" aria-hidden="true">MM</span>
         <span class="mm-topbar__loc">Escondido, California</span>
       </a>
       <div class="mm-topbar__right">
         <a
           class="mm-topbar__cta"
-          href="http://www.booking.com/hotel/us/motel-mediteran.html?aid=330843;lang=en;pb=1"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="book.html"
+         
+         
           >Check availability</a
         >
         <div class="mm-topbar__lang" aria-label="Language">
-          <button class="mm-lang is-active" type="button" aria-label="English">EN</button>
+          <button class="mm-lang is-active" type="button" data-mm-lang="en" aria-label="English">EN</button>
           <span class="mm-lang__sep" aria-hidden="true"></span>
-          <button class="mm-lang" type="button" aria-label="Spanish">ES</button>
+          <button class="mm-lang" type="button" data-mm-lang="es" aria-label="Spanish">ES</button>
         </div>
       </div>
     </header>
 
     <div class="mm-nav" id="mm-site-nav" data-mm-nav aria-hidden="true">
       <button type="button" class="mm-nav__backdrop" data-mm-nav-close aria-label="Close menu"></button>
-      <nav class="mm-nav__panel" aria-label="Site pages">
-        <button type="button" class="mm-nav__x" data-mm-nav-close aria-label="Close menu">
-          <span aria-hidden="true">×</span>
-        </button>
-        <ul class="mm-nav__list">
+      <nav
+        class="mm-nav__panel"
+        id="mm-nav-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mm-nav-dialog-title"
+        aria-label="Site navigation"
+      >
+        <div class="mm-nav__chrome">
+          <button type="button" class="mm-nav__close" data-mm-nav-close aria-label="Close navigation">
+            <span class="mm-nav__close-text" aria-hidden="true"><span class="mm-nav__i18n-en">Close</span><span class="mm-nav__i18n-es" lang="es">Cerrar</span></span>
+            <span class="mm-nav__close-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 2.5L15.5 15.5M15.5 2.5L2.5 15.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" /></svg></span>
+          </button>
+          <div class="mm-nav__brand" id="mm-nav-dialog-title">
+            <span class="mm-nav__mark notranslate" translate="no" aria-hidden="true">MM</span>
+            <span class="mm-nav__loc notranslate" translate="no">Escondido, California</span>
+          </div>
+          <div class="mm-nav__lang notranslate" translate="no" role="group" aria-label="Language">
+            <button type="button" class="mm-lang" data-mm-lang="en" aria-label="English">EN</button>
+            <span class="mm-nav__lang-sep" aria-hidden="true">|</span>
+            <button type="button" class="mm-lang" data-mm-lang="es" aria-label="Spanish">ES</button>
+          </div>
+          <span class="mm-nav__chrome-spacer" aria-hidden="true"></span>
+        </div>
+        <div class="mm-nav__body">
+          <aside class="mm-nav__aside" aria-label="Motel Mediteran">
+            <p class="mm-nav__property notranslate" translate="no">Motel Mediteran</p>
+            <p class="mm-nav__city notranslate" translate="no">Escondido</p>
+          </aside>
+          <div class="mm-nav__scroll">
+          <ul class="mm-nav__list">
           <li><a href="index.html">Home</a></li>
-          <li><a href="rooms.html">Rooms and suites</a></li>
+          <li>
+            <a href="rooms.html" class="notranslate" translate="no"
+              ><span class="mm-nav__i18n-en">Rooms and suites</span
+              ><span class="mm-nav__i18n-es" lang="es">Habitaciones</span></a
+            >
+          </li>
+          <li><a href="gallery.html">Gallery</a></li>
           <li><a href="things-to-do.html" aria-current="page">Things to do</a></li>
           <li><a href="amenities.html">Amenities</a></li>
           <li><a href="directions.html">Directions</a></li>
@@ -74,6 +126,8 @@
           <li><a href="accessibility.html">Accessibility</a></li>
           <li><a href="faqs.html">FAQs</a></li>
         </ul>
+          </div>
+        </div>
       </nav>
     </div>
 
@@ -99,7 +153,7 @@
           <p class="mm-td-kicker">Step out and explore</p>
           <p class="mm-td-lead">
             Stay close to some of North County's best experiences, from scenic lakes and vineyard views to local arts,
-            dining, and outdoor adventure just minutes from Motel Mediteran.
+            dining, and outdoor adventure just minutes from <span class="notranslate" translate="no">Motel Mediteran</span>.
           </p>
         </div>
       </section>
@@ -139,12 +193,14 @@
           <div class="mm-td-grid" data-mm-td-grid>
             <article class="mm-td-card" data-mm-td-categories="attractions escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Rhino_san_diego_wild_animal_park.jpg/1280px-Rhino_san_diego_wild_animal_park.jpg" alt="White rhinos at San Diego Zoo Safari Park" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>San Diego Zoo Safari Park</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=15500%20San%20Pasqual%20Valley%20Rd%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=San%20Diego%20Zoo%20Safari%20Park%2C%2015500%20San%20Pasqual%20Valley%20Rd%2C%20Escondido%2C%20CA%2092027"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open San Diego Zoo Safari Park location in maps"
@@ -158,7 +214,7 @@
                   <h4 class="mm-td-card__label">Why it’s close to our heart</h4>
                   <p class="mm-td-card__text mm-td-card__text--why">
                     A day trip that feels like a real escape. Open-range habitats, safari-style encounters, and wide,
-                    walkable space make it more than a “zoo.” It’s also just minutes from Motel Mediteran—so you can come
+                    walkable space make it more than a “zoo.” It’s also just minutes from <span class="notranslate" translate="no">Motel Mediteran</span>—so you can come
                     back for a rinse, then still have your whole evening free.
                   </p>
                 </div>
@@ -167,12 +223,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="food-drink escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Stone_Brewery_%283302270199%29.jpg/1280px-Stone_Brewery_%283302270199%29.jpg" alt="Stone Brewing World Bistro and Gardens, Escondido" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Stone Brewing World Bistro &amp; Gardens</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=1999%20Citracado%20Pkwy%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Stone%20Brewing%20World%20Bistro%20and%20Gardens%2C%201999%20Citracado%20Pkwy%2C%20Escondido%2C%20CA%2092029"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Stone Brewing World Bistro & Gardens location in maps"
@@ -195,12 +253,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="culture escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/California_Center_for_the_Arts%2C_Escondido.jpg/1280px-California_Center_for_the_Arts%2C_Escondido.jpg" alt="California Center for the Arts, Escondido" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>California Center for the Arts</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=340%20N%20Escondido%20Blvd%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=California%20Center%20for%20the%20Arts%20Escondido%2C%20340%20N%20Escondido%20Blvd%2C%20Escondido%2C%20CA%2092025"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open California Center for the Arts location in maps"
@@ -223,12 +283,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="wellness attractions escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Mark_Skovorodko_Photography_-_Dixon_Lake_Escondido_Sunrise_Aerial.jpg/1280px-Mark_Skovorodko_Photography_-_Dixon_Lake_Escondido_Sunrise_Aerial.jpg" alt="Dixon Lake, Escondido — sunrise aerial" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Dixon Lake</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=1700%20La%20Honda%20Dr%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Dixon%20Lake%2C%201700%20La%20Honda%20Dr%2C%20Escondido%2C%20CA%2092027"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Dixon Lake location in maps"
@@ -251,12 +313,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="wellness attractions escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Overlook%2C_Daley_Ranch%2C_Escondido.jpg/1280px-Overlook%2C_Daley_Ranch%2C_Escondido.jpg" alt="Overlook trail at Daley Ranch, Escondido" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Daley Ranch</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=3024%20La%20Honda%20Dr%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Daley%20Ranch%2C%203024%20La%20Honda%20Dr%2C%20Escondido%2C%20CA%2092027"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Daley Ranch location in maps"
@@ -278,12 +342,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="shopping food-drink culture escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Mark_Skovorodko_Photography_-_Downtown_Escondido_Aerial_%28cropped%29.jpg/1280px-Mark_Skovorodko_Photography_-_Downtown_Escondido_Aerial_%28cropped%29.jpg" alt="Aerial view of Downtown Escondido and Grand Avenue" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Grand Avenue, Downtown Escondido</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=Grand%20Ave%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Grand%20Avenue%20Downtown%20Escondido%2C%20Grand%20Ave%20and%20Broadway%2C%20Escondido%2C%20CA%2092025"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Grand Avenue location in maps"
@@ -298,7 +364,7 @@
                   <p class="mm-td-card__text mm-td-card__text--why">
                     Escondido’s easiest walkable evening. Park once, wander twice, and follow Grand Avenue from coffee and
                     shops to cocktails and live music when the calendar hits. It’s unpretentious, full of variety, and always
-                    makes the short drive back to Motel Mediteran feel like a proper night out.
+                    makes the short drive back to <span class="notranslate" translate="no">Motel Mediteran</span> feel like a proper night out.
                   </p>
                 </div>
               </div>
@@ -306,12 +372,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="attractions culture escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Queen_Califia%27s_Magical_Circle_%285886259797%29.jpg/1280px-Queen_Califia%27s_Magical_Circle_%285886259797%29.jpg" alt="Queen Califia's Magical Circle sculpture garden, Kit Carson Park, Escondido" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Queen Califia’s Magical Circle</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=Kit%20Carson%20Park%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Queen%20Califia%27s%20Magical%20Circle%2C%203333%20Bear%20Valley%20Pkwy%2C%20Escondido%2C%20CA%2092025"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Queen Califia’s Magical Circle location in maps"
@@ -333,12 +401,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="culture shopping escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80" alt="Fresh produce at a farmers market" width="1200" height="800" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Escondido Farmers Market (Downtown)</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=200%20E%20Grand%20Ave%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Escondido%20Farmers%20Market%2C%20200%20E%20Grand%20Ave%2C%20Escondido%2C%20CA%2092025"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Escondido Farmers Market location in maps"
@@ -360,12 +430,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="culture escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://images.unsplash.com/photo-1536924430914-91f8e2041b83?auto=format&fit=crop&w=1200&q=80" alt="Art gallery wall with framed works" width="1200" height="800" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Escondido Municipal Gallery</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=240%20S%20Escondido%20Blvd%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Escondido%20Municipal%20Gallery%2C%20240%20S%20Escondido%20Blvd%2C%20Escondido%2C%20CA%2092025"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Escondido Municipal Gallery location in maps"
@@ -387,21 +459,23 @@
 
             <article class="mm-td-card" data-mm-td-categories="shopping escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Westfieldnorthcounty2020.jpg/1280px-Westfieldnorthcounty2020.jpg" alt="Mershops North County shopping center, Escondido" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
-                  <h3>Westfield North County</h3>
+                  <h3>Mershops North County</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=272%20E%20Via%20Rancho%20Pkwy%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Mershops%20North%20County%2C%20272%20E%20Via%20Rancho%20Pkwy%2C%20Escondido%2C%20CA%2092025"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Open Westfield North County location in maps"
+                    aria-label="Open Mershops North County location in maps"
                     ><span class="mm-td-card__addr-text">272 E Via Rancho Pkwy, Escondido, CA</span><span class="mm-td-card__miles">&nbsp;·&nbsp;3.5 MI</span></a
                   >
                   <h4 class="mm-td-card__label">The experience</h4>
                   <p class="mm-td-card__text mm-td-card__text--what">
-                    A big, easy shopping hub for the practical stuff—clothes, essentials, and a quick bite when you want
-                    everything in one stop.
+                    The center long known as Westfield North County is now Mershops North County—a big, easy shopping hub
+                    for clothes, essentials, and a quick bite when you want everything in one stop.
                   </p>
                   <h4 class="mm-td-card__label">Why it’s close to our heart</h4>
                   <p class="mm-td-card__text mm-td-card__text--why">
@@ -414,12 +488,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="food-drink escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80" alt="Restaurant dining table setting" width="1200" height="800" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Vintana Wine + Dine</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=1205%20Auto%20Park%20Way%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Vintana%20Wine%20%2B%20Dine%2C%201205%20Auto%20Park%20Way%2C%20Escondido%2C%20CA%2092029"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Vintana Wine + Dine location in maps"
@@ -440,16 +516,18 @@
 
             <article class="mm-td-card" data-mm-td-categories="food-drink escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1200&q=80" alt="Classic burger and fries" width="1200" height="800" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Burger Bench</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=777%20W%20Grand%20Ave%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Burger%20Bench%2C%20237%20E%20Grand%20Ave%2C%20Escondido%2C%20CA%2092025"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Burger Bench location in maps"
-                    ><span class="mm-td-card__addr-text">777 W Grand Ave, Escondido, CA</span><span class="mm-td-card__miles">&nbsp;·&nbsp;3.0 MI</span></a
+                    ><span class="mm-td-card__addr-text">237 E Grand Ave, Escondido, CA 92025</span><span class="mm-td-card__miles">&nbsp;·&nbsp;2.7 MI</span></a
                   >
                   <h4 class="mm-td-card__label">The experience</h4>
                   <p class="mm-td-card__text mm-td-card__text--what">
@@ -466,25 +544,28 @@
 
             <article class="mm-td-card" data-mm-td-categories="food-drink culture escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80" alt="Warm restaurant and bar interior — stock photo" width="1200" height="800" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
-                  <h3>Plan 9 Alehouse</h3>
+                  <h3>Upper East on Grand</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=155%20E%20Grand%20Ave%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Upper%20East%20on%20Grand%2C%20155%20E%20Grand%20Ave%2C%20Escondido%2C%20CA%2092025"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Open Plan 9 Alehouse location in maps"
+                    aria-label="Open Upper East on Grand location in maps"
                     ><span class="mm-td-card__addr-text">155 E Grand Ave, Escondido, CA</span><span class="mm-td-card__miles">&nbsp;·&nbsp;2.8 MI</span></a
                   >
                   <h4 class="mm-td-card__label">The experience</h4>
                   <p class="mm-td-card__text mm-td-card__text--what">
-                    A downtown taproom with rotating craft beer, easy bites, and a lively Grand Avenue energy.
+                    Historic Downtown Escondido spot for American comfort classics, seasonal cocktails, and about 20
+                    rotating taps—local craft, imports, and domestic favorites.
                   </p>
                   <h4 class="mm-td-card__label">Why it’s close to our heart</h4>
                   <p class="mm-td-card__text mm-td-card__text--why">
-                    It’s a low-pressure night out—order a flight, pick a favorite, and let downtown do the rest. Perfect
-                    before (or after) a show.
+                    It’s an easy Grand Avenue night—dinner, drinks, and you’re a short walk from the California Center
+                    for the Arts when a show fits your plans.
                   </p>
                 </div>
               </div>
@@ -492,12 +573,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="attractions culture escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/San_Pasqual_Battlefield_State_Historic_Park_2012-09-25_12-55-56.jpg/1280px-San_Pasqual_Battlefield_State_Historic_Park_2012-09-25_12-55-56.jpg" alt="San Pasqual Battlefield State Historic Park, Escondido" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>San Pasqual Battlefield State Historic Park</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=15808%20San%20Pasqual%20Valley%20Rd%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=San%20Pasqual%20Battlefield%20State%20Historic%20Park%2C%2015808%20San%20Pasqual%20Valley%20Rd%2C%20Escondido%2C%20CA%2092027"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open San Pasqual Battlefield location in maps"
@@ -519,12 +602,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="food-drink attractions">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/The_Bernardo_Winery%2C_San_Diego%2C_USA.JPG/1280px-The_Bernardo_Winery%2C_San_Diego%2C_USA.JPG" alt="The Bernardo Winery, Rancho Bernardo, San Diego" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Bernardo Winery</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=13330%20Paseo%20Del%20Verano%20N%2C%20San%20Diego%2C%20CA"
+                    href="https://www.google.com/maps?q=Bernardo%20Winery%2C%2013330%20Paseo%20Del%20Verano%20N%2C%20San%20Diego%2C%20CA%2092128"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Bernardo Winery location in maps"
@@ -546,12 +631,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="wellness attractions">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/LakeHodgesByPhilKonstantin.jpg/1280px-LakeHodgesByPhilKonstantin.jpg" alt="Lake Hodges, Escondido" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Lake Hodges (Overlook + Trails)</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=Lake%20Hodges%20Overlook%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Lake%20Hodges%20Overlook%2C%20Lake%20Dr%2C%20Escondido%2C%20CA%2092029"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Lake Hodges location in maps"
@@ -573,12 +660,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="wellness attractions">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Elfin_Forest_Recreational_Reserve.jpg/1280px-Elfin_Forest_Recreational_Reserve.jpg" alt="Elfin Forest Recreational Reserve trail and reservoir view" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Elfin Forest Recreational Reserve</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=Elfin%20Forest%20Recreational%20Reserve%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Elfin%20Forest%20Recreational%20Reserve%2C%208833%20Harmony%20Grove%20Rd%2C%20Escondido%2C%20CA%2092029"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Elfin Forest location in maps"
@@ -600,12 +689,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="food-drink attractions">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1200&q=80" alt="Wine tasting glasses" width="1200" height="800" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Cordiano Winery</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=15732%20Highland%20Valley%20Rd%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Cordiano%20Winery%2C%2015732%20Highland%20Valley%20Rd%2C%20Escondido%2C%20CA%2092025"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Cordiano Winery location in maps"
@@ -626,12 +717,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="food-drink attractions">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://images.unsplash.com/photo-1506376365321-11a61786d5fa?auto=format&fit=crop&w=1200&q=80" alt="Rows of grapevines" width="1200" height="800" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Orfila Vineyards &amp; Winery</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=13455%20San%20Pasqual%20Rd%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Orfila%20Vineyards%20and%20Winery%2C%2013455%20San%20Pasqual%20Rd%2C%20Escondido%2C%20CA%2092025"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Orfila Vineyards location in maps"
@@ -652,12 +745,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="wellness attractions">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/San_Elijo_Lagoon.jpg/1280px-San_Elijo_Lagoon.jpg" alt="San Elijo Lagoon Ecological Reserve" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>San Elijo Lagoon Ecological Reserve</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=San%20Elijo%20Lagoon%20Ecological%20Reserve"
+                    href="https://www.google.com/maps?q=San%20Elijo%20Lagoon%20Ecological%20Reserve%2C%203030%20Manchester%20Ave%2C%20Encinitas%2C%20CA%2092024"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open San Elijo Lagoon location in maps"
@@ -679,12 +774,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="wellness attractions">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Lagoonb.jpg/1280px-Lagoonb.jpg" alt="Batiquitos Lagoon, Carlsbad" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Batiquitos Lagoon</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=Batiquitos%20Lagoon%2C%20Carlsbad%2C%20CA"
+                    href="https://www.google.com/maps?q=Batiquitos%20Lagoon%20Foundation%20Nature%20Center%2C%207380%20Gabbiano%20Ln%2C%20Carlsbad%2C%20CA%2092011"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Batiquitos Lagoon location in maps"
@@ -705,12 +802,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="culture attractions">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/MuseumOfMakingMusic.jpg/1280px-MuseumOfMakingMusic.jpg" alt="Museum of Making Music, Carlsbad" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Museum of Making Music</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=5790%20Armada%20Dr%2C%20Carlsbad%2C%20CA"
+                    href="https://www.google.com/maps?q=Museum%20of%20Making%20Music%2C%205790%20Armada%20Dr%2C%20Carlsbad%2C%20CA%2092008"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Museum of Making Music location in maps"
@@ -732,12 +831,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="culture attractions">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Quail_Botanical_Gardens_-_general_view.JPG/1280px-Quail_Botanical_Gardens_-_general_view.JPG" alt="San Diego Botanic Garden, Encinitas" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>San Diego Botanic Garden</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=230%20Quail%20Gardens%20Dr%2C%20Encinitas%2C%20CA"
+                    href="https://www.google.com/maps?q=San%20Diego%20Botanic%20Garden%2C%20230%20Quail%20Gardens%20Dr%2C%20Encinitas%2C%20CA%2092024"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open San Diego Botanic Garden location in maps"
@@ -759,12 +860,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="shopping culture attractions">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Solana_Beach_California_-_panoramio.jpg/1280px-Solana_Beach_California_-_panoramio.jpg" alt="Solana Beach, California" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Cedros Avenue Design District</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=Cedros%20Ave%2C%20Solana%20Beach%2C%20CA"
+                    href="https://www.google.com/maps?q=Cedros%20Avenue%20Design%20District%2C%20131%20S%20Cedros%20Ave%2C%20Solana%20Beach%2C%20CA%2092075"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Cedros Avenue Design District location in maps"
@@ -785,12 +888,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="attractions culture escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://images.unsplash.com/photo-1481627834856-70d990de4d21?auto=format&fit=crop&w=1200&q=80" alt="Stack of old books, heritage theme" width="1200" height="800" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Escondido History Center</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=321%20N%20Broadway%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Escondido%20History%20Center%2C%20321%20N%20Broadway%2C%20Escondido%2C%20CA%2092025"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Escondido History Center location in maps"
@@ -812,12 +917,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="attractions wellness escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/FELICITA_COUNTY_PARK_PREHISTORIC_SITE%2C_ESCONDIDO_SAN_DIEGO_COUNTY.jpg/1280px-FELICITA_COUNTY_PARK_PREHISTORIC_SITE%2C_ESCONDIDO_SAN_DIEGO_COUNTY.jpg" alt="Felicita County Park, Escondido — historic site marker" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Felicita County Park</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=742%20Clarence%20Ln%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Felicita%20County%20Park%2C%20742%20Clarence%20Ln%2C%20Escondido%2C%20CA%2092029"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Felicita County Park location in maps"
@@ -839,12 +946,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="culture food-drink escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Grand01.jpg/1280px-Grand01.jpg" alt="Grand Avenue, Downtown Escondido" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Cruisin’ Grand (Classic Car Night)</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=E%20Grand%20Ave%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Cruisin%27%20Grand%20Escondido%2C%20E%20Grand%20Ave%2C%20Escondido%2C%20CA%2092025"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Cruisin’ Grand location in maps"
@@ -866,12 +975,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="attractions wellness">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Double_Peak_Park_south.jpg/1280px-Double_Peak_Park_south.jpg" alt="Double Peak Park, San Marcos — panoramic view south" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Double Peak Park (San Marcos Viewpoint)</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=Double%20Peak%20Park%2C%20San%20Marcos%2C%20CA"
+                    href="https://www.google.com/maps?q=Double%20Peak%20Park%2C%20900%20Double%20Peak%20Dr%2C%20San%20Marcos%2C%20CA%2092078"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Double Peak Park location in maps"
@@ -892,12 +1003,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="wellness attractions">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Lake_View_from_Bridge.jpg/1280px-Lake_View_from_Bridge.jpg" alt="Lake San Marcos waterfront view from bridge" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Lake San Marcos (Walk + Waterfront Views)</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=Lake%20San%20Marcos%2C%20San%20Marcos%2C%20CA"
+                    href="https://www.google.com/maps?q=Lake%20San%20Marcos%2C%201550%20San%20Pablo%20Dr%2C%20San%20Marcos%2C%20CA%2092078"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Lake San Marcos location in maps"
@@ -917,12 +1030,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="culture attractions">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Antique_Gas_and_Steam_Engine_Museum.jpg/1280px-Antique_Gas_and_Steam_Engine_Museum.jpg" alt="Antique Gas and Steam Engine Museum, Vista" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Antique Gas &amp; Steam Engine Museum</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=2040%20N%20Santa%20Fe%20Ave%2C%20Vista%2C%20CA"
+                    href="https://www.google.com/maps?q=Antique%20Gas%20and%20Steam%20Engine%20Museum%2C%202040%20N%20Santa%20Fe%20Ave%2C%20Vista%2C%20CA%2092083"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Antique Gas & Steam Engine Museum location in maps"
@@ -943,12 +1058,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="food-drink">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://images.unsplash.com/photo-1572449807319-00eca6ab9e84?auto=format&fit=crop&w=1200&q=80" alt="Pint of draft beer in a glass — stock photo" width="1200" height="800" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Belching Beaver Brewery (Vista)</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=1334%20Rocky%20Point%20Dr%2C%20Vista%2C%20CA"
+                    href="https://www.google.com/maps?q=Belching%20Beaver%20Brewery%20Vista%2C%201334%20Rocky%20Point%20Dr%2C%20Vista%2C%20CA%2092081"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Belching Beaver Brewery location in maps"
@@ -968,12 +1085,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="food-drink">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80" alt="Casual restaurant interior with plates" width="1200" height="800" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Craft + Commerce (ICA North, Encinitas)</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=157%20S%20Coast%20Hwy%20101%2C%20Encinitas%2C%20CA"
+                    href="https://www.google.com/maps?q=ICA%20San%20Diego%20North%2C%20157%20S%20Coast%20Hwy%20101%2C%20Encinitas%2C%20CA%2092024"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open ICA San Diego North location in maps"
@@ -994,12 +1113,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="culture attractions escondido">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Grape_Day_Park_at_sunset.jpg/1280px-Grape_Day_Park_at_sunset.jpg" alt="Grape Day Park, Escondido at sunset" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Grape Day Park &amp; City Hall Plaza</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=Grape%20Day%20Park%2C%20Escondido%2C%20CA"
+                    href="https://www.google.com/maps?q=Grape%20Day%20Park%2C%20321%20N%20Broadway%2C%20Escondido%2C%20CA%2092025"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Grape Day Park location in maps"
@@ -1021,12 +1142,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="food-drink culture">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Sunset_at_Cardiff-by-the-sea%2C_San_Diego.jpg/1280px-Sunset_at_Cardiff-by-the-sea%2C_San_Diego.jpg" alt="Sunset at Cardiff-by-the-Sea, San Diego" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Seaside Market (Cardiff)</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=208%20Newcastle%20Ave%2C%20Cardiff-by-the-Sea%2C%20CA"
+                    href="https://www.google.com/maps?q=Seaside%20Market%2C%20208%20Newcastle%20Ave%2C%20Cardiff-by-the-Sea%2C%20CA%2092007"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Seaside Market location in maps"
@@ -1048,12 +1171,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="shopping culture attractions">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Carlsbad_Village_Faire_shopping_center_2013.jpg/1280px-Carlsbad_Village_Faire_shopping_center_2013.jpg" alt="Carlsbad Village Faire open-air shopping centre" width="1280" height="853" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Carlsbad Village (Walk + Shops + Coffee)</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=Carlsbad%20Village%2C%20Carlsbad%2C%20CA"
+                    href="https://www.google.com/maps?q=Carlsbad%20Village%2C%202907%20State%20St%2C%20Carlsbad%2C%20CA%2092008"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Carlsbad Village location in maps"
@@ -1074,12 +1199,14 @@
 
             <article class="mm-td-card" data-mm-td-categories="shopping food-drink attractions">
               <div class="mm-td-card__inner">
-                <div class="mm-td-card__media"><span>Image placeholder</span></div>
+                <div class="mm-td-card__media">
+                  <img src="https://images.unsplash.com/photo-1730766451209-ee84b5887bb3?auto=format&fit=crop&w=1200&q=80" alt="Wooden bowl of mixed nuts — country market snacks" width="1200" height="800" loading="lazy" decoding="async" />
+                </div>
                 <div class="mm-td-card__body">
                   <h3>Bates Nut Farm</h3>
                   <a
                     class="mm-td-card__addr"
-                    href="https://www.google.com/maps/search/?api=1&query=15954%20Woods%20Valley%20Rd%2C%20Valley%20Center%2C%20CA"
+                    href="https://www.google.com/maps?q=Bates%20Nut%20Farm%2C%2015954%20Woods%20Valley%20Rd%2C%20Valley%20Center%2C%20CA%2092082"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open Bates Nut Farm location in maps"
@@ -1098,7 +1225,119 @@
                 </div>
               </div>
             </article>
+
+            <article class="mm-td-card" data-mm-td-categories="culture attractions">
+              <div class="mm-td-card__inner">
+                <div class="mm-td-card__media">
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Cal_State_San_Marcos_library_%28cropped%29.jpg/1280px-Cal_State_San_Marcos_library_%28cropped%29.jpg"
+                    alt="Kellogg Library at California State University San Marcos"
+                    width="1280"
+                    height="854"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="mm-td-card__body">
+                  <h3>California State University San Marcos</h3>
+                  <a
+                    class="mm-td-card__addr"
+                    href="https://www.google.com/maps?q=California%20State%20University%20San%20Marcos%2C%20333%20S%20Twin%20Oaks%20Valley%20Rd%2C%20San%20Marcos%2C%20CA%2092096"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Open California State University San Marcos location in maps"
+                    ><span class="mm-td-card__addr-text">333 S Twin Oaks Valley Rd, San Marcos, CA</span
+                    ><span class="mm-td-card__miles">&nbsp;·&nbsp;13.5 MI</span></a
+                  >
+                  <h4 class="mm-td-card__label">The experience</h4>
+                  <p class="mm-td-card__text mm-td-card__text--what">
+                    A modern Cal State campus on the hills above San Marcos—walkable quads, events open to the public,
+                    and easy access if you’re visiting a student or catching a lecture or performance.
+                  </p>
+                  <h4 class="mm-td-card__label">Why it’s close to our heart</h4>
+                  <p class="mm-td-card__text mm-td-card__text--why">
+                    It’s the closest major university to the motel and a simple North County day trip: coffee, campus
+                    air, and you’re back before dinner in Escondido.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="mm-td-card" data-mm-td-categories="culture attractions escondido">
+              <div class="mm-td-card__inner">
+                <div class="mm-td-card__media">
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Jpcatholic-campus-academic-2019.jpg/1280px-Jpcatholic-campus-academic-2019.jpg"
+                    alt="Main academic building at John Paul the Great Catholic University, Escondido"
+                    width="1280"
+                    height="606"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="mm-td-card__body">
+                  <h3>John Paul the Great Catholic University</h3>
+                  <a
+                    class="mm-td-card__addr"
+                    href="https://www.google.com/maps?q=John%20Paul%20the%20Great%20Catholic%20University%2C%20220%20W%20Grand%20Ave%2C%20Escondido%2C%20CA%2092025"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Open John Paul the Great Catholic University location in maps"
+                    ><span class="mm-td-card__addr-text">220 W Grand Ave, Escondido, CA</span
+                    ><span class="mm-td-card__miles">&nbsp;·&nbsp;3.0 MI</span></a
+                  >
+                  <h4 class="mm-td-card__label">The experience</h4>
+                  <p class="mm-td-card__text mm-td-card__text--what">
+                    A compact Catholic university campus right on Grand Avenue—film, business, and theology programs
+                    with a creative, entrepreneurial spirit and a walkable downtown setting.
+                  </p>
+                  <h4 class="mm-td-card__label">Why it’s close to our heart</h4>
+                  <p class="mm-td-card__text mm-td-card__text--why">
+                    If you’re here for a tour, showcase, or to see family, you can park the car once and pair campus
+                    time with coffee and dinner on Grand just blocks away.
+                  </p>
+                </div>
+              </div>
+            </article>
           </div>
+        </div>
+      </section>
+
+      <section class="mm-td-credits" aria-label="Photo credits">
+        <h2 id="td-photo-credits-heading" class="visually-hidden">Photo credits</h2>
+        <div class="mm-td-shell">
+          <p class="mm-td-credits__text">
+            <strong>Photo credits</strong> —
+            Safari Park rhinos: <a href="https://commons.wikimedia.org/wiki/File:Rhino_san_diego_wild_animal_park.jpg" target="_blank" rel="noopener noreferrer">Tcc8</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a> ·
+            Stone Brewing: <a href="https://commons.wikimedia.org/wiki/File:Stone_Brewery_(3302270199).jpg" target="_blank" rel="noopener noreferrer">Tim Wilson</a>, <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener noreferrer">CC BY 2.0</a> ·
+            Belching Beaver Brewery (Vista): <a href="https://unsplash.com/photos/ToZExDm7aDI" target="_blank" rel="noopener noreferrer">Jouwen Wang</a>, <a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer">Unsplash License</a> ·
+            Daley Ranch: <a href="https://commons.wikimedia.org/wiki/File:Overlook,_Daley_Ranch,_Escondido.jpg" target="_blank" rel="noopener noreferrer">Downtowngal</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a> ·
+            Downtown Escondido: <a href="https://commons.wikimedia.org/wiki/File:Mark_Skovorodko_Photography_-_Downtown_Escondido_Aerial_(cropped).jpg" target="_blank" rel="noopener noreferrer">Mark Skovorodko</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> ·
+            Queen Califia's Magical Circle: <a href="https://commons.wikimedia.org/wiki/File:Queen_Califia%27s_Magical_Circle_(5886259797).jpg" target="_blank" rel="noopener noreferrer">Laurie Avocado</a>, <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener noreferrer">CC BY 2.0</a> ·
+            Lake Hodges: <a href="https://commons.wikimedia.org/wiki/File:LakeHodgesByPhilKonstantin.jpg" target="_blank" rel="noopener noreferrer">Phil Konstantin</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a> ·
+            Elfin Forest: <a href="https://commons.wikimedia.org/wiki/File:Elfin_Forest_Recreational_Reserve.jpg" target="_blank" rel="noopener noreferrer">Wiki metis</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a> ·
+            San Elijo Lagoon: <a href="https://commons.wikimedia.org/wiki/File:San_Elijo_Lagoon.jpg" target="_blank" rel="noopener noreferrer">Rennett Stowe</a>, <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener noreferrer">CC BY 2.0</a> ·
+            Batiquitos Lagoon: <a href="https://commons.wikimedia.org/wiki/File:Lagoonb.jpg" target="_blank" rel="noopener noreferrer">Anlace</a>, public domain ·
+            Museum of Making Music: <a href="https://commons.wikimedia.org/wiki/File:MuseumOfMakingMusic.jpg" target="_blank" rel="noopener noreferrer">Museum of Making Music</a>, <a href="https://creativecommons.org/licenses/by/3.0" target="_blank" rel="noopener noreferrer">CC BY 3.0</a> ·
+            San Diego Botanic Garden: <a href="https://commons.wikimedia.org/wiki/File:Quail_Botanical_Gardens_-_general_view.JPG" target="_blank" rel="noopener noreferrer">Daderot</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a> ·
+            Lake San Marcos: <a href="https://commons.wikimedia.org/wiki/File:Lake_View_from_Bridge.jpg" target="_blank" rel="noopener noreferrer">EnneDee</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> ·
+            Antique Gas &amp; Steam Engine Museum: <a href="https://commons.wikimedia.org/wiki/File:Antique_Gas_and_Steam_Engine_Museum.jpg" target="_blank" rel="noopener noreferrer">Alan Islas</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> ·
+            Dixon Lake: <a href="https://commons.wikimedia.org/wiki/File:Mark_Skovorodko_Photography_-_Dixon_Lake_Escondido_Sunrise_Aerial.jpg" target="_blank" rel="noopener noreferrer">Mark Skovorodko</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> ·
+            Bernardo Winery: <a href="https://commons.wikimedia.org/wiki/File:The_Bernardo_Winery,_San_Diego,_USA.JPG" target="_blank" rel="noopener noreferrer">Nvvchar</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a> ·
+            Double Peak Park: <a href="https://commons.wikimedia.org/wiki/File:Double_Peak_Park_south.jpg" target="_blank" rel="noopener noreferrer">Alicezeppelin</a>, <a href="http://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0</a> ·
+            Grape Day Park: <a href="https://commons.wikimedia.org/wiki/File:Grape_Day_Park_at_sunset.jpg" target="_blank" rel="noopener noreferrer">Downtowngal</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a> ·
+            California Center for the Arts: <a href="https://commons.wikimedia.org/wiki/File:California_Center_for_the_Arts,_Escondido.jpg" target="_blank" rel="noopener noreferrer">Escondido History Center</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> ·
+            Mershops North County (exterior photo, prior Westfield signage): <a href="https://commons.wikimedia.org/wiki/File:Westfieldnorthcounty2020.jpg" target="_blank" rel="noopener noreferrer">Maesinfin</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> ·
+            San Pasqual Battlefield: <a href="https://commons.wikimedia.org/wiki/File:San_Pasqual_Battlefield_State_Historic_Park_2012-09-25_12-55-56.jpg" target="_blank" rel="noopener noreferrer">scerruti</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a> ·
+            Felicita County Park: <a href="https://commons.wikimedia.org/wiki/File:FELICITA_COUNTY_PARK_PREHISTORIC_SITE,_ESCONDIDO_SAN_DIEGO_COUNTY.jpg" target="_blank" rel="noopener noreferrer">Jerrye &amp; Roy Klotz, M.D.</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> ·
+            Carlsbad Village: <a href="https://commons.wikimedia.org/wiki/File:Carlsbad_Village_Faire_shopping_center_2013.jpg" target="_blank" rel="noopener noreferrer">Tuxyso</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a> ·
+            Bates Nut Farm: <a href="https://unsplash.com/photos/ifjAowPTSRg" target="_blank" rel="noopener noreferrer">Sara Gomes</a>, <a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer">Unsplash License</a> ·
+            Cal State San Marcos (Kellogg Library): <a href="https://commons.wikimedia.org/wiki/File:Cal_State_San_Marcos_library_(cropped).jpg" target="_blank" rel="noopener noreferrer">Eamuscatuli</a>, public domain ·
+            John Paul the Great Catholic University: <a href="https://commons.wikimedia.org/wiki/File:Jpcatholic-campus-academic-2019.jpg" target="_blank" rel="noopener noreferrer">SHarold</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> ·
+            Cruisin' Grand / Grand Ave: <a href="https://commons.wikimedia.org/wiki/File:Grand01.jpg" target="_blank" rel="noopener noreferrer">David McGovern</a>, public domain ·
+            Cedros Ave / Solana Beach: <a href="https://commons.wikimedia.org/wiki/File:Solana_Beach_California_-_panoramio.jpg" target="_blank" rel="noopener noreferrer">Loco Steve</a>, <a href="https://creativecommons.org/licenses/by/3.0" target="_blank" rel="noopener noreferrer">CC BY 3.0</a> ·
+            Seaside Market / Cardiff: <a href="https://commons.wikimedia.org/wiki/File:Sunset_at_Cardiff-by-the-sea,_San_Diego.jpg" target="_blank" rel="noopener noreferrer">AmarChandra</a>, <a href="https://creativecommons.org/licenses/by-sa/2.5" target="_blank" rel="noopener noreferrer">CC BY-SA 2.5</a>
+          </p>
         </div>
       </section>
     </main>
@@ -1114,7 +1353,7 @@
             height="72"
             decoding="async"
           />
-          <p class="mm-footer__brand">Motel Mediteran</p>
+          <p class="mm-footer__brand"><span class="notranslate" translate="no">Motel Mediteran</span></p>
           <p class="mm-footer__meta">
             2336 S. Escondido Blvd<br />
             Escondido, CA 92025<br />
@@ -1139,8 +1378,14 @@
           <p class="mm-footer__h">Quick links</p>
           <ul class="mm-footer__links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="rooms.html">Rooms and suites</a></li>
-            <li><a href="things-to-do.html" aria-current="page">Things to do</a></li>
+            <li>
+            <a href="rooms.html" class="notranslate" translate="no"
+              ><span class="mm-nav__i18n-en">Rooms and suites</span
+              ><span class="mm-nav__i18n-es" lang="es">Habitaciones</span></a
+            >
+          </li>
+            <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="things-to-do.html" aria-current="page">Things to do</a></li>
             <li><a href="amenities.html">Amenities</a></li>
             <li><a href="directions.html">Directions</a></li>
             <li><a href="hotel-policies.html">Hotel policies</a></li>
@@ -1156,17 +1401,21 @@
           </p>
           <a
             class="mm-footer__book"
-            href="http://www.booking.com/hotel/us/motel-mediteran.html?aid=330843;lang=en;pb=1"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="book.html"
+           
+           
             >Book a room</a
           >
         </div>
       </div>
-      <p class="mm-footer__copy">© Motel Mediteran · Escondido, California</p>
+      <p class="mm-footer__copy">© <span class="notranslate" translate="no">Motel Mediteran</span> · Escondido, California</p>
     </footer>
 
-    <script src="js/mm-topbar.js?v=12"></script>
-    <script src="js/things-to-do.js?v=3"></script>
+    <script src="js/mm-lang.js?v=6"></script>
+    <script src="js/mm-booking-dock.js?v=14"></script>
+    <script src="js/mm-booking-calendar.js?v=5"></script>
+    <script src="js/mm-booking-guests.js?v=1"></script>
+    <script src="js/mm-topbar.js?v=17"></script>
+    <script src="js/mm-chat-widget.js?v=46"></script>
   </body>
 </html>

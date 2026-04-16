@@ -146,22 +146,6 @@
   border-color: var(--mm-ink, #0a0a0a);
 }
 
-/* --- Property map diagram --- */
-.mm-dir-mapdiag {
-  text-align: center;
-  padding-top: clamp(12px, 2vw, 24px);
-}
-
-.mm-dir-mapdiag__img {
-  width: 100%;
-  max-width: min(520px, 90vw);
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  border-radius: 4px;
-  box-shadow: 0 12px 40px rgba(10, 10, 10, 0.08);
-}
-
 /* --- By car / transit --- */
 .mm-dir-by {
   padding-top: clamp(28px, 4vw, 48px);

@@ -287,12 +287,19 @@
 .mm-td-card__media {
   flex: 0 0 45%;
   max-width: 45%;
-  min-height: clamp(260px, 28vw, 360px);
+  height: clamp(260px, 28vw, 360px);
+  align-self: flex-start;
   border: 1px solid rgba(10, 10, 10, 0.2);
   background: rgba(255, 255, 255, 0.35);
-  display: grid;
-  place-items: center;
+  display: block;
   overflow: hidden;
+}
+
+.mm-td-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .mm-td-card__media span {
@@ -411,8 +418,54 @@
 
   .mm-td-card__media {
     flex: none;
+    align-self: auto;
     max-width: 100%;
     width: 100%;
-    min-height: clamp(220px, 52vw, 300px);
+    height: clamp(220px, 52vw, 300px);
   }
+}
+
+/* Photo credits */
+.mm-td-credits {
+  padding: clamp(20px, 3vw, 36px) 0 clamp(28px, 4vw, 48px);
+  border-top: 1px solid rgba(10, 10, 10, 0.1);
+  margin-top: clamp(36px, 4.5vw, 52px);
+}
+
+.mm-td-credits__text {
+  margin: 0;
+  font-family: var(--td-sans);
+  font-size: 10px;
+  line-height: 1.8;
+  color: rgba(10, 10, 10, 0.38);
+  letter-spacing: 0.01em;
+}
+
+.mm-td-credits__text strong {
+  font-weight: 600;
+  color: rgba(10, 10, 10, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.mm-td-credits__text a {
+  color: rgba(10, 10, 10, 0.38);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.mm-td-credits__text a:hover {
+  color: rgba(10, 10, 10, 0.7);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

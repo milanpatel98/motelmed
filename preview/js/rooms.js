@@ -38,8 +38,11 @@
     const hostSection = isSuites ? root.closest("#suites") : (isRooms ? root.closest("#rooms") : null);
     const detailTrack = isDeckSlider ? hostSection?.querySelector(".mm-suite-detail-track") || null : null;
     const suitesGapPx = 48;
-    const reserveHref =
-      "http://www.booking.com/hotel/us/motel-mediteran.html?aid=330843;lang=en;pb=1";
+    const reserveHref = "book.html";
+    const ROOM_PRICES = {
+      "suite-kitchen": 189, "suite-jacuzzi": 149, "suite-2room": 129,
+      "king": 99, "queen": 89, "queen-double": 109, "ada": 99
+    };
 
     const n = slides.length;
     const order = Array.from({ length: n }, (_, k) => k);
@@ -72,7 +75,8 @@
       captions.forEach((text) => {
         const cap = document.createElement("p");
         cap.className = "mm-caption-slide";
-        cap.textContent = text;
+        if (typeof window.mmPreserveEn === "function") cap.innerHTML = window.mmPreserveEn(text);
+        else cap.textContent = text;
         captionTrack.appendChild(cap);
       });
     }
@@ -229,7 +233,9 @@
             slide.className = "mm-suite-meta-slide";
             const nameEl = document.createElement("div");
             nameEl.className = "mm-row__name";
-            nameEl.textContent = captions[slideIdx] || "";
+            if (typeof window.mmPreserveEn === "function")
+              nameEl.innerHTML = window.mmPreserveEn(captions[slideIdx] || "");
+            else nameEl.textContent = captions[slideIdx] || "";
             const actions = document.createElement("div");
             actions.className = "mm-row__actions";
             if (isRooms && detailTrack) {
@@ -282,9 +288,20 @@
             const resA = document.createElement("a");
             resA.className = "mm-pill mm-pill--dark";
             resA.href = reserveHref;
-            resA.target = "_blank";
-            resA.rel = "noopener noreferrer";
             resA.textContent = "Reserve";
+            resA.addEventListener("click", function (e) {
+              const d = detailFor(slideIdx);
+              if (d && d.id) {
+                try {
+                  sessionStorage.setItem("mm_bk_room", JSON.stringify({
+                    id: d.id,
+                    name: names[slideIdx] || d.id,
+                    price: ROOM_PRICES[d.id] || 99,
+                    thumb: slides[slideIdx] || ""
+                  }));
+                } catch (_) {}
+              }
+            });
             actions.append(viewA, resA);
             slide.append(nameEl, actions);
             metaTrack.appendChild(slide);
@@ -446,7 +463,11 @@
     }
 
     function updateUI() {
-      if (captionEl) captionEl.textContent = captions[i] || "";
+      if (captionEl) {
+        if (typeof window.mmPreserveEn === "function")
+          captionEl.innerHTML = window.mmPreserveEn(captions[i] || "");
+        else captionEl.textContent = captions[i] || "";
+      }
       if (dotsWrap) {
         Array.from(dotsWrap.children).forEach((d, di) => d.classList.toggle("is-active", di === i));
       }
@@ -530,9 +551,9 @@
       "assets/motel-pics/std%20king/1.png",
       "assets/motel-pics/std%20queen/1.png",
       "assets/motel-pics/std%202%20queen/1.png",
-      "assets/motel-pics/2%20rooms%20kitchen%20suite/1.png",
-      "assets/motel-pics/king%20room%20jacuzzi/2.png",
-      "assets/motel-pics/2%20rooms%20kitchen%20suite/2.png",
+      "assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/5.png?v=3",
+      "assets/motel-pics/king%20room%20jacuzzi/2.png?v=1",
+      "assets/motel-pics/2%20rooms%20kitchen%20suite/1.png?v=3",
     ],
     [
       "King room",
@@ -547,9 +568,9 @@
   initSlider(
     suites,
     [
-      "assets/motel-pics/2%20rooms%20kitchen%20suite/1.png",
-      "assets/motel-pics/king%20room%20jacuzzi/2.png",
-      "assets/motel-pics/2%20rooms%20kitchen%20suite/2.png",
+      "assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/5.png?v=3",
+      "assets/motel-pics/king%20room%20jacuzzi/2.png?v=1",
+      "assets/motel-pics/2%20rooms%20kitchen%20suite/1.png?v=3",
     ],
     ["Deluxe King suite with kitchen", "Deluxe King Suite", "2 Room suite with kitchen"],
     [
@@ -634,4 +655,26 @@
   );
 
   bindViewAll(document);
+
+  // ── Book-this-room links ────────────────────────────────────────
+  // Any <a> or <button> with data-book-room="<id>" and data-book-name,
+  // data-book-price, data-book-thumb will write the room to sessionStorage
+  // and navigate to book.html. Add these attributes to "Book" CTAs on
+  // the rooms page when you're ready to connect.
+  document.querySelectorAll("[data-book-room]").forEach(function (el) {
+    el.addEventListener("click", function (e) {
+      var id    = el.getAttribute("data-book-room");
+      var name  = el.getAttribute("data-book-name")  || "";
+      var price = parseInt(el.getAttribute("data-book-price") || "0", 10);
+      var thumb = el.getAttribute("data-book-thumb") || "";
+      try {
+        sessionStorage.setItem("mm_bk_room", JSON.stringify({ id: id, name: name, price: price, thumb: thumb }));
+      } catch (err) {}
+      // Only navigate if it's a button, not an <a> that already has href
+      if (el.tagName === "BUTTON" || !el.href) {
+        e.preventDefault();
+        window.location.href = "book.html";
+      }
+    });
+  });
 })();

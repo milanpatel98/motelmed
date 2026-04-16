@@ -1,186 +1,11 @@
 (() => {
-  const RESERVE_HREF =
-    "http://www.booking.com/hotel/us/motel-mediteran.html?aid=330843;lang=en;pb=1";
+  const data = window.MM_DATA;
+  const ROOMS = data.rooms;
 
-  const ROOMS = {
-    "suite-kitchen": {
-      label: "Suite",
-      name: "Deluxe King Suite\nwith Kitchen",
-      specs: ["King Bed + Queen Bed", "Sleeps 4", "Full Kitchen"],
-      desc: "Spacious two-room suite with a full kitchen, dining area, and living space — ideal for longer stays, families, or anyone who wants room to spread out. The kitchen comes fully equipped with two stovetops, a full-size refrigerator, microwave, and utensils, so you can cook and settle in like home.",
-      bullets: [
-        "Sleeps 4",
-        "Living area",
-        "Fireplace",
-        "Dining area",
-        "Kitchen with 2 stovetops",
-        "Full size refrigerator",
-        "Microwave",
-        "Utensils provided",
-        "King bed",
-        "Queen bed",
-        "In-room jacuzzi hot tub",
-        "Flat screen TV",
-        "Free Wi-Fi",
-        "Non-smoking",
-      ],
-      photos: [
-        "assets/motel-pics/deluxe%20king%20jacuzzi/1.png",
-        "assets/motel-pics/deluxe%20king%20jacuzzi/2.png",
-        "assets/motel-pics/deluxe%20king%20jacuzzi/3.png",
-        "assets/motel-pics/deluxe%20king%20jacuzzi/4.png",
-        "assets/motel-pics/deluxe%20king%20jacuzzi/5.png",
-        "assets/motel-pics/deluxe%20king%20jacuzzi/6.png",
-      ],
-    },
-
-    "suite-jacuzzi": {
-      label: "Suite",
-      name: "Deluxe King Suite",
-      specs: ["King Bed", "Sleeps 2", "In-Room Jacuzzi"],
-      desc: "Refined deluxe suite with in-room jacuzzi, upgraded finishes, and a private outdoor patio. A quiet retreat after full days exploring San Diego County — with extra space to unwind in privacy and comfort.",
-      bullets: [
-        "Sleeps 2",
-        "King bed",
-        "In-room jacuzzi",
-        "Private outdoor patio",
-        "Microwave",
-        "Refrigerator",
-        "Flat screen TV",
-        "Free Wi-Fi",
-        "Non-smoking",
-      ],
-      photos: [
-        "assets/motel-pics/king%20room%20jacuzzi/1.png",
-        "assets/motel-pics/king%20room%20jacuzzi/2.png",
-        "assets/motel-pics/king%20room%20jacuzzi/3.png",
-        "assets/motel-pics/king%20room%20jacuzzi/4.png",
-        "assets/motel-pics/king%20room%20jacuzzi/5.png",
-      ],
-    },
-
-    "suite-2room": {
-      label: "Suite",
-      name: "2-Room Suite\nwith Kitchen",
-      specs: ["2 Queen Beds", "Sleeps 4", "Separate Living Room"],
-      desc: "Two-room suite with separated living and sleeping zones — ideal for families, groups, and extended trips. The kitchen comes with two stovetops, a full-size refrigerator, microwave, and utensils. Practical space for relaxing or planning the day.",
-      bullets: [
-        "Sleeps 4",
-        "Separate living room",
-        "Kitchen with 2 stovetops",
-        "Full size refrigerator",
-        "Microwave",
-        "Utensils provided",
-        "2 Queen beds",
-        "Flat screen TV",
-        "Free Wi-Fi",
-        "Non-smoking",
-      ],
-      photos: [
-        "assets/motel-pics/2%20rooms%20kitchen%20suite/1.png",
-        "assets/motel-pics/2%20rooms%20kitchen%20suite/2.png",
-        "assets/motel-pics/2%20rooms%20kitchen%20suite/3.png",
-        "assets/motel-pics/2%20rooms%20kitchen%20suite/4.png",
-        "assets/motel-pics/2%20rooms%20kitchen%20suite/5.png",
-      ],
-    },
-
-    "king": {
-      label: "Room",
-      name: "Standard King",
-      specs: ["King Bed", "Sleeps 2"],
-      desc: "Clean, comfortable king room with the practical essentials you need for a restful stay near I-15 in Escondido. Fresh non-smoking environment, free Wi-Fi, and everything set up so you can get in, rest, and head out ready for the day.",
-      bullets: [
-        "Sleeps 2",
-        "King size bed",
-        "Microwave",
-        "Refrigerator",
-        "Flat screen TV",
-        "Free Wi-Fi",
-        "Non-smoking",
-      ],
-      photos: [
-        "assets/motel-pics/std%20king/1.png",
-        "assets/motel-pics/std%20king/2.png",
-        "assets/motel-pics/std%20king/3.png",
-        "assets/motel-pics/std%20king/4.png",
-      ],
-    },
-
-    "queen": {
-      label: "Room",
-      name: "Standard Queen",
-      specs: ["Queen Bed", "Sleeps 2"],
-      desc: "Comfortable queen room designed for solo travelers and couples. A calm, non-smoking space with free Wi-Fi and the everyday essentials — fridge, microwave, and a flat-screen TV — so you can settle in with ease.",
-      bullets: [
-        "Sleeps 2",
-        "Queen size bed",
-        "Microwave",
-        "Refrigerator",
-        "Flat screen TV",
-        "Free Wi-Fi",
-        "Non-smoking",
-      ],
-      photos: [
-        "assets/motel-pics/std%20queen/1.png",
-        "assets/motel-pics/std%20queen/2.png",
-        "assets/motel-pics/std%20queen/3.png",
-      ],
-    },
-
-    "queen-double": {
-      label: "Room",
-      name: "Double Queen",
-      specs: ["2 Queen Beds", "Sleeps 4"],
-      desc: "Roomy double-queen setup with extra sleeping space — a practical choice for small families or friends traveling together. Non-smoking throughout, with free Wi-Fi and daily essentials already taken care of.",
-      bullets: [
-        "Sleeps 4",
-        "2 Queen beds",
-        "Microwave",
-        "Refrigerator",
-        "Flat screen TV",
-        "Free Wi-Fi",
-        "Non-smoking",
-      ],
-      photos: [
-        "assets/motel-pics/std%202%20queen/1.png",
-        "assets/motel-pics/std%202%20queen/2.png",
-        "assets/motel-pics/std%202%20queen/3.png",
-        "assets/motel-pics/std%202%20queen/4.png",
-      ],
-    },
-
-    "ada": {
-      label: "ADA Accessible",
-      name: "Accessible Rooms",
-      specs: ["King or Queen Bed", "Roll-In Shower Available"],
-      desc: "Accessible accommodations designed for comfort and convenience, with mobility-friendly features for a smooth and restful stay. Available as king, queen, or double-queen configurations — all with practical accessibility features built in.",
-      bullets: [
-        "King, Queen, or 2-Queen bed",
-        "Grab bars in bathroom",
-        "Lowered vanity",
-        "Roll-in shower (select rooms)",
-        "Lowered light switches",
-        "Refrigerator",
-        "Microwave",
-        "Flat screen TV",
-        "Free Wi-Fi",
-        "Non-smoking",
-      ],
-      photos: [
-        "assets/motel-pics/King%20accessible/1.png",
-        "assets/motel-pics/King%20accessible/2.png",
-        "assets/motel-pics/King%20accessible/3.png",
-        "assets/motel-pics/King%20accessible/4.jpeg",
-        "assets/motel-pics/queen%20accessible/1.png",
-        "assets/motel-pics/queen%20accessible/2.png",
-        "assets/motel-pics/queen%20accessible/3.png",
-        "assets/motel-pics/Double%20queen%20accesible/1.png",
-        "assets/motel-pics/Double%20queen%20accesible/2.png",
-        "assets/motel-pics/Double%20queen%20accesible/3.png",
-        "assets/motel-pics/Double%20queen%20accesible/4.jpeg",
-      ],
-    },
+  // Base prices matching book.html room cards
+  const ROOM_PRICES = {
+    "suite-kitchen": 189, "suite-jacuzzi": 149, "suite-2room": 129,
+    "king": 99, "queen": 89, "queen-double": 109, "ada": 99
   };
 
   // ── Read URL param ──────────────────────────────────────
@@ -191,7 +16,9 @@
 
   // ── Page title ──────────────────────────────────────────
   const titleTag = document.getElementById("rd-page-title");
-  if (titleTag) titleTag.textContent = displayName + " — Motel Mediteran";
+  if (titleTag)
+    titleTag.textContent =
+      displayName.replace(/\r\n/g, " ").replace(/\n/g, " ") + " — Motel Mediteran";
 
   // ── Hero ────────────────────────────────────────────────
   const heroImg = document.getElementById("rd-hero-img");
@@ -200,7 +27,11 @@
     heroImg.src = room.photos[0];
     heroImg.alt = displayName + " at Motel Mediteran";
   }
-  if (heroLabel) heroLabel.textContent = room.label;
+  if (heroLabel)
+    heroLabel.innerHTML =
+      typeof window.mmPreserveEn === "function"
+        ? window.mmPreserveEn(room.label)
+        : String(room.label);
 
   // ── Content ─────────────────────────────────────────────
   const nameEl = document.getElementById("rd-room-name");
@@ -209,14 +40,19 @@
   const bulletsEl = document.getElementById("rd-bullets");
   const reserveEl = document.getElementById("rd-reserve");
 
-  if (nameEl) nameEl.innerHTML = room.name.replace("\n", "<br>");
+  if (nameEl)
+    nameEl.innerHTML =
+      typeof window.mmPreserveEnHtml === "function"
+        ? window.mmPreserveEnHtml(room.name.replace(/\n/g, "<br>"))
+        : room.name.replace("\n", "<br>");
 
   if (specsEl) {
     specsEl.innerHTML = "";
     room.specs.forEach((s) => {
       const d = document.createElement("div");
       d.className = "rd-spec";
-      d.textContent = s;
+      if (typeof window.mmPreserveEn === "function") d.innerHTML = window.mmPreserveEn(s);
+      else d.textContent = s;
       specsEl.appendChild(d);
     });
   }
@@ -227,12 +63,27 @@
     bulletsEl.innerHTML = "";
     room.bullets.forEach((b) => {
       const li = document.createElement("li");
-      li.textContent = b;
+      if (typeof window.mmPreserveEn === "function") li.innerHTML = window.mmPreserveEn(b);
+      else li.textContent = b;
       bulletsEl.appendChild(li);
     });
   }
 
-  if (reserveEl) reserveEl.href = RESERVE_HREF;
+  if (reserveEl) {
+    reserveEl.href = "book.html";
+    reserveEl.addEventListener("click", function (e) {
+      e.preventDefault();
+      try {
+        sessionStorage.setItem("mm_bk_room", JSON.stringify({
+          id: roomId,
+          name: displayName,
+          price: ROOM_PRICES[roomId] || 99,
+          thumb: room.photos[0] || ""
+        }));
+      } catch (_) {}
+      window.location.href = "book.html";
+    });
+  }
 
   // ── Gallery ─────────────────────────────────────────────
   const galleryTrack = document.getElementById("rd-gallery-track");
@@ -335,7 +186,8 @@
     updateDots();
   }
 
-  // Auto-slide — always clear before setting to prevent stacked intervals
+  function resetAuto() { startAuto(); }
+
   function startAuto() {
     clearInterval(autoTimer);
     autoTimer = setInterval(() => go(current + 1), 5000);
@@ -349,7 +201,6 @@
   if (prevBtn) prevBtn.addEventListener("click", () => { go(current - 1); startAuto(); });
   if (nextBtn) nextBtn.addEventListener("click", () => { go(current + 1); startAuto(); });
 
-  // Pause on hover — use the frame so arrows don't trigger mouseleave
   const frame = document.querySelector(".rd-gallery__frame");
   if (frame) {
     frame.addEventListener("mouseenter", stopAuto);
@@ -361,7 +212,7 @@
   updateCounter();
   startAuto();
 
-  // Touch swipe support
+  // Touch swipe
   let touchStartX = 0;
   let touchStartY = 0;
   const clip = document.querySelector(".rd-gallery__clip");
@@ -374,7 +225,6 @@
     clip.addEventListener("touchend", (e) => {
       const dx = e.changedTouches[0].clientX - touchStartX;
       const dy = e.changedTouches[0].clientY - touchStartY;
-      // Only trigger if horizontal swipe is dominant
       if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
         go(dx < 0 ? current + 1 : current - 1);
         startAuto();
@@ -382,7 +232,7 @@
     }, { passive: true });
   }
 
-  // ── Scroll fade-in ──────────────────────────────────────
+  // Scroll fade-in
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver(
       (entries) => {
@@ -395,14 +245,11 @@
       },
       { threshold: 0.08 }
     );
-
-    // Stagger the fade-ins
     document.querySelectorAll(".rd-fade").forEach((el, i) => {
       el.style.transitionDelay = (i * 60) + "ms";
       io.observe(el);
     });
   } else {
-    // Fallback: just show everything
     document.querySelectorAll(".rd-fade").forEach((el) => el.classList.add("is-visible"));
   }
 })();

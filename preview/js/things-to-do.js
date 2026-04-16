@@ -8,6 +8,21 @@
   var filters = root.querySelectorAll('.mm-td-filters input[type="checkbox"][name="td-filter"]');
   var cards = root.querySelectorAll(".mm-td-card[data-mm-td-categories]");
 
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var pref = params.get("td-filter") || (window.location.hash || "").replace(/^#/, "").trim();
+    if (pref) {
+      for (var fi = 0; fi < filters.length; fi++) {
+        if (filters[fi].value === pref) {
+          for (var j = 0; j < filters.length; j++) {
+            filters[j].checked = j === fi;
+          }
+          break;
+        }
+      }
+    }
+  } catch (err) {}
+
   function parseCategories(card) {
     var raw = card.getAttribute("data-mm-td-categories") || "";
     return raw.split(/\s+/).filter(Boolean);
@@ -59,6 +74,14 @@
         }
       }
       apply();
+      // Persist active filter in URL hash so back/refresh restores selection
+      try {
+        var active = null;
+        for (var k = 0; k < filters.length; k++) {
+          if (filters[k].checked) { active = filters[k].value; break; }
+        }
+        history.replaceState(null, "", active ? "#" + active : window.location.pathname + window.location.search);
+      } catch (_) {}
     });
   }
 

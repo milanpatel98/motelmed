@@ -200,6 +200,14 @@ header.wp-block-group.alignwide > .wp-block-group:last-child {
   }
 }
 
+/* Very narrow: avoid horizontal overflow from nowrap + clamp() titles */
+@media (max-width: 380px) {
+  .home-welcome-line1,
+  .home-welcome-socal {
+    white-space: normal;
+  }
+}
+
 .is-vertically-aligned-bottom {
   align-self: flex-end;
 }
@@ -1221,23 +1229,33 @@ footer.site-footer-container .wp-block-social-link a {
 }
 
 .home-location-cta .wp-block-button__link {
+  font-family: var(--wp--preset--font-family--inter), system-ui, -apple-system, sans-serif !important;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  line-height: 1.2;
   color: #1a2d4a !important;
   border-color: #1a2d4a !important;
   background: transparent !important;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  padding-left: 1.5rem !important;
-  padding-right: 1.5rem !important;
+  border-radius: 0;
+  padding: 15px 1.5rem !important;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.home-location-cta .wp-block-button__link:hover {
-  background: rgba(26, 45, 74, 0.05) !important;
+.home-location-cta .wp-block-button__link:hover,
+.home-location-cta .wp-block-button__link:focus-visible {
+  background: #0a0a0a !important;
+  color: #fff !important;
+  border-color: #0a0a0a !important;
 }
 
 .home-location-btn-arrow {
   display: inline-block;
-  margin-left: 0.35em;
-  font-weight: 400;
+  margin-left: 0.45em;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 @media (max-width: 900px) {

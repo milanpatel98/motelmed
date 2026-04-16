@@ -105,11 +105,11 @@ body.mm-faqs {
 .mm-q summary {
   list-style: none;
   cursor: pointer;
-  padding: 18px 20px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 14px;
-  align-items: center;
+  padding: 18px 46px 18px 20px;
+  /* Block + absolute “+” (not CSS Grid): Google Translate injects extra nodes inside
+     <summary>; grid would treat each as a column and break the row (brand name + “ES”
+     jumping beside the chevron). */
+  display: block;
   font-family: var(--mm-faq-sans);
   text-transform: uppercase;
   letter-spacing: 0.16em;
@@ -131,7 +131,10 @@ body.mm-faqs {
   font-size: 16px;
   font-weight: 600;
   line-height: 1;
-  transform: translateY(-1px);
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(calc(-50% - 1px));
   opacity: 0.88;
   transition: opacity 180ms ease;
 }
@@ -189,7 +192,7 @@ body.mm-faqs {
 
 @media (max-width: 560px) {
   .mm-q summary {
-    padding: 16px 14px;
+    padding: 16px 44px 16px 14px;
     letter-spacing: 0.14em;
     font-size: 10px;
   }

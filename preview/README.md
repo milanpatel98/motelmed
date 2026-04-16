@@ -67,7 +67,7 @@ Requirements: Google Cloud project, **Places API** enabled, billing on. The Plac
 
 Reservation buttons use the legacy clean Booking URL:
 
-`http://www.booking.com/hotel/us/motel-mediteran.html?aid=330843;lang=en;pb=1`
+`http://www.booking.com/hotel/us/motel-mediteran.html?aid=330843&lang=en&pb=1`
 
 ## Next step
 
