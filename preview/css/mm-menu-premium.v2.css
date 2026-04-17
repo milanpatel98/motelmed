@@ -135,9 +135,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   border-right: 1px solid rgba(255, 255, 255, 0.07);
-  padding-left: clamp(26px, 4.2vw, 52px);
-  padding-right: clamp(26px, 4.2vw, 52px);
+  padding-left: clamp(20px, 3vw, 40px);
+  padding-right: clamp(20px, 3vw, 40px);
 }
 
 /* Secondary: secondary links + CTA at the bottom */
@@ -270,18 +271,23 @@ body.mm-nav-open .mm-topbar__logo {
   list-style: none;
   margin: 0;
   padding: 0;
+  width: 100%;
+  max-width: min(22rem, 92%);
 }
 
-.mm-nav__item { padding: 1px 0; }
+.mm-nav__item {
+  padding: 0.08em 0;
+}
 
 .mm-nav__item a {
   display: block;
   font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  font-size: clamp(30px, 4.6vw, 66px);
-  font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  color: rgba(255, 255, 255, 0.55);
+  /* Editorial scale — previous clamp topped at 66px and felt loud, not luxury */
+  font-size: clamp(21px, 2.35vw, 34px);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.58);
   text-decoration: none;
   /* Entry */
   opacity: 0;
@@ -535,7 +541,13 @@ body.mm-nav-open.mm-nav-solid-topbar .mm-topbar {
     padding: 28px clamp(20px, 5vw, 36px) 20px;
   }
 
-  .mm-nav__item a { font-size: clamp(26px, 9vw, 44px); }
+  .mm-nav__list {
+    max-width: 100%;
+  }
+
+  .mm-nav__item a {
+    font-size: clamp(19px, 5.2vw, 30px);
+  }
 
   /* Secondary: horizontal strip */
   .mm-nav__col--secondary {
