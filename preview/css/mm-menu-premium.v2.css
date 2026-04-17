@@ -15,6 +15,10 @@
   --mm-menu-h: 580px;
   --mm-ease-reveal: cubic-bezier(0.76, 0, 0.24, 1);
   --mm-ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Push-down: slow, decelerating — keep in sync on #main, footer, and topbar min-height */
+  --mm-push-duration-open: 1.2s;
+  --mm-push-duration-close: 1s;
+  --mm-push-ease: cubic-bezier(0.33, 1, 0.32, 1);
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -387,7 +391,8 @@ body.mm-nav-open .mm-topbar__logo {
 #main,
 .v2-footer {
   will-change: transform;
-  transition: transform 0.72s var(--mm-ease-reveal);
+  transition:
+    transform var(--mm-push-duration-open) var(--mm-push-ease);
 }
 
 body.mm-nav-open #main,
@@ -397,7 +402,8 @@ body.mm-nav-open .v2-footer {
 
 body:not(.mm-nav-open) #main,
 body:not(.mm-nav-open) .v2-footer {
-  transition-duration: 0.56s;
+  transition-duration: var(--mm-push-duration-close);
+  transition-timing-function: var(--mm-push-ease);
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -408,12 +414,22 @@ body:not(.mm-nav-open) .v2-footer {
 .mm-topbar {
   /* Full shorthand replaces mm-topbar.css (which lists `color`) — animating chrome color reads as the MM mark fading. */
   transition:
-    background-color 0.48s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.48s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.48s cubic-bezier(0.22, 1, 0.36, 1),
-    backdrop-filter 0.48s cubic-bezier(0.22, 1, 0.36, 1),
-    -webkit-backdrop-filter 0.48s cubic-bezier(0.22, 1, 0.36, 1),
-    min-height 0.72s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    background-color 0.55s var(--mm-push-ease),
+    border-color 0.55s var(--mm-push-ease),
+    box-shadow 0.55s var(--mm-push-ease),
+    backdrop-filter 0.55s var(--mm-push-ease),
+    -webkit-backdrop-filter 0.55s var(--mm-push-ease),
+    min-height var(--mm-push-duration-open) var(--mm-push-ease) !important;
+}
+
+body:not(.mm-nav-open) .mm-topbar {
+  transition-duration:
+    0.55s, 0.55s, 0.55s, 0.55s, 0.55s,
+    var(--mm-push-duration-close) !important;
+  transition-timing-function:
+    var(--mm-push-ease), var(--mm-push-ease), var(--mm-push-ease),
+    var(--mm-push-ease), var(--mm-push-ease),
+    var(--mm-push-ease) !important;
 }
 
 body.mm-nav-open .mm-topbar {
@@ -570,6 +586,11 @@ body.mm-nav-open.mm-nav-solid-topbar .mm-topbar {
    ───────────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
+  #main,
+  .v2-footer {
+    transition: none !important;
+  }
+
   .mm-nav__panel {
     transform: none !important;
     opacity: 1 !important;
