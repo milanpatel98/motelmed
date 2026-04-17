@@ -439,35 +439,6 @@ body.mm-logo-in-nav .mm-topbar {
   -webkit-backdrop-filter: none !important;
 }
 
-/* Beat high-specificity inner-page open rules from mm-topbar.css. */
-body.mm-nav-open.mm-texture-bg .mm-topbar,
-body.mm-nav-open.mm-rooms .mm-topbar,
-body.mm-nav-open.mm-room-detail .mm-topbar,
-body.mm-nav-closing.mm-texture-bg .mm-topbar,
-body.mm-nav-closing.mm-rooms .mm-topbar,
-body.mm-nav-closing.mm-room-detail .mm-topbar,
-body.mm-logo-in-nav.mm-texture-bg .mm-topbar,
-body.mm-logo-in-nav.mm-rooms .mm-topbar,
-body.mm-logo-in-nav.mm-room-detail .mm-topbar {
-  background-color: transparent !important;
-  border-bottom-color: transparent !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-body.mm-nav-open.mm-texture-bg .mm-topbar::after,
-body.mm-nav-open.mm-rooms .mm-topbar::after,
-body.mm-nav-open.mm-room-detail .mm-topbar::after,
-body.mm-nav-closing.mm-texture-bg .mm-topbar::after,
-body.mm-nav-closing.mm-rooms .mm-topbar::after,
-body.mm-nav-closing.mm-room-detail .mm-topbar::after,
-body.mm-logo-in-nav.mm-texture-bg .mm-topbar::after,
-body.mm-logo-in-nav.mm-rooms .mm-topbar::after,
-body.mm-logo-in-nav.mm-room-detail .mm-topbar::after {
-  content: none !important;
-}
-
 /* Premium open topbar: keep burger slot (overrides legacy stretch while menu is open). */
 body.mm-nav-open .mm-topbar__menu,
 body.mm-nav-closing .mm-topbar__menu {
@@ -477,10 +448,6 @@ body.mm-nav-closing .mm-topbar__menu {
   position: relative;
   z-index: 1200;
   color: #ffffff !important;
-  background: rgba(18, 17, 16, 0.84) !important;
-  border: 1px solid rgba(255, 255, 255, 0.24) !important;
-  border-radius: 999px !important;
-  padding-inline: 10px !important;
 }
 
 /* Keep trigger lane always above traveling logo/menu plane */

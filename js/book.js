@@ -717,13 +717,13 @@
     if (state.selectedRoom) {
       updateSummaryRoom(
         "bk-sum-room-name", "bk-sum-room-meta", "bk-sum-room-thumb",
-        "bk-sum-rates", "bk-sub-room-total", "bk-sub-taxes", "bk-sub-deposit",
+        "bk-sum-rates", "bk-sub-room-total", "bk-sub-taxes",
         "bk-sum-total", "bk-sum-subs", "bk-sum-total-block", "bk-sum-continue"
       );
     }
   }
 
-  function updateSummaryRoom(nameId, metaId, thumbId, ratesId, subRoomId, subTaxId, subDepId, totalId, subsId, totalBlockId, continueId) {
+  function updateSummaryRoom(nameId, metaId, thumbId, ratesId, subRoomId, subTaxId, totalId, subsId, totalBlockId, continueId) {
     if (!state.selectedRoom || !state.checkin || !state.checkout) return;
     var nights = daysBetween(state.checkin, state.checkout);
     var room = state.selectedRoom;
@@ -750,13 +750,11 @@
         cur = addDays(cur, 1);
       }
 
-      var taxes = Math.round(subtotal * 0.12);
+      var taxes = Math.round(subtotal * 0.1);
       var total = subtotal + taxes;
-      var deposit = Math.round(total * 0.5);
 
       setText(subRoomId, fmt$(subtotal));
       setText(subTaxId, fmt$(taxes));
-      setText(subDepId, fmt$(deposit));
       setText(totalId, fmt$(total));
 
       show(subsId);
@@ -774,7 +772,7 @@
     if (state.selectedRoom) {
       updateSummaryRoom(
         "bk-sum3-room-name", "bk-sum3-room-meta", "bk-sum3-room-thumb",
-        "bk-sum3-rates", "bk-sub3-room-total", "bk-sub3-taxes", "bk-sub3-deposit",
+        "bk-sum3-rates", "bk-sub3-room-total", "bk-sub3-taxes",
         "bk-sum3-total", "bk-sum3-subs", "bk-sum3-total-block", null
       );
     }
@@ -912,7 +910,7 @@
         // Update summary immediately
         updateSummaryRoom(
           "bk-sum-room-name", "bk-sum-room-meta", "bk-sum-room-thumb",
-          "bk-sum-rates", "bk-sub-room-total", "bk-sub-taxes", "bk-sub-deposit",
+          "bk-sum-rates", "bk-sub-room-total", "bk-sub-taxes",
           "bk-sum-total", "bk-sum-subs", "bk-sum-total-block", "bk-sum-continue"
         );
       });
@@ -1040,7 +1038,7 @@
           cur = addDays(cur, 1);
         }
       }
-      var taxes = Math.round(subtotal * 0.12);
+      var taxes = Math.round(subtotal * 0.1);
       var total = subtotal + taxes;
 
       var cardEl = document.getElementById("f-card");
@@ -1174,7 +1172,7 @@
         subtotal += (getRateForDate(cur) || state.selectedRoom.price);
         cur = addDays(cur, 1);
       }
-      var total = subtotal + Math.round(subtotal * 0.12);
+      var total = subtotal + Math.round(subtotal * 0.1);
       totalEl.textContent = fmt$(total) + " (including taxes & fees)";
     }
   }
