@@ -87,6 +87,31 @@
     body.classList.toggle("mm-nav-open", open);
     if (open) applyNavScrollLock();
     else releaseNavScrollLock();
+
+    const closeBtn = nav.querySelector(".mm-nav__close");
+    if (open) {
+      requestAnimationFrame(() => {
+        closeBtn?.focus({ preventScroll: true });
+      });
+    } else {
+      menuBtn.focus({ preventScroll: true });
+    }
+  }
+
+  const panel = nav.querySelector(".mm-nav__panel");
+  const chrome = nav.querySelector(".mm-nav__chrome");
+  if (panel) {
+    panel.querySelector(".mm-nav__dock")?.remove();
+  }
+  if (chrome && !chrome.querySelector(".mm-nav__chrome-cta")) {
+    const ctaEl = document.querySelector(".mm-topbar__cta");
+    if (ctaEl) {
+      const a = document.createElement("a");
+      a.className = "mm-nav__chrome-cta";
+      a.href = ctaEl.getAttribute("href") || "book.html";
+      a.textContent = (ctaEl.textContent || "").trim() || "Check availability";
+      chrome.appendChild(a);
+    }
   }
 
   menuBtn.addEventListener("click", () => {
@@ -95,7 +120,7 @@
   nav.querySelectorAll("[data-mm-nav-close]").forEach((el) => {
     el.addEventListener("click", () => setNavOpen(false));
   });
-  nav.querySelectorAll(".mm-nav__list a").forEach((a) => {
+  nav.querySelectorAll(".mm-nav__list a, a.mm-nav__chrome-cta").forEach((a) => {
     a.addEventListener("click", () => setNavOpen(false));
   });
   document.addEventListener("keydown", (e) => {

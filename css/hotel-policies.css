@@ -68,7 +68,7 @@
 
 .mm-pol__rail {
   position: sticky;
-  top: calc(var(--mm-topbar-h, 72px) + 16px);
+  top: calc(var(--mm-topbar-h, 88px) + 16px);
   padding: clamp(18px, 2.5vw, 24px) clamp(16px, 2vw, 22px);
   border: 1px solid var(--mm-pol-rule);
   background: transparent;

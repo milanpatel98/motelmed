@@ -1,4 +1,9 @@
-/* Home booking: hero widget (dark / glass on cover) + compact sticky dock */
+/*
+ * Archived booking UI: dark inline hero bar + bottom sticky dock styles.
+ * Not linked from preview pages (dock removed for clarity). The interior-page
+ * sentinel div is styled in mm-footer.css. Re-link this file and restore <aside id="mm-booking-compact">
+ * markup to bring the strip back.
+ */
 
 /* —— Inline hero bar —— Reads with dark hero + home topbar chrome */
 .mm-booking-inline-wrap {
@@ -311,8 +316,10 @@
   background: #fff;
   color: var(--mm-ink, #0a0a0a);
   border: 0;
+  border-top: 1px solid rgba(10, 10, 10, 0.08);
   padding-bottom: env(safe-area-inset-bottom, 0);
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  box-shadow: 0 -8px 24px rgba(10, 10, 10, 0.06);
 }
 
 .mm-booking-strip--dock {
@@ -350,13 +357,11 @@ body.mm-booking-sticky-on .mm-booking-strip--dock {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px 12px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  gap: 7px 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   color: rgba(10, 10, 10, 0.55);
-  line-height: 1.35;
+  line-height: 1.4;
   min-width: 0;
   flex: 1 1 auto;
   overflow: hidden;
@@ -375,10 +380,13 @@ body.mm-booking-sticky-on .mm-booking-strip--dock {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 6px 10px;
+  gap: 5px 8px;
   color: var(--mm-ink, #0a0a0a);
-  font-weight: 800;
-  letter-spacing: 0.06em;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: clamp(11px, 0.98vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  text-transform: none;
 }
 
 .mm-booking-strip__range {
@@ -390,16 +398,16 @@ body.mm-booking-sticky-on .mm-booking-strip--dock {
 }
 
 .mm-booking-strip__dt-val {
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  color: var(--mm-ink, #0a0a0a);
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  color: inherit;
 }
 
 .mm-booking-strip__name {
   font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  font-size: clamp(15px, 1.35vw, 18px);
+  font-size: clamp(12px, 1.05vw, 15px);
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--mm-ink, #0a0a0a);
   white-space: nowrap;
@@ -407,23 +415,25 @@ body.mm-booking-sticky-on .mm-booking-strip--dock {
 
 .mm-booking-strip__sep {
   color: rgba(10, 10, 10, 0.22);
-  font-weight: 500;
+  font-size: 0.85em;
+  font-weight: 400;
   user-select: none;
 }
 
 .mm-booking-strip__meta {
-  color: rgba(10, 10, 10, 0.62);
+  color: rgba(10, 10, 10, 0.58);
   font-family: Inter, system-ui, sans-serif;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
 }
 
 .mm-booking-strip__change {
   font-family: Inter, system-ui, sans-serif;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--mm-ink, #0a0a0a);
   text-decoration: none;
@@ -455,7 +465,7 @@ body.mm-booking-sticky-on .mm-booking-strip--dock {
 
 .mm-booking-strip__change:hover,
 .mm-booking-strip__change:focus-visible {
-  color: rgba(10, 10, 10, 0.72);
+  color: rgba(10, 10, 10, 0.75);
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
@@ -490,12 +500,12 @@ body.mm-booking-sticky-on .mm-booking-strip--dock {
   box-sizing: border-box;
   text-decoration: none;
   text-transform: none;
-  letter-spacing: 0.02em;
-  font-size: 12px;
+  letter-spacing: 0.04em;
+  font-size: 11px;
   font-weight: 700;
   line-height: 1.2;
   border: none;
-  padding: 11px clamp(20px, 2.4vw, 30px);
+  padding: 10px clamp(18px, 2.1vw, 26px);
   border-radius: 1px;
   color: var(--mm-ink, #0a0a0a);
   background: transparent;
@@ -607,6 +617,12 @@ body.mm-booking-sticky-on .mm-booking-strip--dock {
     transition-duration: 0.01ms;
     transition-delay: 0s;
   }
+
+  .mm-booking-strip--dock,
+  body.mm-booking-sticky-on .mm-booking-strip--dock {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
 }
 
 @media (max-width: 640px) {
@@ -632,9 +648,9 @@ body.mm-booking-sticky-on .mm-booking-strip--dock {
     justify-content: center;
     flex-wrap: nowrap;
     gap: 4px;
-    font-size: 8px;
+    font-size: 7px;
     font-weight: 600;
-    letter-spacing: 0.11em;
+    letter-spacing: 0.1em;
     line-height: 1.25;
   }
 
@@ -654,9 +670,9 @@ body.mm-booking-sticky-on .mm-booking-strip--dock {
 
   .mm-booking-strip__dates {
     width: 100%;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     line-height: 1.2;
     color: var(--mm-ink, #0a0a0a);
   }
@@ -668,8 +684,8 @@ body.mm-booking-sticky-on .mm-booking-strip--dock {
   }
 
   .mm-booking-strip__meta {
-    font-size: 9px;
-    letter-spacing: 0.12em;
+    font-size: 8px;
+    letter-spacing: 0.11em;
     color: rgba(10, 10, 10, 0.5);
   }
 
@@ -681,8 +697,8 @@ body.mm-booking-sticky-on .mm-booking-strip--dock {
     margin: -6px -6px 0;
     min-width: 0;
     min-height: 0;
-    font-size: 9px;
-    letter-spacing: 0.14em;
+    font-size: 8px;
+    letter-spacing: 0.12em;
     line-height: 1.35;
     -webkit-tap-highlight-color: rgba(10, 10, 10, 0.06);
   }
@@ -704,8 +720,8 @@ body.mm-booking-sticky-on .mm-booking-strip--dock {
     min-width: 0;
     min-height: 38px;
     padding: 0 8px;
-    letter-spacing: 0.06em;
-    font-size: 11px;
+    letter-spacing: 0.05em;
+    font-size: 10px;
     font-weight: 700;
     touch-action: manipulation;
     border: 1px solid rgba(10, 10, 10, 0.92);
@@ -731,27 +747,15 @@ body.mm-booking-sticky-on .mm-booking-strip--dock {
   }
 
   .mm-booking-strip__dates {
-    font-size: 12px;
-    letter-spacing: 0.04em;
+    font-size: 11px;
+    letter-spacing: 0.035em;
   }
 
   .mm-booking-strip__cta {
     min-height: 36px;
     padding: 0 6px;
-    font-size: 10px;
+    font-size: 9px;
   }
-}
-
-/* Interior pages: IO anchor (match .mm-topbar-sentinel — avoid visibility:hidden for reliable IO). */
-.mm-booking-inline.mm-booking-inline--sentinel {
-  height: 1px;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  overflow: hidden;
-  pointer-events: none;
-  opacity: 0;
 }
 
 :root {

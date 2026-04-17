@@ -169,7 +169,7 @@
   //
   // Three entry points write data before navigating to book.html:
   //
-  // 1. Homepage / booking strip (mm-booking-dock.js)
+  // 1. Homepage availability bar + mm-booking-dock.js (localStorage)
   //    Already writes dates to localStorage["mm-booking-persist"]
   //    { checkin: "YYYY-MM-DD", checkout: "YYYY-MM-DD" }
   //

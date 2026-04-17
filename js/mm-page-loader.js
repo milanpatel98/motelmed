@@ -1,12 +1,15 @@
 /* =============================================================
    Motel Mediteran — Page Loader  (mm-page-loader.js)
 
-   Shows a full-screen branded loader:
-   • On every page load (hides once window fires 'load')
-   • When the guest navigates to another page (link click)
+   Loader only when needed:
+   • If the document is still parsing after ~400 ms, show the overlay
+     until DOM is ready to preview (DOMContentLoaded) — then fade out.
+   • Fast loads never mount the loader (no flash on quick sites).
    ============================================================= */
 (function () {
   "use strict";
+
+  var slowShowMs = 400;
 
   // ── 1. Inject CSS ─────────────────────────────────────────────
   var css = [
@@ -53,7 +56,7 @@
   style.textContent = css;
   document.head.appendChild(style);
 
-  // ── 2. Inject HTML ────────────────────────────────────────────
+  // ── 2. Loader node (mounted only if slow) ─────────────────────
   var el = document.createElement("div");
   el.className = "mm-pl";
   el.setAttribute("role", "status");
@@ -73,68 +76,72 @@
     '<p class="mm-pl__label">Loading</p>'
   ].join("");
 
-  // Insert as first child of body so it covers everything
-  document.body.insertBefore(el, document.body.firstChild);
+  function mount() {
+    if (el.parentNode) return;
+    if (document.body) {
+      document.body.insertBefore(el, document.body.firstChild);
+    } else {
+      document.documentElement.appendChild(el);
+    }
+  }
 
-  // ── 3. Hide once page is fully loaded ─────────────────────────
+  var loaderVisible = false;
+  var hideScheduled = false;
+  var slowTimer = null;
+
   function hide() {
+    if (hideScheduled) return;
+    if (slowTimer) {
+      clearTimeout(slowTimer);
+      slowTimer = null;
+    }
+    if (!el.parentNode) return;
+    hideScheduled = true;
     el.classList.add("mm-pl--hidden");
-    // Remove from DOM after transition so it can't block interaction
+    loaderVisible = false;
     el.addEventListener("transitionend", function cleanup() {
       el.removeEventListener("transitionend", cleanup);
       if (el.parentNode) el.parentNode.removeChild(el);
     });
   }
 
-  if (document.readyState === "complete") {
-    // Already loaded (script injected late) — hide after one frame
-    requestAnimationFrame(function () { requestAnimationFrame(hide); });
-  } else {
-    window.addEventListener("load", function () {
-      // Brief pause so the fade feels intentional, not a flash
-      setTimeout(hide, 200);
-    });
+  function tryShowSlow() {
+    slowTimer = null;
+    if (document.readyState !== "loading") return;
+    loaderVisible = true;
+    mount();
   }
 
-  // ── 4. Show again when guest navigates away ───────────────────
-  //    Only on same-origin <a> links that load a new page.
-  //    Ignores: hash-only links, mailto/tel, target="_blank",
-  //             download links, javascript: hrefs.
-  document.addEventListener("click", function (e) {
-    var anchor = e.target.closest("a[href]");
-    if (!anchor) return;
-
-    var href = anchor.getAttribute("href") || "";
-
-    // Skip non-navigation links
-    if (
-      anchor.target === "_blank" ||
-      anchor.hasAttribute("download") ||
-      href.startsWith("#") ||
-      href.startsWith("mailto:") ||
-      href.startsWith("tel:") ||
-      href.startsWith("javascript:")
-    ) return;
-
-    // Skip external links
-    try {
-      var url = new URL(href, window.location.href);
-      if (url.origin !== window.location.origin) return;
-      // Skip same page with different hash only
-      if (
-        url.pathname === window.location.pathname &&
-        url.search === window.location.search
-      ) return;
-    } catch (_) { return; }
-
-    // Show loader before browser navigates
-    el.classList.remove("mm-pl--hidden");
-    // Re-attach to DOM if it was already removed
-    if (!el.parentNode) {
-      document.body.insertBefore(el, document.body.firstChild);
+  function onReadyToPreview() {
+    if (slowTimer) {
+      clearTimeout(slowTimer);
+      slowTimer = null;
     }
-    el.style.opacity = "1";
-    el.style.pointerEvents = "auto";
-  });
+    if (!loaderVisible) return;
+    setTimeout(hide, 120);
+  }
 
+  if (document.readyState === "complete") {
+    return;
+  }
+
+  slowTimer = setTimeout(tryShowSlow, slowShowMs);
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", onReadyToPreview);
+  } else {
+    // interactive (rare here) — cancel slow timer, no loader
+    if (slowTimer) {
+      clearTimeout(slowTimer);
+      slowTimer = null;
+    }
+  }
+
+  window.addEventListener("load", function () {
+    if (slowTimer) {
+      clearTimeout(slowTimer);
+      slowTimer = null;
+    }
+    if (loaderVisible) setTimeout(hide, 120);
+  });
 })();

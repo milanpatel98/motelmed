@@ -88,7 +88,7 @@
 
 /* Topics */
 .mm-a11y-topics {
-  scroll-margin-top: calc(var(--mm-topbar-h, 84px) + 12px);
+  scroll-margin-top: calc(var(--mm-topbar-h, 88px) + 12px);
 }
 
 .mm-a11y-section__inner {

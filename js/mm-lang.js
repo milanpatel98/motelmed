@@ -123,8 +123,7 @@
     if (leaveSpanish) location.reload();
   }
 
-  function syncButtonState() {
-    var wrap = document.querySelector(".mm-topbar__lang");
+  function bindLangButtons(wrap) {
     if (!wrap) return;
     wrap.classList.add("notranslate");
     var cur = currentLang();
@@ -142,6 +141,11 @@
         setLang(isEs ? "es" : "en");
       });
     });
+  }
+
+  function syncButtonState() {
+    bindLangButtons(document.querySelector(".mm-topbar__lang"));
+    bindLangButtons(document.querySelector(".mm-nav__lang"));
   }
 
   /**

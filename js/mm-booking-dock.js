@@ -1,7 +1,6 @@
 /**
- * Home: hero booking bar + compact sticky strip after scroll.
- * Interior pages: hidden fields + sentinel + same strip (shared IDs / markup).
- * Dates + guest counts persist across pages (localStorage).
+ * Booking persistence (localStorage), hero / v2 bar label sync, book links, exit fade.
+ * Bottom sticky dock markup/CSS lives in repo but is not mounted on preview pages.
  */
 (function () {
   var PERSIST_KEY = "mm-booking-persist";
@@ -12,13 +11,7 @@
   if (!inEl || !outEl) return;
 
   var inlineHero = document.querySelector("#mm-booking-inline.mm-booking-inline--hero");
-  /* Prefer the full hero wrapper so IO tracks the same box users see (margins + bar). */
-  var heroWrap = inlineHero ? inlineHero.closest(".mm-booking-inline-wrap") : null;
-  var scrollRoot =
-    heroWrap ||
-    inlineHero ||
-    document.querySelector("#mm-booking-inline.mm-booking-inline--sentinel") ||
-    document.querySelector(".mm-topbar-sentinel");
+  var inlineV2 = document.querySelector("#mm-booking-inline.v2-avail");
 
   var compactRange = document.getElementById("mm-book-compact-range");
   var compactGuests = document.getElementById("mm-book-compact-guests");
@@ -30,6 +23,9 @@
   var groupChildrenEl = document.getElementById("mm-book-group-children");
   var triggerGuests = document.getElementById("mm-book-hero-trigger-guests");
   var syncLinks = document.querySelectorAll("a.mm-booking-sync");
+  var bbCheckinVal = document.getElementById("bbCheckinVal");
+  var bbCheckoutVal = document.getElementById("bbCheckoutVal");
+  var bbGuestsVal = document.getElementById("bbGuestsVal");
 
   function pad(n) {
     return String(n).length < 2 ? "0" + n : String(n);
@@ -168,6 +164,13 @@
   }
 
   /** Same calendar month → "Apr 07 – Apr 19"; else → "Apr 07, 2026 – May 12, 2026". */
+  /** Short cell label for home v2 bar (e.g. Apr 06). */
+  function formatV2BarDate(iso) {
+    var d = parseYmd(iso);
+    if (!d) return "Select date";
+    return monShort(d) + " " + padDayNum(d);
+  }
+
   function formatStickyRange(isoIn, isoOut) {
     var a = parseYmd(isoIn);
     var b = parseYmd(isoOut);
@@ -226,6 +229,17 @@
     if (heroGuestsLine) {
       heroGuestsLine.textContent = gLine;
     }
+    if (bbCheckinVal) {
+      bbCheckinVal.textContent = formatV2BarDate(inEl.value);
+      bbCheckinVal.classList.toggle("is-placeholder", !inEl.value);
+    }
+    if (bbCheckoutVal) {
+      bbCheckoutVal.textContent = formatV2BarDate(outEl.value);
+      bbCheckoutVal.classList.toggle("is-placeholder", !outEl.value);
+    }
+    if (bbGuestsVal) {
+      bbGuestsVal.textContent = gLine;
+    }
     if (compactGuests) {
       compactGuests.textContent = gLine;
     }
@@ -244,33 +258,6 @@
     inEl.value = ymd(t);
     outEl.min = ymd(t2);
     outEl.value = ymd(t2);
-  }
-
-  function setSticky(on) {
-    document.body.classList.toggle("mm-booking-sticky-on", on);
-    var strip = document.getElementById("mm-booking-compact");
-    if (strip) strip.setAttribute("aria-hidden", on ? "false" : "true");
-  }
-
-  function watchScroll() {
-    if (!scrollRoot) {
-      setSticky(true);
-      return;
-    }
-    if (typeof IntersectionObserver === "undefined") {
-      setSticky(true);
-      return;
-    }
-    var io = new IntersectionObserver(
-      function (entries) {
-        for (var i = 0; i < entries.length; i++) {
-          var vis = entries[i].isIntersecting;
-          setSticky(!vis);
-        }
-      },
-      { root: null, threshold: 0, rootMargin: "0px 0px 48px 0px" }
-    );
-    io.observe(scrollRoot);
   }
 
   window.mmBookingRefresh = refreshLabels;
@@ -320,8 +307,9 @@
   if (changeCompact) {
     changeCompact.addEventListener("click", function (e) {
       e.preventDefault();
-      if (inlineHero) {
-        inlineHero.scrollIntoView({ behavior: "smooth", block: "center" });
+      var scrollTarget = inlineHero || inlineV2;
+      if (scrollTarget) {
+        scrollTarget.scrollIntoView({ behavior: "smooth", block: "center" });
         setTimeout(function () {
           try {
             if (heroTriggerIn) heroTriggerIn.focus();
@@ -334,7 +322,9 @@
     });
   }
 
-  watchScroll();
+  try {
+    document.body.classList.remove("mm-booking-sticky-on");
+  } catch (_) {}
 
   // ── Page exit animation when navigating to book.html ───────────
   // Uses event delegation so it catches both static links and any

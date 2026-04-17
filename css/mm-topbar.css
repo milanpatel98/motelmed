@@ -3,8 +3,15 @@
   --mm-ink: #0a0a0a;
   --mm-paper: #f8f8f6;
   --mm-shell-pad: clamp(16px, 3vw, 48px);
-  --mm-topbar-h: 128px;
-  --mm-logo-size: 58px;
+}
+
+/*
+ * Bar height on html.mm-shell-html (not bare :root) so it wins over other stylesheets that
+ * redefine :root tokens — otherwise mm-topbar can load first and later :root blocks “hide” updates.
+ */
+html.mm-shell-html {
+  --mm-topbar-h: 104px;
+  --mm-logo-size: 56px;
 }
 
 html.mm-shell-html,
@@ -93,7 +100,7 @@ body.mm-texture-bg > footer.mm-footer {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: clamp(14px, 2vw, 22px);
+  gap: clamp(10px, 1.6vw, 18px);
   padding-top: env(safe-area-inset-top, 0px);
   padding-right: max(var(--mm-shell-pad), env(safe-area-inset-right));
   padding-bottom: 0;
@@ -102,10 +109,15 @@ body.mm-texture-bg > footer.mm-footer {
   background: transparent;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
+  /* Isolate from page body line-height (e.g. book.html site.css 1.65) so chrome stays centered */
+  line-height: 1;
   transition:
-    background-color 0.28s ease,
-    border-color 0.28s ease,
-    box-shadow 0.28s ease;
+    background-color 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    backdrop-filter 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    -webkit-backdrop-filter 0.48s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* WP/block themes often set a solid header background — force clear bar at scroll top */
@@ -119,22 +131,27 @@ body.mm-shell.is-scrolled .mm-topbar {
   background-color: #fff !important;
   border-bottom-color: rgba(10, 10, 10, 0.1) !important;
   box-shadow: 0 1px 0 rgba(10, 10, 10, 0.06) !important;
+  backdrop-filter: saturate(130%) blur(8px);
+  -webkit-backdrop-filter: saturate(130%) blur(8px);
 }
 
 .mm-topbar__menu {
   position: relative;
   flex: 0 0 auto;
   width: auto;
-  height: var(--mm-topbar-h);
+  height: auto;
+  min-height: 52px;
   margin: 0;
-  padding: 0 14px 0 env(safe-area-inset-left, 0px);
+  padding: 0 10px 0 env(safe-area-inset-left, 0px);
   border: 0;
   background: transparent;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  align-self: center;
   justify-content: flex-start;
   color: var(--mm-ink);
+  overflow: visible;
 }
 
 .mm-topbar__menu:focus-visible {
@@ -145,13 +162,91 @@ body.mm-shell.is-scrolled .mm-topbar {
 .mm-burger {
   display: block;
   flex-shrink: 0;
+  width: clamp(48px, 7vw, 56px);
+  height: auto;
+  overflow: visible;
 }
 
 .mm-burger__line {
   stroke: currentColor;
-  stroke-width: 2;
+  stroke-width: 0.85;
   vector-effect: non-scaling-stroke;
   shape-rendering: geometricPrecision;
+}
+
+/* Collapse outer bars to the middle row, then rotate both about (34,10) → true 90° cross. */
+.mm-burger__spin--top,
+.mm-burger__spin--bot {
+  transform: rotate(0deg);
+  transform-box: view-box;
+  transform-origin: 34px 10px;
+  transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mm-burger__shift--top,
+.mm-burger__shift--bot {
+  transform: translate(0, 0);
+  transform-box: view-box;
+  transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mm-burger__row--mid {
+  transition: opacity 0.22s ease;
+}
+
+body.mm-nav-open .mm-burger__shift--top {
+  transform: translate(0, 7.5px);
+}
+
+body.mm-nav-open .mm-burger__shift--bot {
+  transform: translate(0, -7.5px);
+}
+
+body.mm-nav-open .mm-burger__spin--top {
+  transform: rotate(45deg);
+}
+
+body.mm-nav-open .mm-burger__spin--bot {
+  transform: rotate(-45deg);
+}
+
+body.mm-nav-open .mm-burger__row--mid {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/*
+ * Burger — shared mm-shell chrome (all site pages with the topbar button).
+ * Closed: stable flex slot + explicit “three lines” geometry so open/close mirrors cleanly.
+ * Open: legacy nav still uses body.mm-nav-open .mm-topbar__menu stretch below; index premium overrides.
+ */
+body.mm-shell:not(.mm-nav-open) .mm-topbar__menu {
+  align-self: flex-start;
+  border-right: none;
+  margin-top: calc((var(--mm-topbar-h, 104px) - 52px) / 2);
+  position: relative;
+  z-index: 2;
+}
+
+body.mm-shell:not(.mm-nav-open) .mm-burger__shift--top,
+body.mm-shell:not(.mm-nav-open) .mm-burger__shift--bot {
+  transform: translate(0, 0);
+}
+
+body.mm-shell:not(.mm-nav-open) .mm-burger__spin--top,
+body.mm-shell:not(.mm-nav-open) .mm-burger__spin--bot {
+  transform: rotate(0deg);
+}
+
+body.mm-shell:not(.mm-nav-open) .mm-burger__row--mid {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Rooms / room-detail: ink menu control (replaces per-page inline burger stroke hacks). */
+body.mm-rooms .mm-topbar__menu,
+body.mm-room-detail .mm-topbar__menu {
+  color: var(--mm-ink);
 }
 
 .mm-topbar__brand {
@@ -164,10 +259,12 @@ body.mm-shell.is-scrolled .mm-topbar {
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
-  gap: clamp(12px, 1.6vw, 18px);
-  letter-spacing: 0.22em;
-  font-size: 11px;
+  align-self: center;
+  gap: clamp(10px, 1.4vw, 16px);
+  letter-spacing: 0.2em;
+  font-size: 10.5px;
   font-weight: 500;
+  line-height: 1;
 }
 
 .mm-topbar__logo {
@@ -179,16 +276,23 @@ body.mm-shell.is-scrolled .mm-topbar {
   place-items: center;
   font-family: "Cormorant Garamond", Georgia, "Times New Roman", Times, serif;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   font-size: 15px;
   line-height: 1;
+  transition: border-color 0.28s ease, color 0.28s ease;
 }
 
 .mm-topbar__loc {
-  letter-spacing: 0.26em;
+  letter-spacing: 0.22em;
   font-size: 11px;
   font-weight: 700;
   color: rgba(10, 10, 10, 0.88);
+  line-height: 1.2;
+  transition:
+    color 0.32s ease,
+    opacity 0.32s ease,
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0s;
 }
 
 .mm-topbar__right {
@@ -197,17 +301,46 @@ body.mm-shell.is-scrolled .mm-topbar {
   margin-left: auto;
   display: inline-flex;
   align-items: center;
-  gap: clamp(14px, 2vw, 22px);
+  align-self: center;
+  gap: clamp(10px, 1.6vw, 18px);
+  line-height: 1;
+}
+
+/* Interior + WP pages: keep bar type scale consistent (logo unchanged below) */
+header.mm-topbar .mm-topbar__brand {
+  font-size: 10.5px;
+  font-weight: 500;
+}
+header.mm-topbar .mm-topbar__loc {
+  font-size: 11px;
+  font-weight: 700;
+}
+header.mm-topbar .mm-topbar__cta {
+  font-weight: 700;
+}
+header.mm-topbar .mm-lang {
+  font-weight: 600;
+}
+.mm-topbar__phone {
+  text-decoration: none;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  color: var(--mm-ink);
+  white-space: nowrap;
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 .mm-topbar__cta {
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   font-size: 10px;
   font-weight: 700;
-  border: 1px solid rgba(10, 10, 10, 0.88);
-  padding: 11px clamp(18px, 2.2vw, 28px);
+  line-height: 1.15;
+  border: 1px solid rgba(10, 10, 10, 0.55);
+  padding: 12px clamp(14px, 2vw, 22px);
   border-radius: 999px;
   color: var(--mm-ink);
   background: transparent;
@@ -218,21 +351,22 @@ body.mm-shell.is-scrolled .mm-topbar {
 .mm-topbar__cta:hover {
   background: #0a0a0a;
   color: #fff;
-  border-color: #0a0a0a;
+  border: 1px solid #0a0a0a;
 }
 
 .mm-topbar__lang {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   font-size: 11px;
   color: rgba(16, 16, 16, 0.72);
+  line-height: 1;
 }
 
 .mm-lang__sep {
   display: inline-block;
   width: 1px;
-  height: 30px;
+  height: 22px;
   flex-shrink: 0;
   background: rgba(10, 10, 10, 0.38);
   user-select: none;
@@ -244,10 +378,11 @@ body.mm-shell.is-scrolled .mm-topbar {
   padding: 0;
   cursor: pointer;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   font-size: 10px;
   font-weight: 600;
   color: rgba(16, 16, 16, 0.55);
+  line-height: 1;
 }
 
 .mm-lang.is-active {
@@ -383,19 +518,21 @@ body.mm-home:not(.is-scrolled) .mm-topbar__logo {
 
 body.mm-home:not(.is-scrolled) .mm-topbar__loc {
   color: rgba(255, 255, 255, 0.92);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition-delay: 0s, 0s, 0s, 0.32s;
 }
 
-/* Home only: phone before Check availability */
-body.mm-home .mm-topbar__phone {
-  text-decoration: none;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: var(--mm-ink);
-  white-space: nowrap;
-  transition: color 0.2s ease, opacity 0.2s ease;
+/* Home only: reveal location label after first scroll threshold */
+body.mm-home.is-scrolled .mm-topbar__loc {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0s, 0s, 0s, 0s;
 }
 
+/* Home only: phone color on hero */
 body.mm-home:not(.is-scrolled) .mm-topbar__phone {
   color: rgba(255, 255, 255, 0.92);
 }
@@ -411,13 +548,13 @@ body.mm-home:not(.is-scrolled) .mm-topbar__phone:hover {
 
 body.mm-home:not(.is-scrolled) .mm-topbar__cta {
   color: #f4f4f2;
-  border-color: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.55);
 }
 
 body.mm-home:not(.is-scrolled) .mm-topbar__cta:hover {
   background: #fff;
   color: #0a0a0a;
-  border-color: #fff;
+  border: 1px solid #fff;
 }
 
 body.mm-home:not(.is-scrolled) .mm-lang {
@@ -441,13 +578,30 @@ body.mm-nav-open {
   overscroll-behavior: none;
 }
 
-/*
- * Nav drawer is z-index 100; keep the bar above it so nothing bleeds under the hamburger.
- * With body position:fixed (scroll lock), Safari can composite a flat strip behind the menu —
- * mirror the paper + grain here so the header matches the rest of the texture pages.
- */
+/* Menu open: topbar stays visible, turns white, burger becomes the × square cell */
 body.mm-nav-open .mm-topbar {
-  z-index: 150;
+  z-index: 210;
+  background-color: #fff !important;
+  border-bottom-color: rgba(10,10,10,.08) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Burger button becomes a square white cell with right border — visually part of panel */
+body.mm-nav-open .mm-topbar__menu {
+  align-self: stretch;
+  border-right: 1px solid rgba(10,10,10,.1);
+  padding-right: 0;
+}
+
+/* Hide topbar right-side items when menu is open */
+body.mm-nav-open .mm-topbar__phone,
+body.mm-nav-open .mm-topbar__cta,
+body.mm-nav-open .mm-topbar__lang {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
 }
 
 /* Scroll lock drops is-scrolled — bar must stay solid white when it was scrolled */
@@ -486,13 +640,13 @@ body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-topbar__phone:hover {
 
 body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-topbar__cta {
   color: var(--mm-ink);
-  border-color: rgba(10, 10, 10, 0.88);
+  border: 1px solid rgba(10, 10, 10, 0.55);
 }
 
 body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-topbar__cta:hover {
   background: #0a0a0a;
   color: #fff;
-  border-color: #0a0a0a;
+  border: 1px solid #0a0a0a;
 }
 
 body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-lang {
@@ -545,7 +699,24 @@ body.mm-nav-open.mm-room-detail:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-
   z-index: 1;
 }
 
+/* Screen-reader only utility */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0;
+  margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+
+/*
+ * Site menu — THE LINE Hotels: white sheet (short on desktop so dimmed page shows below),
+ * close in a hairline square, boxed mark + microcaps loc + EN|ES, ghost CTA, left rail bold caps sans
+ * (gold = current place), hairline, two-column caps links — no shadows.
+ */
 .mm-nav {
+  --mm-nav-bg: #fff;
+  --mm-nav-line: rgba(10, 10, 10, 0.12);
+  --mm-nav-line-soft: rgba(10, 10, 10, 0.08);
+  --mm-nav-gold: #9c8b61;
   position: fixed;
   top: calc(var(--mm-topbar-h) + env(safe-area-inset-top, 0px));
   left: 0;
@@ -554,12 +725,14 @@ body.mm-nav-open.mm-room-detail:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-
   z-index: 100;
   pointer-events: none;
   visibility: hidden;
-  transition: visibility 0.3s;
+  transition: visibility 0.28s ease;
 }
 
 .mm-nav.is-open {
   pointer-events: auto;
   visibility: visible;
+  top: calc(var(--mm-topbar-h) + env(safe-area-inset-top, 0px));
+  z-index: 200;
 }
 
 .mm-nav__backdrop {
@@ -570,9 +743,9 @@ body.mm-nav-open.mm-room-detail:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-
   padding: 0;
   margin: 0;
   cursor: pointer;
-  background: rgba(10, 10, 10, 0.38);
+  background: rgba(10, 10, 10, 0.05);
   opacity: 0;
-  transition: opacity 0.28s ease;
+  transition: opacity 0.4s ease;
 }
 
 .mm-nav.is-open .mm-nav__backdrop {
@@ -581,67 +754,432 @@ body.mm-nav-open.mm-room-detail:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-
 
 .mm-nav__panel {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   z-index: 1;
-  height: 100%;
-  width: min(380px, 92vw);
   box-sizing: border-box;
-  padding: 28px 28px 32px;
-  background: var(--mm-paper);
-  box-shadow: 6px 0 32px rgba(0, 0, 0, 0.12);
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0;
+  background: var(--mm-nav-bg);
+  border: 1px solid rgba(10, 10, 10, 0.15);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.44s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .mm-nav.is-open .mm-nav__panel {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (min-width: 721px) {
+  .mm-nav__panel {
+    inset: auto;
+    top: 0;
+    left: 0;
+    right: auto;
+    bottom: auto;
+    transform: translateY(-6px);
+    width: min(760px, 100%);
+    max-height: min(76vh, 640px);
+    height: auto;
+    border: 1px solid rgba(10, 10, 10, 0.15);
+    border-left: none;
+  }
+
+  .mm-nav.is-open .mm-nav__panel {
+    transform: translateY(0);
+  }
+}
+
+.mm-nav__chrome {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  height: calc(var(--mm-topbar-h) + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) max(var(--mm-shell-pad), env(safe-area-inset-right)) 0
+    0;
+  border-bottom: 1px solid var(--mm-nav-line-soft);
+  background: var(--mm-nav-bg);
+}
+
+.mm-nav__close {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  /* Match topbar height on left edge — same footprint as the burger */
+  width: calc(var(--mm-topbar-h) + env(safe-area-inset-top, 0px));
+  height: calc(var(--mm-topbar-h) + env(safe-area-inset-top, 0px));
+  align-self: stretch;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-right: 1px solid rgba(10,10,10,.1);
+  border-radius: 0;
+  background: transparent;
+  color: rgba(10, 10, 10, 0.5);
+  cursor: pointer;
+  font: inherit;
+  transition: color 0.22s ease, background 0.22s ease;
+}
+
+.mm-nav__close:hover {
+  color: var(--mm-ink);
+  background: rgba(10,10,10,.03);
+}
+
+.mm-nav__close-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.mm-nav__close-icon {
+  display: flex;
+  line-height: 0;
+  color: currentColor;
+}
+
+.mm-nav__close-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.mm-nav__close-icon path {
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.mm-nav__close:focus-visible {
+  outline: 1px solid rgba(10, 10, 10, 0.25);
+  outline-offset: 5px;
+}
+
+.mm-nav__chrome-spacer {
+  flex: 1 1 24px;
+  min-width: 12px;
+  order: 3;
+}
+
+.mm-nav__brand {
+  order: 1;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.mm-nav__mark {
+  box-sizing: border-box;
+  width: var(--mm-logo-size);
+  height: var(--mm-logo-size);
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(10,10,10,.55);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--mm-ink);
+  line-height: 1;
+}
+
+.mm-nav__loc {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(10, 10, 10, 0.45);
+  line-height: 1.35;
+}
+
+.mm-nav__lang {
+  order: 2;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.mm-nav__lang .mm-lang {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(10, 10, 10, 0.42);
+}
+
+.mm-nav__lang .mm-lang.is-active {
+  color: var(--mm-ink);
+}
+
+.mm-nav__lang-sep {
+  margin: 0 0.42em;
+  font-size: 8.5px;
+  font-weight: 400;
+  color: rgba(10, 10, 10, 0.32);
+  user-select: none;
+}
+
+a.mm-nav__chrome-cta {
+  order: 4;
+  flex: 0 0 auto;
+  margin-left: auto;
+  padding: 11px clamp(16px, 2.8vw, 22px);
+  border-radius: 0;
+  border: 1px solid rgba(10, 10, 10, 0.55);
+  background: transparent;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--mm-ink);
+  white-space: nowrap;
+  transition:
+    background-color 0.22s ease,
+    color 0.22s ease;
+}
+
+a.mm-nav__chrome-cta:hover {
+  background: rgba(10, 10, 10, 0.06);
+}
+
+a.mm-nav__chrome-cta:focus-visible {
+  outline: 1px solid rgba(10, 10, 10, 0.28);
+  outline-offset: 3px;
+}
+
+.mm-nav__body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.mm-nav__aside {
+  flex: 0 0 min(36%, 260px);
+  max-width: 280px;
+  box-sizing: border-box;
+  padding: clamp(28px, 4vw, 44px) clamp(24px, 3vw, 36px) 32px clamp(24px, 3.5vw, 40px);
+  border-right: 1px solid rgba(10, 10, 10, 0.1);
+  background: var(--mm-nav-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Aside slides in from left */
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity .38s ease .1s, transform .42s cubic-bezier(0.22,1,0.36,1) .1s;
+}
+.mm-nav.is-open .mm-nav__aside {
+  opacity: 1;
   transform: translateX(0);
 }
 
-.mm-nav__x {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 44px;
-  height: 44px;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  font-size: 28px;
-  line-height: 1;
+.mm-nav__aside-top { flex: 1; }
+
+.mm-nav__property {
+  margin: 0 0 4px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: clamp(17px, 1.8vw, 22px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.15;
   color: var(--mm-ink);
-  display: grid;
-  place-items: center;
 }
 
-.mm-nav__x:focus-visible {
-  outline: 2px solid rgba(16, 16, 16, 0.45);
-  outline-offset: 2px;
+.mm-nav__city {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: clamp(17px, 1.8vw, 22px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  color: var(--mm-nav-gold);
+}
+
+/* Divider in aside */
+.mm-nav__aside-rule {
+  border: none;
+  border-top: 1px solid rgba(10,10,10,.1);
+  margin: 20px 0;
+  flex-shrink: 0;
+}
+
+/* Secondary links below rule */
+.mm-nav__aside-secondary {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.mm-nav__aside-secondary a {
+  display: block;
+  padding: 4px 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(10,10,10,.4);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.mm-nav__aside-secondary a:hover { color: rgba(10,10,10,.8); }
+
+.mm-nav__scroll {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding: clamp(24px, 4vw, 40px) max(var(--mm-shell-pad), env(safe-area-inset-right)) 32px
+    clamp(22px, 3.5vw, 36px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Check Availability sits top-right of scroll area */
+.mm-nav__scroll-cta {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px;
 }
 
 .mm-nav__list {
   list-style: none;
   margin: 0;
-  padding: 40px 0 0;
+  padding: 0;
+  width: 100%;
+  max-width: 480px;
+  column-count: 2;
+  column-gap: 40px;
+}
+
+/* Stagger animation keyframe */
+@keyframes mm-link-in {
+  from { opacity: 0; transform: translateY(7px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .mm-nav__list li {
-  border-bottom: 1px solid rgba(10, 10, 10, 0.12);
+  margin: 0;
+  break-inside: avoid;
+  /* Hidden by default; animated in when menu opens */
+  opacity: 0;
 }
+
+/* Animate each link in with stagger when menu is open */
+.mm-nav.is-open .mm-nav__list li:nth-child(1)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .10s both; }
+.mm-nav.is-open .mm-nav__list li:nth-child(2)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .15s both; }
+.mm-nav.is-open .mm-nav__list li:nth-child(3)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .20s both; }
+.mm-nav.is-open .mm-nav__list li:nth-child(4)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .25s both; }
+.mm-nav.is-open .mm-nav__list li:nth-child(5)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .30s both; }
+.mm-nav.is-open .mm-nav__list li:nth-child(6)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .35s both; }
+.mm-nav.is-open .mm-nav__list li:nth-child(7)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .40s both; }
+.mm-nav.is-open .mm-nav__list li:nth-child(8)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .45s both; }
+.mm-nav.is-open .mm-nav__list li:nth-child(9)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .50s both; }
 
 .mm-nav__list a {
   display: block;
-  padding: 18px 0;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  font-size: 11px;
+  padding: 0.72rem 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 10px;
   font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.45;
   color: var(--mm-ink);
+  text-decoration: none;
+  transition: color 0.22s ease;
 }
 
-.mm-nav__list a:hover {
-  color: rgba(10, 10, 10, 0.55);
+.mm-nav__list a:hover,
+.mm-nav__list a:focus-visible {
+  color: rgba(10, 10, 10, 0.45);
+}
+
+.mm-nav__list a[aria-current="page"] {
+  color: var(--mm-nav-gold);
+  pointer-events: none;
+}
+
+@media (max-width: 720px) {
+  .mm-nav__body {
+    flex-direction: column;
+  }
+
+  .mm-nav__aside {
+    flex: 0 0 auto;
+    max-width: none;
+    border-right: 0;
+    border-bottom: 1px solid rgba(10, 10, 10, 0.1);
+    padding: 20px max(var(--mm-shell-pad), env(safe-area-inset-left)) 18px;
+  }
+
+  .mm-nav__list {
+    column-count: 1;
+  }
+
+  a.mm-nav__chrome-cta {
+    flex: 1 0 100%;
+    margin-left: 0;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mm-nav__backdrop,
+  .mm-nav__panel {
+    transition: opacity 0.2s ease;
+  }
+
+  .mm-nav__panel {
+    transform: none;
+  }
+
+  .mm-nav.is-open .mm-nav__panel {
+    transform: none;
+  }
+
+  .mm-nav__list a,
+  .mm-nav__close,
+  a.mm-nav__chrome-cta {
+    transition: none;
+  }
 }
 
 /* Nav/footer: fixed Spanish “Habitaciones” (Google often renders “Alojamiento” for “Rooms”). */
@@ -656,14 +1194,14 @@ html.mm-lang-es .mm-nav__i18n-es {
 }
 
 @media (max-width: 860px) {
-  :root {
-    --mm-topbar-h: 84px;
-    --mm-logo-size: 48px;
+  html.mm-shell-html {
+    --mm-topbar-h: 88px;
+    --mm-logo-size: 56px;
   }
 
   .mm-topbar {
     min-height: calc(var(--mm-topbar-h) + env(safe-area-inset-top, 0px));
-    gap: 10px;
+    gap: 8px;
     padding-top: env(safe-area-inset-top, 0px);
     padding-right: clamp(14px, 4vw, 22px);
     padding-bottom: 0;
@@ -671,49 +1209,24 @@ html.mm-lang-es .mm-nav__i18n-es {
   }
 
   .mm-topbar__brand {
-    gap: 8px;
-    font-size: 9px;
-    letter-spacing: 0.14em;
+    gap: clamp(8px, 1.2vw, 14px);
   }
 
   .mm-topbar__logo {
     width: var(--mm-logo-size);
     height: var(--mm-logo-size);
-    font-size: 11px;
-  }
-
-  .mm-topbar__loc {
-    font-size: 8px;
-    letter-spacing: 0.16em;
-    font-weight: 700;
   }
 
   .mm-topbar__lang {
     display: none;
   }
 
-  .mm-topbar__cta {
-    padding: 9px 12px;
-    letter-spacing: 0.12em;
-    font-size: 8px;
-    font-weight: 700;
-  }
-
-  body.mm-home .mm-topbar__phone {
-    font-size: 8px;
-    letter-spacing: 0.08em;
-  }
-
   .mm-topbar__menu {
     width: auto;
-    height: var(--mm-topbar-h);
-    padding-left: env(safe-area-inset-left, 0px);
-    padding-right: 12px;
-  }
-
-  .mm-burger {
-    width: 58px;
     height: auto;
+    min-height: 48px;
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: 8px;
   }
 
   .mm-topbar__right {
@@ -743,10 +1256,7 @@ html.mm-lang-es .mm-nav__i18n-es {
   }
 
   .mm-topbar__cta {
-    padding: 8px 10px;
-    letter-spacing: 0.1em;
-    font-size: 7px;
-    font-weight: 800;
+    padding: 11px 9px;
   }
 
   .mm-topbar__right {
@@ -757,10 +1267,6 @@ html.mm-lang-es .mm-nav__i18n-es {
   .mm-topbar__menu {
     padding-right: 6px;
     flex-shrink: 0;
-  }
-
-  .mm-burger {
-    width: 52px;
   }
 }
 
@@ -791,5 +1297,15 @@ body.mm-shell {
 }
 .goog-te-gadget-icon,
 .goog-te-menu-value span {
+  display: none !important;
+}
+
+/* ── Book page: topbar scrolls with the page (not sticky) ───── */
+body.mm-book-page .mm-topbar {
+  position: relative !important;
+  top: auto !important;
+}
+/* Spacer not needed — bar is already in normal flow */
+body.mm-book-page .mm-topbar-spacer {
   display: none !important;
 }

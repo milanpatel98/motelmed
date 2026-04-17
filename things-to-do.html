@@ -12,12 +12,11 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/site.css?v=ref8" />
-    <link rel="stylesheet" href="css/mm-topbar.css?v=26" />
-    <link rel="stylesheet" href="css/mm-footer.css?v=6" />
-    <link rel="stylesheet" href="css/mm-booking-strip.css?v=55" />
-    <link rel="stylesheet" href="css/things-to-do.css?v=26" />
+    <link rel="stylesheet" href="css/mm-topbar.css?v=20260454" />
+    <link rel="stylesheet" href="css/mm-footer.css?v=7" />
+<link rel="stylesheet" href="css/things-to-do.css?v=26" />
     <script defer src="js/things-to-do.js?v=5"></script>
-    <script src="js/mm-page-loader.js"></script>
+    <script src="js/mm-page-loader.js?v=3"></script>
 </head>
   <body class="mm-shell mm-texture-bg mm-editorial">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -44,10 +43,20 @@
         aria-haspopup="true"
       >
         <svg class="mm-burger" width="68" height="20" viewBox="0 0 68 20" aria-hidden="true" focusable="false">
-          <line class="mm-burger__line" x1="0" y1="2.5" x2="68" y2="2.5" stroke="#0a0a0a" stroke-width="2" />
-          <line class="mm-burger__line" x1="0" y1="10" x2="68" y2="10" stroke="#0a0a0a" stroke-width="2" />
-          <line class="mm-burger__line" x1="0" y1="17.5" x2="68" y2="17.5" stroke="#0a0a0a" stroke-width="2" />
-        </svg>
+        <g class="mm-burger__spin mm-burger__spin--top">
+          <g class="mm-burger__shift mm-burger__shift--top">
+          <line class="mm-burger__line" x1="0" y1="2.5" x2="68" y2="2.5" />
+        </g>
+        </g>
+        <g class="mm-burger__row mm-burger__row--mid">
+          <line class="mm-burger__line" x1="0" y1="10" x2="68" y2="10" />
+        </g>
+        <g class="mm-burger__spin mm-burger__spin--bot">
+          <g class="mm-burger__shift mm-burger__shift--bot">
+          <line class="mm-burger__line" x1="0" y1="17.5" x2="68" y2="17.5" />
+        </g>
+        </g>
+    </svg>
       </button>
       <a class="mm-topbar__brand notranslate" href="index.html" aria-label="Motel Mediteran Home">
         <span class="mm-topbar__logo" aria-hidden="true">MM</span>
@@ -71,11 +80,37 @@
 
     <div class="mm-nav" id="mm-site-nav" data-mm-nav aria-hidden="true">
       <button type="button" class="mm-nav__backdrop" data-mm-nav-close aria-label="Close menu"></button>
-      <nav class="mm-nav__panel" aria-label="Site pages">
-        <button type="button" class="mm-nav__x" data-mm-nav-close aria-label="Close menu">
-          <span aria-hidden="true">×</span>
-        </button>
-        <ul class="mm-nav__list">
+      <nav
+        class="mm-nav__panel"
+        id="mm-nav-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mm-nav-dialog-title"
+        aria-label="Site navigation"
+      >
+        <div class="mm-nav__chrome">
+          <button type="button" class="mm-nav__close" data-mm-nav-close aria-label="Close navigation">
+            <span class="mm-nav__close-text" aria-hidden="true"><span class="mm-nav__i18n-en">Close</span><span class="mm-nav__i18n-es" lang="es">Cerrar</span></span>
+            <span class="mm-nav__close-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 2.5L15.5 15.5M15.5 2.5L2.5 15.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" /></svg></span>
+          </button>
+          <div class="mm-nav__brand" id="mm-nav-dialog-title">
+            <span class="mm-nav__mark notranslate" translate="no" aria-hidden="true">MM</span>
+            <span class="mm-nav__loc notranslate" translate="no">Escondido, California</span>
+          </div>
+          <div class="mm-nav__lang notranslate" translate="no" role="group" aria-label="Language">
+            <button type="button" class="mm-lang" data-mm-lang="en" aria-label="English">EN</button>
+            <span class="mm-nav__lang-sep" aria-hidden="true">|</span>
+            <button type="button" class="mm-lang" data-mm-lang="es" aria-label="Spanish">ES</button>
+          </div>
+          <span class="mm-nav__chrome-spacer" aria-hidden="true"></span>
+        </div>
+        <div class="mm-nav__body">
+          <aside class="mm-nav__aside" aria-label="Motel Mediteran">
+            <p class="mm-nav__property notranslate" translate="no">Motel Mediteran</p>
+            <p class="mm-nav__city notranslate" translate="no">Escondido</p>
+          </aside>
+          <div class="mm-nav__scroll">
+          <ul class="mm-nav__list">
           <li><a href="index.html">Home</a></li>
           <li>
             <a href="rooms.html" class="notranslate" translate="no"
@@ -91,6 +126,8 @@
           <li><a href="accessibility.html">Accessibility</a></li>
           <li><a href="faqs.html">FAQs</a></li>
         </ul>
+          </div>
+        </div>
       </nav>
     </div>
 
@@ -1305,48 +1342,6 @@
       </section>
     </main>
 
-    <aside class="mm-booking-strip mm-booking-strip--dock" id="mm-booking-compact" role="complementary" aria-label="Book your stay" aria-hidden="true">
-      <div class="mm-booking-strip__inner">
-        <div class="mm-booking-strip__summary">
-          <div class="mm-booking-strip__summary-track">
-            <span class="mm-booking-strip__name notranslate" translate="no">Motel Mediteran</span>
-            <span class="mm-booking-strip__sep" aria-hidden="true">|</span>
-            <span class="mm-booking-strip__dates"><span class="mm-booking-strip__range" id="mm-book-compact-range" aria-live="polite"></span></span>
-            <span class="mm-booking-strip__sep" aria-hidden="true">|</span>
-            <span class="mm-booking-strip__meta" id="mm-book-compact-guests" aria-live="polite">1 Room · 2 Guests</span>
-            <a class="mm-booking-strip__change" id="mm-booking-strip-change" href="index.html#mm-booking-inline">Change</a>
-          </div>
-        </div>
-        <div class="mm-booking-strip__action">
-          <a
-            class="mm-booking-strip__cta mm-booking-sync"
-            href="book.html"
-           
-           
-            ><svg
-              class="mm-booking-strip__cta-draw"
-              viewBox="0 0 100 40"
-              preserveAspectRatio="none"
-              overflow="visible"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path
-                class="mm-booking-strip__cta-draw-path"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.25"
-                stroke-linecap="butt"
-                stroke-linejoin="miter"
-                d="M 1 1 L 99 1 L 99 39 L 1 39 Z"
-              />
-            </svg>
-            <span class="mm-booking-strip__cta-text">Reserve</span>
-          </a>
-        </div>
-      </div>
-    </aside>
-
     <footer class="mm-footer">
       <div class="mm-footer__inner">
         <div class="mm-footer__brand-col">
@@ -1416,11 +1411,11 @@
       <p class="mm-footer__copy">© <span class="notranslate" translate="no">Motel Mediteran</span> · Escondido, California</p>
     </footer>
 
-    <script src="js/mm-lang.js?v=5"></script>
-    <script src="js/mm-booking-dock.js?v=11"></script>
+    <script src="js/mm-lang.js?v=6"></script>
+    <script src="js/mm-booking-dock.js?v=14"></script>
     <script src="js/mm-booking-calendar.js?v=5"></script>
     <script src="js/mm-booking-guests.js?v=1"></script>
-    <script src="js/mm-topbar.js?v=13"></script>
-    <script src="js/mm-chat-widget.js?v=41"></script>
+    <script src="js/mm-topbar.js?v=17"></script>
+    <script src="js/mm-chat-widget.js?v=46"></script>
   </body>
 </html>

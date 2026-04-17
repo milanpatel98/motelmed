@@ -551,9 +551,9 @@
       "assets/motel-pics/std%20king/1.png",
       "assets/motel-pics/std%20queen/1.png",
       "assets/motel-pics/std%202%20queen/1.png",
-      "assets/motel-pics/2%20rooms%20kitchen%20suite/1.png",
-      "assets/motel-pics/king%20room%20jacuzzi/2.png",
-      "assets/motel-pics/2%20rooms%20kitchen%20suite/2.png",
+      "assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/5.png?v=3",
+      "assets/motel-pics/king%20room%20jacuzzi/2.png?v=1",
+      "assets/motel-pics/2%20rooms%20kitchen%20suite/1.png?v=3",
     ],
     [
       "King room",
@@ -568,9 +568,9 @@
   initSlider(
     suites,
     [
-      "assets/motel-pics/2%20rooms%20kitchen%20suite/1.png",
-      "assets/motel-pics/king%20room%20jacuzzi/2.png",
-      "assets/motel-pics/2%20rooms%20kitchen%20suite/2.png",
+      "assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/5.png?v=3",
+      "assets/motel-pics/king%20room%20jacuzzi/2.png?v=1",
+      "assets/motel-pics/2%20rooms%20kitchen%20suite/1.png?v=3",
     ],
     ["Deluxe King suite with kitchen", "Deluxe King Suite", "2 Room suite with kitchen"],
     [

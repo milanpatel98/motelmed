@@ -137,11 +137,11 @@ body.mm-rooms .mm-page {
   display: block;
   flex-shrink: 0;
   object-fit: cover;
-  object-position: center center;
+  object-position: center 64%;
   user-select: none;
   -webkit-user-drag: none;
   transform: scale(1.01);
-  transform-origin: center;
+  transform-origin: center 70%;
 }
 
 .mm-hero__media {

@@ -164,9 +164,16 @@ footer.mm-footer .mm-footer__logo {
   text-align: center;
 }
 
-/* Extra clearance above the fixed booking strip (stack var can underestimate wrapped strip height). */
-body.mm-booking-sticky-on .mm-footer__copy {
-  padding-bottom: clamp(40px, 6vw, 56px);
+/* Interior pages: invisible 1px anchor next to header (legacy hook for optional scroll UI). */
+.mm-booking-inline.mm-booking-inline--sentinel {
+  height: 1px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
 }
 
 @media (max-width: 860px) {

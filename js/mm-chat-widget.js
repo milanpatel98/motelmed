@@ -12,7 +12,7 @@
   /** Bump these when individual assets change */
   var VERSIONS = {
     css: "17",
-    mmData: "7",
+    mmData: "14",
     dataset: "13",
     datasetAuto: "13",
     knowledge: "18",

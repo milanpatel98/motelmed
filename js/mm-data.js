@@ -11,6 +11,27 @@ window.MM_DATA = {
     checkIn: "3:00 PM",
     checkOut: "11:00 AM",
     poolHours: { open: 8.5, close: 21 }, // 8:30 AM – 9:00 PM
+
+    /**
+     * Disk folder under preview/assets/motel-pics/ ↔ guest-facing names.
+     * Paths in rooms[].photos must use folder names here (spaces → %20 in URLs).
+     * Renaming a folder requires updating every src + mm-data path.
+     */
+    photoFolderGuide: [
+      { roomId: "suite-kitchen", name: "Deluxe King Suite with Kitchen", folder: "Deluxe King suite with kitchen" },
+      { roomId: "suite-jacuzzi", name: "Deluxe King Suite", folder: "king room jacuzzi", note: "Jacuzzi / patio suite photos" },
+      { roomId: "suite-2room", name: "2-Room Suite with Kitchen", folder: "2 rooms kitchen suite" },
+      { roomId: "king", name: "Standard King", folder: "std king" },
+      { roomId: "queen", name: "Standard Queen", folder: "std queen" },
+      { roomId: "queen-double", name: "Double Queen", folder: "std 2 queen" },
+      { roomId: null, name: "Accessible King room photos", folder: "King accessible" },
+      { roomId: null, name: "Accessible Queen room photos", folder: "queen accessible" },
+      { roomId: null, name: "Accessible Double Queen room photos", folder: "Double queen accessible" },
+      { roomId: "ada", name: "Accessible Rooms (combined gallery)", folder: "(King + queen + double-queen accessible folders above)" },
+      { roomId: null, name: "Property exterior", folder: "EXTERIOR PICS" },
+      { roomId: null, name: "Pool", folder: "POOL", file: "pool.png" },
+      { roomId: null, name: "Office & laundry", folder: "OFFICE AND LAUNDRY" },
+    ],
   },
 
   rooms: {
@@ -36,12 +57,16 @@ window.MM_DATA = {
         "Non-smoking",
       ],
       photos: [
-        "assets/motel-pics/deluxe%20king%20jacuzzi/1.png",
-        "assets/motel-pics/deluxe%20king%20jacuzzi/2.png",
-        "assets/motel-pics/deluxe%20king%20jacuzzi/3.png",
-        "assets/motel-pics/deluxe%20king%20jacuzzi/4.png",
-        "assets/motel-pics/deluxe%20king%20jacuzzi/5.png",
-        "assets/motel-pics/deluxe%20king%20jacuzzi/6.png",
+        "assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/5.png?v=3",
+        "assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/3.png?v=3",
+        "assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/10.png?v=3",
+        "assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/7.png?v=3",
+        "assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/6.png?v=3",
+        "assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/9.png?v=3",
+        "assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/8.png?v=3",
+        "assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/2.png?v=3",
+        "assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/4.jpg?v=3",
+        "assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/1.png?v=3",
       ],
     },
 
@@ -62,11 +87,11 @@ window.MM_DATA = {
         "Non-smoking",
       ],
       photos: [
-        "assets/motel-pics/king%20room%20jacuzzi/1.png",
-        "assets/motel-pics/king%20room%20jacuzzi/2.png",
-        "assets/motel-pics/king%20room%20jacuzzi/3.png",
-        "assets/motel-pics/king%20room%20jacuzzi/4.png",
-        "assets/motel-pics/king%20room%20jacuzzi/5.png",
+        "assets/motel-pics/king%20room%20jacuzzi/2.png?v=1",
+        "assets/motel-pics/king%20room%20jacuzzi/3.png?v=1",
+        "assets/motel-pics/king%20room%20jacuzzi/4.png?v=1",
+        "assets/motel-pics/king%20room%20jacuzzi/5.png?v=1",
+        "assets/motel-pics/king%20room%20jacuzzi/6.png?v=1",
       ],
     },
 
@@ -88,11 +113,10 @@ window.MM_DATA = {
         "Non-smoking",
       ],
       photos: [
-        "assets/motel-pics/2%20rooms%20kitchen%20suite/1.png",
-        "assets/motel-pics/2%20rooms%20kitchen%20suite/2.png",
-        "assets/motel-pics/2%20rooms%20kitchen%20suite/3.png",
-        "assets/motel-pics/2%20rooms%20kitchen%20suite/4.png",
-        "assets/motel-pics/2%20rooms%20kitchen%20suite/5.png",
+        "assets/motel-pics/2%20rooms%20kitchen%20suite/1.png?v=3",
+        "assets/motel-pics/2%20rooms%20kitchen%20suite/2.png?v=3",
+        "assets/motel-pics/2%20rooms%20kitchen%20suite/3.png?v=3",
+        "assets/motel-pics/2%20rooms%20kitchen%20suite/4.png?v=3",
       ],
     },
 
@@ -185,11 +209,8 @@ window.MM_DATA = {
         "assets/motel-pics/King%20accessible/4.jpeg",
         "assets/motel-pics/queen%20accessible/1.png",
         "assets/motel-pics/queen%20accessible/2.png",
-        "assets/motel-pics/queen%20accessible/3.png",
-        "assets/motel-pics/Double%20queen%20accesible/1.png",
-        "assets/motel-pics/Double%20queen%20accesible/2.png",
-        "assets/motel-pics/Double%20queen%20accesible/3.png",
-        "assets/motel-pics/Double%20queen%20accesible/4.jpeg",
+        "assets/motel-pics/Double%20queen%20accessible/1.png",
+        "assets/motel-pics/Double%20queen%20accessible/2.png",
       ],
     },
   },
