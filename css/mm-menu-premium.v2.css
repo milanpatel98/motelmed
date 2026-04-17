@@ -1,0 +1,603 @@
+/*
+ * mm-menu-premium.css
+ *
+ * Push-down editorial menu panel.
+ * Architecture:
+ *   - .mm-nav: position:fixed container below topbar, overflow:hidden
+ *   - .mm-nav__panel: slides from translateY(-100%) → translateY(0)
+ *   - #main + .v2-footer: pushed down via transform to reveal page below panel
+ *
+ * Height controlled by --mm-menu-h CSS variable (set by mm-menu-premium.js).
+ * Load this AFTER mm-topbar.css.
+ */
+
+:root {
+  --mm-menu-h: 580px;
+  --mm-ease-reveal: cubic-bezier(0.76, 0, 0.24, 1);
+  --mm-ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   1. Container — absolute inside the fixed topbar, clips panel
+   ───────────────────────────────────────────────────────────────── */
+
+.mm-nav {
+  position: absolute !important; /* contained by the fixed topbar */
+  top: calc(var(--mm-topbar-h, 104px) + env(safe-area-inset-top, 0px)) !important;
+  left: 0;
+  right: 0;
+  bottom: auto !important;
+  height: var(--mm-menu-h);
+  z-index: 1;                  /* below topbar's burger and brand (z-index 2) */
+  overflow: hidden;
+  pointer-events: none;
+  visibility: visible !important;
+}
+
+.mm-nav.is-open {
+  pointer-events: auto;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   2. Panel — dark leaf image, slides in from above
+   ───────────────────────────────────────────────────────────────── */
+
+.mm-nav__panel {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden;
+
+  /* Menu image is the hero — light scrim so photo reads, not flat black */
+  background-color: #121110 !important;
+  background-image:
+    linear-gradient(rgba(8, 7, 6, 0.38), rgba(8, 7, 6, 0.52)),
+    url('../assets/menu.png') !important;
+  background-size: auto, cover !important;
+  background-position: center, center !important;
+  background-repeat: no-repeat, no-repeat !important;
+
+  /* Grain depth layer */
+  isolation: isolate;
+
+  /* No clip-path — it read as a logo fade. Toggle visibility only (no opacity on the panel). */
+  visibility: hidden;
+}
+
+/* Grain texture over panel */
+.mm-nav__panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../assets/site-texture.png?v=2') repeat;
+  background-size: 560px auto;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Hairline along the bottom edge (visible boundary between panel and page) */
+.mm-nav__panel::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  z-index: 3;
+}
+
+.mm-nav.is-open .mm-nav__panel {
+  visibility: visible;
+}
+
+.mm-nav:not(.is-open) .mm-nav__panel {
+  visibility: hidden;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   3. Three-column grid
+   ───────────────────────────────────────────────────────────────── */
+
+.mm-nav__cols {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(210px, 26%) 1fr minmax(200px, 26%);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.mm-nav__col {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(28px, 4.5vw, 52px) clamp(22px, 3.2vw, 42px);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Brand column: push brand to the bottom so it arrives with the panel edge */
+.mm-nav__col--brand {
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
+  justify-content: flex-end;
+  padding-bottom: clamp(26px, 4vw, 44px);
+}
+
+/* Primary nav: links centered vertically */
+.mm-nav__col--primary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
+  padding-left: clamp(26px, 4.2vw, 52px);
+  padding-right: clamp(26px, 4.2vw, 52px);
+}
+
+/* Secondary: secondary links + CTA at the bottom */
+.mm-nav__col--secondary {
+  justify-content: flex-end;
+  padding-bottom: clamp(26px, 4vw, 44px);
+  gap: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   4. Brand row — real topbar MM logo (moved in JS) + wordmark + city
+   ───────────────────────────────────────────────────────────────── */
+
+.mm-nav__brand {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Logo (from topbar) + labels: one horizontal row, bottom-aligned */
+.mm-nav__brand-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: clamp(12px, 2vw, 18px);
+  margin-bottom: 18px;
+}
+
+/* Same MM box styling when the node lives in the menu — no fade, no extra motion */
+.mm-topbar__logo.mm-topbar__logo--in-nav {
+  display: grid !important;
+  place-items: center;
+  width: var(--mm-logo-size, 56px) !important;
+  height: var(--mm-logo-size, 56px) !important;
+  flex: 0 0 auto !important;
+  border: 1px solid rgba(255, 255, 255, 0.36) !important;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.2em !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  transform: none;
+  transition: none !important;
+}
+
+/* Home hero beats generic --in-nav; lock menu look + kill border/color tween (reads as fade). */
+body.mm-home.mm-nav-open .mm-topbar__logo.mm-topbar__logo--in-nav {
+  border-color: rgba(255, 255, 255, 0.36) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+body.mm-nav-open .mm-topbar__logo {
+  opacity: 1 !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+.mm-nav__brand-labels {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+/*
+ * "Motel Mediteran" and "Escondido, California" share identical
+ * typography and reveal behaviour — same font, weight, tracking,
+ * same slide-from-left + fade treatment.
+ */
+.mm-nav__brand-wordmark,
+.mm-nav__brand-city {
+  display: block;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  /* Closed: hidden; open: instant (no opacity stagger next to MM — felt like logo fading). */
+  opacity: 0;
+  transform: none;
+  transition: none;
+}
+
+.mm-nav__brand-wordmark { color: rgba(255, 255, 255, 0.85); }
+.mm-nav__brand-city     { color: rgba(255, 255, 255, 0.36); }
+
+/* Phone number */
+.mm-nav__brand-foot {
+  opacity: 0;
+  transition: none;
+}
+
+.mm-nav__brand-tel {
+  display: block;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  color: rgba(255, 255, 255, 0.26);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.mm-nav__brand-tel:hover { color: rgba(255, 255, 255, 0.6); }
+
+/* ── Brand: show with panel (no delayed opacity fade) ── */
+.mm-nav.is-open .mm-nav__brand-wordmark,
+.mm-nav.is-open .mm-nav__brand-city,
+.mm-nav.is-open .mm-nav__brand-foot {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* ── Brand: quick fade on close ── */
+.mm-nav:not(.is-open) .mm-nav__brand-wordmark,
+.mm-nav:not(.is-open) .mm-nav__brand-city,
+.mm-nav:not(.is-open) .mm-nav__brand-foot {
+  opacity: 0 !important;
+  transition: opacity 0.14s ease 0s !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   5. Primary navigation links — large serif, stagger up
+   ───────────────────────────────────────────────────────────────── */
+
+.mm-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mm-nav__item { padding: 1px 0; }
+
+.mm-nav__item a {
+  display: block;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: clamp(30px, 4.6vw, 66px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  /* Entry */
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity   0.52s ease,
+    transform 0.52s var(--mm-ease-settle),
+    color     0.22s ease;
+}
+
+.mm-nav__item a span { display: inline; }
+.mm-nav__item a:hover              { color: rgba(255, 255, 255, 0.95); }
+.mm-nav__item a[aria-current="page"] { color: rgba(255, 255, 255, 0.88); }
+
+/* Stagger in on open */
+.mm-nav.is-open .mm-nav__item:nth-child(1) a { opacity: 1; transform: translateY(0); transition-delay: 0.28s; }
+.mm-nav.is-open .mm-nav__item:nth-child(2) a { opacity: 1; transform: translateY(0); transition-delay: 0.34s; }
+.mm-nav.is-open .mm-nav__item:nth-child(3) a { opacity: 1; transform: translateY(0); transition-delay: 0.40s; }
+.mm-nav.is-open .mm-nav__item:nth-child(4) a { opacity: 1; transform: translateY(0); transition-delay: 0.46s; }
+.mm-nav.is-open .mm-nav__item:nth-child(5) a { opacity: 1; transform: translateY(0); transition-delay: 0.52s; }
+.mm-nav.is-open .mm-nav__item:nth-child(6) a { opacity: 1; transform: translateY(0); transition-delay: 0.58s; }
+
+/* Quick close */
+.mm-nav:not(.is-open) .mm-nav__item a {
+  opacity: 0 !important;
+  transition: opacity 0.14s ease 0s !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   6. Secondary links + CTA
+   ───────────────────────────────────────────────────────────────── */
+
+.mm-nav__secondary {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: auto;   /* push CTA to the bottom */
+}
+
+.mm-nav__secondary li {
+  opacity: 0;
+  transform: translateY(7px);
+  transition: opacity 0.42s ease, transform 0.42s var(--mm-ease-settle);
+}
+
+.mm-nav__secondary a {
+  display: block;
+  padding: 4px 0;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.26);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.mm-nav__secondary a:hover { color: rgba(255, 255, 255, 0.62); }
+
+/* CTA button */
+.mm-nav__book-cta {
+  display: inline-block;
+  margin-top: clamp(22px, 3vh, 36px);
+  padding: 11px clamp(14px, 1.8vw, 20px);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 0;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  /* Entry */
+  opacity: 0;
+  transform: translateY(7px);
+  transition:
+    opacity      0.42s ease 0.68s,
+    transform    0.42s var(--mm-ease-settle) 0.68s,
+    border-color 0.2s ease,
+    color        0.2s ease;
+}
+.mm-nav__book-cta:hover { border-color: rgba(255,255,255,0.55); color: #fff; }
+
+/* Stagger in */
+.mm-nav.is-open .mm-nav__secondary li:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.46s; }
+.mm-nav.is-open .mm-nav__secondary li:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.52s; }
+.mm-nav.is-open .mm-nav__secondary li:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.58s; }
+.mm-nav.is-open .mm-nav__book-cta                  { opacity: 1; transform: translateY(0); }
+
+/* Quick close */
+.mm-nav:not(.is-open) .mm-nav__secondary li,
+.mm-nav:not(.is-open) .mm-nav__book-cta {
+  opacity: 0 !important;
+  transition: opacity 0.14s ease 0s !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   7. Page push — content moves down when panel opens
+   ───────────────────────────────────────────────────────────────── */
+
+#main,
+.v2-footer {
+  will-change: transform;
+  transition: transform 0.72s var(--mm-ease-reveal);
+}
+
+body.mm-nav-open #main,
+body.mm-nav-open .v2-footer {
+  transform: translateY(var(--mm-menu-h));
+}
+
+body:not(.mm-nav-open) #main,
+body:not(.mm-nav-open) .v2-footer {
+  transition-duration: 0.56s;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   8. Topbar — expands to become the menu
+   ───────────────────────────────────────────────────────────────── */
+
+/* Topbar gains a min-height transition for expansion */
+.mm-topbar {
+  /* Full shorthand replaces mm-topbar.css (which lists `color`) — animating chrome color reads as the MM mark fading. */
+  transition:
+    background-color 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    backdrop-filter 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    -webkit-backdrop-filter 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    min-height 0.72s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+body.mm-nav-open .mm-topbar {
+  background-color: #121110 !important;
+  background-image:
+    linear-gradient(rgba(8, 7, 6, 0.38), rgba(8, 7, 6, 0.52)),
+    url('../assets/menu.png') !important;
+  background-size: auto, cover !important;
+  background-position: center, center !important;
+  background-repeat: no-repeat, no-repeat !important;
+  border-bottom-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  /* Topbar expands to cover topbar row + panel */
+  min-height: calc(var(--mm-topbar-h) + var(--mm-menu-h) + env(safe-area-inset-top, 0px)) !important;
+  align-items: flex-start !important;
+}
+
+/* Home page at scroll-top: transparent rule has higher specificity — beat it explicitly */
+body.mm-home.mm-nav-open .mm-topbar {
+  background-color: #121110 !important;
+  background-image:
+    linear-gradient(rgba(8, 7, 6, 0.38), rgba(8, 7, 6, 0.52)),
+    url('../assets/menu.png') !important;
+  background-size: auto, cover !important;
+  background-position: center, center !important;
+  background-repeat: no-repeat, no-repeat !important;
+  border-bottom-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  min-height: calc(var(--mm-topbar-h) + var(--mm-menu-h) + env(safe-area-inset-top, 0px)) !important;
+}
+
+/* Premium open topbar: keep burger slot (overrides legacy stretch while menu is open). */
+body.mm-nav-open .mm-topbar__menu {
+  align-self: flex-start !important;
+  border-right: none !important;
+  margin-top: calc((var(--mm-topbar-h, 104px) - 52px) / 2) !important;
+  position: relative;
+  z-index: 2;
+}
+
+/*
+ * Cross strokes: always white while menu is open.
+ * mm-topbar.css uses currentColor for home+solid+open (dark on our dark menu);
+ * hero uses body.mm-home:not(.is-scrolled) .mm-burger__line — beat both when mm-nav-open.
+ */
+body.mm-home.mm-nav-open:not(.is-scrolled) .mm-burger__line,
+body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-burger__line,
+body.mm-nav-open .mm-burger__line {
+  stroke: #ffffff !important;
+}
+
+/* Logo is in the menu while open — collapse empty brand strip (no opacity: parent opacity fades children) */
+body.mm-nav-open .mm-topbar__brand {
+  width: 0 !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+}
+
+body.mm-nav-open .mm-topbar__loc {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  transition: none !important;
+}
+
+/* Right items: fade out */
+body.mm-nav-open .mm-topbar__phone,
+body.mm-nav-open .mm-topbar__cta,
+body.mm-nav-open .mm-topbar__lang {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.18s ease !important;
+}
+
+/* is-scrolled / solid-topbar: same menu image treatment */
+body.mm-nav-open.is-scrolled .mm-topbar,
+body.mm-nav-open.mm-nav-solid-topbar .mm-topbar {
+  background-color: #121110 !important;
+  background-image:
+    linear-gradient(rgba(8, 7, 6, 0.38), rgba(8, 7, 6, 0.52)),
+    url('../assets/menu.png') !important;
+  background-size: auto, cover !important;
+  background-position: center, center !important;
+  border-bottom-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   9. Mobile — single column stacked layout
+   ───────────────────────────────────────────────────────────────── */
+
+@media (max-width: 720px) {
+  .mm-nav__cols {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Primary nav: top, vertically centered in its row */
+  .mm-nav__col--primary {
+    grid-row: 1;
+    border-right: none !important;
+    justify-content: center;
+    padding: 28px clamp(20px, 5vw, 36px) 20px;
+  }
+
+  .mm-nav__item a { font-size: clamp(26px, 9vw, 44px); }
+
+  /* Secondary: horizontal strip */
+  .mm-nav__col--secondary {
+    grid-row: 2;
+    border-right: none !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px clamp(20px, 5vw, 36px);
+    gap: 0;
+  }
+
+  .mm-nav__secondary {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+    margin-bottom: 0;
+  }
+
+  .mm-nav__book-cta {
+    margin-top: 0;
+    padding: 9px 14px;
+    font-size: 8px;
+  }
+
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   10. Reduced motion
+   ───────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .mm-nav__panel {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+  .mm-nav:not(.is-open) .mm-nav__panel {
+    visibility: hidden !important;
+  }
+  .mm-nav.is-open .mm-nav__panel {
+    visibility: visible !important;
+  }
+
+  .mm-topbar__logo.mm-topbar__logo--in-nav {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .mm-nav__item a,
+  .mm-nav__secondary li,
+  .mm-nav__book-cta {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .mm-nav:not(.is-open) .mm-nav__item a,
+  .mm-nav:not(.is-open) .mm-nav__secondary li,
+  .mm-nav:not(.is-open) .mm-nav__book-cta {
+    opacity: 0 !important;
+  }
+}
