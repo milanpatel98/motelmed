@@ -360,23 +360,26 @@ var MM_API = (function () {
           var rid = self._asiIdToRoomId[r.id];
           if (!rid) return;
           if (byRoomId[rid] && byRoomId[rid].available) return; // keep available over unavailable
+          /* r.rate / r.rateWithTax are TOTAL for the whole stay from ASI */
+          var nightlyRate    = nights > 0 ? +(r.rate        / nights).toFixed(2) : r.rate;
+          var nightlyWithTax = nights > 0 ? +(r.rateWithTax / nights).toFixed(2) : r.rateWithTax;
           byRoomId[rid] = {
             roomId      : rid,
             asiRoomTypeId: r.id,
             available   : r.available > 0,
-            rate        : r.rate,
-            tax         : r.tax,
-            totalRate   : r.rate * nights,
-            totalWithTax: r.rateWithTax * nights,
+            rate        : nightlyRate,       /* per-night without tax */
+            tax         : r.tax,             /* total tax for stay */
+            totalRate   : r.rate,            /* total for stay without tax */
+            totalWithTax: r.rateWithTax,     /* total for stay with tax */
             images      : r.images || []
           };
           /* Also update the rate cache for getRateForDate() */
           if (!self._rateCache) self._rateCache = {};
           if (!self._rateCache[rid]) self._rateCache[rid] = {};
-          /* Store rate for every night of the stay */
+          /* Store per-night rate for every night of the stay */
           for (var i = 0; i < nights; i++) {
             var d = new Date(checkin.getTime() + i * 86400000);
-            self._rateCache[rid][fmtKey(d)] = r.available > 0 ? r.rate : null;
+            self._rateCache[rid][fmtKey(d)] = r.available > 0 ? nightlyRate : null;
           }
         });
 

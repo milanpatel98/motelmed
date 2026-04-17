@@ -138,21 +138,35 @@ async function fetchAvailability(session, checkin, checkout, adults, children) {
   const rooms = inner.lstAvailableRooms || [];
   if (!rooms.length) return null;
 
-  return rooms.map(r => ({
-    id:          r.linktoRoomTypeMasterId,
-    name:        r.RoomType || "",
-    rateTypeId:  r.linktoRateTypeMasterId,
-    rate:        parseFloat(r.TotalRateWithoutTax) || 0,
-    tax:         parseFloat(r.TotalTaxAmount) || 0,
-    rateWithTax: parseFloat(r.TotalRateWithTax) || 0,
-    available:   parseInt(r.lstRoomRateType?.[0]?.AvailableRooms ?? 0),
-    maxAdults:   parseInt(r.MaxNoofAdults  || 2),
-    maxChildren: parseInt(r.MaxNoofChildren || 0),
-    maxOcc:      parseInt(r.MaxOccupancy || 2),
-    bedCount:    parseInt(r.BedCount || 1),
-    sortOrder:   parseInt(r.Sortorder || 0),
-    images:      (r.lstRoomImages || []).map(i => IMG_CDN + i.ImageName),
-  })).sort((a, b) => a.sortOrder - b.sortOrder);
+  return rooms.map(r => {
+    /* Per-night rates from lstRoomRateType (one entry per night in the stay) */
+    const nightly = (r.lstRoomRateType || []).map(n => ({
+      date:      n.TranDate ? fmtISO(new Date(n.TranDate)) : null,
+      rate:      parseFloat(n.Rate) || 0,
+      available: parseInt(n.AvailableRooms ?? 0),
+    })).filter(n => n.date);
+
+    /* Availability = min available rooms across all nights */
+    const availArr = nightly.map(n => n.available);
+    const available = availArr.length ? Math.min(...availArr) : parseInt(r.lstRoomRateType?.[0]?.AvailableRooms ?? 0);
+
+    return {
+      id:          r.linktoRoomTypeMasterId,
+      name:        r.RoomType || "",
+      rateTypeId:  r.linktoRateTypeMasterId,
+      rate:        parseFloat(r.TotalRateWithoutTax) || 0,
+      tax:         parseFloat(r.TotalTaxAmount) || 0,
+      rateWithTax: parseFloat(r.TotalRateWithTax) || 0,
+      available,
+      maxAdults:   parseInt(r.MaxNoofAdults  || 2),
+      maxChildren: parseInt(r.MaxNoofChildren || 0),
+      maxOcc:      parseInt(r.MaxOccupancy || 2),
+      bedCount:    parseInt(r.BedCount || 1),
+      sortOrder:   parseInt(r.Sortorder || 0),
+      images:      (r.lstRoomImages || []).map(i => IMG_CDN + i.ImageName),
+      nightly,   /* per-night breakdown: [{ date, rate, available }] */
+    };
+  }).sort((a, b) => a.sortOrder - b.sortOrder);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -183,13 +197,22 @@ async function handleCalendar() {
       if (!rid) continue;
       if (!calData[rid]) calData[rid] = {};
 
-      /* Divide total-stay rate by chunk length to get approximate nightly rate */
-      const nightly = (r.available > 0 && r.rate > 0) ? +(r.rate / len).toFixed(2) : null;
-
-      for (let i = 0; i < len; i++) {
-        const d = new Date(ci); d.setDate(d.getDate() + i);
-        const key = fmtISO(d);
-        if (calData[rid][key] === undefined) calData[rid][key] = nightly;
+      if (r.nightly && r.nightly.length) {
+        /* Use exact per-night rates from ASI lstRoomRateType */
+        for (const n of r.nightly) {
+          if (!n.date) continue;
+          if (calData[rid][n.date] === undefined) {
+            calData[rid][n.date] = (n.available > 0 && n.rate > 0) ? n.rate : null;
+          }
+        }
+      } else {
+        /* Fallback: divide total by chunk length if per-night data is missing */
+        const nightlyRate = (r.available > 0 && r.rate > 0 && len > 0) ? +(r.rate / len).toFixed(2) : null;
+        for (let i = 0; i < len; i++) {
+          const d = new Date(ci); d.setDate(d.getDate() + i);
+          const key = fmtISO(d);
+          if (calData[rid][key] === undefined) calData[rid][key] = nightlyRate;
+        }
       }
     }
   }

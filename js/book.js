@@ -77,7 +77,21 @@
     return "MM-" + Math.random().toString(36).substr(2, 6).toUpperCase();
   }
 
-  function fmt$(n) { return "$" + n.toLocaleString("en-US", { minimumFractionDigits: 0 }); }
+  function roundMoney2(n) {
+    return Math.round(Number(n) * 100) / 100;
+  }
+
+  /** City tax shown on ASI review: 10% of room/night subtotal (cent-accurate). */
+  function cityTax10(subtotal) {
+    return roundMoney2(subtotal * 0.1);
+  }
+
+  function fmt$(n) {
+    return "$" + roundMoney2(n).toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  }
 
   // ── DOM refs ───────────────────────────────────────────────────
   var stepEls = document.querySelectorAll(".mm-bk-step");
@@ -682,12 +696,26 @@
             console.error("Availability check failed:", err);
             // Fall through to step 2 — room cards keep their HTML defaults
           } else {
-            // Update each room card's availability from API response
+            var nights = daysBetween(state.checkin, state.checkout);
+            // Update each room card's availability and live price from API response
             results.forEach(function (item) {
               var card = document.querySelector(
                 ".mm-bk-room-card[data-room-id='" + item.roomId + "']"
               );
-              if (card) card.setAttribute("data-available", item.available ? "true" : "false");
+              if (!card) return;
+              card.setAttribute("data-available", item.available ? "true" : "false");
+
+              // Update displayed price with live nightly rate (item.rate is already per-night)
+              if (item.available && item.rate > 0) {
+                var nightly = Math.round(item.rate);
+                var priceEl = card.querySelector(".mm-bk-room-card__price");
+                if (priceEl) {
+                  priceEl.innerHTML = "$" + nightly + '<span class="mm-bk-room-card__price-night"> / night</span>';
+                }
+                // Keep data-price in sync so total calculation is correct
+                var btn = card.querySelector(".mm-bk-room-card__select");
+                if (btn) btn.setAttribute("data-price", String(nightly));
+              }
             });
           }
 
@@ -750,8 +778,9 @@
         cur = addDays(cur, 1);
       }
 
-      var taxes = Math.round(subtotal * 0.1);
-      var total = subtotal + taxes;
+      subtotal = roundMoney2(subtotal);
+      var taxes = cityTax10(subtotal);
+      var total = roundMoney2(subtotal + taxes);
 
       setText(subRoomId, fmt$(subtotal));
       setText(subTaxId, fmt$(taxes));
@@ -1038,8 +1067,9 @@
           cur = addDays(cur, 1);
         }
       }
-      var taxes = Math.round(subtotal * 0.1);
-      var total = subtotal + taxes;
+      subtotal = roundMoney2(subtotal);
+      var taxes = cityTax10(subtotal);
+      var total = roundMoney2(subtotal + taxes);
 
       var cardEl = document.getElementById("f-card");
       var cardVal = cardEl ? cardEl.value.replace(/\s/g, "") : "";
@@ -1172,7 +1202,8 @@
         subtotal += (getRateForDate(cur) || state.selectedRoom.price);
         cur = addDays(cur, 1);
       }
-      var total = subtotal + Math.round(subtotal * 0.1);
+      subtotal = roundMoney2(subtotal);
+      var total = roundMoney2(subtotal + cityTax10(subtotal));
       totalEl.textContent = fmt$(total) + " (including taxes & fees)";
     }
   }
