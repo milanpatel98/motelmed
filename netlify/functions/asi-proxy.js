@@ -226,16 +226,10 @@ async function handleCalendar() {
    Returns normalised room array with live rates for the specific stay.
  ═══════════════════════════════════════════════════════════════════════════ */
 async function handleCheck(checkin, checkout, adults, children) {
-  const key = `check_${checkin}_${checkout}_a${adults}_c${children}`;
-  const cached = getCached(key, 5 * 60 * 1000);
-  if (cached) return cached;
-
+  /* No caching — every check availability click fetches live from ASI */
   const session = await initSession();
   const rooms   = await fetchAvailability(session, checkin, checkout, adults, children);
-  if (!rooms) return [];
-
-  setCached(key, rooms);
-  return rooms;
+  return rooms || [];
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
