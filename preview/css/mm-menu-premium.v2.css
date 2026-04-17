@@ -1,13 +1,13 @@
 /*
  * mm-menu-premium.css
  *
- * Push-down editorial menu panel.
- * Architecture:
- *   - .mm-nav: position:fixed container below topbar, overflow:hidden
- *   - .mm-nav__panel: slides from translateY(-100%) → translateY(0)
- *   - #main + .v2-footer: pushed down via transform to reveal page below panel
+ * Garage-shutter menu (one plane with the chrome):
+ *   - .mm-nav: absolute inside fixed topbar, overflow hidden — clips the panel
+ *   - .mm-nav__panel: translateY(-100%) → 0 with the SAME duration/ease as #main + topbar min-height
+ *   - Logo + nav links live on the panel — they ride the shutter, no separate “pop in”
+ *   - #main + .v2-footer: translateY(--mm-menu-h) in lockstep
  *
- * Height controlled by --mm-menu-h CSS variable (set by mm-menu-premium.js).
+ * Height: --mm-menu-h (set by mm-menu-premium.js).
  * Load this AFTER mm-topbar.css.
  */
 
@@ -15,10 +15,28 @@
   --mm-menu-h: 580px;
   --mm-ease-reveal: cubic-bezier(0.76, 0, 0.24, 1);
   --mm-ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
-  /* Push-down: slow, decelerating — keep in sync on #main, footer, and topbar min-height */
+  /* Shutter + page push — one timing curve everywhere */
   --mm-push-duration-open: 2.1s;
   --mm-push-duration-close: 1.75s;
   --mm-push-ease: cubic-bezier(0.28, 1, 0.35, 1);
+  /* Same-logo travel timings (topbar slot <-> menu lockup) */
+  --mm-logo-flight-open: 2.65s;
+  --mm-logo-flight-close: 2.25s;
+  --mm-logo-flight-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+ * Push-down paints “holes” above translated #main; body uses --paper (off-white).
+ * Match shell background to menu chrome while open so no paper flash at the top edge.
+ */
+html.mm-shell-html:has(body.mm-nav-open),
+html.mm-shell-html:has(body.mm-nav-closing) {
+  background-color: #121110;
+}
+
+body.mm-nav-open,
+body.mm-nav-closing {
+  background-color: #121110;
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -26,13 +44,13 @@
    ───────────────────────────────────────────────────────────────── */
 
 .mm-nav {
-  position: absolute !important; /* contained by the fixed topbar */
-  top: calc(var(--mm-topbar-h, 104px) + env(safe-area-inset-top, 0px)) !important;
+  position: fixed !important; /* viewport-anchored shutter */
+  top: 0 !important;
   left: 0;
   right: 0;
   bottom: auto !important;
-  height: var(--mm-menu-h);
-  z-index: 1;                  /* below topbar's burger and brand (z-index 2) */
+  height: calc(var(--mm-topbar-h, 104px) + var(--mm-menu-h) + env(safe-area-inset-top, 0px));
+  z-index: 205;                /* below topbar chrome, above page */
   overflow: hidden;
   pointer-events: none;
   visibility: visible !important;
@@ -57,6 +75,8 @@
   display: flex !important;
   flex-direction: column !important;
   overflow: hidden;
+  box-sizing: border-box;
+  padding-top: calc(var(--mm-topbar-h, 104px) + env(safe-area-inset-top, 0px));
 
   /* Menu image is the hero — light scrim so photo reads, not flat black */
   background-color: #121110 !important;
@@ -70,8 +90,15 @@
   /* Grain depth layer */
   isolation: isolate;
 
-  /* No clip-path — it read as a logo fade. Toggle visibility only (no opacity on the panel). */
-  visibility: hidden;
+  /* Garage shutter: whole panel (image + links + logo slot) translates with the push */
+  transform: translate3d(0, -100%, 0);
+  will-change: transform;
+  transition: transform var(--mm-push-duration-close) var(--mm-push-ease);
+}
+
+.mm-nav.is-open .mm-nav__panel {
+  transform: translate3d(0, 0, 0);
+  transition: transform var(--mm-push-duration-open) var(--mm-push-ease);
 }
 
 /* Grain texture over panel */
@@ -94,14 +121,6 @@
   height: 1px;
   background: rgba(255, 255, 255, 0.12);
   z-index: 3;
-}
-
-.mm-nav.is-open .mm-nav__panel {
-  visibility: visible;
-}
-
-.mm-nav:not(.is-open) .mm-nav__panel {
-  visibility: hidden;
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -189,16 +208,52 @@
   transition: none !important;
 }
 
+/* FLIP travel: same logo node moves between slots */
+.mm-topbar__logo.mm-topbar__logo--flying {
+  transform: translate(var(--mm-logo-flight-dx, 0px), var(--mm-logo-flight-dy, 0px)) !important;
+  transition: none !important;
+  will-change: transform;
+  pointer-events: none !important;
+}
+
+.mm-topbar__logo.mm-topbar__logo--flying.mm-topbar__logo--in-nav {
+  transform: translate(0, 0) !important;
+  transition: transform var(--mm-logo-flight-duration, var(--mm-logo-flight-open)) var(--mm-logo-flight-ease) !important;
+}
+
+.mm-topbar__logo.mm-topbar__logo--flying:not(.mm-topbar__logo--in-nav) {
+  transform: translate(0, 0) !important;
+  transition: transform var(--mm-logo-flight-duration, var(--mm-logo-flight-close)) var(--mm-logo-flight-ease) !important;
+}
+
 /* Home hero beats generic --in-nav; lock menu look + kill border/color tween (reads as fade). */
 body.mm-home.mm-nav-open .mm-topbar__logo.mm-topbar__logo--in-nav {
   border-color: rgba(255, 255, 255, 0.36) !important;
   color: rgba(255, 255, 255, 0.9) !important;
 }
 
-body.mm-nav-open .mm-topbar__logo {
+body.mm-nav-open .mm-topbar__logo,
+body.mm-nav-closing .mm-topbar__logo {
   opacity: 1 !important;
   transition: none !important;
   animation: none !important;
+}
+
+body.mm-nav-open .mm-topbar__logo.mm-topbar__logo--flying,
+body.mm-nav-closing .mm-topbar__logo.mm-topbar__logo--flying {
+  transition: transform var(--mm-logo-flight-duration, var(--mm-logo-flight-open)) var(--mm-logo-flight-ease) !important;
+}
+
+/* Logo is its own moving entity: never opacity-fade with menu states */
+.mm-topbar__logo,
+body.mm-nav-open .mm-topbar__logo,
+body.mm-logo-in-nav .mm-topbar__logo {
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+.mm-topbar__logo.mm-topbar__logo--flying {
+  transition-property: transform !important;
 }
 
 .mm-nav__brand-labels {
@@ -222,8 +277,7 @@ body.mm-nav-open .mm-topbar__logo {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   line-height: 1.2;
-  /* Closed: hidden; open: instant (no opacity stagger next to MM — felt like logo fading). */
-  opacity: 0;
+  opacity: 1;
   transform: none;
   transition: none;
 }
@@ -233,7 +287,7 @@ body.mm-nav-open .mm-topbar__logo {
 
 /* Phone number */
 .mm-nav__brand-foot {
-  opacity: 0;
+  opacity: 1;
   transition: none;
 }
 
@@ -248,23 +302,6 @@ body.mm-nav-open .mm-topbar__logo {
   transition: color 0.2s ease;
 }
 .mm-nav__brand-tel:hover { color: rgba(255, 255, 255, 0.6); }
-
-/* ── Brand: show with panel (no delayed opacity fade) ── */
-.mm-nav.is-open .mm-nav__brand-wordmark,
-.mm-nav.is-open .mm-nav__brand-city,
-.mm-nav.is-open .mm-nav__brand-foot {
-  opacity: 1;
-  transform: none;
-  transition: none;
-}
-
-/* ── Brand: quick fade on close ── */
-.mm-nav:not(.is-open) .mm-nav__brand-wordmark,
-.mm-nav:not(.is-open) .mm-nav__brand-city,
-.mm-nav:not(.is-open) .mm-nav__brand-foot {
-  opacity: 0 !important;
-  transition: opacity 0.14s ease 0s !important;
-}
 
 /* ─────────────────────────────────────────────────────────────────
    5. Primary navigation — simple list, calm type
@@ -290,9 +327,9 @@ body.mm-nav-open .mm-topbar__logo {
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.72);
   text-decoration: none;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.28s ease, transform 0.28s ease, color 0.15s ease;
+  opacity: 1;
+  transform: none;
+  transition: color 0.15s ease;
 }
 
 .mm-nav__item a span { display: inline; }
@@ -300,16 +337,6 @@ body.mm-nav-open .mm-topbar__logo {
 .mm-nav__item a:hover,
 .mm-nav__item a[aria-current="page"] {
   color: rgba(255, 255, 255, 0.95);
-}
-
-.mm-nav.is-open .mm-nav__item a {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.mm-nav:not(.is-open) .mm-nav__item a {
-  opacity: 0 !important;
-  transition: opacity 0.12s ease, transform 0.12s ease !important;
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -327,9 +354,9 @@ body.mm-nav-open .mm-topbar__logo {
 }
 
 .mm-nav__secondary li {
-  opacity: 0;
-  transform: translateY(7px);
-  transition: opacity 0.42s ease, transform 0.42s var(--mm-ease-settle);
+  opacity: 1;
+  transform: none;
+  transition: none;
 }
 
 .mm-nav__secondary a {
@@ -360,118 +387,117 @@ body.mm-nav-open .mm-topbar__logo {
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.65);
   text-decoration: none;
-  /* Entry */
-  opacity: 0;
-  transform: translateY(7px);
-  transition:
-    opacity      0.42s ease 0.68s,
-    transform    0.42s var(--mm-ease-settle) 0.68s,
-    border-color 0.2s ease,
-    color        0.2s ease;
+  opacity: 1;
+  transform: none;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 .mm-nav__book-cta:hover { border-color: rgba(255,255,255,0.55); color: #fff; }
-
-/* Stagger in */
-.mm-nav.is-open .mm-nav__secondary li:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.46s; }
-.mm-nav.is-open .mm-nav__secondary li:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.52s; }
-.mm-nav.is-open .mm-nav__secondary li:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.58s; }
-.mm-nav.is-open .mm-nav__book-cta                  { opacity: 1; transform: translateY(0); }
-
-/* Quick close */
-.mm-nav:not(.is-open) .mm-nav__secondary li,
-.mm-nav:not(.is-open) .mm-nav__book-cta {
-  opacity: 0 !important;
-  transition: opacity 0.14s ease 0s !important;
-}
 
 /* ─────────────────────────────────────────────────────────────────
    7. Page push — content moves down when panel opens
    ───────────────────────────────────────────────────────────────── */
 
 #main,
-.v2-footer {
+.v2-footer,
+.mm-footer {
   will-change: transform;
   transition:
     transform var(--mm-push-duration-open) var(--mm-push-ease);
 }
 
 body.mm-nav-open #main,
-body.mm-nav-open .v2-footer {
+body.mm-nav-open .v2-footer,
+body.mm-nav-open .mm-footer {
   transform: translateY(var(--mm-menu-h));
 }
 
 body:not(.mm-nav-open) #main,
-body:not(.mm-nav-open) .v2-footer {
+body:not(.mm-nav-open) .v2-footer,
+body:not(.mm-nav-open) .mm-footer {
   transition-duration: var(--mm-push-duration-close);
   transition-timing-function: var(--mm-push-ease);
 }
 
 /* ─────────────────────────────────────────────────────────────────
-   8. Topbar — expands to become the menu
+   8. Topbar chrome — pinned above shutter (no fades)
    ───────────────────────────────────────────────────────────────── */
 
-/* Topbar gains a min-height transition for expansion */
 .mm-topbar {
-  /* Full shorthand replaces mm-topbar.css (which lists `color`) — animating chrome color reads as the MM mark fading. */
-  transition:
-    background-color 0.75s var(--mm-push-ease),
-    border-color 0.75s var(--mm-push-ease),
-    box-shadow 0.75s var(--mm-push-ease),
-    backdrop-filter 0.75s var(--mm-push-ease),
-    -webkit-backdrop-filter 0.75s var(--mm-push-ease),
-    min-height var(--mm-push-duration-open) var(--mm-push-ease) !important;
+  z-index: 220 !important;
+  transition: none !important;
+  isolation: isolate;
 }
 
-body:not(.mm-nav-open) .mm-topbar {
-  transition-duration:
-    0.75s, 0.75s, 0.75s, 0.75s, 0.75s,
-    var(--mm-push-duration-close) !important;
-  transition-timing-function:
-    var(--mm-push-ease), var(--mm-push-ease), var(--mm-push-ease),
-    var(--mm-push-ease), var(--mm-push-ease),
-    var(--mm-push-ease) !important;
-}
-
-body.mm-nav-open .mm-topbar {
-  background-color: #121110 !important;
-  background-image:
-    linear-gradient(rgba(8, 7, 6, 0.38), rgba(8, 7, 6, 0.52)),
-    url('../assets/menu.png') !important;
-  background-size: auto, cover !important;
-  background-position: center, center !important;
-  background-repeat: no-repeat, no-repeat !important;
+/* Inner pages can keep legacy white topbar on open; force dark chrome for visible white cross. */
+body.mm-nav-open .mm-topbar,
+body.mm-nav-closing .mm-topbar,
+body.mm-logo-in-nav .mm-topbar {
+  background-color: transparent !important;
   border-bottom-color: transparent !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  /* Topbar expands to cover topbar row + panel */
-  min-height: calc(var(--mm-topbar-h) + var(--mm-menu-h) + env(safe-area-inset-top, 0px)) !important;
-  align-items: flex-start !important;
 }
 
-/* Home page at scroll-top: transparent rule has higher specificity — beat it explicitly */
-body.mm-home.mm-nav-open .mm-topbar {
-  background-color: #121110 !important;
-  background-image:
-    linear-gradient(rgba(8, 7, 6, 0.38), rgba(8, 7, 6, 0.52)),
-    url('../assets/menu.png') !important;
-  background-size: auto, cover !important;
-  background-position: center, center !important;
-  background-repeat: no-repeat, no-repeat !important;
+/* Beat high-specificity inner-page open rules from mm-topbar.css. */
+body.mm-nav-open.mm-texture-bg .mm-topbar,
+body.mm-nav-open.mm-rooms .mm-topbar,
+body.mm-nav-open.mm-room-detail .mm-topbar,
+body.mm-nav-closing.mm-texture-bg .mm-topbar,
+body.mm-nav-closing.mm-rooms .mm-topbar,
+body.mm-nav-closing.mm-room-detail .mm-topbar,
+body.mm-logo-in-nav.mm-texture-bg .mm-topbar,
+body.mm-logo-in-nav.mm-rooms .mm-topbar,
+body.mm-logo-in-nav.mm-room-detail .mm-topbar {
+  background-color: transparent !important;
   border-bottom-color: transparent !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  min-height: calc(var(--mm-topbar-h) + var(--mm-menu-h) + env(safe-area-inset-top, 0px)) !important;
+}
+
+body.mm-nav-open.mm-texture-bg .mm-topbar::after,
+body.mm-nav-open.mm-rooms .mm-topbar::after,
+body.mm-nav-open.mm-room-detail .mm-topbar::after,
+body.mm-nav-closing.mm-texture-bg .mm-topbar::after,
+body.mm-nav-closing.mm-rooms .mm-topbar::after,
+body.mm-nav-closing.mm-room-detail .mm-topbar::after,
+body.mm-logo-in-nav.mm-texture-bg .mm-topbar::after,
+body.mm-logo-in-nav.mm-rooms .mm-topbar::after,
+body.mm-logo-in-nav.mm-room-detail .mm-topbar::after {
+  content: none !important;
 }
 
 /* Premium open topbar: keep burger slot (overrides legacy stretch while menu is open). */
-body.mm-nav-open .mm-topbar__menu {
+body.mm-nav-open .mm-topbar__menu,
+body.mm-nav-closing .mm-topbar__menu {
   align-self: flex-start !important;
   border-right: none !important;
   margin-top: calc((var(--mm-topbar-h, 104px) - 52px) / 2) !important;
   position: relative;
-  z-index: 2;
+  z-index: 1200;
+  color: #ffffff !important;
+  background: rgba(18, 17, 16, 0.84) !important;
+  border: 1px solid rgba(255, 255, 255, 0.24) !important;
+  border-radius: 999px !important;
+  padding-inline: 10px !important;
+}
+
+/* Keep trigger lane always above traveling logo/menu plane */
+.mm-topbar__menu,
+.mm-topbar__menu .mm-burger {
+  position: relative;
+  z-index: 1201;
+}
+
+/*
+ * While the dark panel is open, the hero “light” :focus-visible rule still matches
+ * (mm-home + not scrolled). Suppress outline on the burger so pointer focus never
+ * draws a beige box on the brown menu.
+ */
+body.mm-nav-open .mm-topbar__menu:focus-visible,
+body.mm-nav-closing .mm-topbar__menu:focus-visible {
+  outline: none !important;
 }
 
 /*
@@ -481,52 +507,76 @@ body.mm-nav-open .mm-topbar__menu {
  */
 body.mm-home.mm-nav-open:not(.is-scrolled) .mm-burger__line,
 body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-burger__line,
-body.mm-nav-open .mm-burger__line {
+body.mm-nav-open .mm-burger__line,
+body.mm-nav-closing .mm-burger__line,
+body.mm-logo-in-nav .mm-burger__line {
   stroke: #ffffff !important;
 }
 
-/* Logo is in the menu while open — collapse empty brand strip (no opacity: parent opacity fades children) */
-body.mm-nav-open .mm-topbar__brand {
+/* Cross stays an “X” until the logo leaves the shutter (matches mm-topbar burger math) */
+body.mm-nav-open .mm-burger__shift--top,
+body.mm-nav-closing .mm-burger__shift--top,
+body.mm-logo-in-nav .mm-burger__shift--top {
+  transform: translate(0, 7.5px);
+}
+
+body.mm-nav-open .mm-burger__shift--bot,
+body.mm-nav-closing .mm-burger__shift--bot,
+body.mm-logo-in-nav .mm-burger__shift--bot {
+  transform: translate(0, -7.5px);
+}
+
+body.mm-nav-open .mm-burger__spin--top,
+body.mm-nav-closing .mm-burger__spin--top,
+body.mm-logo-in-nav .mm-burger__spin--top {
+  transform: rotate(45deg);
+}
+
+body.mm-nav-open .mm-burger__spin--bot,
+body.mm-nav-closing .mm-burger__spin--bot,
+body.mm-logo-in-nav .mm-burger__spin--bot {
+  transform: rotate(-45deg);
+}
+
+body.mm-nav-open .mm-burger__row--mid,
+body.mm-nav-closing .mm-burger__row--mid,
+body.mm-logo-in-nav .mm-burger__row--mid {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/*
+ * Logo is in the menu while open — collapse empty brand strip.
+ * :has(...) keeps the strip hidden after body.mm-nav-open clears but before JS
+ * moves the logo back (garage shutter closing).
+ */
+body.mm-nav-open .mm-topbar__brand,
+body.mm-logo-in-nav .mm-topbar__brand {
   width: 0 !important;
   min-width: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
   overflow: hidden !important;
-  opacity: 1 !important;
   pointer-events: none !important;
 }
 
-body.mm-nav-open .mm-topbar__loc {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  transition: none !important;
+body.mm-nav-open .mm-topbar__loc,
+body.mm-nav-closing .mm-topbar__loc,
+body.mm-logo-in-nav .mm-topbar__loc {
+  display: none !important;
 }
 
 /* Right items: fade out */
 body.mm-nav-open .mm-topbar__phone,
 body.mm-nav-open .mm-topbar__cta,
-body.mm-nav-open .mm-topbar__lang {
-  opacity: 0 !important;
-  pointer-events: none !important;
-  transition: opacity 0.18s ease !important;
-}
-
-/* is-scrolled / solid-topbar: same menu image treatment */
-body.mm-nav-open.is-scrolled .mm-topbar,
-body.mm-nav-open.mm-nav-solid-topbar .mm-topbar {
-  background-color: #121110 !important;
-  background-image:
-    linear-gradient(rgba(8, 7, 6, 0.38), rgba(8, 7, 6, 0.52)),
-    url('../assets/menu.png') !important;
-  background-size: auto, cover !important;
-  background-position: center, center !important;
-  border-bottom-color: transparent !important;
-  box-shadow: none !important;
+body.mm-nav-open .mm-topbar__lang,
+body.mm-nav-closing .mm-topbar__phone,
+body.mm-nav-closing .mm-topbar__cta,
+body.mm-nav-closing .mm-topbar__lang,
+body.mm-logo-in-nav .mm-topbar__phone,
+body.mm-logo-in-nav .mm-topbar__cta,
+body.mm-logo-in-nav .mm-topbar__lang {
+  display: none !important;
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -587,18 +637,20 @@ body.mm-nav-open.mm-nav-solid-topbar .mm-topbar {
 
 @media (prefers-reduced-motion: reduce) {
   #main,
-  .v2-footer {
+  .v2-footer,
+  .mm-footer {
     transition: none !important;
   }
 
   .mm-nav__panel {
     transform: none !important;
-    opacity: 1 !important;
     transition: none !important;
   }
+
   .mm-nav:not(.is-open) .mm-nav__panel {
     visibility: hidden !important;
   }
+
   .mm-nav.is-open .mm-nav__panel {
     visibility: visible !important;
   }

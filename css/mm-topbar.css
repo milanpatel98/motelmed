@@ -152,11 +152,23 @@ body.mm-shell.is-scrolled .mm-topbar {
   justify-content: flex-start;
   color: var(--mm-ink);
   overflow: visible;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Mouse / tap focus: no rectangle; keyboard keeps :focus-visible ring below */
+.mm-topbar__menu:focus:not(:focus-visible) {
+  outline: none;
 }
 
 .mm-topbar__menu:focus-visible {
   outline: 2px solid rgba(16, 16, 16, 0.45);
   outline-offset: 3px;
+}
+
+/* Dark hero under transparent bar — dark ink ring reads as a black frame */
+body.mm-home:not(.is-scrolled) .mm-topbar__menu:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.42);
+  outline-offset: 2px;
 }
 
 .mm-burger {

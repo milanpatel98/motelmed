@@ -3,7 +3,7 @@
  * Rebuild: node scripts/build-chat-dataset.cjs (runs on Netlify deploy)
  */
 window.MM_CHAT_DATASET_AUTO = {
-  generatedAt: "2026-04-02T12:00:00.000Z",
+  generatedAt: "2026-04-17T11:25:02.752Z",
   entryCount: 101,
   entries: [
   {
@@ -541,7 +541,7 @@ window.MM_CHAT_DATASET_AUTO = {
       "parking",
       "transportation"
     ],
-    "reply": "Parking: Complimentary on-site self-parking Airport shuttle: Not available Nearest airport: San Diego International Airport (SAN) (about 45 minutes) EV charging: Not on-site — nearest public fast charging usually about 10 min at 110 W El Norte Pkwy, Escondido (check your EV app)",
+    "reply": "Parking: Complimentary on-site self-parking Airport shuttle: Not available Nearest airport: San Diego International Airport (SAN) (about 45 minutes) EV charging: Not on-site. Nearest public fast charging is usually about 10 minutes away at 110 W El Norte Pkwy, Escondido (multiple networks — check your EV app for live availability and plug type).",
     "link": "hotel-policies.html",
     "linkLabel": "Hotel policies"
   },
@@ -565,7 +565,7 @@ window.MM_CHAT_DATASET_AUTO = {
     "keywords": [
       "facilities"
     ],
-    "reply": "Pool: Outdoor pool (not heated) Laundry: Self-service laundry on-site Breakfast: Complimentary coffee in the office; full breakfast not included — local cafés nearby On-site restaurant: Not available",
+    "reply": "Pool: Outdoor pool (not heated) Laundry: Self-service laundry on-site Breakfast: A full breakfast isn’t included, but complimentary coffee is available in the office. Local cafés and restaurants are nearby if you’d like more. On-site restaurant: Not available",
     "link": "hotel-policies.html",
     "linkLabel": "Hotel policies"
   },
@@ -672,7 +672,11 @@ window.MM_CHAT_DATASET_AUTO = {
   },
   {
     "triggers": [
-      "what is the cancellation policy?"
+      "what is the cancellation policy?",
+      "can i cancel",
+      "get my money back",
+      "change booking",
+      "cancellation policy"
     ],
     "keywords": [
       "cancellation",
@@ -829,7 +833,7 @@ window.MM_CHAT_DATASET_AUTO = {
       "shower",
       "available"
     ],
-    "reply": "Accessible Rooms\n(King or Queen Bed · Roll-In Shower Available)\nAccessible accommodations designed for comfort and convenience, with mobility-friendly features for a smooth and restful stay. Available as king, queen, or double-queen configurations — all with practical accessibility features built in.\n• King, Queen, or 2-Queen bed\n• Grab bars in bathroom\n• Lowered vanity\n• Roll-in shower (select rooms)\n• Lowered light switches\n• Refrigerator\n• Microwave\n• Flat screen TV\n• Free Wi-Fi\n• Non-smoking",
+    "reply": "Accessible Rooms\n(King or Queen Bed · Roll-In Shower Available)\nAccessible accommodations designed for comfort and convenience, with mobility-friendly features for a smooth and restful stay. Available as king, queen, or double-queen configurations — all with practical accessibility features built in. Subject to availability; request when booking.\n• King, Queen, or 2-Queen bed\n• Grab bars in bathroom\n• Lowered vanity\n• Roll-in shower (select rooms)\n• Lowered light switches\n• Refrigerator\n• Microwave\n• Flat screen TV\n• Free Wi-Fi\n• Non-smoking",
     "link": "room-detail.html?room=ada",
     "linkLabel": "Room details"
   },
@@ -1106,63 +1110,14 @@ window.MM_CHAT_DATASET_AUTO = {
   },
   {
     "triggers": [
-      "mershops north county",
-      "mershops",
-      "westfield north county"
+      "mershops north county"
     ],
     "keywords": [
       "mershops",
-      "westfield",
       "north",
-      "county",
-      "mall",
-      "shopping"
+      "county"
     ],
-    "reply": "Q: Mershops North County\n\n272 E Via Rancho Pkwy, Escondido, CA · 3.5 MI The experience The Escondido center long known as Westfield North County—now Mershops North County—is a big, easy shopping hub for clothes, essentials, and a quick bite when you want everything in one stop. Why it’s close to our heart When you need sunscreen, a last-minute outfit, or a simple air-conditioned wander, it’s close and straightforward—then you’re back at the pool.",
-    "link": "things-to-do.html",
-    "linkLabel": "Things to do"
-  },
-  {
-    "triggers": [
-      "california state university san marcos",
-      "cal state san marcos",
-      "csusm",
-      "san marcos state university"
-    ],
-    "keywords": [
-      "california",
-      "state",
-      "university",
-      "marcos",
-      "campus",
-      "csusm",
-      "twin",
-      "oaks",
-      "kellogg"
-    ],
-    "reply": "Q: California State University San Marcos\n\n333 S Twin Oaks Valley Rd, San Marcos, CA · 13.5 MI The experience A modern Cal State campus on the hills above San Marcos—walkable quads, events open to the public, and easy access if you’re visiting a student or catching a lecture or performance. Why it’s close to our heart It’s the closest major university to the motel and a simple north-county day trip: coffee, campus air, and you’re back before dinner in Escondido.",
-    "link": "things-to-do.html",
-    "linkLabel": "Things to do"
-  },
-  {
-    "triggers": [
-      "john paul the great catholic university",
-      "john paul the great",
-      "jp catholic",
-      "jpcatholic"
-    ],
-    "keywords": [
-      "john",
-      "paul",
-      "great",
-      "catholic",
-      "university",
-      "escondido",
-      "grand",
-      "campus",
-      "college"
-    ],
-    "reply": "Q: John Paul the Great Catholic University\n\n220 W Grand Ave, Escondido, CA · 3.0 MI The experience A compact Catholic university campus right on Grand Avenue—film, business, and theology programs with a creative, entrepreneurial spirit and a walkable downtown setting. Why it’s close to our heart If you’re here for a tour, showcase, or to see family, you can park the car once and pair campus time with coffee and dinner on Grand just blocks away.",
+    "reply": "Q: Mershops North County\n\n272 E Via Rancho Pkwy, Escondido, CA · 3.5 MI The experience The center long known as Westfield North County is now Mershops North County—a big, easy shopping hub for clothes, essentials, and a quick bite when you want everything in one stop. Why it’s close to our heart When you need sunscreen, a last-minute outfit, or a simple air-conditioned wander, it’s close and straightforward—then you’re back at the pool.",
     "link": "things-to-do.html",
     "linkLabel": "Things to do"
   },
@@ -1193,18 +1148,14 @@ window.MM_CHAT_DATASET_AUTO = {
   },
   {
     "triggers": [
-      "upper east on grand",
-      "upper east",
-      "plan 9 alehouse"
+      "upper east on grand"
     ],
     "keywords": [
-      "grand",
-      "escondido",
-      "downtown",
-      "craft",
-      "beer"
+      "upper",
+      "east",
+      "grand"
     ],
-    "reply": "Q: Upper East on Grand\n\n155 E Grand Ave, Escondido, CA · 2.8 MI The experience Historic Downtown Escondido for American comfort classics, seasonal cocktails, and about 20 rotating taps—local craft, imports, and domestic. Why it’s close to our heart Easy Grand Avenue night—dinner and drinks, with the California Center for the Arts a short walk when you want a show. (Plan 9 Alehouse at this address has closed; Upper East is the current venue.)",
+    "reply": "Q: Upper East on Grand\n\n155 E Grand Ave, Escondido, CA · 2.8 MI The experience Historic Downtown Escondido spot for American comfort classics, seasonal cocktails, and about 20 rotating taps—local craft, imports, and domestic favorites. Why it’s close to our heart It’s an easy Grand Avenue night—dinner, drinks, and you’re a short walk from the California Center for the Arts when a show fits your plans.",
     "link": "things-to-do.html",
     "linkLabel": "Things to do"
   },
@@ -1521,6 +1472,35 @@ window.MM_CHAT_DATASET_AUTO = {
       "farm"
     ],
     "reply": "Q: Bates Nut Farm\n\n15954 Woods Valley Rd, Valley Center, CA · 14.0 MI The experience A classic North County roadside stop for snacks, gifts, seasonal treats, and that nostalgic “we found a local place” feeling. Why it’s close to our heart It’s fun, easy, and surprisingly satisfying. Grab something for the room, pick up a gift, and keep the drive scenic.",
+    "link": "things-to-do.html",
+    "linkLabel": "Things to do"
+  },
+  {
+    "triggers": [
+      "california state university san marcos"
+    ],
+    "keywords": [
+      "california",
+      "state",
+      "university",
+      "marcos"
+    ],
+    "reply": "Q: California State University San Marcos\n\n333 S Twin Oaks Valley Rd, San Marcos, CA · 13.5 MI The experience A modern Cal State campus on the hills above San Marcos—walkable quads, events open to the public, and easy access if you’re visiting a student or catching a lecture or performance. Why it’s close to our heart It’s the closest major university to the motel and a simple North County day trip: coffee, campus air, and you’re back before dinner in Escondido.",
+    "link": "things-to-do.html",
+    "linkLabel": "Things to do"
+  },
+  {
+    "triggers": [
+      "john paul the great catholic university"
+    ],
+    "keywords": [
+      "john",
+      "paul",
+      "great",
+      "catholic",
+      "university"
+    ],
+    "reply": "Q: John Paul the Great Catholic University\n\n220 W Grand Ave, Escondido, CA · 3.0 MI The experience A compact Catholic university campus right on Grand Avenue—film, business, and theology programs with a creative, entrepreneurial spirit and a walkable downtown setting. Why it’s close to our heart If you’re here for a tour, showcase, or to see family, you can park the car once and pair campus time with coffee and dinner on Grand just blocks away.",
     "link": "things-to-do.html",
     "linkLabel": "Things to do"
   }

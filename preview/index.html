@@ -17,13 +17,21 @@
 <link rel="stylesheet" href="site-export-style.css" />
 <link rel="stylesheet" href="css/motel-map.css?v=ref23" />
 <link rel="stylesheet" href="wp-compat-1to1.css?v=ref66" />
-<link rel="stylesheet" href="css/mm-topbar.css?v=20260454" />
+<link rel="stylesheet" href="css/mm-topbar.css?v=20260455" />
 <link rel="stylesheet" href="css/mm-footer.css?v=7" />
 <link rel="stylesheet" href="css/mm-booking-calendar.css?v=3" />
 <link rel="stylesheet" href="css/mm-booking-guests.css?v=1" />
 <link rel="stylesheet" href="css/home-v2-main.css?v=15" />
 <!-- Menu chrome last so it always wins over page CSS -->
-<link rel="stylesheet" href="css/mm-menu-premium.v2.css?v=20260473" />
+<link rel="stylesheet" id="mm-menu-premium-css" href="css/mm-menu-premium.v3.css" />
+<script>
+  (function () {
+    var el = document.getElementById('mm-menu-premium-css');
+    if (!el) return;
+    var sep = el.href.indexOf('?') === -1 ? '?' : '&';
+    el.href = el.href + sep + 'v=' + Date.now();
+  })();
+</script>
   <script src="js/mm-page-loader.js?v=3"></script>
 </head>
 <body class="mm-shell mm-home">
@@ -430,7 +438,14 @@
 <script src="js/mm-booking-calendar.js?v=5"></script>
 <script src="js/mm-booking-guests.js?v=1"></script>
 <script src="js/mm-topbar.js?v=17"></script>
-<script src="js/mm-menu-premium.v2.js?v=20260450"></script>
+<script>
+  (function () {
+    var s = document.createElement('script');
+    s.src = 'js/mm-menu-premium.v3.js?v=' + Date.now();
+    s.defer = true;
+    document.body.appendChild(s);
+  })();
+</script>
 <script src="js/mm-chat-widget.js?v=46"></script>
 <script src="js/home-v2-main.js?v=5"></script>
 </body>

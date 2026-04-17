@@ -36,7 +36,7 @@ var MM_API = (function () {
 
   /* ── Configuration ─────────────────────────────────────── */
   var config = {
-    useMock        : true,   // ← flip to false once ASI credentials arrive
+    useMock        : false,  // live — routed through netlify/functions/asi-proxy.js
     endpoint       : "",     // ASI base URL  e.g. "https://api.asipm.com/v1"
     propertyId     : "",     // ASI property / hotel ID
     apiKey         : "",     // ASI API key (sent as Bearer token)
@@ -45,18 +45,33 @@ var MM_API = (function () {
     shift4AuthToken: ""      // Auth Token from Shift4 (exchange for AccessToken server-side)
   };
 
-  /* ── Mock rate table ───────────────────────────────────────
-     Mirrors what the ASI /rates endpoint will return.
-     base    = standard weekday rate (USD).
-     Weekend auto-adjusts: +$30 Fri/Sat, +$10 Sun.
+  /* ── ASI Room Type ID map (confirmed from live GetRoomAvailability response) ──
+     linktoRoomTypeMasterId values from reservation.asiwebres.com
+     HotelID: 34134  |  HotelMasterID: 2270  |  HotelGUID: 77c9401ba7e640988f8410033a7434cc
+     Tax: 10% City Tax
+  ────────────────────────────────────────────────────────── */
+  var ASI_ROOM_TYPE_IDS = {
+    "queen"        : 13697,   // Queen Size Room
+    "king"         : 13696,   // King Size Room
+    "queen-double" : 13698,   // Room with 2 Queen
+    "ada"          : 13701,   // King Handicap (also: 13702 Queen, 13703 2Q)
+    "suite-jacuzzi": 13699,   // King room Jacuzzi
+    "suite-2room"  : 13700,   // 2 Room Suite with kitchenette
+    "suite-kitchen": 13704    // Deluxe King Jaccuzi
+  };
+
+  /* ── Mock rate table (base rates synced from live ASI GetRoomAvailability Apr 2026) ──
+     base    = standard weekday rate (USD) — confirmed from live API.
+     Weekend auto-adjusts: +$20 Fri/Sat, +$10 Sun (approximation).
      unavail = specific dates blocked for that room type (YYYY-MM-DD).
+     Tax: 10% City Tax (added at checkout display, not charged by site).
 
      IMPORTANT: room IDs here must match data-room-id attributes
      on the .mm-bk-room-card elements in book.html.
   ────────────────────────────────────────────────────────── */
   var MOCK_RATES = {
     "queen": {
-      base: 89,
+      base: 74,   // ASI live: $74/night (Queen Size Room)
       unavail: {
         "2026-04-25": true, "2026-04-26": true,
         "2026-05-09": true, "2026-05-10": true,
@@ -64,7 +79,7 @@ var MM_API = (function () {
       }
     },
     "king": {
-      base: 99,
+      base: 79,   // ASI live: $79/night (King Size Room)
       unavail: {
         "2026-04-18": true, "2026-04-19": true,
         "2026-04-25": true, "2026-04-26": true,
@@ -74,7 +89,7 @@ var MM_API = (function () {
       }
     },
     "ada": {
-      base: 99,
+      base: 99,   // ASI live: $99/night (King/Queen/2Q Handicap)
       unavail: {
         "2026-04-25": true, "2026-04-26": true,
         "2026-05-23": true, "2026-05-24": true,
@@ -82,7 +97,7 @@ var MM_API = (function () {
       }
     },
     "queen-double": {
-      base: 109,
+      base: 84,   // ASI live: $84/night (Room with 2 Queen)
       unavail: {
         "2026-04-18": true, "2026-04-19": true,
         "2026-05-09": true, "2026-05-10": true,
@@ -91,7 +106,7 @@ var MM_API = (function () {
       }
     },
     "suite-2room": {
-      base: 129,
+      base: 150,  // ASI live: $150/night (2 Room Suite with kitchenette)
       unavail: {
         "2026-04-18": true, "2026-04-19": true,
         "2026-05-02": true,
@@ -100,7 +115,7 @@ var MM_API = (function () {
       }
     },
     "suite-jacuzzi": {
-      base: 149,
+      base: 150,  // ASI live: $150/night (King room Jacuzzi)
       unavail: {
         "2026-04-25": true, "2026-04-26": true,
         "2026-05-09": true, "2026-05-10": true,
@@ -108,7 +123,7 @@ var MM_API = (function () {
       }
     },
     "suite-kitchen": {
-      base: 189,
+      base: 150,  // ASI live: $150/night (Deluxe King Jaccuzi)
       unavail: {
         "2026-04-18": true, "2026-04-19": true,
         "2026-05-23": true, "2026-05-24": true,
@@ -131,6 +146,21 @@ var MM_API = (function () {
     "suite-2room"  : true,
     "suite-jacuzzi": true,
     "suite-kitchen": true
+  };
+
+  /* ── Max occupancy per room type ────────────────────────────
+     Must match data-max-occupancy attributes on room cards
+     in book.html and the "Sleeps X" amenity label.
+     The check is: adults + children > maxOccupancy → unavailable.
+  ────────────────────────────────────────────────────────── */
+  var MOCK_MAX_OCCUPANCY = {
+    "queen"        : 2,
+    "king"         : 2,
+    "ada"          : 2,
+    "queen-double" : 4,
+    "suite-2room"  : 4,
+    "suite-jacuzzi": 2,
+    "suite-kitchen": 4
   };
 
   /* ── Internal helpers ──────────────────────────────────── */
@@ -206,32 +236,84 @@ var MM_API = (function () {
          }
        Blocked / sold-out dates should be omitted or set to null.
     -------------------------------------------------------- */
-    fetchRatesForCalendar: function (callback) {
-      if (config.useMock) {
-        // Mock: nothing to fetch — getRateForDate reads MOCK_RATES directly
-        return callback(null);
-      }
-      var self = this;
-      var today = new Date();
-      today.setHours(0, 0, 0, 0);
-      var end = new Date(today.getTime() + 90 * 86400000);
+    /* ASI room type ID → our internal room ID map (reverse of ASI_ROOM_TYPE_IDS) */
+    _asiIdToRoomId: {
+      13697: "queen",
+      13696: "king",
+      13698: "queen-double",
+      13701: "ada",
+      13702: "ada",
+      13703: "ada",
+      13699: "suite-jacuzzi",
+      13700: "suite-2room",
+      13704: "suite-kitchen"
+    },
 
-      fetch(
-        config.endpoint + "/rates"
-        + "?property=" + encodeURIComponent(config.propertyId)
-        + "&checkin="  + fmtKey(today)
-        + "&checkout=" + fmtKey(end),
-        { headers: { "Authorization": "Bearer " + config.apiKey } }
-      )
+    /* Proxy URL — relative path, works on any domain where the PHP file is deployed */
+    _proxyUrl: "php/asi-proxy.php",
+
+    /* --------------------------------------------------------
+       _fmtAsiDate(date) → "MM/DD/YYYY"
+    -------------------------------------------------------- */
+    _fmtAsiDate: function (d) {
+      return pad(d.getMonth() + 1) + "/" + pad(d.getDate()) + "/" + d.getFullYear();
+    },
+
+    /* --------------------------------------------------------
+       _callProxy(checkin, checkout, adults, children, callback)
+       Calls the PHP proxy and returns raw ASI room array.
+    -------------------------------------------------------- */
+    _callProxy: function (checkin, checkout, adults, children, callback) {
+      var self = this;
+      fetch(self._proxyUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action   : "check",
+          checkin  : self._fmtAsiDate(checkin),
+          checkout : self._fmtAsiDate(checkout),
+          adults   : adults || 1,
+          children : children || 0
+        })
+      })
       .then(function (r) {
-        if (!r.ok) throw new Error("Rates fetch failed: " + r.status);
+        if (!r.ok) throw new Error("Proxy error " + r.status);
         return r.json();
       })
-      .then(function (data) {
-        self._rateCache = data;   // { roomId: { "YYYY-MM-DD": rate } }
+      .then(function (rooms) { callback(null, rooms); })
+      .catch(function (err)  { callback(err, null);   });
+    },
+
+    fetchRatesForCalendar: function (callback) {
+      if (config.useMock) {
+        return callback(null);
+      }
+
+      /* Call the proxy's calendar action.
+         The proxy fetches 90 days of rates from ASI in 30-day chunks,
+         caches the result on disk for 15 minutes, and returns a map:
+           { "queen": { "2026-05-01": 74, "2026-05-02": null, ... }, ... }
+         Null = sold-out / unavailable on that date.
+         We store this in _rateCache so getRateForDate() works instantly. */
+      var self = this;
+      fetch(self._proxyUrl, {
+        method : "POST",
+        headers: { "Content-Type": "application/json" },
+        body   : JSON.stringify({ action: "calendar" })
+      })
+      .then(function (r) {
+        if (!r.ok) throw new Error("Calendar proxy error " + r.status);
+        return r.json();
+      })
+      .then(function (calData) {
+        self._rateCache = calData;   // { roomId: { "YYYY-MM-DD": rate|null } }
         callback(null);
       })
-      .catch(function (err) { callback(err); });
+      .catch(function (err) {
+        /* Non-fatal: calendar won't show rates but booking still works */
+        console.warn("MM_API: calendar pre-fetch failed —", err.message);
+        callback(null);
+      });
     },
 
     /* --------------------------------------------------------
@@ -261,33 +343,45 @@ var MM_API = (function () {
       if (config.useMock) {
         return this._mock_checkAvailability(checkin, checkout, guests, callback);
       }
-      var qs = [
-        "property=" + encodeURIComponent(config.propertyId),
-        "checkin="  + fmtKey(checkin),
-        "checkout=" + fmtKey(checkout),
-        "rooms="    + (guests.rooms    || 1),
-        "adults="   + (guests.adults   || 2),
-        "children=" + (guests.children || 0)
-      ].join("&");
 
-      fetch(config.endpoint + "/availability?" + qs, {
-        headers: { "Authorization": "Bearer " + config.apiKey }
-      })
-      .then(function (r) {
-        if (!r.ok) throw new Error("Availability fetch failed: " + r.status);
-        return r.json();
-      })
-      .then(function (data) {
-        var results = data.map(function (item) {
-          return {
-            roomId    : item.room_type_id,   // ← adjust key to match ASI response
-            available : item.available,
-            totalRate : item.total
+      var self    = this;
+      var nights  = Math.round((checkout - checkin) / 86400000);
+      var adults  = guests.adults   || 1;
+      var children = guests.children || 0;
+
+      self._callProxy(checkin, checkout, adults, children, function (err, rooms) {
+        if (err) return callback(err, null);
+
+        /* Build results keyed by our internal room ID.
+           Multiple ASI IDs may map to the same internal ID (e.g. ada variants) —
+           keep the first available one found. */
+        var byRoomId = {};
+        (rooms || []).forEach(function (r) {
+          var rid = self._asiIdToRoomId[r.id];
+          if (!rid) return;
+          if (byRoomId[rid] && byRoomId[rid].available) return; // keep available over unavailable
+          byRoomId[rid] = {
+            roomId      : rid,
+            asiRoomTypeId: r.id,
+            available   : r.available > 0,
+            rate        : r.rate,
+            tax         : r.tax,
+            totalRate   : r.rate * nights,
+            totalWithTax: r.rateWithTax * nights,
+            images      : r.images || []
           };
+          /* Also update the rate cache for getRateForDate() */
+          if (!self._rateCache) self._rateCache = {};
+          if (!self._rateCache[rid]) self._rateCache[rid] = {};
+          /* Store rate for every night of the stay */
+          for (var i = 0; i < nights; i++) {
+            var d = new Date(checkin.getTime() + i * 86400000);
+            self._rateCache[rid][fmtKey(d)] = r.available > 0 ? r.rate : null;
+          }
         });
-        callback(null, results);
-      })
-      .catch(function (err) { callback(err, null); });
+
+        callback(null, Object.values(byRoomId));
+      });
     },
 
     /* --------------------------------------------------------
@@ -375,7 +469,11 @@ var MM_API = (function () {
       //   })
       //   .catch(function(err) { callback(err, null); });
 
-      callback(new Error("Shift4 i4Go not yet configured — follow steps A–D in the comment above."), null);
+      // ── ASI WebRes proxy mode ───────────────────────────────────────
+      // This property has IsSendCreditCardInfo=false in ASI, meaning
+      // ConfirmBooking does not require card data. The motel collects
+      // payment at check-in from ASI FrontDesk. No tokenization needed.
+      callback(null, "guarantee-at-checkin");
     },
 
     /* --------------------------------------------------------
@@ -415,48 +513,46 @@ var MM_API = (function () {
       if (config.useMock) {
         return this._mock_submitBooking(bookingData, callback);
       }
-      fetch(config.endpoint + "/reservations", {
+
+      var self    = this;
+      var nights  = Math.round((bookingData.checkout - bookingData.checkin) / 86400000);
+      var total   = (bookingData.total || 0).toFixed(2);
+
+      fetch(self._proxyUrl, {
         method : "POST",
-        headers: {
-          "Content-Type" : "application/json",
-          "Authorization": "Bearer " + config.apiKey
-        },
-        body: JSON.stringify({
-          property_id      : config.propertyId,
-          room_type_id     : bookingData.roomId,
-          checkin          : fmtKey(bookingData.checkin),
-          checkout         : fmtKey(bookingData.checkout),
-          rooms            : bookingData.rooms,
-          adults           : bookingData.adults,
-          children         : bookingData.children,
-          rate_total       : bookingData.total,
-          guarantee_type   : "CC",               // card guarantee, not prepayment
-          guest_first_name : bookingData.guest.firstName,
-          guest_last_name  : bookingData.guest.lastName,
-          guest_email      : bookingData.guest.email,
-          guest_phone      : bookingData.guest.phone,
-          guest_address    : bookingData.guest.address,
-          guest_city       : bookingData.guest.city,
-          guest_state      : bookingData.guest.state,
-          guest_zip        : bookingData.guest.zip,
-          motive           : bookingData.guest.motive,
-          special_requests : bookingData.guest.specialRequests,
-          // Shift4 TrueToken — ASI stores this and charges via Shift4 at desk
-          cc_truetoken     : bookingData.payment.paymentToken,
-          cc_last4         : bookingData.payment.cardLast4,
-          cc_name          : bookingData.payment.nameOnCard
+        headers: { "Content-Type": "application/json" },
+        body   : JSON.stringify({
+          action    : "book",
+          checkin   : self._fmtAsiDate(bookingData.checkin),
+          checkout  : self._fmtAsiDate(bookingData.checkout),
+          adults    : bookingData.adults    || 1,
+          children  : bookingData.children  || 0,
+          roomId    : bookingData.roomId,
+          grandTotal: total,
+          nights    : nights,
+          guest     : {
+            firstName      : bookingData.guest.firstName       || "",
+            lastName       : bookingData.guest.lastName        || "",
+            email          : bookingData.guest.email           || "",
+            phone          : bookingData.guest.phone           || "",
+            address        : bookingData.guest.address         || "",
+            city           : bookingData.guest.city            || "",
+            state          : bookingData.guest.state           || "",
+            zip            : bookingData.guest.zip             || "",
+            specialRequests: bookingData.guest.specialRequests || ""
+          }
         })
       })
       .then(function (r) {
-        if (!r.ok) throw new Error("Booking failed: " + r.status);
+        if (!r.ok) throw new Error("Proxy error " + r.status);
         return r.json();
       })
       .then(function (data) {
-        callback(null, {
-          success   : data.success !== false && data.status !== "error",
-          refNumber : data.reservation_id || data.ref || data.confirmation_number || "MM-ERR",
-          message   : data.message || ""
-        });
+        if (data.success) {
+          callback(null, { success: true, refNumber: data.refNumber, message: "" });
+        } else {
+          callback(new Error(data.error || "Booking was not confirmed"), null);
+        }
       })
       .catch(function (err) { callback(err, null); });
     },
@@ -484,12 +580,23 @@ var MM_API = (function () {
     _mock_checkAvailability: function (checkin, checkout, guests, callback) {
       // Small delay simulates network round-trip
       setTimeout(function () {
+        var rooms    = guests.rooms    || 1;
+        var adults   = guests.adults   || 2;
+        var children = guests.children || 0;
+        // Each booked room must fit this many people
+        var peoplePerRoom = Math.ceil((adults + children) / rooms);
+
         var results = Object.keys(MOCK_RATES).map(function (id) {
-          // Room-level override first
+          // Sold-out override
           if (MOCK_AVAILABILITY[id] === false) {
             return { roomId: id, available: false, totalRate: 0 };
           }
-          // Then check for any blocked dates within the stay
+          // Occupancy check — room can't sleep this many people
+          var maxOcc = MOCK_MAX_OCCUPANCY[id] || 2;
+          if (peoplePerRoom > maxOcc) {
+            return { roomId: id, available: false, totalRate: 0 };
+          }
+          // Date-level blocks within the stay
           var rd = MOCK_RATES[id];
           var available = true;
           var totalRate = 0;

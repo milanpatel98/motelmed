@@ -354,9 +354,16 @@
       state.viewMonth = t.getMonth();
     }
     initCustomSelects();
-    renderCalendar();
-    updateDateDisplay();
-    updateCheckAvailBtn();
+
+    // Fetch rate data before rendering calendar so prices show correctly.
+    // In mock mode this is instant (no-op callback). In live mode it awaits
+    // the ASI /rates response — calendar renders only after cache is ready.
+    MM_API.fetchRatesForCalendar(function () {
+      renderCalendar();
+      updateDateDisplay();
+      updateCheckAvailBtn();
+    });
+
     bindCalNav();
     bindSidebar();
     bindCheckAvail();
@@ -430,7 +437,30 @@
 
   // ── Calendar rendering ─────────────────────────────────────────
 
+  function updateCalendarRoomBanner() {
+    var panel = document.querySelector(".mm-bk-cal-panel");
+    if (!panel) return;
+    var banner = panel.querySelector(".mm-bk-cal-room-banner");
+    if (state.selectedRoom) {
+      if (!banner) {
+        banner = document.createElement("div");
+        banner.className = "mm-bk-cal-room-banner";
+        banner.style.cssText = "font-size:13px;color:#555;margin-bottom:10px;padding:7px 12px;background:rgba(0,0,0,0.04);border-radius:4px;display:flex;align-items:center;gap:6px;";
+        var icon = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="10" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M5 3.5V2.5M11 3.5V2.5M1.5 7h13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
+        banner.innerHTML = icon + '<span></span>';
+        var nav = panel.querySelector(".mm-bk-cal__nav");
+        if (nav) panel.insertBefore(banner, nav);
+        else panel.prepend(banner);
+      }
+      banner.querySelector("span").textContent = "Showing rates for: " + state.selectedRoom.name;
+      banner.style.display = "flex";
+    } else if (banner) {
+      banner.style.display = "none";
+    }
+  }
+
   function renderCalendar() {
+    updateCalendarRoomBanner();
     calMonths.innerHTML = "";
     for (var m = 0; m < 2; m++) {
       var mo = state.viewMonth + m;
@@ -654,9 +684,20 @@
     var roomSel = document.getElementById("bk-rooms");
     var adultSel = document.getElementById("bk-adults");
     var childSel = document.getElementById("bk-children");
-    if (roomSel) roomSel.addEventListener("change", function () { state.rooms = parseInt(this.value, 10); });
-    if (adultSel) adultSel.addEventListener("change", function () { state.adults = parseInt(this.value, 10); });
-    if (childSel) childSel.addEventListener("change", function () { state.children = parseInt(this.value, 10); });
+
+    function onOccupancyChange() {
+      // Availability results are now stale — reset room data-available attrs
+      // so the next Check Availability call starts clean
+      document.querySelectorAll(".mm-bk-room-card[data-available]").forEach(function (card) {
+        card.removeAttribute("data-available");
+      });
+      // Show Check Availability button again so the user knows to re-check
+      updateCheckAvailBtn();
+    }
+
+    if (roomSel)  roomSel.addEventListener("change",  function () { state.rooms    = parseInt(this.value, 10); onOccupancyChange(); });
+    if (adultSel) adultSel.addEventListener("change", function () { state.adults   = parseInt(this.value, 10); onOccupancyChange(); });
+    if (childSel) childSel.addEventListener("change", function () { state.children = parseInt(this.value, 10); onOccupancyChange(); });
   }
 
   // ── Check Availability ─────────────────────────────────────────
@@ -741,7 +782,8 @@
       var subtotal = 0;
       var cur = new Date(state.checkin);
       for (var i = 0; i < nights; i++) {
-        var rate = getRateForDate(cur) || room.price;
+        var rawRate = getRateForDate(cur);
+        var rate = rawRate !== null ? rawRate : room.price;
         subtotal += rate;
         var row = document.createElement("div");
         row.className = "mm-bk-summary__rate-row";
@@ -817,14 +859,28 @@
       document.querySelectorAll(".mm-bk-room-card[data-available='true']")
     );
     if (!cards.length) return;
+    var nights = (state.checkin && state.checkout) ? daysBetween(state.checkin, state.checkout) : 0;
     var cheapest = null;
-    var cheapestPrice = Infinity;
+    var cheapestTotal = Infinity;
     cards.forEach(function (card) {
       var btn = card.querySelector(".mm-bk-room-card__select");
       if (!btn) return;
-      var price = parseInt(btn.getAttribute("data-price"), 10);
-      if (price < cheapestPrice) {
-        cheapestPrice = price;
+      var roomId = btn.getAttribute("data-room");
+      var basePrice = parseInt(btn.getAttribute("data-price"), 10);
+      // Use actual API rates for the stay period — falls back to base price per night
+      var total = 0;
+      if (nights > 0 && state.checkin) {
+        var cur = new Date(state.checkin);
+        for (var i = 0; i < nights; i++) {
+          var r = MM_API.getRateForDate(roomId, cur);
+          total += (r !== null ? r : basePrice);
+          cur = addDays(cur, 1);
+        }
+      } else {
+        total = basePrice;
+      }
+      if (total < cheapestTotal) {
+        cheapestTotal = total;
         cheapest = btn;
       }
     });
@@ -832,7 +888,7 @@
       state.selectedRoom = {
         id: cheapest.getAttribute("data-room"),
         name: cheapest.getAttribute("data-name"),
-        price: cheapestPrice,
+        price: parseInt(cheapest.getAttribute("data-price"), 10),
         thumb: cheapest.getAttribute("data-thumb")
       };
     }
@@ -1065,7 +1121,7 @@
           state          : (document.getElementById("f-addr-state")  || {}).value || "",
           zip            : (document.getElementById("f-addr-zip")    || {}).value || "",
           motive         : (document.getElementById("f-motive")      || {}).value || "",
-          specialRequests: (document.getElementById("f-requests")    || {}).value || ""
+          specialRequests: (document.getElementById("f-request")     || {}).value || ""
         },
         payment: {
           nameOnCard: (document.getElementById("f-card-name") || {}).value || "",

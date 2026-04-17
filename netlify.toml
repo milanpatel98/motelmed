@@ -6,6 +6,17 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# Serverless functions live in netlify/functions/
+[functions]
+  directory = "netlify/functions"
+
+# Route the proxy path the JS already uses → the serverless function
+[[redirects]]
+  from   = "/php/asi-proxy.php"
+  to     = "/.netlify/functions/asi-proxy"
+  status = 200
+  force  = true
+
 # Optional: discourage search engines (does not password-protect the URL)
 [[headers]]
   for = "/*"

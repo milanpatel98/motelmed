@@ -1,0 +1,6 @@
+# Exclude git internals and temp files from Netlify deploys
+.git
+**/.git
+*.mov
+*.mp4
+to remove/
