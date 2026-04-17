@@ -1176,6 +1176,7 @@
       var origText = btn.textContent;
       btn.textContent = "Processing…";
       btn.disabled = true;
+      if (window.MMLoader) MMLoader.show("Confirming reservation…");
 
       var successEl = document.getElementById("bk-confirm-success");
       var errorEl   = document.getElementById("bk-confirm-error");
@@ -1196,6 +1197,7 @@
         if (tokenErr) {
           btn.textContent = origText;
           btn.disabled = false;
+          if (window.MMLoader) MMLoader.hide();
           console.error("Payment tokenization failed:", tokenErr);
           if (successEl) successEl.hidden = true;
           if (errorEl)   errorEl.hidden   = false;
@@ -1210,6 +1212,7 @@
         MM_API.submitBooking(bookingData, function (err, result) {
           btn.textContent = origText;
           btn.disabled = false;
+          if (window.MMLoader) MMLoader.hide();
 
           var success = !err && result && result.success;
 
