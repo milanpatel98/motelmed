@@ -77,20 +77,28 @@
     return "MM-" + Math.random().toString(36).substr(2, 6).toUpperCase();
   }
 
-  function roundMoney2(n) {
-    return Math.round(Number(n) * 100) / 100;
+  function dollarsToCents(n) {
+    return Math.round(Number(n) * 100);
   }
 
-  /** City tax shown on ASI review: 10% of room/night subtotal (cent-accurate). */
-  function cityTax10(subtotal) {
-    return roundMoney2(subtotal * 0.1);
+  function centsToMoney(c) {
+    return c / 100;
   }
 
-  function fmt$(n) {
-    return "$" + roundMoney2(n).toLocaleString("en-US", {
+  /** City tax shown on ASI review: 10% of room/night subtotal (computed in cents). */
+  function cityTax10Cents(subtotalCents) {
+    return Math.round((subtotalCents * 10) / 100);
+  }
+
+  function fmtCents(c) {
+    return "$" + (c / 100).toLocaleString("en-US", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
+  }
+
+  function fmt$(n) {
+    return fmtCents(dollarsToCents(n));
   }
 
   // ── DOM refs ───────────────────────────────────────────────────
@@ -683,6 +691,7 @@
       var origText = checkAvailBtn.textContent;
       checkAvailBtn.textContent = "Checking…";
       checkAvailBtn.disabled = true;
+      if (window.MMLoader) MMLoader.show("Checking availability…");
 
       MM_API.checkAvailability(
         state.checkin,
@@ -691,6 +700,7 @@
         function (err, results) {
           checkAvailBtn.textContent = origText;
           checkAvailBtn.disabled = false;
+          if (window.MMLoader) MMLoader.hide();
 
           if (err) {
             console.error("Availability check failed:", err);
@@ -766,25 +776,26 @@
     var ratesEl = document.getElementById(ratesId);
     if (ratesEl) {
       ratesEl.innerHTML = "";
-      var subtotal = 0;
+      var subtotalCents = 0;
       var cur = new Date(state.checkin);
       for (var i = 0; i < nights; i++) {
-        var rate = getRateForDate(cur) || room.price;
-        subtotal += rate;
+        var rawRate = getRateForDate(cur);
+        var rate = rawRate !== null ? rawRate : room.price;
+        var rateCents = dollarsToCents(rate);
+        subtotalCents += rateCents;
         var row = document.createElement("div");
         row.className = "mm-bk-summary__rate-row";
-        row.innerHTML = "<span>" + fmtLong(cur) + "</span><span>" + fmt$(rate) + "</span>";
+        row.innerHTML = "<span>" + fmtLong(cur) + "</span><span>" + fmtCents(rateCents) + "</span>";
         ratesEl.appendChild(row);
         cur = addDays(cur, 1);
       }
 
-      subtotal = roundMoney2(subtotal);
-      var taxes = cityTax10(subtotal);
-      var total = roundMoney2(subtotal + taxes);
+      var taxCents = cityTax10Cents(subtotalCents);
+      var totalCents = subtotalCents + taxCents;
 
-      setText(subRoomId, fmt$(subtotal));
-      setText(subTaxId, fmt$(taxes));
-      setText(totalId, fmt$(total));
+      setText(subRoomId, fmtCents(subtotalCents));
+      setText(subTaxId, fmtCents(taxCents));
+      setText(totalId, fmtCents(totalCents));
 
       show(subsId);
       show(totalBlockId);
@@ -1059,17 +1070,19 @@
       // Collect booking data for the API
       var nights = (state.checkin && state.checkout)
         ? daysBetween(state.checkin, state.checkout) : 0;
-      var subtotal = 0;
+      var subtotalCents = 0;
       if (state.selectedRoom && state.checkin && state.checkout) {
         var cur = new Date(state.checkin);
         for (var i = 0; i < nights; i++) {
-          subtotal += (getRateForDate(cur) || state.selectedRoom.price);
+          var r = getRateForDate(cur);
+          var rate = r !== null ? r : state.selectedRoom.price;
+          subtotalCents += dollarsToCents(rate);
           cur = addDays(cur, 1);
         }
       }
-      subtotal = roundMoney2(subtotal);
-      var taxes = cityTax10(subtotal);
-      var total = roundMoney2(subtotal + taxes);
+      var taxCents = cityTax10Cents(subtotalCents);
+      var totalCents = subtotalCents + taxCents;
+      var total = centsToMoney(totalCents);
 
       var cardEl = document.getElementById("f-card");
       var cardVal = cardEl ? cardEl.value.replace(/\s/g, "") : "";
@@ -1196,15 +1209,16 @@
     // Calculate total
     if (totalEl && state.checkin && state.checkout && state.selectedRoom) {
       var nights = daysBetween(state.checkin, state.checkout);
-      var subtotal = 0;
+      var subtotalCents = 0;
       var cur = new Date(state.checkin);
       for (var i = 0; i < nights; i++) {
-        subtotal += (getRateForDate(cur) || state.selectedRoom.price);
+        var r = getRateForDate(cur);
+        var rate = r !== null ? r : state.selectedRoom.price;
+        subtotalCents += dollarsToCents(rate);
         cur = addDays(cur, 1);
       }
-      subtotal = roundMoney2(subtotal);
-      var total = roundMoney2(subtotal + cityTax10(subtotal));
-      totalEl.textContent = fmt$(total) + " (including taxes & fees)";
+      var totalCents = subtotalCents + cityTax10Cents(subtotalCents);
+      totalEl.textContent = fmtCents(totalCents) + " (including taxes & fees)";
     }
   }
 

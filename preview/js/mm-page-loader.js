@@ -144,4 +144,18 @@
     }
     if (loaderVisible) setTimeout(hide, 120);
   });
+
+  // ── Public API ─────────────────────────────────────────────────
+  // MMLoader.show("Checking availability…") / MMLoader.hide()
+  var labelEl = el.querySelector(".mm-pl__label");
+
+  function show(labelText) {
+    if (labelEl) labelEl.textContent = labelText || "Loading";
+    hideScheduled = false;
+    loaderVisible = true;
+    el.classList.remove("mm-pl--hidden");
+    mount();
+  }
+
+  window.MMLoader = { show: show, hide: hide };
 })();
