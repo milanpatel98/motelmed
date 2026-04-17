@@ -448,5 +448,17 @@
 </script>
 <script src="js/mm-chat-widget.js?v=46"></script>
 <script src="js/home-v2-main.js?v=5"></script>
+<script>
+// Show the MM loader when navigating to the booking page so the wait
+// between clicking a CTA and book.html finishing its rate fetch is covered.
+document.addEventListener("click", function (e) {
+  var link = e.target.closest("a[href]");
+  if (!link) return;
+  var href = link.getAttribute("href") || "";
+  if (href.indexOf("book.html") !== -1 && window.MMLoader) {
+    MMLoader.show("Loading availability…");
+  }
+});
+</script>
 </body>
 </html>

@@ -377,10 +377,12 @@
     }
     initCustomSelects();
 
-    // Fetch rate data before rendering calendar so prices show correctly.
-    // In mock mode this is instant (no-op callback). In live mode it awaits
-    // the ASI /rates response — calendar renders only after cache is ready.
+    // Show loader while fetching live calendar rates from ASI.
+    // In mock mode fetchRatesForCalendar is instant; in live mode the
+    // calendar renders only after the proxy responds.
+    if (window.MMLoader) MMLoader.show("Loading rates…");
     MM_API.fetchRatesForCalendar(function () {
+      if (window.MMLoader) MMLoader.hide();
       renderCalendar();
       updateDateDisplay();
       updateCheckAvailBtn();

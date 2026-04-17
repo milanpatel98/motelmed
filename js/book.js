@@ -376,9 +376,18 @@
       state.viewMonth = t.getMonth();
     }
     initCustomSelects();
-    renderCalendar();
-    updateDateDisplay();
-    updateCheckAvailBtn();
+
+    // Show loader while fetching live calendar rates from ASI.
+    // In mock mode fetchRatesForCalendar is instant; in live mode the
+    // calendar renders only after the proxy responds.
+    if (window.MMLoader) MMLoader.show("Loading rates…");
+    MM_API.fetchRatesForCalendar(function () {
+      if (window.MMLoader) MMLoader.hide();
+      renderCalendar();
+      updateDateDisplay();
+      updateCheckAvailBtn();
+    });
+
     bindCalNav();
     bindSidebar();
     bindCheckAvail();
