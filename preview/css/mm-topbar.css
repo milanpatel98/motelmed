@@ -1,0 +1,1311 @@
+/* Shared site chrome — LINE-style top bar + slide nav (use on all preview pages) */
+:root {
+  --mm-ink: #0a0a0a;
+  --mm-paper: #f8f8f6;
+  --mm-shell-pad: clamp(16px, 3vw, 48px);
+}
+
+/*
+ * Bar height on html.mm-shell-html (not bare :root) so it wins over other stylesheets that
+ * redefine :root tokens — otherwise mm-topbar can load first and later :root blocks “hide” updates.
+ */
+html.mm-shell-html {
+  --mm-topbar-h: 104px;
+  --mm-logo-size: 56px;
+}
+
+html.mm-shell-html,
+body.mm-shell {
+  height: 100%;
+}
+
+html.mm-shell-html {
+  overflow-x: clip;
+}
+
+body.mm-shell {
+  margin: 0;
+}
+
+/* Fixed paper grain (site-texture.png) — add class mm-texture-bg on <body> */
+body.mm-texture-bg {
+  background: var(--mm-paper);
+}
+
+body.mm-texture-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("../assets/site-texture.png?v=2") repeat;
+  background-size: 560px auto;
+  opacity: 0.38;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.mm-texture-bg #main.mm-content-page {
+  background: transparent;
+}
+
+/* Empty shell pages — fill viewport below the fixed bar */
+#main.mm-content-page.mm-dir--blank {
+  min-height: calc(100vh - var(--mm-topbar-h) - env(safe-area-inset-top, 0px));
+  box-sizing: border-box;
+}
+
+body.mm-texture-bg > main {
+  position: relative;
+  z-index: 1;
+}
+
+body.mm-texture-bg > footer.site-footer,
+body.mm-texture-bg > footer.mm-footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* In-flow strip so IntersectionObserver toggles at scroll top (no clip that collapses to 0×0) */
+.mm-topbar-sentinel {
+  height: 1px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Reserves the same vertical space the bar used when it was in-flow (bar is fixed) */
+.mm-topbar-spacer {
+  height: calc(var(--mm-topbar-h) + env(safe-area-inset-top, 0px));
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.mm-topbar {
+  min-height: calc(var(--mm-topbar-h) + env(safe-area-inset-top, 0px));
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: clamp(10px, 1.6vw, 18px);
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-right: max(var(--mm-shell-pad), env(safe-area-inset-right));
+  padding-bottom: 0;
+  padding-left: 0;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  /* Isolate from page body line-height (e.g. book.html site.css 1.65) so chrome stays centered */
+  line-height: 1;
+  transition:
+    background-color 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    backdrop-filter 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    -webkit-backdrop-filter 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* WP/block themes often set a solid header background — force clear bar at scroll top */
+body.mm-shell:not(.is-scrolled) .mm-topbar {
+  background-color: transparent !important;
+  border-bottom-color: transparent !important;
+  box-shadow: none !important;
+}
+
+body.mm-shell.is-scrolled .mm-topbar {
+  background-color: #fff !important;
+  border-bottom-color: rgba(10, 10, 10, 0.1) !important;
+  box-shadow: 0 1px 0 rgba(10, 10, 10, 0.06) !important;
+  backdrop-filter: saturate(130%) blur(8px);
+  -webkit-backdrop-filter: saturate(130%) blur(8px);
+}
+
+.mm-topbar__menu {
+  position: relative;
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  min-height: 52px;
+  margin: 0;
+  padding: 0 10px 0 env(safe-area-inset-left, 0px);
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  justify-content: flex-start;
+  color: var(--mm-ink);
+  overflow: visible;
+}
+
+.mm-topbar__menu:focus-visible {
+  outline: 2px solid rgba(16, 16, 16, 0.45);
+  outline-offset: 3px;
+}
+
+.mm-burger {
+  display: block;
+  flex-shrink: 0;
+  width: clamp(48px, 7vw, 56px);
+  height: auto;
+  overflow: visible;
+}
+
+.mm-burger__line {
+  stroke: currentColor;
+  stroke-width: 0.85;
+  vector-effect: non-scaling-stroke;
+  shape-rendering: geometricPrecision;
+}
+
+/* Collapse outer bars to the middle row, then rotate both about (34,10) → true 90° cross. */
+.mm-burger__spin--top,
+.mm-burger__spin--bot {
+  transform: rotate(0deg);
+  transform-box: view-box;
+  transform-origin: 34px 10px;
+  transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mm-burger__shift--top,
+.mm-burger__shift--bot {
+  transform: translate(0, 0);
+  transform-box: view-box;
+  transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mm-burger__row--mid {
+  transition: opacity 0.22s ease;
+}
+
+body.mm-nav-open .mm-burger__shift--top {
+  transform: translate(0, 7.5px);
+}
+
+body.mm-nav-open .mm-burger__shift--bot {
+  transform: translate(0, -7.5px);
+}
+
+body.mm-nav-open .mm-burger__spin--top {
+  transform: rotate(45deg);
+}
+
+body.mm-nav-open .mm-burger__spin--bot {
+  transform: rotate(-45deg);
+}
+
+body.mm-nav-open .mm-burger__row--mid {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/*
+ * Burger — shared mm-shell chrome (all site pages with the topbar button).
+ * Closed: stable flex slot + explicit “three lines” geometry so open/close mirrors cleanly.
+ * Open: legacy nav still uses body.mm-nav-open .mm-topbar__menu stretch below; index premium overrides.
+ */
+body.mm-shell:not(.mm-nav-open) .mm-topbar__menu {
+  align-self: flex-start;
+  border-right: none;
+  margin-top: calc((var(--mm-topbar-h, 104px) - 52px) / 2);
+  position: relative;
+  z-index: 2;
+}
+
+body.mm-shell:not(.mm-nav-open) .mm-burger__shift--top,
+body.mm-shell:not(.mm-nav-open) .mm-burger__shift--bot {
+  transform: translate(0, 0);
+}
+
+body.mm-shell:not(.mm-nav-open) .mm-burger__spin--top,
+body.mm-shell:not(.mm-nav-open) .mm-burger__spin--bot {
+  transform: rotate(0deg);
+}
+
+body.mm-shell:not(.mm-nav-open) .mm-burger__row--mid {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Rooms / room-detail: ink menu control (replaces per-page inline burger stroke hacks). */
+body.mm-rooms .mm-topbar__menu,
+body.mm-room-detail .mm-topbar__menu {
+  color: var(--mm-ink);
+}
+
+.mm-topbar__brand {
+  position: relative;
+  flex: 0 1 auto;
+  min-width: 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--mm-ink);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  gap: clamp(10px, 1.4vw, 16px);
+  letter-spacing: 0.2em;
+  font-size: 10.5px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.mm-topbar__logo {
+  width: var(--mm-logo-size);
+  height: var(--mm-logo-size);
+  flex: 0 0 auto;
+  border: 1px solid rgba(16, 16, 16, 0.55);
+  display: grid;
+  place-items: center;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", Times, serif;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  font-size: 15px;
+  line-height: 1;
+  transition: border-color 0.28s ease, color 0.28s ease;
+}
+
+.mm-topbar__loc {
+  letter-spacing: 0.22em;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(10, 10, 10, 0.88);
+  line-height: 1.2;
+  transition:
+    color 0.32s ease,
+    opacity 0.32s ease,
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0s;
+}
+
+.mm-topbar__right {
+  position: relative;
+  flex: 0 0 auto;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  gap: clamp(10px, 1.6vw, 18px);
+  line-height: 1;
+}
+
+/* Interior + WP pages: keep bar type scale consistent (logo unchanged below) */
+header.mm-topbar .mm-topbar__brand {
+  font-size: 10.5px;
+  font-weight: 500;
+}
+header.mm-topbar .mm-topbar__loc {
+  font-size: 11px;
+  font-weight: 700;
+}
+header.mm-topbar .mm-topbar__cta {
+  font-weight: 700;
+}
+header.mm-topbar .mm-lang {
+  font-weight: 600;
+}
+.mm-topbar__phone {
+  text-decoration: none;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  color: var(--mm-ink);
+  white-space: nowrap;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.mm-topbar__cta {
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.15;
+  border: 1px solid rgba(10, 10, 10, 0.55);
+  padding: 12px clamp(14px, 2vw, 22px);
+  border-radius: 999px;
+  color: var(--mm-ink);
+  background: transparent;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.mm-topbar__cta:hover {
+  background: #0a0a0a;
+  color: #fff;
+  border: 1px solid #0a0a0a;
+}
+
+.mm-topbar__lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: rgba(16, 16, 16, 0.72);
+  line-height: 1;
+}
+
+.mm-lang__sep {
+  display: inline-block;
+  width: 1px;
+  height: 22px;
+  flex-shrink: 0;
+  background: rgba(10, 10, 10, 0.38);
+  user-select: none;
+}
+
+.mm-lang {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(16, 16, 16, 0.55);
+  line-height: 1;
+}
+
+.mm-lang.is-active {
+  color: rgba(16, 16, 16, 0.92);
+}
+
+/*
+ * Home: fixed transparent bar stacks over whatever is *behind* it in the viewport.
+ * The in-flow spacer is normally white (body bg), so the bar looked solid white.
+ * Collapse the spacer and pull the hero cover up so the dark image sits under the bar.
+ */
+body.mm-home .mm-topbar-spacer {
+  height: 0;
+}
+
+body.mm-home #main .wp-block-group.is-style-section-3:first-child > .wp-block-cover.alignfull {
+  margin-top: calc(-1 * (var(--mm-topbar-h) + env(safe-area-inset-top, 0px)));
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  /*
+   * At least full viewport height so the image fills the first screen (no white band from
+   * body showing under the booking bar). clamp() still sets a sensible minimum on odd sizes.
+   */
+  min-height: max(clamp(240px, 28vw + 30vh, 76vh), 100svh);
+}
+
+/* Title + supporting line sit lower, just above the glass bar (bar stays at bottom of hero) */
+body.mm-home #main .wp-block-group.is-style-section-3:first-child > .wp-block-cover.alignfull .wp-block-cover__inner-container {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+body.mm-home #main .wp-block-group.is-style-section-3:first-child > .wp-block-cover.alignfull .mm-home-hero-flex-fill {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+}
+
+body.mm-home #main .wp-block-group.is-style-section-3:first-child > .wp-block-cover.alignfull .mm-home-hero-copy {
+  flex: 0 0 auto;
+  width: 100%;
+  padding-bottom: var(--wp--preset--spacing--30, 1rem);
+}
+
+body.mm-home #main .wp-block-group.is-style-section-3:first-child > .wp-block-cover.alignfull .mm-home-hero-copy .wp-block-heading {
+  margin-top: 0;
+  margin-bottom: var(--wp--preset--spacing--30, 1rem);
+}
+
+body.mm-home #main .wp-block-group.is-style-section-3:first-child > .wp-block-cover.alignfull .mm-booking-inline-wrap {
+  flex: 0 0 auto;
+  margin-top: 0;
+}
+
+/* Phones: one full-screen hero fold + readable title; respect home indicator below booking */
+@media (max-width: 640px) {
+  body.mm-home #main .wp-block-group.is-style-section-3:first-child > .wp-block-cover.alignfull {
+    min-height: 100svh;
+  }
+
+  body.mm-home #main .wp-block-group.is-style-section-3:first-child > .wp-block-cover.alignfull .mm-booking-inline-wrap {
+    padding-bottom: max(10px, env(safe-area-inset-bottom, 0px));
+  }
+
+  body.mm-home #main .wp-block-group.is-style-section-3:first-child > .wp-block-cover.alignfull .mm-home-hero-copy .wp-block-heading {
+    font-size: clamp(26px, 8.2vw, 40px) !important;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: max(12px, env(safe-area-inset-left, 0px));
+    padding-right: max(12px, env(safe-area-inset-right, 0px));
+    box-sizing: border-box;
+  }
+
+  body.mm-home #main .wp-block-group.is-style-section-3:first-child > .wp-block-cover.alignfull .mm-home-hero-copy > p {
+    font-size: clamp(0.875rem, 3.6vw, 1rem);
+    line-height: 1.55;
+    max-width: 36rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: max(0px, env(safe-area-inset-left, 0px));
+    padding-right: max(0px, env(safe-area-inset-right, 0px));
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  body.mm-home #main .wp-block-group.is-style-section-3:first-child > .wp-block-cover.alignfull .mm-home-hero-copy > p br {
+    display: none;
+  }
+}
+
+/* Ensure the stacked media layers always paint the full cover box */
+body.mm-home #main .wp-block-group.is-style-section-3:first-child > .wp-block-cover.alignfull .wp-block-cover__background,
+body.mm-home #main .wp-block-group.is-style-section-3:first-child > .wp-block-cover.alignfull .wp-block-cover__image-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body.mm-home #main .wp-block-group.is-style-section-3:first-child > .wp-block-cover.alignfull .wp-block-cover__image-background {
+  object-fit: cover;
+  object-position: 50% 95%;
+}
+
+/* Legacy WP body snippet (index-wp-body.html) still uses this class */
+.mm-home-hero-top-spacer {
+  height: clamp(40px, 10vh, 240px);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Home: dark hero under transparent bar — light chrome until scrolled */
+body.mm-home:not(.is-scrolled) .mm-topbar {
+  color: #f4f4f2;
+  background-color: transparent !important;
+}
+
+body.mm-home:not(.is-scrolled) .mm-topbar__logo {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #f4f4f2;
+}
+
+body.mm-home:not(.is-scrolled) .mm-topbar__loc {
+  color: rgba(255, 255, 255, 0.92);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition-delay: 0s, 0s, 0s, 0.32s;
+}
+
+/* Home only: reveal location label after first scroll threshold */
+body.mm-home.is-scrolled .mm-topbar__loc {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0s, 0s, 0s, 0s;
+}
+
+/* Home only: phone color on hero */
+body.mm-home:not(.is-scrolled) .mm-topbar__phone {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+body.mm-home .mm-topbar__phone:hover {
+  opacity: 0.75;
+}
+
+body.mm-home:not(.is-scrolled) .mm-topbar__phone:hover {
+  opacity: 1;
+  color: #fff;
+}
+
+body.mm-home:not(.is-scrolled) .mm-topbar__cta {
+  color: #f4f4f2;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+body.mm-home:not(.is-scrolled) .mm-topbar__cta:hover {
+  background: #fff;
+  color: #0a0a0a;
+  border: 1px solid #fff;
+}
+
+body.mm-home:not(.is-scrolled) .mm-lang {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+body.mm-home:not(.is-scrolled) .mm-lang.is-active {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+body.mm-home:not(.is-scrolled) .mm-lang__sep {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+body.mm-home:not(.is-scrolled) .mm-burger__line {
+  stroke: #f4f4f2 !important;
+}
+
+/* Scroll lock while menu is open — see mm-topbar.js */
+body.mm-nav-open {
+  overscroll-behavior: none;
+}
+
+/* Menu open: topbar stays visible, turns white, burger becomes the × square cell */
+body.mm-nav-open .mm-topbar {
+  z-index: 210;
+  background-color: #fff !important;
+  border-bottom-color: rgba(10,10,10,.08) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Burger button becomes a square white cell with right border — visually part of panel */
+body.mm-nav-open .mm-topbar__menu {
+  align-self: stretch;
+  border-right: 1px solid rgba(10,10,10,.1);
+  padding-right: 0;
+}
+
+/* Hide topbar right-side items when menu is open */
+body.mm-nav-open .mm-topbar__phone,
+body.mm-nav-open .mm-topbar__cta,
+body.mm-nav-open .mm-topbar__lang {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+/* Scroll lock drops is-scrolled — bar must stay solid white when it was scrolled */
+body.mm-nav-open.mm-nav-solid-topbar .mm-topbar {
+  background-color: #fff !important;
+  border-bottom-color: rgba(10, 10, 10, 0.1) !important;
+  box-shadow: 0 1px 0 rgba(10, 10, 10, 0.06) !important;
+}
+
+body.mm-nav-open.mm-nav-solid-topbar .mm-topbar::after {
+  content: none;
+}
+
+/* Home hero chrome is tied to :not(.is-scrolled); restore dark ink on white when menu opens mid-scroll */
+body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-topbar {
+  color: var(--mm-ink);
+}
+
+body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-topbar__logo {
+  border-color: rgba(16, 16, 16, 0.55);
+  color: var(--mm-ink);
+}
+
+body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-topbar__loc {
+  color: rgba(10, 10, 10, 0.88);
+}
+
+body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-topbar__phone {
+  color: var(--mm-ink);
+}
+
+body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-topbar__phone:hover {
+  opacity: 0.75;
+  color: var(--mm-ink);
+}
+
+body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-topbar__cta {
+  color: var(--mm-ink);
+  border: 1px solid rgba(10, 10, 10, 0.55);
+}
+
+body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-topbar__cta:hover {
+  background: #0a0a0a;
+  color: #fff;
+  border: 1px solid #0a0a0a;
+}
+
+body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-lang {
+  color: rgba(16, 16, 16, 0.55);
+}
+
+body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-lang.is-active {
+  color: rgba(16, 16, 16, 0.92);
+}
+
+body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-lang__sep {
+  background: rgba(10, 10, 10, 0.38);
+}
+
+body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-burger__line {
+  stroke: currentColor !important;
+}
+
+/* Transparent bar at scroll top: scroll-lock can leave a flat strip behind the burger — match body grain */
+body.mm-nav-open.mm-texture-bg:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar,
+body.mm-nav-open.mm-rooms:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar {
+  background-color: var(--mm-paper) !important;
+  border-bottom-color: rgba(10, 10, 10, 0.1) !important;
+  box-shadow: 0 1px 0 rgba(10, 10, 10, 0.06) !important;
+}
+
+body.mm-nav-open.mm-room-detail:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar {
+  background-color: var(--rd-paper, var(--mm-paper)) !important;
+  border-bottom-color: rgba(10, 10, 10, 0.1) !important;
+  box-shadow: 0 1px 0 rgba(10, 10, 10, 0.06) !important;
+}
+
+body.mm-nav-open.mm-texture-bg:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar::after,
+body.mm-nav-open.mm-rooms:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar::after,
+body.mm-nav-open.mm-room-detail:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../assets/site-texture.png?v=2") repeat;
+  background-size: 560px auto;
+  opacity: 0.38;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.mm-nav-open.mm-texture-bg:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar > *,
+body.mm-nav-open.mm-rooms:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar > *,
+body.mm-nav-open.mm-room-detail:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Screen-reader only utility */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0;
+  margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+
+/*
+ * Site menu — THE LINE Hotels: white sheet (short on desktop so dimmed page shows below),
+ * close in a hairline square, boxed mark + microcaps loc + EN|ES, ghost CTA, left rail bold caps sans
+ * (gold = current place), hairline, two-column caps links — no shadows.
+ */
+.mm-nav {
+  --mm-nav-bg: #fff;
+  --mm-nav-line: rgba(10, 10, 10, 0.12);
+  --mm-nav-line-soft: rgba(10, 10, 10, 0.08);
+  --mm-nav-gold: #9c8b61;
+  position: fixed;
+  top: calc(var(--mm-topbar-h) + env(safe-area-inset-top, 0px));
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  pointer-events: none;
+  visibility: hidden;
+  transition: visibility 0.28s ease;
+}
+
+.mm-nav.is-open {
+  pointer-events: auto;
+  visibility: visible;
+  top: calc(var(--mm-topbar-h) + env(safe-area-inset-top, 0px));
+  z-index: 200;
+}
+
+.mm-nav__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  background: rgba(10, 10, 10, 0.05);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.mm-nav.is-open .mm-nav__backdrop {
+  opacity: 1;
+}
+
+.mm-nav__panel {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0;
+  background: var(--mm-nav-bg);
+  border: 1px solid rgba(10, 10, 10, 0.15);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.44s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mm-nav.is-open .mm-nav__panel {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (min-width: 721px) {
+  .mm-nav__panel {
+    inset: auto;
+    top: 0;
+    left: 0;
+    right: auto;
+    bottom: auto;
+    transform: translateY(-6px);
+    width: min(760px, 100%);
+    max-height: min(76vh, 640px);
+    height: auto;
+    border: 1px solid rgba(10, 10, 10, 0.15);
+    border-left: none;
+  }
+
+  .mm-nav.is-open .mm-nav__panel {
+    transform: translateY(0);
+  }
+}
+
+.mm-nav__chrome {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  height: calc(var(--mm-topbar-h) + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) max(var(--mm-shell-pad), env(safe-area-inset-right)) 0
+    0;
+  border-bottom: 1px solid var(--mm-nav-line-soft);
+  background: var(--mm-nav-bg);
+}
+
+.mm-nav__close {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  /* Match topbar height on left edge — same footprint as the burger */
+  width: calc(var(--mm-topbar-h) + env(safe-area-inset-top, 0px));
+  height: calc(var(--mm-topbar-h) + env(safe-area-inset-top, 0px));
+  align-self: stretch;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-right: 1px solid rgba(10,10,10,.1);
+  border-radius: 0;
+  background: transparent;
+  color: rgba(10, 10, 10, 0.5);
+  cursor: pointer;
+  font: inherit;
+  transition: color 0.22s ease, background 0.22s ease;
+}
+
+.mm-nav__close:hover {
+  color: var(--mm-ink);
+  background: rgba(10,10,10,.03);
+}
+
+.mm-nav__close-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.mm-nav__close-icon {
+  display: flex;
+  line-height: 0;
+  color: currentColor;
+}
+
+.mm-nav__close-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.mm-nav__close-icon path {
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.mm-nav__close:focus-visible {
+  outline: 1px solid rgba(10, 10, 10, 0.25);
+  outline-offset: 5px;
+}
+
+.mm-nav__chrome-spacer {
+  flex: 1 1 24px;
+  min-width: 12px;
+  order: 3;
+}
+
+.mm-nav__brand {
+  order: 1;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.mm-nav__mark {
+  box-sizing: border-box;
+  width: var(--mm-logo-size);
+  height: var(--mm-logo-size);
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(10,10,10,.55);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--mm-ink);
+  line-height: 1;
+}
+
+.mm-nav__loc {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(10, 10, 10, 0.45);
+  line-height: 1.35;
+}
+
+.mm-nav__lang {
+  order: 2;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.mm-nav__lang .mm-lang {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(10, 10, 10, 0.42);
+}
+
+.mm-nav__lang .mm-lang.is-active {
+  color: var(--mm-ink);
+}
+
+.mm-nav__lang-sep {
+  margin: 0 0.42em;
+  font-size: 8.5px;
+  font-weight: 400;
+  color: rgba(10, 10, 10, 0.32);
+  user-select: none;
+}
+
+a.mm-nav__chrome-cta {
+  order: 4;
+  flex: 0 0 auto;
+  margin-left: auto;
+  padding: 11px clamp(16px, 2.8vw, 22px);
+  border-radius: 0;
+  border: 1px solid rgba(10, 10, 10, 0.55);
+  background: transparent;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--mm-ink);
+  white-space: nowrap;
+  transition:
+    background-color 0.22s ease,
+    color 0.22s ease;
+}
+
+a.mm-nav__chrome-cta:hover {
+  background: rgba(10, 10, 10, 0.06);
+}
+
+a.mm-nav__chrome-cta:focus-visible {
+  outline: 1px solid rgba(10, 10, 10, 0.28);
+  outline-offset: 3px;
+}
+
+.mm-nav__body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.mm-nav__aside {
+  flex: 0 0 min(36%, 260px);
+  max-width: 280px;
+  box-sizing: border-box;
+  padding: clamp(28px, 4vw, 44px) clamp(24px, 3vw, 36px) 32px clamp(24px, 3.5vw, 40px);
+  border-right: 1px solid rgba(10, 10, 10, 0.1);
+  background: var(--mm-nav-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Aside slides in from left */
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity .38s ease .1s, transform .42s cubic-bezier(0.22,1,0.36,1) .1s;
+}
+.mm-nav.is-open .mm-nav__aside {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.mm-nav__aside-top { flex: 1; }
+
+.mm-nav__property {
+  margin: 0 0 4px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: clamp(17px, 1.8vw, 22px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  color: var(--mm-ink);
+}
+
+.mm-nav__city {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: clamp(17px, 1.8vw, 22px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  color: var(--mm-nav-gold);
+}
+
+/* Divider in aside */
+.mm-nav__aside-rule {
+  border: none;
+  border-top: 1px solid rgba(10,10,10,.1);
+  margin: 20px 0;
+  flex-shrink: 0;
+}
+
+/* Secondary links below rule */
+.mm-nav__aside-secondary {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.mm-nav__aside-secondary a {
+  display: block;
+  padding: 4px 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(10,10,10,.4);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.mm-nav__aside-secondary a:hover { color: rgba(10,10,10,.8); }
+
+.mm-nav__scroll {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding: clamp(24px, 4vw, 40px) max(var(--mm-shell-pad), env(safe-area-inset-right)) 32px
+    clamp(22px, 3.5vw, 36px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Check Availability sits top-right of scroll area */
+.mm-nav__scroll-cta {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+}
+
+.mm-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 480px;
+  column-count: 2;
+  column-gap: 40px;
+}
+
+/* Stagger animation keyframe */
+@keyframes mm-link-in {
+  from { opacity: 0; transform: translateY(7px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.mm-nav__list li {
+  margin: 0;
+  break-inside: avoid;
+  /* Hidden by default; animated in when menu opens */
+  opacity: 0;
+}
+
+/* Animate each link in with stagger when menu is open */
+.mm-nav.is-open .mm-nav__list li:nth-child(1)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .10s both; }
+.mm-nav.is-open .mm-nav__list li:nth-child(2)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .15s both; }
+.mm-nav.is-open .mm-nav__list li:nth-child(3)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .20s both; }
+.mm-nav.is-open .mm-nav__list li:nth-child(4)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .25s both; }
+.mm-nav.is-open .mm-nav__list li:nth-child(5)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .30s both; }
+.mm-nav.is-open .mm-nav__list li:nth-child(6)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .35s both; }
+.mm-nav.is-open .mm-nav__list li:nth-child(7)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .40s both; }
+.mm-nav.is-open .mm-nav__list li:nth-child(8)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .45s both; }
+.mm-nav.is-open .mm-nav__list li:nth-child(9)  { animation: mm-link-in .38s cubic-bezier(0.22,1,0.36,1) .50s both; }
+
+.mm-nav__list a {
+  display: block;
+  padding: 0.72rem 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.45;
+  color: var(--mm-ink);
+  text-decoration: none;
+  transition: color 0.22s ease;
+}
+
+.mm-nav__list a:hover,
+.mm-nav__list a:focus-visible {
+  color: rgba(10, 10, 10, 0.45);
+}
+
+.mm-nav__list a[aria-current="page"] {
+  color: var(--mm-nav-gold);
+  pointer-events: none;
+}
+
+@media (max-width: 720px) {
+  .mm-nav__body {
+    flex-direction: column;
+  }
+
+  .mm-nav__aside {
+    flex: 0 0 auto;
+    max-width: none;
+    border-right: 0;
+    border-bottom: 1px solid rgba(10, 10, 10, 0.1);
+    padding: 20px max(var(--mm-shell-pad), env(safe-area-inset-left)) 18px;
+  }
+
+  .mm-nav__list {
+    column-count: 1;
+  }
+
+  a.mm-nav__chrome-cta {
+    flex: 1 0 100%;
+    margin-left: 0;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mm-nav__backdrop,
+  .mm-nav__panel {
+    transition: opacity 0.2s ease;
+  }
+
+  .mm-nav__panel {
+    transform: none;
+  }
+
+  .mm-nav.is-open .mm-nav__panel {
+    transform: none;
+  }
+
+  .mm-nav__list a,
+  .mm-nav__close,
+  a.mm-nav__chrome-cta {
+    transition: none;
+  }
+}
+
+/* Nav/footer: fixed Spanish “Habitaciones” (Google often renders “Alojamiento” for “Rooms”). */
+.mm-nav__i18n-es {
+  display: none;
+}
+html.mm-lang-es .mm-nav__i18n-en {
+  display: none;
+}
+html.mm-lang-es .mm-nav__i18n-es {
+  display: inline;
+}
+
+@media (max-width: 860px) {
+  html.mm-shell-html {
+    --mm-topbar-h: 88px;
+    --mm-logo-size: 56px;
+  }
+
+  .mm-topbar {
+    min-height: calc(var(--mm-topbar-h) + env(safe-area-inset-top, 0px));
+    gap: 8px;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-right: clamp(14px, 4vw, 22px);
+    padding-bottom: 0;
+    padding-left: 0;
+  }
+
+  .mm-topbar__brand {
+    gap: clamp(8px, 1.2vw, 14px);
+  }
+
+  .mm-topbar__logo {
+    width: var(--mm-logo-size);
+    height: var(--mm-logo-size);
+  }
+
+  .mm-topbar__lang {
+    display: none;
+  }
+
+  .mm-topbar__menu {
+    width: auto;
+    height: auto;
+    min-height: 48px;
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: 8px;
+  }
+
+  .mm-topbar__right {
+    gap: 8px;
+  }
+}
+
+/* Phones: home stacks phone + CTA + long location — hide nonessential row items */
+@media (max-width: 640px) {
+  body.mm-home .mm-topbar__phone {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .mm-topbar {
+    gap: 6px;
+    padding-right: max(10px, env(safe-area-inset-right));
+  }
+
+  .mm-topbar__loc {
+    display: none;
+  }
+
+  .mm-topbar__brand {
+    gap: 0;
+  }
+
+  .mm-topbar__cta {
+    padding: 11px 9px;
+  }
+
+  .mm-topbar__right {
+    flex-shrink: 0;
+    gap: 6px;
+  }
+
+  .mm-topbar__menu {
+    padding-right: 6px;
+    flex-shrink: 0;
+  }
+}
+
+/* Google Website Translator — EN/ES handled in top bar; hide gadget & chrome */
+#mm-google-translate {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  border: 0 !important;
+  visibility: hidden !important;
+}
+iframe.skiptranslate,
+.goog-te-banner-frame,
+body > .skiptranslate {
+  display: none !important;
+  visibility: hidden !important;
+}
+body.mm-shell {
+  top: 0 !important;
+}
+.goog-te-gadget,
+.goog-te-gadget-simple {
+  font-size: 0 !important;
+}
+.goog-te-gadget-icon,
+.goog-te-menu-value span {
+  display: none !important;
+}
+
+/* ── Book page: topbar scrolls with the page (not sticky) ───── */
+body.mm-book-page .mm-topbar {
+  position: relative !important;
+  top: auto !important;
+}
+/* Spacer not needed — bar is already in normal flow */
+body.mm-book-page .mm-topbar-spacer {
+  display: none !important;
+}

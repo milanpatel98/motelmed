@@ -1,0 +1,282 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Urbanist & Poppins (Sans/Sans) (Sophisticated)",
+	"personality": [
+		"sophisticated"
+	],
+	"keywords": [
+		"sans-serif",
+		"geometric",
+		"rounded",
+		"modern",
+		"clean",
+		"neutral",
+		"contemporary",
+		"light"
+	],
+	"settings": {
+		"typography": {
+			"fontFamilies": [
+				{
+					"fontFace": [
+						{
+							"src": "https://fonts.wp.com/s/urbanist/v15/L0xjDF02iFML4hGCyOCpRdycFsGxSrqDlR4fE5OrS8SlKw.woff2",
+							"fontWeight": "300",
+							"fontStyle": "normal",
+							"fontFamily": "Urbanist"
+						},
+						{
+							"src": "https://fonts.wp.com/s/urbanist/v15/L0xtDF02iFML4hGCyMqgdyNEf6or5L2WA12pVZmqacG1K4S1.woff2",
+							"fontWeight": "300",
+							"fontStyle": "italic",
+							"fontFamily": "Urbanist"
+						},
+						{
+							"src": "https://fonts.wp.com/s/urbanist/v15/L0xjDF02iFML4hGCyOCpRdycFsGxSrqDyx4fE5OrS8SlKw.woff2",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"fontFamily": "Urbanist"
+						},
+						{
+							"src": "https://fonts.wp.com/s/urbanist/v15/L0xtDF02iFML4hGCyMqgdyNEf6or5L2WA133VZmqacG1K4S1.woff2",
+							"fontWeight": "400",
+							"fontStyle": "italic",
+							"fontFamily": "Urbanist"
+						},
+						{
+							"src": "https://fonts.wp.com/s/urbanist/v15/L0xjDF02iFML4hGCyOCpRdycFsGxSrqD-R4fE5OrS8SlKw.woff2",
+							"fontWeight": "500",
+							"fontStyle": "normal",
+							"fontFamily": "Urbanist"
+						},
+						{
+							"src": "https://fonts.wp.com/s/urbanist/v15/L0xtDF02iFML4hGCyMqgdyNEf6or5L2WA13FVZmqacG1K4S1.woff2",
+							"fontWeight": "500",
+							"fontStyle": "italic",
+							"fontFamily": "Urbanist"
+						},
+						{
+							"src": "https://fonts.wp.com/s/urbanist/v15/L0xjDF02iFML4hGCyOCpRdycFsGxSrqDFRkfE5OrS8SlKw.woff2",
+							"fontWeight": "600",
+							"fontStyle": "normal",
+							"fontFamily": "Urbanist"
+						},
+						{
+							"src": "https://fonts.wp.com/s/urbanist/v15/L0xtDF02iFML4hGCyMqgdyNEf6or5L2WA10pUpmqacG1K4S1.woff2",
+							"fontWeight": "600",
+							"fontStyle": "italic",
+							"fontFamily": "Urbanist"
+						}
+					],
+					"fontFamily": "\"Urbanist\", sans-serif",
+					"name": "Urbanist",
+					"slug": "urbanist"
+				},
+				{
+					"fontFace": [
+						{
+							"src": "https://fonts.wp.com/s/poppins/v23/pxiByp8kv8JHgFVrLDz8V15vFP-KUEg.woff2",
+							"fontWeight": "300",
+							"fontStyle": "normal",
+							"fontFamily": "Poppins"
+						},
+						{
+							"src": "https://fonts.wp.com/s/poppins/v23/pxiDyp8kv8JHgFVrJJLm21llFd2PQEhcqw.woff2",
+							"fontWeight": "300",
+							"fontStyle": "italic",
+							"fontFamily": "Poppins"
+						},
+						{
+							"src": "https://fonts.wp.com/s/poppins/v23/pxiEyp8kv8JHgFVrFJXUc1NECPY.woff2",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"fontFamily": "Poppins"
+						},
+						{
+							"src": "https://fonts.wp.com/s/poppins/v23/pxiGyp8kv8JHgFVrJJLecnFBGPaTSQ.woff2",
+							"fontWeight": "400",
+							"fontStyle": "italic",
+							"fontFamily": "Poppins"
+						},
+						{
+							"src": "https://fonts.wp.com/s/poppins/v23/pxiByp8kv8JHgFVrLGT9V15vFP-KUEg.woff2",
+							"fontWeight": "500",
+							"fontStyle": "normal",
+							"fontFamily": "Poppins"
+						},
+						{
+							"src": "https://fonts.wp.com/s/poppins/v23/pxiDyp8kv8JHgFVrJJLmg1hlFd2PQEhcqw.woff2",
+							"fontWeight": "500",
+							"fontStyle": "italic",
+							"fontFamily": "Poppins"
+						},
+						{
+							"src": "https://fonts.wp.com/s/poppins/v23/pxiByp8kv8JHgFVrLEj6V15vFP-KUEg.woff2",
+							"fontWeight": "600",
+							"fontStyle": "normal",
+							"fontFamily": "Poppins"
+						},
+						{
+							"src": "https://fonts.wp.com/s/poppins/v23/pxiDyp8kv8JHgFVrJJLmr19lFd2PQEhcqw.woff2",
+							"fontWeight": "600",
+							"fontStyle": "italic",
+							"fontFamily": "Poppins"
+						}
+					],
+					"fontFamily": "\"Poppins\", sans-serif",
+					"name": "Poppins",
+					"slug": "poppins"
+				}
+			],
+			"fontSizes": [
+				{
+					"name": "Small",
+					"size": "16px",
+					"slug": "small",
+					"fluid": {
+						"min": "15px",
+						"max": "16px"
+					}
+				},
+				{
+					"name": "Medium",
+					"size": "20px",
+					"slug": "medium",
+					"fluid": {
+						"min": "18px",
+						"max": "20px"
+					}
+				},
+				{
+					"name": "Large",
+					"size": "32px",
+					"slug": "large",
+					"fluid": {
+						"min": "22px",
+						"max": "32px"
+					}
+				},
+				{
+					"name": "Extra Large",
+					"size": "64px",
+					"slug": "x-large",
+					"fluid": {
+						"min": "32px",
+						"max": "64px"
+					}
+				},
+				{
+					"name": "2X Large",
+					"size": "84px",
+					"slug": "xx-large",
+					"fluid": {
+						"min": "34px",
+						"max": "84px"
+					}
+				},
+				{
+					"name": "3X Large",
+					"size": "120px",
+					"slug": "xxx-large",
+					"fluid": {
+						"min": "36px",
+						"max": "120px"
+					}
+				}
+			]
+		}
+	},
+	"styles": {
+		"blocks": {
+			"core/site-title": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"fontFamily": "var(--wp--preset--font-family--urbanist)",
+					"fontWeight": "400",
+					"letterSpacing": "0",
+					"lineHeight": {
+						"ref": "styles.blocks.core/navigation.typography.lineHeight"
+					}
+				}
+			},
+			"core/navigation": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"fontFamily": "var(--wp--preset--font-family--urbanist)",
+					"fontWeight": "400",
+					"letterSpacing": "0",
+					"lineHeight": "1.4"
+				}
+			},
+			"core/site-tagline": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"fontFamily": "var(--wp--preset--font-family--urbanist)",
+					"fontWeight": "400",
+					"letterSpacing": "0"
+				}
+			}
+		},
+		"elements": {
+			"button": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"fontFamily": "var(--wp--preset--font-family--urbanist)",
+					"fontWeight": "500"
+				}
+			},
+			"heading": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--urbanist)",
+					"fontWeight": "400",
+					"lineHeight": "1.2",
+					"letterSpacing": "-0.01em"
+				}
+			},
+			"h1": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--xx-large)"
+				}
+			},
+			"h2": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--x-large)"
+				}
+			},
+			"h3": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--large)",
+					"letterSpacing": "0",
+					"fontWeight": "500"
+				}
+			},
+			"h4": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--large)",
+					"letterSpacing": "0",
+					"fontWeight": "500"
+				}
+			},
+			"h5": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--large)",
+					"letterSpacing": "0"
+				}
+			},
+			"h6": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--large)",
+					"letterSpacing": "0"
+				}
+			}
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--poppins)",
+			"fontSize": "var(--wp--preset--font-size--small)",
+			"fontWeight": "400",
+			"lineHeight": "1.5",
+			"letterSpacing": "0"
+		}
+	}
+}

@@ -1,0 +1,293 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Newsreader & PT Serif (Serif/Serif) (Professional)",
+	"personality": [
+		"professional"
+	],
+	"keywords": [
+		"serif",
+		"display",
+		"expressive",
+		"magazine",
+		"newspaper",
+		"book",
+		"editorial",
+		"elegant",
+		"classic"
+	],
+	"settings": {
+		"typography": {
+			"fontFamilies": [
+				{
+					"fontFace": [
+						{
+							"src": "https://fonts.wp.com/s/newsreader/v25/cY9qfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBCzBDXXD9JVF438w-I_ACexEPjCggA.woff2",
+							"fontWeight": "200",
+							"fontStyle": "normal",
+							"fontFamily": "Newsreader"
+						},
+						{
+							"src": "https://fonts.wp.com/s/newsreader/v25/cY9qfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBCzBDXXD9JVF438wJo_ACexEPjCggA.woff2",
+							"fontWeight": "300",
+							"fontStyle": "normal",
+							"fontFamily": "Newsreader"
+						},
+						{
+							"src": "https://fonts.wp.com/s/newsreader/v25/cY9qfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBCzBDXXD9JVF438weI_ACexEPjCggA.woff2",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"fontFamily": "Newsreader"
+						},
+						{
+							"src": "https://fonts.wp.com/s/newsreader/v25/cY9qfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBCzBDXXD9JVF438wSo_ACexEPjCggA.woff2",
+							"fontWeight": "500",
+							"fontStyle": "normal",
+							"fontFamily": "Newsreader"
+						},
+						{
+							"src": "https://fonts.wp.com/s/newsreader/v25/cY9qfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBCzBDXXD9JVF438wpojACexEPjCggA.woff2",
+							"fontWeight": "600",
+							"fontStyle": "normal",
+							"fontFamily": "Newsreader"
+						},
+						{
+							"src": "https://fonts.wp.com/s/newsreader/v25/cY9qfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBCzBDXXD9JVF438wn4jACexEPjCggA.woff2",
+							"fontWeight": "700",
+							"fontStyle": "normal",
+							"fontFamily": "Newsreader"
+						},
+						{
+							"src": "https://fonts.wp.com/s/newsreader/v25/cY9qfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBCzBDXXD9JVF438w-IjACexEPjCggA.woff2",
+							"fontWeight": "800",
+							"fontStyle": "normal",
+							"fontFamily": "Newsreader"
+						},
+						{
+							"src": "https://fonts.wp.com/s/newsreader/v25/cY9kfjOCX1hbuyalUrK439vogqC9yFZCYg7oRZaLP4obnf7fTXglsMyoT-ZFHDWwgECi.woff2",
+							"fontWeight": "200",
+							"fontStyle": "italic",
+							"fontFamily": "Newsreader"
+						},
+						{
+							"src": "https://fonts.wp.com/s/newsreader/v25/cY9kfjOCX1hbuyalUrK439vogqC9yFZCYg7oRZaLP4obnf7fTXglsMx2T-ZFHDWwgECi.woff2",
+							"fontWeight": "300",
+							"fontStyle": "italic",
+							"fontFamily": "Newsreader"
+						},
+						{
+							"src": "https://fonts.wp.com/s/newsreader/v25/cY9kfjOCX1hbuyalUrK439vogqC9yFZCYg7oRZaLP4obnf7fTXglsMwoT-ZFHDWwgECi.woff2",
+							"fontWeight": "400",
+							"fontStyle": "italic",
+							"fontFamily": "Newsreader"
+						},
+						{
+							"src": "https://fonts.wp.com/s/newsreader/v25/cY9kfjOCX1hbuyalUrK439vogqC9yFZCYg7oRZaLP4obnf7fTXglsMwaT-ZFHDWwgECi.woff2",
+							"fontWeight": "500",
+							"fontStyle": "italic",
+							"fontFamily": "Newsreader"
+						},
+						{
+							"src": "https://fonts.wp.com/s/newsreader/v25/cY9kfjOCX1hbuyalUrK439vogqC9yFZCYg7oRZaLP4obnf7fTXglsMz2SOZFHDWwgECi.woff2",
+							"fontWeight": "600",
+							"fontStyle": "italic",
+							"fontFamily": "Newsreader"
+						},
+						{
+							"src": "https://fonts.wp.com/s/newsreader/v25/cY9kfjOCX1hbuyalUrK439vogqC9yFZCYg7oRZaLP4obnf7fTXglsMzPSOZFHDWwgECi.woff2",
+							"fontWeight": "700",
+							"fontStyle": "italic",
+							"fontFamily": "Newsreader"
+						},
+						{
+							"src": "https://fonts.wp.com/s/newsreader/v25/cY9kfjOCX1hbuyalUrK439vogqC9yFZCYg7oRZaLP4obnf7fTXglsMyoSOZFHDWwgECi.woff2",
+							"fontWeight": "800",
+							"fontStyle": "italic",
+							"fontFamily": "Newsreader"
+						}
+					],
+					"fontFamily": "\"Newsreader\", sans-serif",
+					"name": "Newsreader",
+					"slug": "newsreader"
+				},
+				{
+					"fontFace": [
+						{
+							"src": "https://fonts.wp.com/s/ptserif/v18/EJRVQgYoZZY2vCFuvDFUxL6ddjb-.woff2",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"fontFamily": "PT Serif"
+						},
+						{
+							"src": "https://fonts.wp.com/s/ptserif/v18/EJRTQgYoZZY2vCFuvAFTzr-_cyb-vco.woff2",
+							"fontWeight": "400",
+							"fontStyle": "italic",
+							"fontFamily": "PT Serif"
+						},
+						{
+							"src": "https://fonts.wp.com/s/ptserif/v18/EJRSQgYoZZY2vCFuvAnt65qQXSr3pNNB.woff2",
+							"fontWeight": "700",
+							"fontStyle": "normal",
+							"fontFamily": "PT Serif"
+						},
+						{
+							"src": "https://fonts.wp.com/s/ptserif/v18/EJRQQgYoZZY2vCFuvAFT9gaQVyvVocNB6Iw.woff2",
+							"fontWeight": "700",
+							"fontStyle": "italic",
+							"fontFamily": "PT Serif"
+						}
+					],
+					"fontFamily": "\"PT Serif\", sans-serif",
+					"name": "PT Serif",
+					"slug": "pt-serif"
+				}
+			],
+			"fontSizes": [
+				{
+					"name": "Small",
+					"size": "16px",
+					"slug": "small",
+					"fluid": {
+						"min": "15px",
+						"max": "16px"
+					}
+				},
+				{
+					"name": "Medium",
+					"size": "17px",
+					"slug": "medium",
+					"fluid": {
+						"min": "16px",
+						"max": "17px"
+					}
+				},
+				{
+					"name": "Large",
+					"size": "32px",
+					"slug": "large",
+					"fluid": {
+						"min": "24px",
+						"max": "32px"
+					}
+				},
+				{
+					"name": "Extra Large",
+					"size": "62px",
+					"slug": "x-large",
+					"fluid": {
+						"min": "40px",
+						"max": "62px"
+					}
+				},
+				{
+					"name": "2X Large",
+					"size": "74px",
+					"slug": "xx-large",
+					"fluid": {
+						"min": "44px",
+						"max": "74px"
+					}
+				},
+				{
+					"name": "3X Large",
+					"size": "132px",
+					"slug": "xxx-large",
+					"fluid": {
+						"min": "40px",
+						"max": "138px"
+					}
+				}
+			]
+		}
+	},
+	"styles": {
+		"blocks": {
+			"core/site-title": {
+				"typography": {
+					"fontSize": "24px",
+					"fontFamily": "var(--wp--preset--font-family--newsreader)",
+					"fontWeight": "400",
+					"lineHeight": {
+						"ref": "styles.blocks.core/navigation.typography.lineHeight"
+					}
+				}
+			},
+			"core/navigation": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"fontFamily": "var(--wp--preset--font-family--pt-serif)",
+					"fontWeight": "400",
+					"lineHeight": "1.3"
+				}
+			},
+			"core/site-tagline": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"fontFamily": "var(--wp--preset--font-family--pt-serif)",
+					"fontWeight": "400"
+				}
+			}
+		},
+		"elements": {
+			"button": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"fontFamily": "var(--wp--preset--font-family--pt-serif)",
+					"fontWeight": "400"
+				}
+			},
+			"heading": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--newsreader)",
+					"fontWeight": "400",
+					"lineHeight": "1.2",
+					"letterSpacing": "-0.02em"
+				}
+			},
+			"h1": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--xx-large)"
+				}
+			},
+			"h2": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--x-large)",
+					"lineHeight": "1.1"
+				}
+			},
+			"h3": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--large)",
+					"letterSpacing": "-0.01em",
+					"fontWeight": "400"
+				}
+			},
+			"h4": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--large)",
+					"letterSpacing": "-0.01em",
+					"fontWeight": "400"
+				}
+			},
+			"h5": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--large)",
+					"letterSpacing": "-0.01em"
+				}
+			},
+			"h6": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--large)",
+					"letterSpacing": "-0.01em"
+				}
+			}
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--pt-serif)",
+			"fontSize": "var(--wp--preset--font-size--medium)",
+			"fontWeight": "400",
+			"lineHeight": "1.55",
+			"letterSpacing": "0"
+		}
+	}
+}

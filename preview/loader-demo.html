@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motel Mediteran — Loading State Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8f8f6;
+      color: #0a0a0a;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url('assets/site-texture.png?v=2') repeat;
+      background-size: 560px auto;
+      opacity: 0.38;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Demo page (fake booking calendar step) ─────────────── */
+
+    .demo-page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 80px 40px 100px;
+    }
+
+    .demo-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.35;
+      margin-bottom: 12px;
+    }
+
+    .demo-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 48px;
+    }
+
+    /* Fake dual-month calendar */
+    .demo-cal {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 56px;
+      margin-bottom: 52px;
+      border-top: 1px solid rgba(10,10,10,0.1);
+      padding-top: 28px;
+    }
+
+    .demo-cal__month {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 18px;
+    }
+
+    .demo-cal__grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+    }
+
+    .demo-cal__cell {
+      height: 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: rgba(10,10,10,0.28);
+    }
+
+    .demo-cal__cell.active {
+      color: #0a0a0a;
+    }
+
+    .demo-cal__cell.selected {
+      background: #0a0a0a;
+      color: #fff;
+    }
+
+    .demo-cal__cell.in-range {
+      background: rgba(10,10,10,0.06);
+      color: #0a0a0a;
+    }
+
+    .demo-cal__cell .rate {
+      font-size: 9px;
+      opacity: 0.45;
+      margin-top: 1px;
+    }
+
+    /* Trigger button */
+    .demo-footer {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 24px;
+      border-top: 1px solid rgba(10,10,10,0.1);
+    }
+
+    .demo-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 15px 36px;
+      background: transparent;
+      border: 1px solid #0a0a0a;
+      color: #0a0a0a;
+      cursor: pointer;
+      transition: background 0.22s, color 0.22s;
+    }
+
+    .demo-btn:hover {
+      background: #0a0a0a;
+      color: #f5f0e8;
+    }
+
+    .demo-btn:disabled {
+      opacity: 0.4;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* ── Loader overlay ──────────────────────────────────────── */
+
+    .mm-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #f8f8f6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+
+      /* Fade in/out */
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.38s ease;
+    }
+
+    .mm-loader::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('assets/site-texture.png?v=2') repeat;
+      background-size: 560px auto;
+      opacity: 0.38;
+      pointer-events: none;
+    }
+
+    .mm-loader.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Spinner: rotating square ring + static MM mark */
+    .mm-loader__spinner {
+      position: relative;
+      z-index: 1;
+      width: 100px;
+      height: 100px;
+    }
+
+    .mm-loader__ring {
+      position: absolute;
+      inset: 0;
+    }
+
+    .mm-loader__rect {
+      animation: mm-gap 1.6s linear infinite;
+    }
+
+    /*
+      SVG rect: x=3, y=3, w=94, h=94  →  stroke centerline perimeter ≈ 376 px
+      dasharray: 304 (stroke) + 72 (gap) = 376
+      The gap travels around the square as the SVG rotates.
+    */
+
+    .mm-loader__mark {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      padding-left: 0.22em; /* optical: compensate trailing letter-spacing */
+      color: #0a0a0a;
+      user-select: none;
+    }
+
+    .mm-loader__label {
+      position: relative;
+      z-index: 1;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #0a0a0a;
+      opacity: 0.4;
+    }
+
+    /* Perimeter of rect (centerline): 4 × 94 = 376 px
+       Animate dashoffset from 0 → -376 so the gap travels
+       one full loop clockwise around the square.          */
+    @keyframes mm-gap {
+      from { stroke-dashoffset: 0; }
+      to   { stroke-dashoffset: -376; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Demo background content ──────────────────────────────── -->
+  <div class="demo-page">
+    <p class="demo-eyebrow">Step 1 of 4</p>
+    <h1 class="demo-heading">Select your dates</h1>
+
+    <div class="demo-cal">
+
+      <!-- April 2026 -->
+      <div>
+        <p class="demo-cal__month">April 2026</p>
+        <div class="demo-cal__grid">
+          <!-- DOW headers -->
+          <div class="demo-cal__cell">S</div><div class="demo-cal__cell">M</div><div class="demo-cal__cell">T</div>
+          <div class="demo-cal__cell">W</div><div class="demo-cal__cell">T</div><div class="demo-cal__cell">F</div><div class="demo-cal__cell">S</div>
+          <!-- blanks -->
+          <div class="demo-cal__cell"></div><div class="demo-cal__cell"></div>
+          <!-- days -->
+          <div class="demo-cal__cell active">1<span class="rate">99</span></div>
+          <div class="demo-cal__cell active">2<span class="rate">99</span></div>
+          <div class="demo-cal__cell active">3<span class="rate">109</span></div>
+          <div class="demo-cal__cell active">4<span class="rate">109</span></div>
+          <div class="demo-cal__cell active">5<span class="rate">129</span></div>
+          <div class="demo-cal__cell active">6<span class="rate">129</span></div>
+          <div class="demo-cal__cell active">7<span class="rate">129</span></div>
+          <div class="demo-cal__cell active">8<span class="rate">109</span></div>
+          <div class="demo-cal__cell active">9<span class="rate">99</span></div>
+          <div class="demo-cal__cell active">10<span class="rate">99</span></div>
+          <div class="demo-cal__cell active">11<span class="rate">99</span></div>
+          <div class="demo-cal__cell active">12<span class="rate">129</span></div>
+          <div class="demo-cal__cell selected">13</div>
+          <div class="demo-cal__cell in-range">14<span class="rate">109</span></div>
+          <div class="demo-cal__cell in-range">15<span class="rate">109</span></div>
+          <div class="demo-cal__cell in-range">16<span class="rate">99</span></div>
+          <div class="demo-cal__cell in-range">17<span class="rate">99</span></div>
+          <div class="demo-cal__cell in-range">18<span class="rate">129</span></div>
+          <div class="demo-cal__cell selected">19</div>
+          <div class="demo-cal__cell active">20<span class="rate">129</span></div>
+          <div class="demo-cal__cell active">21<span class="rate">109</span></div>
+          <div class="demo-cal__cell active">22<span class="rate">99</span></div>
+          <div class="demo-cal__cell active">23<span class="rate">99</span></div>
+          <div class="demo-cal__cell active">24<span class="rate">109</span></div>
+          <div class="demo-cal__cell active">25<span class="rate">109</span></div>
+          <div class="demo-cal__cell active">26<span class="rate">129</span></div>
+          <div class="demo-cal__cell active">27<span class="rate">129</span></div>
+          <div class="demo-cal__cell active">28<span class="rate">99</span></div>
+          <div class="demo-cal__cell active">29<span class="rate">99</span></div>
+          <div class="demo-cal__cell active">30<span class="rate">99</span></div>
+        </div>
+      </div>
+
+      <!-- May 2026 -->
+      <div>
+        <p class="demo-cal__month">May 2026</p>
+        <div class="demo-cal__grid">
+          <div class="demo-cal__cell">S</div><div class="demo-cal__cell">M</div><div class="demo-cal__cell">T</div>
+          <div class="demo-cal__cell">W</div><div class="demo-cal__cell">T</div><div class="demo-cal__cell">F</div><div class="demo-cal__cell">S</div>
+          <div class="demo-cal__cell"></div><div class="demo-cal__cell"></div><div class="demo-cal__cell"></div>
+          <div class="demo-cal__cell"></div>
+          <div class="demo-cal__cell active">1<span class="rate">129</span></div>
+          <div class="demo-cal__cell active">2<span class="rate">149</span></div>
+          <div class="demo-cal__cell active">3<span class="rate">149</span></div>
+          <div class="demo-cal__cell active">4<span class="rate">129</span></div>
+          <div class="demo-cal__cell active">5<span class="rate">109</span></div>
+          <div class="demo-cal__cell active">6<span class="rate">99</span></div>
+          <div class="demo-cal__cell active">7<span class="rate">99</span></div>
+          <div class="demo-cal__cell active">8<span class="rate">109</span></div>
+          <div class="demo-cal__cell active">9<span class="rate">129</span></div>
+          <div class="demo-cal__cell active">10<span class="rate">149</span></div>
+          <div class="demo-cal__cell active">11<span class="rate">149</span></div>
+          <div class="demo-cal__cell active">12<span class="rate">109</span></div>
+          <div class="demo-cal__cell active">13<span class="rate">99</span></div>
+          <div class="demo-cal__cell active">14<span class="rate">99</span></div>
+          <div class="demo-cal__cell active">15<span class="rate">109</span></div>
+          <div class="demo-cal__cell active">16<span class="rate">109</span></div>
+          <div class="demo-cal__cell active">17<span class="rate">129</span></div>
+          <div class="demo-cal__cell active">18<span class="rate">149</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="demo-footer">
+      <button class="demo-btn" id="triggerBtn">Check Availability</button>
+    </div>
+  </div>
+
+  <!-- ── Loader overlay ────────────────────────────────────────── -->
+  <div class="mm-loader" id="mmLoader" role="status" aria-live="polite" aria-label="Checking availability, please wait">
+
+    <div class="mm-loader__spinner" aria-hidden="true">
+      <svg
+        class="mm-loader__ring"
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        width="100"
+        height="100"
+      >
+        <rect
+          class="mm-loader__rect"
+          x="3" y="3"
+          width="94" height="94"
+          stroke="#0a0a0a"
+          stroke-width="1.5"
+          stroke-dasharray="304 72"
+          stroke-linecap="square"
+        />
+      </svg>
+      <div class="mm-loader__mark">M M</div>
+    </div>
+
+    <p class="mm-loader__label">Loading</p>
+
+  </div>
+
+  <script>
+    var btn    = document.getElementById('triggerBtn');
+    var loader = document.getElementById('mmLoader');
+    var timer  = null;
+
+    btn.addEventListener('click', function () {
+      // Show loader
+      loader.classList.add('is-visible');
+      btn.disabled = true;
+
+      // Simulate a 2.8 s API response, then dismiss
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        loader.classList.remove('is-visible');
+        btn.disabled = false;
+      }, 2800);
+    });
+  </script>
+
+</body>
+</html>

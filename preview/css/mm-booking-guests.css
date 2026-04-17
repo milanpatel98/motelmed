@@ -1,0 +1,287 @@
+/* Rooms & guests popover — matches mm-book-cal dark glass */
+
+.mm-book-guests {
+  position: fixed;
+  inset: 0;
+  z-index: 8650;
+  pointer-events: none;
+}
+
+.mm-book-guests.mm-book-guests--open {
+  pointer-events: auto;
+}
+
+.mm-book-guests__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  cursor: default;
+}
+
+.mm-book-guests__panel {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: min(420px, calc(100vw - 20px));
+  max-height: min(90vh, 480px);
+  box-sizing: border-box;
+  padding: 18px 20px 16px;
+  color: rgba(254, 254, 254, 0.94);
+  color-scheme: dark;
+  background: linear-gradient(
+    165deg,
+    rgba(14, 14, 14, 0.96) 0%,
+    rgba(8, 8, 8, 0.94) 45%,
+    rgba(12, 12, 12, 0.96) 100%
+  );
+  -webkit-backdrop-filter: blur(20px) saturate(1.1);
+  backdrop-filter: blur(20px) saturate(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 1px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 28px 72px rgba(0, 0, 0, 0.55);
+  z-index: 1;
+  overflow: auto;
+}
+
+.mm-book-guests__head {
+  display: grid;
+  grid-template-columns: minmax(72px, 1fr) 1fr 1fr;
+  gap: 8px 12px;
+  align-items: end;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mm-book-guests__head span {
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: rgba(254, 254, 254, 0.92);
+  text-align: center;
+}
+
+.mm-book-guests__head span:first-child {
+  text-align: left;
+}
+
+.mm-book-guests__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.mm-book-guests__room-block {
+  display: block;
+}
+
+.mm-book-guests__row {
+  display: grid;
+  grid-template-columns: minmax(72px, 1fr) 1fr 1fr;
+  gap: 8px 12px;
+  align-items: center;
+}
+
+.mm-book-guests__room-label-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 6px;
+}
+
+.mm-book-guests__room-label {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: rgba(254, 254, 254, 0.78);
+}
+
+.mm-book-guests__remove {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.15s ease;
+}
+
+.mm-book-guests__remove:hover {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.mm-book-guests__stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.mm-book-guests__step-btn {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(254, 254, 254, 0.92);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.mm-book-guests__step-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.mm-book-guests__step-btn:disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+}
+
+.mm-book-guests__step-val {
+  min-width: 1.25ch;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(254, 254, 254, 0.95);
+  text-align: center;
+}
+
+.mm-book-guests__add {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(254, 254, 254, 0.88);
+  transition: color 0.15s ease;
+}
+
+.mm-book-guests__add:hover:not(:disabled) {
+  color: #fff;
+}
+
+.mm-book-guests__add:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.mm-book-guests__add-ic {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.mm-book-guests__note {
+  margin: 14px 0 0;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.mm-book-guests__note a {
+  color: rgba(254, 254, 254, 0.72);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.mm-book-guests__note a:hover {
+  color: #fff;
+}
+
+.mm-book-guests__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mm-book-guests__btn {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 10px 18px;
+  border-radius: 1px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.mm-book-guests__btn--ghost {
+  border: 1px solid rgba(255, 255, 255, 0.52);
+  background: transparent;
+  color: rgba(254, 254, 254, 0.95);
+}
+
+.mm-book-guests__btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.72);
+  color: #fff;
+}
+
+.mm-book-guests__btn--primary {
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.96);
+  color: #0a0a0a;
+}
+
+.mm-book-guests__btn--primary:hover {
+  background: #fff;
+  border-color: #fff;
+}
+
+@media (max-width: 380px) {
+  .mm-book-guests__panel {
+    width: calc(100vw - 16px);
+    padding: 14px 14px 12px;
+  }
+
+  .mm-book-guests__head,
+  .mm-book-guests__row {
+    gap: 6px 8px;
+    grid-template-columns: 52px 1fr 1fr;
+  }
+}

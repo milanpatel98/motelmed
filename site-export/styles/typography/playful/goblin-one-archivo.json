@@ -1,0 +1,243 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Goblin One & Archivo (Sans/Sans) (Playful)",
+	"personality": [
+		"playful"
+	],
+	"keywords": [
+		"serif",
+		"chunky",
+		"display",
+		"slab",
+		"retro",
+		"bold",
+		"creative",
+		"magazine",
+		"dramatic",
+		"poster",
+		"fun",
+		"vintage",
+		"expressive"
+	],
+	"settings": {
+		"typography": {
+			"fontFamilies": [
+				{
+					"fontFace": [
+						{
+							"src": "https://fonts.wp.com/s/goblinone/v26/CSR64z1ZnOqZRjRCBVY_TOIATNt_pOU.woff2",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"fontFamily": "Goblin One"
+						}
+					],
+					"fontFamily": "\"Goblin One\", sans-serif",
+					"name": "Goblin One",
+					"slug": "goblin-one"
+				},
+				{
+					"fontFace": [
+						{
+							"src": "https://fonts.wp.com/s/archivo/v19/k3k6o8UDI-1M0wlSV9XAw6lQkqWY8Q82sJaRE-NWIDdgffTTajNp9R1oJ0vyVQ.woff2",
+							"fontWeight": "300",
+							"fontStyle": "normal",
+							"fontFamily": "Archivo"
+						},
+						{
+							"src": "https://fonts.wp.com/s/archivo/v19/k3k6o8UDI-1M0wlSV9XAw6lQkqWY8Q82sJaRE-NWIDdgffTTNDNp9R1oJ0vyVQ.woff2",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"fontFamily": "Archivo"
+						},
+						{
+							"src": "https://fonts.wp.com/s/archivo/v19/k3k6o8UDI-1M0wlSV9XAw6lQkqWY8Q82sJaRE-NWIDdgffTTBjNp9R1oJ0vyVQ.woff2",
+							"fontWeight": "500",
+							"fontStyle": "normal",
+							"fontFamily": "Archivo"
+						},
+						{
+							"src": "https://fonts.wp.com/s/archivo/v19/k3k6o8UDI-1M0wlSV9XAw6lQkqWY8Q82sJaRE-NWIDdgffTT6jRp9R1oJ0vyVQ.woff2",
+							"fontWeight": "600",
+							"fontStyle": "normal",
+							"fontFamily": "Archivo"
+						},
+						{
+							"src": "https://fonts.wp.com/s/archivo/v19/k3k8o8UDI-1M0wlSfdzyIEkpwTM29hr-8mTYIRyOSVz60_PG_HDfsxdpBU7iVdxQ.woff2",
+							"fontWeight": "300",
+							"fontStyle": "italic",
+							"fontFamily": "Archivo"
+						},
+						{
+							"src": "https://fonts.wp.com/s/archivo/v19/k3k8o8UDI-1M0wlSfdzyIEkpwTM29hr-8mTYIRyOSVz60_PG_HCBsxdpBU7iVdxQ.woff2",
+							"fontWeight": "400",
+							"fontStyle": "italic",
+							"fontFamily": "Archivo"
+						},
+						{
+							"src": "https://fonts.wp.com/s/archivo/v19/k3k8o8UDI-1M0wlSfdzyIEkpwTM29hr-8mTYIRyOSVz60_PG_HCzsxdpBU7iVdxQ.woff2",
+							"fontWeight": "500",
+							"fontStyle": "italic",
+							"fontFamily": "Archivo"
+						},
+						{
+							"src": "https://fonts.wp.com/s/archivo/v19/k3k8o8UDI-1M0wlSfdzyIEkpwTM29hr-8mTYIRyOSVz60_PG_HBftBdpBU7iVdxQ.woff2",
+							"fontWeight": "600",
+							"fontStyle": "italic",
+							"fontFamily": "Archivo"
+						}
+					],
+					"fontFamily": "\"Archivo\", sans-serif",
+					"name": "Archivo",
+					"slug": "archivo"
+				}
+			],
+			"fontSizes": [
+				{
+					"name": "Small",
+					"size": "16px",
+					"slug": "small",
+					"fluid": {
+						"min": "15px",
+						"max": "16px"
+					}
+				},
+				{
+					"name": "Medium",
+					"size": "18px",
+					"slug": "medium",
+					"fluid": {
+						"min": "17px",
+						"max": "18px"
+					}
+				},
+				{
+					"name": "Large",
+					"size": "24px",
+					"slug": "large",
+					"fluid": {
+						"min": "20px",
+						"max": "24px"
+					}
+				},
+				{
+					"name": "Extra Large",
+					"size": "46px",
+					"slug": "x-large",
+					"fluid": {
+						"min": "32px",
+						"max": "46px"
+					}
+				},
+				{
+					"name": "2X Large",
+					"size": "50px",
+					"slug": "xx-large",
+					"fluid": {
+						"min": "38px",
+						"max": "50px"
+					}
+				},
+				{
+					"name": "3X Large",
+					"size": "100px",
+					"slug": "xxx-large",
+					"fluid": {
+						"min": "40px",
+						"max": "100px"
+					}
+				}
+			]
+		}
+	},
+	"styles": {
+		"blocks": {
+			"core/site-title": {
+				"typography": {
+					"fontSize": "24px",
+					"fontFamily": "var(--wp--preset--font-family--archivo)",
+					"fontWeight": "400",
+					"lineHeight": {
+						"ref": "styles.blocks.core/navigation.typography.lineHeight"
+					}
+				}
+			},
+			"core/navigation": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"fontFamily": "var(--wp--preset--font-family--archivo)",
+					"fontWeight": "400",
+					"lineHeight": "1.5"
+				}
+			},
+			"core/site-tagline": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"fontFamily": "var(--wp--preset--font-family--archivo)",
+					"fontWeight": "400"
+				}
+			}
+		},
+		"elements": {
+			"button": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"fontFamily": "var(--wp--preset--font-family--archivo)",
+					"fontWeight": "400"
+				}
+			},
+			"heading": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--goblin-one)",
+					"fontWeight": "400",
+					"lineHeight": "1.2",
+					"letterSpacing": "-0.02em"
+				}
+			},
+			"h1": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--xx-large)"
+				}
+			},
+			"h2": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--x-large)",
+					"lineHeight": "1.2"
+				}
+			},
+			"h3": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--large)",
+					"letterSpacing": "-0.03em",
+					"fontWeight": "400"
+				}
+			},
+			"h4": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--large)",
+					"letterSpacing": "-0.01em",
+					"fontWeight": "400"
+				}
+			},
+			"h5": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--large)",
+					"letterSpacing": "-0.01em"
+				}
+			},
+			"h6": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--large)",
+					"letterSpacing": "-0.01em"
+				}
+			}
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--archivo)",
+			"fontSize": "var(--wp--preset--font-size--medium)",
+			"fontWeight": "400",
+			"lineHeight": "1.6",
+			"letterSpacing": "0"
+		}
+	}
+}

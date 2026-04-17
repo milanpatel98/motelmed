@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" class="mm-shell-html">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Accessibility — Motel Mediteran</title>
+    <meta
+      name="description"
+      content="Accessibility information for Motel Mediteran guest rooms, bathrooms, and parking."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/site.css?v=ref8" />
+    <link rel="stylesheet" href="css/mm-topbar.css?v=20260454" />
+    <link rel="stylesheet" href="css/mm-footer.css?v=7" />
+<link rel="stylesheet" href="css/accessibility.css?v=8" />
+    <script src="js/mm-page-loader.js?v=3"></script>
+</head>
+  <body class="mm-shell mm-texture-bg mm-a11y-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="mm-topbar-sentinel" aria-hidden="true"></div>
+    <div class="mm-topbar-spacer" aria-hidden="true"></div>
+    <div class="mm-book-data" hidden>
+      <input type="hidden" id="mm-book-checkin" name="checkin" value="" autocomplete="off" />
+      <input type="hidden" id="mm-book-checkout" name="checkout" value="" autocomplete="off" />
+      <input type="hidden" id="mm-book-guests-state" value='[{"adults":2,"children":0}]' autocomplete="off" />
+      <input type="hidden" id="mm-book-no-rooms" value="1" autocomplete="off" />
+      <input type="hidden" id="mm-book-group-adults" value="2" autocomplete="off" />
+      <input type="hidden" id="mm-book-group-children" value="0" autocomplete="off" />
+    </div>
+    <div id="mm-booking-inline" class="mm-booking-inline mm-booking-inline--sentinel" aria-hidden="true"></div>
+    <header class="mm-topbar" aria-label="Site header">
+      <button
+        class="mm-topbar__menu"
+        type="button"
+        id="mm-menu-btn"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mm-site-nav"
+        aria-haspopup="true"
+      >
+        <svg class="mm-burger" width="68" height="20" viewBox="0 0 68 20" aria-hidden="true" focusable="false">
+        <g class="mm-burger__spin mm-burger__spin--top">
+          <g class="mm-burger__shift mm-burger__shift--top">
+          <line class="mm-burger__line" x1="0" y1="2.5" x2="68" y2="2.5" />
+        </g>
+        </g>
+        <g class="mm-burger__row mm-burger__row--mid">
+          <line class="mm-burger__line" x1="0" y1="10" x2="68" y2="10" />
+        </g>
+        <g class="mm-burger__spin mm-burger__spin--bot">
+          <g class="mm-burger__shift mm-burger__shift--bot">
+          <line class="mm-burger__line" x1="0" y1="17.5" x2="68" y2="17.5" />
+        </g>
+        </g>
+    </svg>
+      </button>
+      <a class="mm-topbar__brand notranslate" href="index.html" aria-label="Motel Mediteran Home">
+        <span class="mm-topbar__logo" aria-hidden="true">MM</span>
+        <span class="mm-topbar__loc">Escondido, California</span>
+      </a>
+      <div class="mm-topbar__right">
+        <a
+          class="mm-topbar__cta"
+          href="book.html"
+         
+         
+          >Check availability</a
+        >
+        <div class="mm-topbar__lang" aria-label="Language">
+          <button class="mm-lang is-active" type="button" data-mm-lang="en" aria-label="English">EN</button>
+          <span class="mm-lang__sep" aria-hidden="true"></span>
+          <button class="mm-lang" type="button" data-mm-lang="es" aria-label="Spanish">ES</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="mm-nav" id="mm-site-nav" data-mm-nav aria-hidden="true">
+      <button type="button" class="mm-nav__backdrop" data-mm-nav-close aria-label="Close menu"></button>
+      <nav
+        class="mm-nav__panel"
+        id="mm-nav-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mm-nav-dialog-title"
+        aria-label="Site navigation"
+      >
+        <div class="mm-nav__chrome">
+          <button type="button" class="mm-nav__close" data-mm-nav-close aria-label="Close navigation">
+            <span class="mm-nav__close-text" aria-hidden="true"><span class="mm-nav__i18n-en">Close</span><span class="mm-nav__i18n-es" lang="es">Cerrar</span></span>
+            <span class="mm-nav__close-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 2.5L15.5 15.5M15.5 2.5L2.5 15.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" /></svg></span>
+          </button>
+          <div class="mm-nav__brand" id="mm-nav-dialog-title">
+            <span class="mm-nav__mark notranslate" translate="no" aria-hidden="true">MM</span>
+            <span class="mm-nav__loc notranslate" translate="no">Escondido, California</span>
+          </div>
+          <div class="mm-nav__lang notranslate" translate="no" role="group" aria-label="Language">
+            <button type="button" class="mm-lang" data-mm-lang="en" aria-label="English">EN</button>
+            <span class="mm-nav__lang-sep" aria-hidden="true">|</span>
+            <button type="button" class="mm-lang" data-mm-lang="es" aria-label="Spanish">ES</button>
+          </div>
+          <span class="mm-nav__chrome-spacer" aria-hidden="true"></span>
+        </div>
+        <div class="mm-nav__body">
+          <aside class="mm-nav__aside" aria-label="Motel Mediteran">
+            <p class="mm-nav__property notranslate" translate="no">Motel Mediteran</p>
+            <p class="mm-nav__city notranslate" translate="no">Escondido</p>
+          </aside>
+          <div class="mm-nav__scroll">
+          <ul class="mm-nav__list">
+          <li><a href="index.html">Home</a></li>
+          <li>
+            <a href="rooms.html" class="notranslate" translate="no"
+              ><span class="mm-nav__i18n-en">Rooms and suites</span
+              ><span class="mm-nav__i18n-es" lang="es">Habitaciones</span></a
+            >
+          </li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="things-to-do.html">Things to do</a></li>
+          <li><a href="amenities.html">Amenities</a></li>
+          <li><a href="directions.html">Directions</a></li>
+          <li><a href="hotel-policies.html">Hotel policies</a></li>
+          <li><a href="accessibility.html" aria-current="page">Accessibility</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+        </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <main id="main" class="mm-a11y-main mm-content-page">
+      <header class="mm-a11y-hero">
+        <div class="mm-a11y-hero__inner">
+          <p class="mm-a11y-hero__kicker">Guest information</p>
+          <h1 class="mm-a11y-hero__title">Accessibility</h1>
+          <p class="mm-a11y-hero__lead">
+            Mobility-related details for bathrooms, guest rooms, and parking—organized so you can scan or expand each
+            topic.
+          </p>
+        </div>
+      </header>
+
+      <section
+        class="mm-a11y-topics"
+        aria-labelledby="a11y-topics-title"
+        aria-describedby="a11y-accordion-hint"
+      >
+        <div class="mm-a11y-section__inner">
+          <h2 id="a11y-topics-title" class="mm-a11y-topics__title">Specifications by area</h2>
+          <p id="a11y-accordion-hint" class="mm-a11y-hint">
+            Expand a section for the full checklist. Works with keyboard (Tab, Enter, or Space) and touch.
+          </p>
+          <div
+            class="accordion mm-a11y-accordion mm-a11y-accordion--stack"
+            role="group"
+            aria-label="Accessibility specifications by topic"
+          >
+            <details class="mm-a11y-details" open>
+              <summary>
+                <span class="mm-a11y-summary__label">1. Bathroom mobility accessibility</span>
+              </summary>
+              <div class="accordion__body mm-a11y-card-body">
+                <ol type="a">
+                  <li>
+                    The accessible toilet in each accessible guestroom bathroom is centered 18&quot; from the adjacent
+                    side wall to permit use of the grab bars.
+                  </li>
+                  <li>
+                    The toilet has a horizontal grab bar along the adjacent side wall at least 42&quot; long, mounted
+                    33&quot;-36&quot; above the floor.
+                  </li>
+                  <li>
+                    The accessible toilet has a horizontal grab bar along the wall behind the toilet at least 36&quot;
+                    long, mounted 33&quot;-36&quot; above the floor.
+                  </li>
+                  <li>The lavatory is no more than 34&quot; high with at least 29&quot; clearance under the front edge.</li>
+                  <li>Faucets are easily operable (levers, wrist blades, single arm, etc.) and usable with one hand.</li>
+                  <li>Clear floor space for wheelchair turning: a 60&quot; diameter circle or T-turn.</li>
+                  <li>Adequate approach space at the bathroom door from the pull side.</li>
+                  <li>
+                    Alternate roll-in shower compartment is 36&quot; wide and 60&quot; deep, with a 36&quot; wide entry at
+                    one end of the long side.
+                  </li>
+                  <li>Shower grab bars comply with ADA Section 609 and are provided per 608.3.</li>
+                </ol>
+              </div>
+            </details>
+
+            <details class="mm-a11y-details">
+              <summary>
+                <span class="mm-a11y-summary__label">2. Room mobility accessibility</span>
+              </summary>
+              <div class="accordion__body mm-a11y-card-body">
+                <ol type="a">
+                  <li>Entry and interior doors (except shallow closet doors) provide at least 32&quot; clear passage width.</li>
+                  <li>Door hardware is operable with one hand without tight grasping, pinching, or twisting.</li>
+                  <li>At least 18&quot; clear floor space on the latch side on the pull side of doors.</li>
+                  <li>Accessible desk surface height between 28&quot; and 34&quot; with at least 27&quot; knee clearance.</li>
+                  <li>
+                    Accessible route to tables; clear floor area 30&quot; × 48&quot; at accessible seating, extending
+                    19&quot;.
+                  </li>
+                  <li>Accessible rooms with two beds: minimum 36&quot; between beds for wheelchair transfer.</li>
+                </ol>
+              </div>
+            </details>
+
+            <details class="mm-a11y-details">
+              <summary>
+                <span class="mm-a11y-summary__label">3. Accessible parking</span>
+              </summary>
+              <div class="accordion__body mm-a11y-card-body">
+                <ol type="a">
+                  <li>Accessible spaces have or share an adjacent access aisle.</li>
+                  <li>Slopes of spaces and aisles are less than 1:50.</li>
+                  <li>Each space has a visible accessibility sign mounted high enough when a vehicle is parked.</li>
+                  <li>Level surfaces free of built-up curb ramps that impede transfers.</li>
+                  <li>Accessible parking is closest to the lobby and accessible guestroom entrances.</li>
+                </ol>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="mm-footer">
+      <div class="mm-footer__inner">
+        <div class="mm-footer__brand-col">
+          <img
+            class="mm-footer__logo"
+            src="assets/mm-logo-mark.png"
+            alt=""
+            width="72"
+            height="72"
+            decoding="async"
+          />
+          <p class="mm-footer__brand"><span class="notranslate" translate="no">Motel Mediteran</span></p>
+          <p class="mm-footer__meta">
+            2336 S. Escondido Blvd<br />
+            Escondido, CA 92025<br />
+            Phone <a href="tel:+17607432300">760-743-2300</a>
+          </p>
+          <a
+            class="mm-footer__ig"
+            href="https://www.instagram.com/motelmediteran/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Motel Mediteran on Instagram"
+            ><img
+              class="mm-footer__ig-icon"
+              src="assets/icon-instagram.svg"
+              alt=""
+              width="22"
+              height="22"
+              decoding="async"
+          /></a>
+        </div>
+        <div>
+          <p class="mm-footer__h">Quick links</p>
+          <ul class="mm-footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rooms.html" class="notranslate" translate="no"><span class="mm-nav__i18n-en">Rooms and suites</span><span class="mm-nav__i18n-es" lang="es">Habitaciones</span></a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="things-to-do.html">Things to do</a></li>
+            <li><a href="amenities.html">Amenities</a></li>
+            <li><a href="directions.html">Directions</a></li>
+            <li><a href="hotel-policies.html">Hotel policies</a></li>
+            <li><a href="accessibility.html" aria-current="page">Accessibility</a></li>
+            <li><a href="faqs.html">FAQs</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="mm-footer__h">Stay with us</p>
+          <p class="mm-footer__note">
+            Free parking, Wi‑Fi, and a pool—plus a central North County location minutes from the Safari Park. Book
+            directly for our best availability.
+          </p>
+          <a
+            class="mm-footer__book"
+            href="book.html"
+           
+           
+            >Book a room</a
+          >
+        </div>
+      </div>
+      <p class="mm-footer__copy">© <span class="notranslate" translate="no">Motel Mediteran</span> · Escondido, California</p>
+    </footer>
+
+    <script src="js/mm-lang.js?v=6"></script>
+    <script src="js/mm-booking-dock.js?v=14"></script>
+    <script src="js/mm-booking-calendar.js?v=5"></script>
+    <script src="js/mm-booking-guests.js?v=1"></script>
+    <script src="js/mm-topbar.js?v=17"></script>
+    <script src="js/site.js"></script>
+    <script src="js/mm-chat-widget.js?v=46"></script>
+  </body>
+</html>

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en" class="mm-shell-html">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Gallery — Motel Mediteran</title>
+    <meta name="description" content="Browse photos of rooms, the outdoor pool, and the full property at Motel Mediteran in Escondido, CA." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/site.css?v=ref8" />
+    <link rel="stylesheet" href="css/mm-topbar.css?v=20260454" />
+    <link rel="stylesheet" href="css/mm-footer.css?v=7" />
+<link rel="stylesheet" href="css/gallery.css?v=35" />
+    <script src="js/mm-page-loader.js?v=3"></script>
+</head>
+  <body class="mm-shell mm-texture-bg mm-editorial">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="mm-topbar-sentinel" aria-hidden="true"></div>
+    <div class="mm-topbar-spacer" aria-hidden="true"></div>
+    <div class="mm-book-data" hidden>
+      <input type="hidden" id="mm-book-checkin" name="checkin" value="" autocomplete="off" />
+      <input type="hidden" id="mm-book-checkout" name="checkout" value="" autocomplete="off" />
+      <input type="hidden" id="mm-book-guests-state" value='[{"adults":2,"children":0}]' autocomplete="off" />
+      <input type="hidden" id="mm-book-no-rooms" value="1" autocomplete="off" />
+      <input type="hidden" id="mm-book-group-adults" value="2" autocomplete="off" />
+      <input type="hidden" id="mm-book-group-children" value="0" autocomplete="off" />
+    </div>
+    <div id="mm-booking-inline" class="mm-booking-inline mm-booking-inline--sentinel" aria-hidden="true"></div>
+
+    <header class="mm-topbar" aria-label="Site header">
+      <button
+        class="mm-topbar__menu"
+        type="button"
+        id="mm-menu-btn"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mm-site-nav"
+        aria-haspopup="true"
+      >
+        <svg class="mm-burger" width="68" height="20" viewBox="0 0 68 20" aria-hidden="true" focusable="false">
+        <g class="mm-burger__spin mm-burger__spin--top">
+          <g class="mm-burger__shift mm-burger__shift--top">
+          <line class="mm-burger__line" x1="0" y1="2.5" x2="68" y2="2.5" />
+        </g>
+        </g>
+        <g class="mm-burger__row mm-burger__row--mid">
+          <line class="mm-burger__line" x1="0" y1="10" x2="68" y2="10" />
+        </g>
+        <g class="mm-burger__spin mm-burger__spin--bot">
+          <g class="mm-burger__shift mm-burger__shift--bot">
+          <line class="mm-burger__line" x1="0" y1="17.5" x2="68" y2="17.5" />
+        </g>
+        </g>
+    </svg>
+      </button>
+      <a class="mm-topbar__brand notranslate" href="index.html" aria-label="Motel Mediteran Home">
+        <span class="mm-topbar__logo" aria-hidden="true">MM</span>
+        <span class="mm-topbar__loc">Escondido, California</span>
+      </a>
+      <div class="mm-topbar__right">
+        <a
+          class="mm-topbar__cta"
+          href="book.html"
+         
+         
+          >Check availability</a
+        >
+        <div class="mm-topbar__lang" aria-label="Language">
+          <button class="mm-lang is-active" type="button" data-mm-lang="en" aria-label="English">EN</button>
+          <span class="mm-lang__sep" aria-hidden="true"></span>
+          <button class="mm-lang" type="button" data-mm-lang="es" aria-label="Spanish">ES</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="mm-nav" id="mm-site-nav" data-mm-nav aria-hidden="true">
+      <button type="button" class="mm-nav__backdrop" data-mm-nav-close aria-label="Close menu"></button>
+      <nav
+        class="mm-nav__panel"
+        id="mm-nav-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mm-nav-dialog-title"
+        aria-label="Site navigation"
+      >
+        <div class="mm-nav__chrome">
+          <button type="button" class="mm-nav__close" data-mm-nav-close aria-label="Close navigation">
+            <span class="mm-nav__close-text" aria-hidden="true"><span class="mm-nav__i18n-en">Close</span><span class="mm-nav__i18n-es" lang="es">Cerrar</span></span>
+            <span class="mm-nav__close-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 2.5L15.5 15.5M15.5 2.5L2.5 15.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" /></svg></span>
+          </button>
+          <div class="mm-nav__brand" id="mm-nav-dialog-title">
+            <span class="mm-nav__mark notranslate" translate="no" aria-hidden="true">MM</span>
+            <span class="mm-nav__loc notranslate" translate="no">Escondido, California</span>
+          </div>
+          <div class="mm-nav__lang notranslate" translate="no" role="group" aria-label="Language">
+            <button type="button" class="mm-lang" data-mm-lang="en" aria-label="English">EN</button>
+            <span class="mm-nav__lang-sep" aria-hidden="true">|</span>
+            <button type="button" class="mm-lang" data-mm-lang="es" aria-label="Spanish">ES</button>
+          </div>
+          <span class="mm-nav__chrome-spacer" aria-hidden="true"></span>
+        </div>
+        <div class="mm-nav__body">
+          <aside class="mm-nav__aside" aria-label="Motel Mediteran">
+            <p class="mm-nav__property notranslate" translate="no">Motel Mediteran</p>
+            <p class="mm-nav__city notranslate" translate="no">Escondido</p>
+          </aside>
+          <div class="mm-nav__scroll">
+          <ul class="mm-nav__list">
+          <li><a href="index.html">Home</a></li>
+          <li>
+            <a href="rooms.html" class="notranslate" translate="no"
+              ><span class="mm-nav__i18n-en">Rooms and suites</span
+              ><span class="mm-nav__i18n-es" lang="es">Habitaciones</span></a
+            >
+          </li>
+          <li><a href="gallery.html" aria-current="page">Gallery</a></li>
+          <li><a href="things-to-do.html">Things to do</a></li>
+          <li><a href="amenities.html">Amenities</a></li>
+          <li><a href="directions.html">Directions</a></li>
+          <li><a href="hotel-policies.html">Hotel policies</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+        </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <main id="main" class="mm-gal-page" aria-label="Photo gallery">
+
+      <!-- ── Hero: overlap — left = iris / pupil macro; right = lens macro ─── -->
+      <section class="mm-gal-hero" aria-labelledby="gal-title">
+        <div class="mm-gal-hero__stage">
+          <div class="mm-gal-hero__img mm-gal-hero__img--left" aria-hidden="true">
+            <img
+              src="https://images.unsplash.com/photo-1483519173755-be893fab1f46?auto=format&amp;fit=crop&amp;w=1600&amp;q=80"
+              alt=""
+              width="1600"
+              height="1600"
+              decoding="async"
+            />
+          </div>
+          <div class="mm-gal-hero__img mm-gal-hero__img--right" aria-hidden="true">
+            <img
+              src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&amp;fit=crop&amp;w=1600&amp;q=80"
+              alt=""
+              width="1600"
+              height="1067"
+              decoding="async"
+            />
+          </div>
+          <div class="mm-gal-hero__titlewrap">
+            <h1 id="gal-title" class="mm-gal-title">
+              <span class="mm-gal-title__line">A Closer</span>
+              <span class="mm-gal-title__line">Look</span>
+            </h1>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Intro ─────────────────────────────────────────────────────────── -->
+      <section class="mm-gal-intro" aria-label="Gallery introduction">
+        <div class="mm-gal-shell">
+          <p class="mm-gal-kicker">See before you stay</p>
+          <p class="mm-gal-lead">
+            Browse every room type, the outdoor pool, and the full property — so you know exactly what you're booking
+            before you arrive at <span class="notranslate" translate="no">Motel Mediteran</span>.
+          </p>
+        </div>
+      </section>
+
+      <!-- ── Grid + Filters ────────────────────────────────────────────────── -->
+      <section class="mm-gal-body" aria-labelledby="gal-grid-label">
+        <div class="mm-gal-shell">
+
+          <!-- Filter by (checkbox row — matches Things to do) -->
+          <div class="mm-gal-filter-block">
+            <p class="mm-gal-filter-label">Filter by</p>
+            <div class="mm-gal-filters" role="group" aria-label="Filter photos">
+              <label class="mm-gal-filter">
+                <input type="checkbox" name="gal-filter" value="exterior" />
+                <span>Exterior</span>
+              </label>
+              <label class="mm-gal-filter">
+                <input type="checkbox" name="gal-filter" value="rooms" />
+                <span>Rooms</span>
+              </label>
+              <label class="mm-gal-filter">
+                <input type="checkbox" name="gal-filter" value="amenities" />
+                <span>Pool &amp; Amenities</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Photo count -->
+          <p class="mm-gal-count" id="mm-gal-count" aria-live="polite" aria-atomic="true"></p>
+
+          <!-- Grid -->
+          <div class="mm-gal-grid" id="mm-gal-grid" data-filter="all">
+
+            <!-- ── EXTERIOR ─────────────────────────────────── -->
+            <div class="mm-gal-section-label" data-section="exterior" aria-hidden="true">
+              <span class="mm-gal-section-label__text">Exterior</span>
+              <span class="mm-gal-section-label__line"></span>
+            </div>
+
+            <div class="mm-gal-item mm-gal-item--wide" data-cat="exterior" data-caption="The Property">
+              <img src="assets/motel-pics/EXTERIOR%20PICS/1.png" alt="Motel Mediteran exterior — front of property" loading="eager" decoding="async" />
+              <span class="mm-gal-item__label">The Property</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="exterior" data-caption="Exterior">
+              <img src="assets/motel-pics/EXTERIOR%20PICS/2.png" alt="Motel Mediteran exterior" loading="eager" decoding="async" />
+              <span class="mm-gal-item__label">Exterior</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="exterior" data-caption="Exterior">
+              <img src="assets/motel-pics/EXTERIOR%20PICS/3.png" alt="Motel Mediteran exterior" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Exterior</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="exterior" data-caption="Exterior">
+              <img src="assets/motel-pics/EXTERIOR%20PICS/4.png" alt="Motel Mediteran exterior" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Exterior</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="exterior" data-caption="Exterior">
+              <img src="assets/motel-pics/EXTERIOR%20PICS/5.png" alt="Motel Mediteran exterior" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Exterior</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="exterior" data-caption="Exterior">
+              <img src="assets/motel-pics/EXTERIOR%20PICS/7.png" alt="Motel Mediteran exterior" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Exterior</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="exterior" data-caption="Exterior">
+              <img src="assets/motel-pics/EXTERIOR%20PICS/8.png" alt="Motel Mediteran exterior" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Exterior</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="exterior" data-caption="Exterior">
+              <img src="assets/motel-pics/EXTERIOR%20PICS/9.png" alt="Motel Mediteran exterior" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Exterior</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="exterior" data-caption="Exterior">
+              <img src="assets/motel-pics/EXTERIOR%20PICS/10.png" alt="Motel Mediteran exterior" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Exterior</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+
+            <!-- ── POOL & AMENITIES ──────────────────────────── -->
+            <div class="mm-gal-section-label" data-section="amenities" aria-hidden="true">
+              <span class="mm-gal-section-label__text">Pool &amp; Amenities</span>
+              <span class="mm-gal-section-label__line"></span>
+            </div>
+
+            <div class="mm-gal-item mm-gal-item--wide" data-cat="amenities" data-caption="Outdoor Pool">
+              <img src="assets/motel-pics/POOL/pool.png" alt="Motel Mediteran outdoor pool" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Outdoor Pool</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="amenities" data-caption="Guest Services">
+              <img src="assets/motel-pics/OFFICE%20AND%20LAUNDRY/1.png" alt="Front office and guest services" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Guest Services</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="amenities" data-caption="Guest Services">
+              <img src="assets/motel-pics/OFFICE%20AND%20LAUNDRY/2.png" alt="Guest laundry room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Guest Services</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="amenities" data-caption="Guest Services">
+              <img src="assets/motel-pics/OFFICE%20AND%20LAUNDRY/3.png" alt="Guest services area" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Guest Services</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+
+            <!-- ── ROOMS ─────────────────────────────────────── -->
+            <div class="mm-gal-section-label" data-section="rooms" aria-hidden="true">
+              <span class="mm-gal-section-label__text">Rooms</span>
+              <span class="mm-gal-section-label__line"></span>
+            </div>
+
+            <!-- Deluxe King Jacuzzi (retired lead 1.png — patio / jacuzzi emphasis from 2 onward) -->
+            <div class="mm-gal-item mm-gal-item--wide" data-cat="rooms" data-caption="Deluxe King Jacuzzi">
+              <img src="assets/motel-pics/king%20room%20jacuzzi/2.png?v=1" alt="Deluxe King Jacuzzi suite — patio" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Deluxe King Jacuzzi</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Deluxe King Jacuzzi">
+              <img src="assets/motel-pics/king%20room%20jacuzzi/3.png?v=1" alt="Deluxe King Jacuzzi room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Deluxe King Jacuzzi</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Deluxe King Jacuzzi">
+              <img src="assets/motel-pics/king%20room%20jacuzzi/4.png?v=1" alt="Deluxe King Jacuzzi room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Deluxe King Jacuzzi</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Deluxe King Jacuzzi">
+              <img src="assets/motel-pics/king%20room%20jacuzzi/5.png?v=1" alt="Deluxe King Jacuzzi room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Deluxe King Jacuzzi</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Deluxe King Jacuzzi">
+              <img src="assets/motel-pics/king%20room%20jacuzzi/6.png?v=1" alt="Deluxe King Jacuzzi room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Deluxe King Jacuzzi</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+
+            <!-- Deluxe King Suite with Kitchen -->
+            <div class="mm-gal-item mm-gal-item--wide" data-cat="rooms" data-caption="Deluxe King Suite with Kitchen">
+              <img src="assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/5.png" alt="Deluxe King Suite with Kitchen — living area and fireplace" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Deluxe King Suite with Kitchen</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Deluxe King Suite with Kitchen">
+              <img src="assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/3.png" alt="Deluxe King Suite with Kitchen — patio kitchen" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Deluxe King Suite with Kitchen</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Deluxe King Suite with Kitchen">
+              <img src="assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/10.png" alt="Deluxe King Suite with Kitchen — king bedroom" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Deluxe King Suite with Kitchen</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Deluxe King Suite with Kitchen">
+              <img src="assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/7.png" alt="Deluxe King Suite with Kitchen — kitchen at dusk" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Deluxe King Suite with Kitchen</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Deluxe King Suite with Kitchen">
+              <img src="assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/6.png" alt="Deluxe King Suite with Kitchen — fireplace and seating" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Deluxe King Suite with Kitchen</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Deluxe King Suite with Kitchen">
+              <img src="assets/motel-pics/Deluxe%20King%20suite%20with%20kitchen/2.png" alt="Deluxe King Suite with Kitchen — suite overview" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Deluxe King Suite with Kitchen</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+
+            <!-- 2-Room Kitchen Suite -->
+            <div class="mm-gal-item mm-gal-item--wide" data-cat="rooms" data-caption="2-Room Kitchen Suite">
+              <img src="assets/motel-pics/2%20rooms%20kitchen%20suite/1.png?v=3" alt="2-Room Kitchen Suite" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">2-Room Kitchen Suite</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="2-Room Kitchen Suite">
+              <img src="assets/motel-pics/2%20rooms%20kitchen%20suite/2.png?v=3" alt="2-Room Kitchen Suite" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">2-Room Kitchen Suite</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="2-Room Kitchen Suite">
+              <img src="assets/motel-pics/2%20rooms%20kitchen%20suite/3.png?v=3" alt="2-Room Kitchen Suite" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">2-Room Kitchen Suite</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="2-Room Kitchen Suite">
+              <img src="assets/motel-pics/2%20rooms%20kitchen%20suite/4.png?v=3" alt="2-Room Kitchen Suite" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">2-Room Kitchen Suite</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+
+            <!-- Standard 2-Queen -->
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Standard 2-Queen">
+              <img src="assets/motel-pics/std%202%20queen/1.png" alt="Standard 2-Queen room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Standard 2-Queen</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Standard 2-Queen">
+              <img src="assets/motel-pics/std%202%20queen/2.png" alt="Standard 2-Queen room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Standard 2-Queen</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Standard 2-Queen">
+              <img src="assets/motel-pics/std%202%20queen/3.png" alt="Standard 2-Queen room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Standard 2-Queen</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Standard 2-Queen">
+              <img src="assets/motel-pics/std%202%20queen/4.png" alt="Standard 2-Queen room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Standard 2-Queen</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+
+            <!-- Standard Queen -->
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Standard Queen">
+              <img src="assets/motel-pics/std%20queen/1.png" alt="Standard Queen room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Standard Queen</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Standard Queen">
+              <img src="assets/motel-pics/std%20queen/2.png" alt="Standard Queen room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Standard Queen</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Standard Queen">
+              <img src="assets/motel-pics/std%20queen/3.png" alt="Standard Queen room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Standard Queen</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+
+            <!-- Standard King -->
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Standard King">
+              <img src="assets/motel-pics/std%20king/1.png" alt="Standard King room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Standard King</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Standard King">
+              <img src="assets/motel-pics/std%20king/2.png" alt="Standard King room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Standard King</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Standard King">
+              <img src="assets/motel-pics/std%20king/3.png" alt="Standard King room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Standard King</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Standard King">
+              <img src="assets/motel-pics/std%20king/4.png" alt="Standard King room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Standard King</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+
+            <!-- Accessible Queen -->
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Accessible Queen">
+              <img src="assets/motel-pics/queen%20accessible/1.png" alt="Accessible Queen room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Accessible Queen</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Accessible Queen">
+              <img src="assets/motel-pics/queen%20accessible/2.png" alt="Accessible Queen room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Accessible Queen</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+
+            <!-- Accessible Double Queen -->
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Accessible Double Queen">
+              <img src="assets/motel-pics/Double%20queen%20accessible/1.png" alt="Accessible Double Queen room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Accessible Double Queen</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Accessible Double Queen">
+              <img src="assets/motel-pics/Double%20queen%20accessible/2.png" alt="Accessible Double Queen room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Accessible Double Queen</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+
+            <!-- Same bath photos ship in each accessible room folder; show once -->
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Accessible bathroom">
+              <img src="assets/motel-pics/King%20accessible/3.png" alt="Accessible bathroom with roll-in shower" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Accessible bathroom</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Accessible bathroom">
+              <img src="assets/motel-pics/King%20accessible/4.jpeg" alt="Accessible bathroom — vanity and fixtures" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Accessible bathroom</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+
+            <!-- Accessible King -->
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Accessible King">
+              <img src="assets/motel-pics/King%20accessible/1.png" alt="Accessible King room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Accessible King</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="mm-gal-item" data-cat="rooms" data-caption="Accessible King">
+              <img src="assets/motel-pics/King%20accessible/2.png" alt="Accessible King room" loading="lazy" decoding="async" />
+              <span class="mm-gal-item__label">Accessible King</span>
+              <span class="mm-gal-item__icon" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v9M10 1 1 10" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+
+          </div><!-- /mm-gal-grid -->
+        </div><!-- /mm-gal-shell -->
+      </section>
+
+    </main><!-- /mm-gal-page -->
+
+    <!-- ── Lightbox ──────────────────────────────────────────────────────────── -->
+    <div class="mm-gal-lb" id="mm-gal-lb" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+      <button class="mm-gal-lb__close" type="button" aria-label="Close photo viewer">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <line x1="1" y1="1" x2="13" y2="13" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="13" y1="1" x2="1" y2="13" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button class="mm-gal-lb__prev" type="button" aria-label="Previous photo">
+        <svg width="10" height="16" viewBox="0 0 10 16" fill="none" aria-hidden="true">
+          <path d="M8 1L1 8l7 7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="mm-gal-lb__next" type="button" aria-label="Next photo">
+        <svg width="10" height="16" viewBox="0 0 10 16" fill="none" aria-hidden="true">
+          <path d="M2 1l7 7-7 7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <figure class="mm-gal-lb__fig">
+        <img class="mm-gal-lb__img" src="" alt="" />
+        <figcaption class="mm-gal-lb__caption"></figcaption>
+        <p class="mm-gal-lb__counter"></p>
+      </figure>
+    </div>
+
+    <!-- ── Booking strip ────────────────────────────────────────────────────── -->
+    <!-- ── Footer ───────────────────────────────────────────────────────────── -->
+    <footer class="mm-footer">
+      <div class="mm-footer__inner">
+        <div class="mm-footer__brand-col">
+          <img class="mm-footer__logo" src="assets/mm-logo-mark.png" alt="" width="72" height="72" decoding="async" />
+          <p class="mm-footer__brand"><span class="notranslate" translate="no">Motel Mediteran</span></p>
+          <p class="mm-footer__meta">
+            2336 S. Escondido Blvd<br />
+            Escondido, CA 92025<br />
+            Phone <a href="tel:+17607432300">760-743-2300</a>
+          </p>
+          <a
+            class="mm-footer__ig"
+            href="https://www.instagram.com/motelmediteran/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Motel Mediteran on Instagram"
+            ><img class="mm-footer__ig-icon" src="assets/icon-instagram.svg" alt="" width="22" height="22" decoding="async" /></a>
+        </div>
+        <div>
+          <p class="mm-footer__h">Quick links</p>
+          <ul class="mm-footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li>
+              <a href="rooms.html" class="notranslate" translate="no"
+                ><span class="mm-nav__i18n-en">Rooms and suites</span
+                ><span class="mm-nav__i18n-es" lang="es">Habitaciones</span></a
+              >
+            </li>
+            <li><a href="gallery.html" aria-current="page">Gallery</a></li>
+            <li><a href="things-to-do.html">Things to do</a></li>
+            <li><a href="amenities.html">Amenities</a></li>
+            <li><a href="directions.html">Directions</a></li>
+            <li><a href="hotel-policies.html">Hotel policies</a></li>
+            <li><a href="accessibility.html">Accessibility</a></li>
+            <li><a href="faqs.html">FAQs</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="mm-footer__h">Stay with us</p>
+          <p class="mm-footer__note">
+            Free parking, Wi‑Fi, and a pool — plus a central North County location minutes from the Safari Park. Book
+            directly for our best availability.
+          </p>
+          <a
+            class="mm-footer__book"
+            href="book.html"
+           
+           
+            >Book a room</a
+          >
+        </div>
+      </div>
+      <p class="mm-footer__copy">© <span class="notranslate" translate="no">Motel Mediteran</span> · Escondido, California</p>
+    </footer>
+
+    <script src="js/mm-lang.js?v=6"></script>
+    <script src="js/mm-booking-dock.js?v=14"></script>
+    <script src="js/mm-booking-calendar.js?v=5"></script>
+    <script src="js/mm-booking-guests.js?v=1"></script>
+    <script src="js/mm-topbar.js?v=17"></script>
+    <script defer src="js/gallery.js?v=6"></script>
+    <script src="js/mm-chat-widget.js?v=46"></script>
+  </body>
+</html>

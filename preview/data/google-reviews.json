@@ -1,0 +1,15 @@
+{
+  "placeName": "Motel Mediteran",
+  "googleMapsUri": "https://www.google.com/maps/search/?api=1&query=Motel+Mediteran+2336+S+Escondido+Blvd+Escondido+CA",
+  "fetchedAt": null,
+  "note": "You can list hundreds of 5-star reviews here (curated by hand or merged with API output). The home page shows a random subset on each refresh; see preview/google-reviews.js. Places API only returns a few reviews—run scripts/fetch_google_reviews.py for a starter file, then append more objects to \"reviews\" as needed.",
+  "reviews": [
+    {
+      "authorName": "Sample guest",
+      "rating": 5,
+      "text": "Run the fetch script to pull real Google reviews. This placeholder stays until you connect the Places API.",
+      "relativeTime": "",
+      "authorPhotoUrl": ""
+    }
+  ]
+}

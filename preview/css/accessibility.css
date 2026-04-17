@@ -1,0 +1,301 @@
+/* Accessibility — policies-scale typography, transparent bordered stack (contrast via dark text on light texture); WCAG focus & targets */
+
+@font-face {
+  font-family: "Lydian BT";
+  src: url("../assets/fonts/lydian/LydianBTRoman.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.mm-a11y-page {
+  --mm-a11y-ink: #0a0a0a;
+  --mm-a11y-muted: rgba(16, 16, 16, 0.88);
+  /* Card body: near-black on off-white for ≥4.5:1 (normal text) */
+  --mm-a11y-body: #1a1a1a;
+  --mm-a11y-hint: rgba(10, 10, 10, 0.72);
+  --mm-a11y-rule: rgba(10, 10, 10, 0.2);
+  /* Panels match hotel-policies: transparent + hairline border; WCAG contrast = text vs blended bg (light texture + #1a1a1a ≈ 4.5:1+) */
+  --mm-a11y-display: "Lydian BT", "Lydian MT", Didot, Georgia, serif;
+  --mm-a11y-serif: "Cormorant Garamond", Georgia, "Times New Roman", Times, serif;
+  --mm-a11y-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mm-a11y-focus: #0a0a0a;
+}
+
+.mm-a11y-main.mm-content-page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(20px, 3vw, 40px) var(--mm-shell-pad, 24px) clamp(72px, 10vw, 100px);
+  box-sizing: border-box;
+}
+
+/* Skip link */
+.mm-a11y-page .skip-link:focus {
+  left: max(12px, env(safe-area-inset-left, 0px));
+  top: max(12px, env(safe-area-inset-top, 0px));
+  outline: 3px solid var(--mm-a11y-focus);
+  outline-offset: 3px;
+  background: #fff;
+  color: var(--mm-a11y-ink);
+  z-index: 200;
+}
+
+/* Hero — same scale as hotel policies */
+.mm-a11y-hero {
+  margin-bottom: clamp(28px, 4vw, 44px);
+  padding-bottom: clamp(20px, 3vw, 32px);
+  border-bottom: 1px solid var(--mm-a11y-rule);
+  text-align: center;
+}
+
+.mm-a11y-hero__inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.mm-a11y-hero__kicker {
+  margin: 0 0 10px;
+  font-family: var(--mm-a11y-sans);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(10, 10, 10, 0.55);
+}
+
+.mm-a11y-hero__title {
+  margin: 0;
+  font-family: var(--mm-a11y-display);
+  font-size: clamp(36px, 5.5vw, 56px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--mm-a11y-ink);
+}
+
+.mm-a11y-hero__lead {
+  margin: 14px 0 0;
+  font-family: var(--mm-a11y-serif);
+  font-size: clamp(16px, 1.35vw, 19px);
+  font-weight: 500;
+  line-height: 1.58;
+  color: var(--mm-a11y-muted);
+  max-width: 52ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Topics */
+.mm-a11y-topics {
+  scroll-margin-top: calc(var(--mm-topbar-h, 88px) + 12px);
+}
+
+.mm-a11y-section__inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.mm-a11y-topics__title {
+  margin: 0 0 12px;
+  font-family: var(--mm-a11y-sans);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgba(10, 10, 10, 0.55);
+}
+
+.mm-a11y-hint {
+  margin: 0 0 28px;
+  padding: 14px 18px;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-family: var(--mm-a11y-sans);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(10, 10, 10, 0.78);
+  border: 1px solid var(--mm-a11y-rule);
+  background: transparent;
+  box-sizing: border-box;
+}
+
+/* One bordered stack — same idea as .mm-pol__accordions (transparent on texture) */
+.mm-a11y-page .accordion.mm-a11y-accordion--stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  border: 1px solid var(--mm-a11y-rule);
+  background: transparent;
+}
+
+.mm-a11y-page .mm-a11y-accordion--stack .mm-a11y-details {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--mm-a11y-rule);
+  background: transparent;
+  box-shadow: none;
+}
+
+.mm-a11y-page .mm-a11y-accordion--stack .mm-a11y-details:first-of-type {
+  border-top: 0;
+}
+
+.mm-a11y-page .mm-a11y-accordion--stack .mm-a11y-details[open] {
+  background: transparent;
+}
+
+.mm-a11y-page .accordion details {
+  margin-bottom: 0;
+}
+
+.mm-a11y-page .mm-a11y-accordion summary {
+  position: relative;
+  min-height: 52px;
+  padding: 16px 52px 16px 22px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  font-family: var(--mm-a11y-sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: none;
+  line-height: 1.35;
+  color: var(--mm-a11y-ink);
+  cursor: pointer;
+  list-style: none;
+}
+
+.mm-a11y-page .mm-a11y-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.mm-a11y-page .mm-a11y-accordion summary::after {
+  content: "+";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--mm-a11y-sans);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--mm-a11y-ink);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.mm-a11y-page .mm-a11y-details[open] > summary::after {
+  content: "−";
+}
+
+.mm-a11y-page .mm-a11y-accordion summary:hover {
+  background: transparent;
+}
+
+.mm-a11y-page .mm-a11y-accordion summary:focus {
+  outline: none;
+}
+
+.mm-a11y-page .mm-a11y-accordion summary:focus-visible {
+  outline: 3px solid var(--mm-a11y-focus);
+  outline-offset: -3px;
+  z-index: 2;
+  position: relative;
+}
+
+/* Card interiors: Inter regular — best readability for dense specs (same family as UI) */
+.mm-a11y-page .accordion .accordion__body.mm-a11y-card-body {
+  padding: 12px 22px 22px;
+  border-top: 1px solid rgba(10, 10, 10, 0.1);
+  background: transparent;
+  color: var(--mm-a11y-body);
+  font-family: var(--mm-a11y-sans);
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mm-a11y-page .accordion .accordion__body ol {
+  margin: 0;
+  padding-left: 1.5rem;
+  max-width: 70ch;
+}
+
+.mm-a11y-page .accordion .accordion__body li + li {
+  margin-top: 0.65rem;
+}
+
+.mm-a11y-page .accordion .accordion__body li::marker {
+  font-weight: 600;
+  color: var(--mm-a11y-ink);
+  font-family: var(--mm-a11y-sans);
+}
+
+/* Visible focus on in-page footer links (keyboard users) */
+.mm-a11y-page .mm-footer a:focus-visible {
+  outline: 3px solid var(--mm-a11y-focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (max-width: 560px) {
+  .mm-a11y-main.mm-content-page {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .mm-a11y-page .mm-a11y-accordion summary {
+    padding-left: 16px;
+    padding-right: 46px;
+    font-size: 12px;
+  }
+
+  .mm-a11y-page .mm-a11y-accordion summary::after {
+    right: 16px;
+  }
+
+  .mm-a11y-page .accordion .accordion__body {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .mm-a11y-page {
+    --mm-a11y-rule: rgba(10, 10, 10, 0.5);
+    --mm-a11y-hint: rgba(10, 10, 10, 0.92);
+    --mm-a11y-body: #0a0a0a;
+  }
+
+  .mm-a11y-page .mm-a11y-accordion--stack {
+    border-width: 2px;
+    background: #ffffff;
+  }
+
+  .mm-a11y-page .mm-a11y-accordion--stack .mm-a11y-details {
+    background: #ffffff;
+  }
+
+  .mm-a11y-page .mm-a11y-accordion--stack .mm-a11y-details[open] {
+    background: #f3f3f1;
+  }
+
+  .mm-a11y-page .accordion .accordion__body.mm-a11y-card-body {
+    background: #ffffff;
+  }
+
+  .mm-a11y-hint {
+    border-width: 2px;
+    background: #ffffff;
+  }
+}

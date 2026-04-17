@@ -1,0 +1,259 @@
+/* Hero booking calendar — dark glass (matches mm-booking-inline--hero) */
+
+.mm-book-cal {
+  position: fixed;
+  inset: 0;
+  z-index: 8600;
+  pointer-events: none;
+}
+
+.mm-book-cal.mm-book-cal--open {
+  pointer-events: auto;
+}
+
+.mm-book-cal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  cursor: default;
+}
+
+.mm-book-cal__panel {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: min(640px, calc(100vw - 20px));
+  max-height: min(90vh, 520px);
+  box-sizing: border-box;
+  padding: 18px 20px 16px;
+  color: rgba(254, 254, 254, 0.94);
+  color-scheme: dark;
+  background: linear-gradient(
+    165deg,
+    rgba(14, 14, 14, 0.96) 0%,
+    rgba(8, 8, 8, 0.94) 45%,
+    rgba(12, 12, 12, 0.96) 100%
+  );
+  -webkit-backdrop-filter: blur(20px) saturate(1.1);
+  backdrop-filter: blur(20px) saturate(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 1px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 28px 72px rgba(0, 0, 0, 0.55);
+  z-index: 1;
+  overflow: auto;
+}
+
+.mm-book-cal__nav-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.mm-book-cal__nav {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(254, 254, 254, 0.92);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.mm-book-cal__nav:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+.mm-book-cal__nav:disabled {
+  opacity: 0.32;
+  cursor: not-allowed;
+}
+
+.mm-book-cal__grid-wrap h3 {
+  margin: 0 0 8px;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: clamp(17px, 2.5vw, 21px);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: rgba(254, 254, 254, 0.95);
+  text-align: center;
+}
+
+.mm-book-cal__grids {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 20px;
+  margin-bottom: 14px;
+}
+
+.mm-book-cal__grid-wrap {
+  min-width: 0;
+}
+
+.mm-book-cal__dow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+  margin-bottom: 6px;
+}
+
+.mm-book-cal__dow span {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.42);
+  padding: 4px 0;
+}
+
+.mm-book-cal__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.mm-book-cal__day {
+  aspect-ratio: 1;
+  max-height: 40px;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 1px;
+  background: transparent;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(254, 254, 254, 0.95);
+  cursor: pointer;
+  transition:
+    background 0.14s ease,
+    border-color 0.14s ease,
+    color 0.14s ease;
+}
+
+.mm-book-cal__day:hover:not(:disabled):not(.mm-book-cal__day--disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.mm-book-cal__day--empty {
+  pointer-events: none;
+  border: 0;
+}
+
+.mm-book-cal__day--disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.mm-book-cal__day--in-range {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: transparent !important;
+  border-radius: 0;
+}
+
+.mm-book-cal__day--range-start.mm-book-cal__day--in-range {
+  border-radius: 1px 0 0 1px;
+}
+
+.mm-book-cal__day--range-end.mm-book-cal__day--in-range {
+  border-radius: 0 1px 1px 0;
+}
+
+.mm-book-cal__day--range-start:not(.mm-book-cal__day--in-range),
+.mm-book-cal__day--range-end,
+.mm-book-cal__day--selected {
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: #0a0a0a !important;
+  border-color: rgba(255, 255, 255, 0.95) !important;
+  font-weight: 600;
+}
+
+.mm-book-cal__day--range-start.mm-book-cal__day--in-range {
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: #0a0a0a !important;
+}
+
+.mm-book-cal__day--range-end.mm-book-cal__day--in-range {
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: #0a0a0a !important;
+}
+
+.mm-book-cal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mm-book-cal__btn {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 10px 18px;
+  border-radius: 1px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* Square outline — dark chrome */
+.mm-book-cal__btn--ghost {
+  border: 1px solid rgba(255, 255, 255, 0.52);
+  background: transparent;
+  color: rgba(254, 254, 254, 0.95);
+}
+
+.mm-book-cal__btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.72);
+  color: #fff;
+}
+
+/* Fills light on dark bar (like topbar CTA hover invert) */
+.mm-book-cal__btn--primary {
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.96);
+  color: #0a0a0a;
+}
+
+.mm-book-cal__btn--primary:hover {
+  background: #fff;
+  border-color: #fff;
+  color: #0a0a0a;
+}
+
+@media (max-width: 560px) {
+  .mm-book-cal__panel {
+    width: calc(100vw - 16px);
+    padding: 14px 14px 12px;
+  }
+
+  .mm-book-cal__grids {
+    grid-template-columns: 1fr;
+  }
+}

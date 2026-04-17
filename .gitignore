@@ -1,1 +1,7 @@
 to remove/
+.netlify/
+node_modules/
+.DS_Store
+**/.DS_Store
+**/__pycache__/
+*.pyc

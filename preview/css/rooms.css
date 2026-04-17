@@ -1,0 +1,1296 @@
+/* Motel Mediteran Rooms — rebuilt from zero */
+
+@font-face {
+  font-family: "Lydian BT";
+  src: url("../assets/fonts/lydian/LydianBTRoman.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Lydian BT";
+  src: url("../assets/fonts/lydian/LYDIANI.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Lydian BT";
+  src: url("../assets/fonts/lydian/LydianBTBold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Lydian BT";
+  src: url("../assets/fonts/lydian/LydianBTBoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --mm-ink: #0a0a0a;
+  /* LINE rooms page reads slightly brighter / cleaner */
+  --mm-paper: #f8f8f6;
+  --mm-border: rgba(16, 16, 16, 0.25);
+  --mm-muted: rgba(16, 16, 16, 0.72);
+  --mm-display: "Lydian BT", "Lydian MT", "Lydian", Didot, "Bodoni MT", Georgia, serif;
+  --mm-intro-serif: "Cormorant Garamond", Georgia, "Times New Roman", Times, serif;
+  /* Hero column + image band */
+  --mm-content-max: min(1720px, 87vw);
+  --mm-frame-pad: clamp(20px, 3vw, 40px);
+  --mm-hero-img-h: min(72vh, 820px);
+  --mm-fold-img-h: min(70vh, 720px);
+  --mm-row-h: 52px;
+  --mm-acc-h: 46px;
+  --mm-hero-arrow-hit: 56px;
+}
+
+body.mm-rooms {
+  margin: 0;
+  color: var(--mm-ink);
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  background: var(--mm-paper);
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+/* Fixed background (never scrolls) */
+body.mm-rooms::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("../assets/site-texture.png?v=2") repeat;
+  background-size: 560px auto;
+  opacity: 0.38;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mm-page,
+.mm-hero {
+  position: relative;
+  z-index: 1;
+}
+
+body.mm-rooms .mm-page {
+  max-width: none;
+}
+
+.mm-page {
+  width: 100%;
+  margin: 0;
+  padding: 8px 0 62px;
+  box-sizing: border-box;
+}
+
+/* Hero: light side padding; overflow visible so arrows can straddle image edges */
+.mm-hero {
+  padding: clamp(8px, 1.6vw, 24px) clamp(8px, 1.25vw, 22px) 0;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.mm-hero__frame {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+.mm-hero__stage,
+.mm-wide__stage {
+  position: relative;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  outline: 0;
+  box-shadow: none;
+}
+
+.mm-hero__stage .mm-slider__slide,
+.mm-wide__stage .mm-slider__slide {
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.mm-slider__track {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  will-change: transform;
+  transition: transform 0.8s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mm-slider__track {
+    transition-duration: 0.01ms;
+  }
+}
+
+.mm-slider__slide {
+  display: block;
+  flex-shrink: 0;
+  object-fit: cover;
+  object-position: center 64%;
+  user-select: none;
+  -webkit-user-drag: none;
+  transform: scale(1.01);
+  transform-origin: center 70%;
+}
+
+.mm-hero__media {
+  position: relative;
+  width: 100%;
+  max-width: var(--mm-content-max);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.mm-hero__stage .mm-slider__slide {
+  width: 100%;
+  min-width: 0;
+  height: var(--mm-hero-img-h);
+  max-height: var(--mm-hero-img-h);
+}
+
+.mm-wide__stage .mm-slider__slide {
+  width: 100%;
+  min-width: 0;
+  height: var(--mm-fold-img-h);
+  max-height: var(--mm-fold-img-h);
+}
+
+.mm-wide {
+  position: relative;
+  padding: 0;
+  width: 100%;
+  max-width: var(--mm-content-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mm-wide__frame {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+/* Hero arrows: bolder graphic, centered on L/R edge (half over image, half in margin) */
+.mm-hero .mm-arrow {
+  position: absolute;
+  top: 50%;
+  width: var(--mm-hero-arrow-hit);
+  height: var(--mm-hero-arrow-hit);
+  padding: 0;
+  border: 0;
+  background: none !important;
+  cursor: pointer;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  color: var(--mm-ink);
+}
+
+.mm-wide .mm-arrow {
+  position: absolute;
+  top: 50%;
+  width: var(--mm-hero-arrow-hit);
+  height: var(--mm-hero-arrow-hit);
+  padding: 0;
+  border: 0;
+  background: none !important;
+  cursor: pointer;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  color: var(--mm-ink);
+}
+
+.mm-arrow__svg {
+  display: block;
+  pointer-events: none;
+}
+
+.mm-hero .mm-arrow__img {
+  width: clamp(46px, 7vw, 62px);
+  height: auto;
+  max-width: none;
+  display: block;
+  opacity: 0.95;
+  transition: opacity 0.2s ease, filter 0.2s ease;
+  filter: drop-shadow(0.55px 0 0 #0a0a0a) drop-shadow(-0.55px 0 0 #0a0a0a) drop-shadow(0 0.35px 0 #0a0a0a)
+    drop-shadow(0 -0.35px 0 #0a0a0a);
+}
+
+.mm-hero .mm-arrow:hover .mm-arrow__img,
+.mm-hero .mm-arrow:focus-visible .mm-arrow__img {
+  opacity: 1;
+  filter: drop-shadow(0.65px 0 0 #0a0a0a) drop-shadow(-0.65px 0 0 #0a0a0a) drop-shadow(0 0.4px 0 #0a0a0a)
+    drop-shadow(0 -0.4px 0 #0a0a0a);
+}
+
+.mm-arrow__path {
+  stroke: currentColor;
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+.mm-arrow:hover {
+  opacity: 1;
+}
+
+.mm-arrow:focus-visible {
+  outline: 2px solid rgba(16, 16, 16, 0.45);
+  outline-offset: 3px;
+}
+
+.mm-hero .mm-arrow--prev {
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.mm-hero .mm-arrow--next {
+  right: 0;
+  left: auto;
+  transform: translate(50%, -50%);
+}
+
+.mm-wide .mm-arrow--prev {
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.mm-wide .mm-arrow--next {
+  right: 0;
+  left: auto;
+  transform: translate(50%, -50%);
+}
+
+.mm-wide .mm-arrow__img {
+  width: clamp(46px, 7vw, 62px);
+  height: auto;
+  max-width: none;
+  display: block;
+  opacity: 0.95;
+  transition: opacity 0.2s ease, filter 0.2s ease;
+  filter: drop-shadow(0.55px 0 0 #0a0a0a) drop-shadow(-0.55px 0 0 #0a0a0a) drop-shadow(0 0.35px 0 #0a0a0a)
+    drop-shadow(0 -0.35px 0 #0a0a0a);
+}
+
+.mm-wide .mm-arrow:hover .mm-arrow__img,
+.mm-wide .mm-arrow:focus-visible .mm-arrow__img {
+  opacity: 1;
+  filter: drop-shadow(0.65px 0 0 #0a0a0a) drop-shadow(-0.65px 0 0 #0a0a0a) drop-shadow(0 0.4px 0 #0a0a0a)
+    drop-shadow(0 -0.4px 0 #0a0a0a);
+}
+
+.mm-hero__below {
+  width: 100%;
+  max-width: var(--mm-content-max);
+  margin: 0 auto;
+  padding-top: clamp(10px, 1.5vw, 16px);
+  box-sizing: border-box;
+}
+
+.mm-hero .mm-dots {
+  position: static;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  z-index: auto;
+}
+
+.mm-wide .mm-dots {
+  position: absolute;
+  left: 42px;
+  bottom: 14px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-top: 0;
+  z-index: 2;
+}
+
+.mm-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.28);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.mm-hero .mm-dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  background: rgba(10, 10, 10, 0.24);
+}
+
+.mm-dot.is-active {
+  background: rgba(10, 10, 10, 0.82);
+}
+
+.mm-hero .mm-dot.is-active {
+  background: var(--mm-ink);
+}
+
+.mm-caption-rail {
+  width: 100%;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.mm-caption-track {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  will-change: transform;
+  transition: transform 0.8s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mm-caption-track {
+    transition-duration: 0.01ms;
+  }
+}
+
+.mm-caption-slide {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: clamp(12px, 1.25vw, 14px);
+  font-weight: 600;
+  color: var(--mm-ink);
+  line-height: 1.45;
+  flex-shrink: 0;
+}
+
+.mm-intro {
+  text-align: center;
+  padding: clamp(44px, 6.5vw, 92px) var(--mm-shell-pad) clamp(52px, 6.5vw, 88px);
+  background: transparent;
+}
+
+.mm-title {
+  margin: 0;
+  font-family: var(--mm-display);
+  font-size: clamp(52px, 6.85vw, 86px);
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+  font-weight: 400;
+  line-height: 0.98;
+  color: var(--mm-ink);
+}
+
+.mm-subtitle {
+  margin-top: clamp(18px, 2.2vw, 28px);
+  font-family: var(--mm-intro-serif);
+  text-transform: uppercase;
+  letter-spacing: 0.48em;
+  font-size: clamp(12px, 1.35vw, 16px);
+  font-weight: 700;
+  color: rgba(10, 10, 10, 0.76);
+}
+
+.mm-lead {
+  margin: clamp(26px, 3.2vw, 40px) auto 0;
+  max-width: min(52ch, 92vw);
+  font-family: var(--mm-intro-serif);
+  font-size: clamp(15px, 1.28vw, 18px);
+  font-weight: 400;
+  line-height: 1.62;
+  color: rgba(16, 16, 16, 0.82);
+}
+
+.mm-lead__ul {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: currentColor;
+}
+
+.mm-down {
+  width: 1px;
+  height: 48px;
+  margin: clamp(28px, 3.5vw, 44px) auto 0;
+  position: relative;
+  background: rgba(10, 10, 10, 0.5);
+}
+
+.mm-down::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  width: 64px;
+  height: 10px;
+  transform: translateX(-50%) rotate(90deg);
+  background: url("../assets/line-arrow.svg") center / contain no-repeat;
+  opacity: 1;
+}
+
+.mm-section {
+  padding: 16px var(--mm-shell-pad);
+}
+
+.mm-h2 {
+  margin: 0 0 14px;
+  text-align: center;
+  font-family: var(--mm-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.98;
+}
+
+/* All section titles — one size (matches previous “Suites” scale). */
+.mm-section > .mm-h2 {
+  font-size: clamp(28px, 3.45vw, 48px);
+  letter-spacing: 0.045em;
+}
+
+/* Lower ROOMS heading to match spacing after Features panel */
+#rooms {
+  padding-top: clamp(34px, 4.8vw, 62px);
+}
+
+/* Push ADA section lower with more space above */
+#ada {
+  padding-top: clamp(78px, 8.8vw, 120px);
+}
+
+/* Push “Know before you go” lower; match Rooms content serif style */
+#general {
+  padding-top: clamp(96px, 11vw, 168px);
+}
+
+#general > .mm-h2 {
+  font-family: var(--mm-intro-serif);
+  font-size: clamp(24px, 1.9vw, 30px);
+  font-weight: 700;
+  line-height: 1.62;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+#ada .mm-room {
+  max-width: var(--mm-content-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#ada .mm-row__name {
+  transform: none;
+  font-family: var(--mm-intro-serif);
+  font-size: clamp(24px, 1.9vw, 30px);
+  font-weight: 700;
+  line-height: 1.62;
+  color: rgba(16, 16, 16, 0.82);
+}
+
+#ada .mm-room .mm-row {
+  border: 0;
+  background: transparent;
+  padding-left: 0;
+  padding-right: 0;
+  margin-top: 20px;
+}
+
+#ada .mm-row__actions {
+  justify-content: flex-end;
+}
+
+.mm-row {
+  border: 1px solid rgba(16, 16, 16, 0.18);
+  border-top: 0;
+  min-height: var(--mm-row-h);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: rgba(243, 243, 241, 0.92);
+}
+
+/* Match .mm-wide width — avoid 100vw + negative margin (causes horizontal scroll with scrollbars) */
+#suites .mm-suite-meta-rail,
+#rooms .mm-suite-meta-rail {
+  width: 100%;
+  margin-left: 0;
+  overflow: hidden;
+}
+
+#suites .mm-suite-meta-track,
+#rooms .mm-suite-meta-track {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  will-change: transform;
+  transition: transform 0.8s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+#suites .mm-suite-detail-rail,
+#rooms .mm-suite-detail-rail {
+  width: 100%;
+  margin-left: 0;
+  margin-top: clamp(14px, 2.2vw, 28px);
+  overflow: hidden;
+}
+
+#rooms .mm-suite-detail-rail.is-collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+  pointer-events: none;
+}
+
+#suites .mm-suite-detail-track,
+#rooms .mm-suite-detail-track {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  will-change: transform;
+  transition: transform 0.8s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #suites .mm-suite-meta-track,
+  #rooms .mm-suite-meta-track {
+    transition-duration: 0.01ms;
+  }
+
+  #suites .mm-suite-detail-track,
+  #rooms .mm-suite-detail-track {
+    transition-duration: 0.01ms;
+  }
+}
+
+#suites .mm-suite-meta-slide,
+#rooms .mm-suite-meta-slide {
+  background: transparent;
+  border: 0;
+  min-height: var(--mm-row-h);
+  padding-left: var(--mm-shell-pad);
+  padding-right: var(--mm-shell-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  box-sizing: border-box;
+}
+
+#rooms .mm-suite-meta-slide,
+#suites .mm-suite-meta-slide {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#suites .mm-suite-detail-slide,
+#rooms .mm-suite-detail-slide {
+  box-sizing: border-box;
+  padding-left: var(--mm-shell-pad);
+  padding-right: var(--mm-shell-pad);
+}
+
+#suites .mm-suite-detail-slide .mm-detail,
+#rooms .mm-suite-detail-slide .mm-detail {
+  margin: clamp(42px, 5.2vw, 78px) auto 0;
+  text-align: center;
+}
+
+#suites .mm-suite-detail-slide .mm-detail__title,
+#rooms .mm-suite-detail-slide .mm-detail__title {
+  font-family: var(--mm-display);
+  font-size: clamp(24px, 1.9vw, 30px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+}
+
+#suites .mm-suite-detail-slide .mm-detail__text,
+#rooms .mm-suite-detail-slide .mm-detail__text {
+  font-family: var(--mm-intro-serif);
+  font-size: clamp(16px, 1.3vw, 20px);
+  line-height: 1.6;
+  max-width: min(78ch, 92vw);
+  color: rgba(16, 16, 16, 0.86);
+  margin-top: clamp(22px, 2.5vw, 34px);
+  margin-bottom: clamp(30px, 3.8vw, 52px);
+}
+
+#suites .mm-row__name,
+#rooms .mm-row__name {
+  transform: none;
+  font-family: var(--mm-intro-serif);
+  font-size: clamp(24px, 1.9vw, 30px);
+  font-weight: 700;
+  line-height: 1.62;
+  color: rgba(16, 16, 16, 0.82);
+}
+
+/* LINE-style suites carousel: keep main frame with side peeks visible */
+#suites .mm-wide,
+#rooms .mm-wide {
+  overflow: visible;
+}
+
+#suites .mm-wide__stage,
+#rooms .mm-wide__stage {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 14px;
+  margin-bottom: 20px;
+  overflow: visible;
+}
+
+/* Prevent top bleed over the SUITES heading while keeping side peeks */
+#suites .mm-wide__stage .mm-slider__slide,
+#rooms .mm-wide__stage .mm-slider__slide {
+  transform: none;
+}
+
+.mm-row--border {
+  border-top: 1px solid rgba(16, 16, 16, 0.18);
+}
+
+.mm-row__name {
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", Times, serif;
+  font-size: 34px;
+  line-height: 0.95;
+}
+
+.mm-row__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.mm-pill {
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 11px;
+  font-weight: 700;
+  border: 1px solid rgba(16, 16, 16, 0.72);
+  padding: 11px 18px;
+  border-radius: 999px;
+  color: var(--mm-ink);
+  background: transparent;
+  min-width: 136px;
+  text-align: center;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.mm-pill:hover {
+  background: #050505;
+  color: #fff;
+  border-color: #050505;
+}
+
+.mm-pill:focus-visible {
+  background: #050505;
+  color: #fff;
+  border-color: #050505;
+}
+
+.mm-pill--dark:hover {
+  background: #000;
+}
+
+.mm-pill--dark {
+  background: #050505;
+  color: #fff;
+  border-color: #050505;
+}
+
+/* Rooms-only "More details" text button (no pill box) */
+.mm-more-details {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  min-width: 0;
+  border-radius: 0;
+  cursor: pointer;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--mm-ink);
+  text-decoration: none;
+  transition: color 180ms ease;
+  margin-right: 14px;
+}
+
+.mm-more-details__label {
+  position: relative;
+  display: inline-block;
+  line-height: 1.05;
+}
+
+.mm-more-details__label::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(1);
+  transform-origin: left center;
+  transition: transform 220ms ease;
+}
+
+.mm-more-details:hover,
+.mm-more-details:focus-visible {
+  color: #050505;
+}
+
+.mm-more-details:hover .mm-more-details__label::after,
+.mm-more-details:focus-visible .mm-more-details__label::after {
+  transform-origin: right center;
+  transform: scaleX(0);
+}
+
+.mm-viewall {
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 11px;
+  font-weight: 800;
+  color: rgba(16, 16, 16, 0.9);
+  margin-bottom: 22px;
+  text-decoration: none;
+}
+
+.mm-viewall__label {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.mm-viewall__label::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.18em;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 220ms ease;
+}
+
+.mm-viewall:hover .mm-viewall__label::after,
+.mm-viewall:focus-visible .mm-viewall__label::after {
+  transform: scaleX(1);
+}
+
+.mm-viewall:not(:hover):not(:focus-visible) .mm-viewall__label::after {
+  transform-origin: right center;
+}
+
+.mm-plus {
+  font-size: 14px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.mm-detail {
+  max-width: 900px;
+  margin: 14px auto 0;
+  text-align: center;
+}
+
+.mm-detail__title {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.mm-detail__text {
+  margin: 10px auto 12px;
+  max-width: 84ch;
+  color: var(--mm-muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.mm-box {
+  border: 1px solid var(--mm-border);
+  padding: 16px 18px;
+  background: rgba(243, 243, 241, 0.9);
+}
+
+#suites .mm-suite-detail-slide .mm-box,
+#rooms .mm-suite-detail-slide .mm-box {
+  background: transparent;
+  border-color: rgba(16, 16, 16, 0.42);
+  max-width: min(700px, 70vw);
+  margin: 0 auto;
+  padding: clamp(14px, 1.8vw, 22px) clamp(16px, 2.2vw, 28px);
+}
+
+.mm-box__title {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.mm-list {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: rgba(16, 16, 16, 0.86);
+}
+
+#suites .mm-suite-detail-slide .mm-list,
+#rooms .mm-suite-detail-slide .mm-list {
+  margin: 0;
+  padding-left: clamp(16px, 1.8vw, 26px);
+  list-style-type: square;
+  list-style-position: outside;
+  font-family: var(--mm-intro-serif);
+  font-size: clamp(13px, 1.05vw, 15px);
+  line-height: 1.45;
+  color: rgba(16, 16, 16, 0.86);
+  column-count: 2;
+  column-gap: clamp(24px, 3.2vw, 46px);
+  text-align: left;
+}
+
+#suites .mm-suite-detail-slide .mm-list li,
+#rooms .mm-suite-detail-slide .mm-list li {
+  break-inside: avoid;
+  margin-bottom: 2px;
+}
+
+#suites .mm-suite-detail-slide .mm-list li.mm-list__exclusive,
+#rooms .mm-suite-detail-slide .mm-list li.mm-list__exclusive {
+  color: #7a1f1f;
+  font-weight: 600;
+}
+
+.mm-room__media {
+  overflow: hidden;
+}
+
+.mm-room__media img {
+  width: 100%;
+  height: var(--mm-fold-img-h);
+  max-height: var(--mm-fold-img-h);
+  object-fit: cover;
+  display: block;
+  border: 0;
+  transform: scale(1.01);
+  transform-origin: center;
+}
+
+.mm-room {
+  margin-top: 10px;
+  padding: 0;
+}
+
+.mm-room + .mm-room {
+  margin-top: 28px;
+}
+
+.mm-room .mm-row {
+  margin-top: 0;
+}
+
+.mm-ada {
+  text-align: center;
+}
+
+.mm-ada__name {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 10px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+#ada .mm-ada {
+  max-width: var(--mm-content-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mm-ada__lead {
+  margin: 0 auto 18px;
+  max-width: 74ch;
+  color: var(--mm-muted);
+  font-size: 14px;
+}
+
+#ada .mm-ada__lead {
+  font-family: var(--mm-intro-serif);
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.58;
+  max-width: min(82ch, 92vw);
+  color: rgba(16, 16, 16, 0.86);
+  margin: clamp(66px, 8.4vw, 114px) auto clamp(14px, 1.8vw, 24px);
+}
+
+#ada .mm-ada__types-title {
+  font-family: var(--mm-intro-serif);
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0 auto clamp(8px, 1.2vw, 14px);
+}
+
+#ada .mm-ada__types-list {
+  list-style: none;
+  margin: 0 auto clamp(22px, 2.6vw, 34px);
+  padding: 0;
+  max-width: min(88ch, 94vw);
+  font-family: var(--mm-intro-serif);
+  font-size: clamp(14px, 1.06vw, 16px);
+  line-height: 1.45;
+}
+
+#ada .mm-ada__types-list li + li {
+  margin-top: 2px;
+}
+
+.mm-ada__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  text-align: left;
+}
+
+#ada .mm-ada__grid {
+  background: transparent;
+  border: 1px solid rgba(16, 16, 16, 0.42);
+  max-width: min(760px, 74vw);
+  margin: 0 auto;
+  padding: clamp(18px, 2.2vw, 28px) clamp(18px, 2.4vw, 30px);
+}
+
+#ada .mm-ada__grid .mm-list {
+  margin: 8px 0 0;
+  padding-left: clamp(16px, 1.8vw, 26px);
+  list-style-type: square;
+  list-style-position: outside;
+  font-family: var(--mm-intro-serif);
+  font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.42;
+  color: rgba(16, 16, 16, 0.86);
+}
+
+#ada .mm-ada__grid .mm-box__title {
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: var(--mm-intro-serif);
+  font-size: clamp(13px, 1vw, 15px);
+  font-weight: 600;
+  line-height: 1.42;
+}
+
+.mm-accordion {
+  max-width: 930px;
+  margin: 0 auto;
+}
+
+.mm-q {
+  border: 1px solid rgba(16, 16, 16, 0.26);
+  margin-bottom: 10px;
+  background: transparent;
+}
+
+.mm-q summary {
+  list-style: none;
+  cursor: pointer;
+  min-height: 52px;
+  padding: 0 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 9px;
+  font-weight: 800;
+  position: relative;
+  text-align: center;
+  transition: background-color 320ms ease, color 320ms ease;
+}
+
+.mm-q summary::after {
+  content: "+";
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  letter-spacing: 0;
+}
+
+.mm-q summary:hover,
+.mm-q summary:focus-visible {
+  background: #000;
+  color: #fff;
+}
+
+.mm-q[open] summary {
+  background: #000;
+  color: #fff;
+}
+
+.mm-q[open] summary::after {
+  content: "−";
+}
+
+.mm-a {
+  padding: 16px 18px;
+  text-align: center;
+  color: rgba(16, 16, 16, 0.82);
+}
+
+/* “Know before you go” — mobile: was14px + 0.3em tracking (too wide); left-align + calmer scale */
+@media (max-width: 700px) {
+  #general > .mm-h2 {
+    font-size: clamp(18px, 4.8vw, 24px);
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+
+  #general .mm-accordion .mm-q summary {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    line-height: 1.45;
+    font-weight: 700;
+    padding: 14px 40px 14px 16px;
+    min-height: 0;
+    justify-content: flex-start;
+    text-align: left;
+    hyphens: none;
+    -webkit-hyphens: none;
+  }
+
+  #general .mm-accordion .mm-q summary::after {
+    right: 12px;
+    font-size: 15px;
+  }
+
+  #general .mm-accordion .mm-a {
+    padding: 14px 16px 16px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+}
+
+@media (max-width: 860px) {
+  :root {
+    --mm-hero-img-h: min(82vw, 560px);
+    --mm-fold-img-h: min(76vw, 420px);
+    --mm-content-max: 100%;
+    --mm-hero-arrow-hit: 52px;
+  }
+
+  .mm-ada__grid {
+    grid-template-columns: 1fr;
+  }
+  .mm-row {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .mm-row__actions {
+    gap: 8px;
+  }
+  .mm-hero__media,
+  .mm-wide {
+    padding: 0;
+  }
+
+  #suites .mm-wide__stage,
+  #rooms .mm-wide__stage {
+    width: 100%;
+  }
+
+  #suites .mm-suite-detail-slide .mm-list {
+    column-count: 1;
+    column-gap: 0;
+  }
+
+  #rooms .mm-suite-detail-slide .mm-list {
+    column-count: 1;
+    column-gap: 0;
+  }
+
+  .mm-room {
+    padding: 0;
+  }
+
+  .mm-page {
+    padding: 10px 0 54px;
+  }
+
+  .mm-hero {
+    padding-left: clamp(12px, 4vw, 22px);
+    padding-right: clamp(12px, 4vw, 22px);
+  }
+
+  .mm-intro {
+    padding-left: clamp(12px, 4vw, 22px);
+    padding-right: clamp(12px, 4vw, 22px);
+    padding-top: clamp(40px, 8vw, 64px);
+    padding-bottom: clamp(44px, 7vw, 72px);
+  }
+
+  .mm-section {
+    padding-left: clamp(12px, 4vw, 22px);
+    padding-right: clamp(12px, 4vw, 22px);
+  }
+
+  .mm-room__media img {
+    height: var(--mm-fold-img-h);
+    max-height: var(--mm-fold-img-h);
+  }
+
+  .mm-title {
+    font-size: clamp(44px, 11vw, 56px);
+    letter-spacing: 0.04em;
+  }
+
+  .mm-section > .mm-h2 {
+    font-size: clamp(30px, 6.55vw, 36px);
+    letter-spacing: 0.04em;
+  }
+
+  .mm-row__name {
+    font-size: 28px;
+  }
+
+  #suites .mm-row__name,
+  #rooms .mm-row__name {
+    font-size: clamp(34px, 7.8vw, 40px);
+  }
+}
+
+/* ── Small mobile (≤520px) ──────────────────────────────── */
+@media (max-width: 520px) {
+  :root {
+    --mm-shell-pad: 16px;
+  }
+
+  /* Row: stack name above buttons */
+  .mm-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    min-height: unset;
+  }
+
+  #ada .mm-row {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .mm-row__name {
+    font-size: 24px;
+    line-height: 1.1;
+  }
+
+  #suites .mm-row__name,
+  #rooms .mm-row__name {
+    font-size: clamp(22px, 6vw, 30px);
+  }
+
+  .mm-row__actions {
+    width: 100%;
+    gap: 8px;
+  }
+
+  /* Pills: fill width evenly */
+  .mm-pill {
+    min-width: 0;
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 10px;
+  }
+
+  /* Suite meta slide: stack too */
+  #suites .mm-suite-meta-slide,
+  #rooms .mm-suite-meta-slide {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    min-height: unset;
+  }
+
+  #suites .mm-suite-meta-slide .mm-row__actions,
+  #rooms .mm-suite-meta-slide .mm-row__actions {
+    width: 100%;
+  }
+
+  /* Detail panel */
+  #suites .mm-suite-detail-slide .mm-detail,
+  #rooms .mm-suite-detail-slide .mm-detail {
+    margin-top: 28px;
+    text-align: left;
+  }
+
+  #suites .mm-suite-detail-slide .mm-detail__text,
+  #rooms .mm-suite-detail-slide .mm-detail__text {
+    font-size: 15px;
+  }
+
+  /* Intro section */
+  .mm-title {
+    font-size: clamp(38px, 10vw, 50px);
+  }
+
+  .mm-lead {
+    font-size: 15px;
+  }
+
+  /* ADA section */
+  #ada .mm-row__actions {
+    justify-content: flex-start;
+  }
+
+  /* Hero arrows: smaller, fully inside */
+  .mm-arrow--prev {
+    left: 8px;
+  }
+  .mm-arrow--next {
+    right: 8px;
+  }
+}
+

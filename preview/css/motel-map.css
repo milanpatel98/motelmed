@@ -1,0 +1,38 @@
+/* --- Google Maps iframe embed (no JavaScript API) --- */
+.motel-location-map {
+  min-height: 260px;
+  z-index: 0;
+  border: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #ebebeb;
+}
+
+/* Directions: map fills host */
+.motel-map-host,
+.home-location-map-layer {
+  position: relative;
+}
+
+.location-map.motel-map-host .motel-location-map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/*
+ * Home: embed is centered inside the iframe — widen + shift left so the pin reads
+ * farther left under the right-side fade (no pan API on simple embed).
+ */
+.home-location-map-layer .motel-location-map.home-location-map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -40%;
+  right: auto;
+  width: 152%;
+  max-width: none;
+  height: 100%;
+}

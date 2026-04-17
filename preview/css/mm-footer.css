@@ -1,0 +1,183 @@
+/* Site-wide white footer bar — use with Cormorant + Inter (loaded on each page) */
+
+body.mm-shell > footer.mm-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.mm-footer {
+  background: #fff;
+  color: var(--mm-ink, #0a0a0a);
+  border-top: 1px solid rgba(10, 10, 10, 0.1);
+}
+
+.mm-footer__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(40px, 5vw, 56px) var(--mm-shell-pad, 24px) clamp(32px, 4vw, 48px);
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr;
+  gap: clamp(24px, 4vw, 40px);
+  align-items: start;
+  box-sizing: border-box;
+}
+
+.mm-footer__brand-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Fine-tune horizontal alignment vs. footer text (PNG canvas padding) */
+footer.mm-footer .mm-footer__logo {
+  width: clamp(56px, 12vw, 72px);
+  max-width: none;
+  height: auto;
+  display: block;
+  margin: 0 0 14px;
+  object-fit: contain;
+  position: relative;
+  left: -10px;
+}
+
+.mm-footer__brand {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+}
+
+.mm-footer__meta {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(10, 10, 10, 0.78);
+}
+
+.mm-footer__ig {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 14px;
+  padding: 2px;
+  line-height: 0;
+  text-decoration: none;
+  border-radius: 6px;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.mm-footer__ig:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.mm-footer__ig:focus-visible {
+  outline: 2px solid rgba(10, 10, 10, 0.35);
+  outline-offset: 3px;
+}
+
+.mm-footer__ig-icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.mm-footer__meta a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.mm-footer__meta a:hover {
+  color: var(--mm-ink, #0a0a0a);
+}
+
+.mm-footer__h {
+  margin: 0 0 14px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(10, 10, 10, 0.55);
+}
+
+.mm-footer__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mm-footer__links li {
+  margin-bottom: 10px;
+}
+
+.mm-footer__links a {
+  font-size: 13px;
+  color: rgba(10, 10, 10, 0.82);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.mm-footer__links a:hover {
+  color: var(--mm-ink, #0a0a0a);
+  border-bottom-color: rgba(10, 10, 10, 0.35);
+}
+
+.mm-footer__note {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(10, 10, 10, 0.72);
+}
+
+.mm-footer__book {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 12px 22px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--mm-ink, #0a0a0a);
+  border: 1px solid rgba(10, 10, 10, 0.35);
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.mm-footer__book:hover {
+  background: var(--mm-ink, #0a0a0a);
+  color: #fff;
+  border-color: var(--mm-ink, #0a0a0a);
+}
+
+.mm-footer__copy {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--mm-shell-pad, 24px) clamp(28px, 4vw, 40px);
+  font-size: 12px;
+  color: rgba(10, 10, 10, 0.5);
+  text-align: center;
+}
+
+/* Interior pages: invisible 1px anchor next to header (legacy hook for optional scroll UI). */
+.mm-booking-inline.mm-booking-inline--sentinel {
+  height: 1px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+
+@media (max-width: 860px) {
+  .mm-footer__inner {
+    grid-template-columns: 1fr;
+  }
+}
