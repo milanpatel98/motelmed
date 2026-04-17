@@ -23,7 +23,8 @@
   var openDoneTimer = null;
   var logoFlightToken = 0;
   var lastFocusedBeforeOpen = null;
-  var scrollLockY = 0;
+  /** @type {number | null} */
+  var menuScrollLockY = null;
 
   /* Bumps when opening — invalidates pending “close shutter finished” callbacks */
   var shutterEpoch = 0;
@@ -31,23 +32,53 @@
   var closePanelHandler = null;
   var closeFallbackTimer = null;
 
+  function scrollbarWidth() {
+    return Math.max(0, window.innerWidth - document.documentElement.clientWidth);
+  }
+
+  /** Restore scroll without smooth scrolling (site.css may set `html { scroll-behavior: smooth }`). */
+  function scrollToRestore(y) {
+    var root = document.documentElement;
+    var prevRoot = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    window.scrollTo(0, y);
+    if (Math.abs(window.scrollY - y) > 1) {
+      root.scrollTop = y;
+      document.body.scrollTop = y;
+    }
+    requestAnimationFrame(function () {
+      root.style.scrollBehavior = prevRoot;
+    });
+  }
+
   function lockBodyScroll() {
-    scrollLockY = window.scrollY || window.pageYOffset || 0;
+    if (menuScrollLockY !== null) return;
+    menuScrollLockY = window.scrollY || window.pageYOffset || 0;
+    var y = menuScrollLockY;
+    var sbw = scrollbarWidth();
+    if (sbw > 0) {
+      document.body.style.paddingRight = sbw + 'px';
+    }
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.position = 'fixed';
-    document.body.style.top = '-' + scrollLockY + 'px';
+    document.body.style.top = '-' + y + 'px';
     document.body.style.left = '0';
     document.body.style.right = '0';
     document.body.style.width = '100%';
   }
 
   function unlockBodyScroll() {
-    var y = scrollLockY;
+    if (menuScrollLockY === null) return;
+    var y = menuScrollLockY;
+    menuScrollLockY = null;
+    document.body.style.paddingRight = '';
+    document.documentElement.style.overflow = '';
     document.body.style.removeProperty('position');
     document.body.style.removeProperty('top');
     document.body.style.removeProperty('left');
     document.body.style.removeProperty('right');
     document.body.style.removeProperty('width');
-    window.scrollTo(0, y);
+    scrollToRestore(y);
   }
 
   function clearCloseShutterWatch() {

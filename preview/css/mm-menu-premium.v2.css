@@ -232,22 +232,22 @@ body.mm-home.mm-nav-open .mm-topbar__logo.mm-topbar__logo--in-nav {
   color: rgba(255, 255, 255, 0.9) !important;
 }
 
-body.mm-nav-open .mm-topbar__logo,
-body.mm-nav-closing .mm-topbar__logo {
+body.mm-shell.mm-nav-open .mm-topbar__logo,
+body.mm-shell.mm-nav-closing .mm-topbar__logo {
   opacity: 1 !important;
   transition: none !important;
   animation: none !important;
 }
 
-body.mm-nav-open .mm-topbar__logo.mm-topbar__logo--flying,
-body.mm-nav-closing .mm-topbar__logo.mm-topbar__logo--flying {
+body.mm-shell.mm-nav-open .mm-topbar__logo.mm-topbar__logo--flying,
+body.mm-shell.mm-nav-closing .mm-topbar__logo.mm-topbar__logo--flying {
   transition: transform var(--mm-logo-flight-duration, var(--mm-logo-flight-open)) var(--mm-logo-flight-ease) !important;
 }
 
 /* Logo is its own moving entity: never opacity-fade with menu states */
 .mm-topbar__logo,
-body.mm-nav-open .mm-topbar__logo,
-body.mm-logo-in-nav .mm-topbar__logo {
+body.mm-shell.mm-nav-open .mm-topbar__logo,
+body.mm-shell.mm-logo-in-nav .mm-topbar__logo {
   opacity: 1 !important;
   animation: none !important;
 }
@@ -429,9 +429,9 @@ body:not(.mm-nav-open) .mm-footer {
 }
 
 /* Inner pages can keep legacy white topbar on open; force dark chrome for visible white cross. */
-body.mm-nav-open .mm-topbar,
-body.mm-nav-closing .mm-topbar,
-body.mm-logo-in-nav .mm-topbar {
+body.mm-shell.mm-nav-open .mm-topbar,
+body.mm-shell.mm-nav-closing .mm-topbar,
+body.mm-shell.mm-logo-in-nav .mm-topbar {
   background-color: transparent !important;
   border-bottom-color: transparent !important;
   box-shadow: none !important;
@@ -440,8 +440,8 @@ body.mm-logo-in-nav .mm-topbar {
 }
 
 /* Premium open topbar: keep burger slot (overrides legacy stretch while menu is open). */
-body.mm-nav-open .mm-topbar__menu,
-body.mm-nav-closing .mm-topbar__menu {
+body.mm-shell.mm-nav-open .mm-topbar__menu,
+body.mm-shell.mm-nav-closing .mm-topbar__menu {
   align-self: flex-start !important;
   border-right: none !important;
   margin-top: calc((var(--mm-topbar-h, 104px) - 52px) / 2) !important;
@@ -462,8 +462,8 @@ body.mm-nav-closing .mm-topbar__menu {
  * (mm-home + not scrolled). Suppress outline on the burger so pointer focus never
  * draws a beige box on the brown menu.
  */
-body.mm-nav-open .mm-topbar__menu:focus-visible,
-body.mm-nav-closing .mm-topbar__menu:focus-visible {
+body.mm-shell.mm-nav-open .mm-topbar__menu:focus-visible,
+body.mm-shell.mm-nav-closing .mm-topbar__menu:focus-visible {
   outline: none !important;
 }
 
@@ -474,40 +474,40 @@ body.mm-nav-closing .mm-topbar__menu:focus-visible {
  */
 body.mm-home.mm-nav-open:not(.is-scrolled) .mm-burger__line,
 body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-burger__line,
-body.mm-nav-open .mm-burger__line,
-body.mm-nav-closing .mm-burger__line,
-body.mm-logo-in-nav .mm-burger__line {
+body.mm-shell.mm-nav-open .mm-burger__line,
+body.mm-shell.mm-nav-closing .mm-burger__line,
+body.mm-shell.mm-logo-in-nav .mm-burger__line {
   stroke: #ffffff !important;
 }
 
 /* Cross stays an “X” until the logo leaves the shutter (matches mm-topbar burger math) */
-body.mm-nav-open .mm-burger__shift--top,
-body.mm-nav-closing .mm-burger__shift--top,
-body.mm-logo-in-nav .mm-burger__shift--top {
+body.mm-shell.mm-nav-open .mm-burger__shift--top,
+body.mm-shell.mm-nav-closing .mm-burger__shift--top,
+body.mm-shell.mm-logo-in-nav .mm-burger__shift--top {
   transform: translate(0, 7.5px);
 }
 
-body.mm-nav-open .mm-burger__shift--bot,
-body.mm-nav-closing .mm-burger__shift--bot,
-body.mm-logo-in-nav .mm-burger__shift--bot {
+body.mm-shell.mm-nav-open .mm-burger__shift--bot,
+body.mm-shell.mm-nav-closing .mm-burger__shift--bot,
+body.mm-shell.mm-logo-in-nav .mm-burger__shift--bot {
   transform: translate(0, -7.5px);
 }
 
-body.mm-nav-open .mm-burger__spin--top,
-body.mm-nav-closing .mm-burger__spin--top,
-body.mm-logo-in-nav .mm-burger__spin--top {
+body.mm-shell.mm-nav-open .mm-burger__spin--top,
+body.mm-shell.mm-nav-closing .mm-burger__spin--top,
+body.mm-shell.mm-logo-in-nav .mm-burger__spin--top {
   transform: rotate(45deg);
 }
 
-body.mm-nav-open .mm-burger__spin--bot,
-body.mm-nav-closing .mm-burger__spin--bot,
-body.mm-logo-in-nav .mm-burger__spin--bot {
+body.mm-shell.mm-nav-open .mm-burger__spin--bot,
+body.mm-shell.mm-nav-closing .mm-burger__spin--bot,
+body.mm-shell.mm-logo-in-nav .mm-burger__spin--bot {
   transform: rotate(-45deg);
 }
 
-body.mm-nav-open .mm-burger__row--mid,
-body.mm-nav-closing .mm-burger__row--mid,
-body.mm-logo-in-nav .mm-burger__row--mid {
+body.mm-shell.mm-nav-open .mm-burger__row--mid,
+body.mm-shell.mm-nav-closing .mm-burger__row--mid,
+body.mm-shell.mm-logo-in-nav .mm-burger__row--mid {
   opacity: 0;
   pointer-events: none;
 }
@@ -517,8 +517,8 @@ body.mm-logo-in-nav .mm-burger__row--mid {
  * :has(...) keeps the strip hidden after body.mm-nav-open clears but before JS
  * moves the logo back (garage shutter closing).
  */
-body.mm-nav-open .mm-topbar__brand,
-body.mm-logo-in-nav .mm-topbar__brand {
+body.mm-shell.mm-nav-open .mm-topbar__brand,
+body.mm-shell.mm-logo-in-nav .mm-topbar__brand {
   width: 0 !important;
   min-width: 0 !important;
   margin: 0 !important;
@@ -527,22 +527,22 @@ body.mm-logo-in-nav .mm-topbar__brand {
   pointer-events: none !important;
 }
 
-body.mm-nav-open .mm-topbar__loc,
-body.mm-nav-closing .mm-topbar__loc,
-body.mm-logo-in-nav .mm-topbar__loc {
+body.mm-shell.mm-nav-open .mm-topbar__loc,
+body.mm-shell.mm-nav-closing .mm-topbar__loc,
+body.mm-shell.mm-logo-in-nav .mm-topbar__loc {
   display: none !important;
 }
 
 /* Right items: fade out */
-body.mm-nav-open .mm-topbar__phone,
-body.mm-nav-open .mm-topbar__cta,
-body.mm-nav-open .mm-topbar__lang,
-body.mm-nav-closing .mm-topbar__phone,
-body.mm-nav-closing .mm-topbar__cta,
-body.mm-nav-closing .mm-topbar__lang,
-body.mm-logo-in-nav .mm-topbar__phone,
-body.mm-logo-in-nav .mm-topbar__cta,
-body.mm-logo-in-nav .mm-topbar__lang {
+body.mm-shell.mm-nav-open .mm-topbar__phone,
+body.mm-shell.mm-nav-open .mm-topbar__cta,
+body.mm-shell.mm-nav-open .mm-topbar__lang,
+body.mm-shell.mm-nav-closing .mm-topbar__phone,
+body.mm-shell.mm-nav-closing .mm-topbar__cta,
+body.mm-shell.mm-nav-closing .mm-topbar__lang,
+body.mm-shell.mm-logo-in-nav .mm-topbar__phone,
+body.mm-shell.mm-logo-in-nav .mm-topbar__cta,
+body.mm-shell.mm-logo-in-nav .mm-topbar__lang {
   display: none !important;
 }
 
