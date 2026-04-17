@@ -367,19 +367,29 @@ var MM_API = (function () {
             roomId      : rid,
             asiRoomTypeId: r.id,
             available   : r.available > 0,
-            rate        : nightlyRate,       /* per-night without tax */
+            rate        : nightlyRate,       /* average per-night without tax */
             tax         : r.tax,             /* total tax for stay */
             totalRate   : r.rate,            /* total for stay without tax */
             totalWithTax: r.rateWithTax,     /* total for stay with tax */
+            nightly     : r.nightly || [],   /* exact per-night breakdown from ASI */
             images      : r.images || []
           };
           /* Also update the rate cache for getRateForDate() */
           if (!self._rateCache) self._rateCache = {};
           if (!self._rateCache[rid]) self._rateCache[rid] = {};
-          /* Store per-night rate for every night of the stay */
-          for (var i = 0; i < nights; i++) {
-            var d = new Date(checkin.getTime() + i * 86400000);
-            self._rateCache[rid][fmtKey(d)] = r.available > 0 ? nightlyRate : null;
+          /* Use exact per-night rates from ASI lstRoomRateType when available,
+             otherwise fall back to the average nightly rate across the stay */
+          if (r.nightly && r.nightly.length) {
+            r.nightly.forEach(function (n) {
+              if (n.date) {
+                self._rateCache[rid][n.date] = (r.available > 0 && n.rate > 0) ? n.rate : null;
+              }
+            });
+          } else {
+            for (var i = 0; i < nights; i++) {
+              var d = new Date(checkin.getTime() + i * 86400000);
+              self._rateCache[rid][fmtKey(d)] = r.available > 0 ? nightlyRate : null;
+            }
           }
         });
 

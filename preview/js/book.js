@@ -758,16 +758,20 @@
               if (!card) return;
               card.setAttribute("data-available", item.available ? "true" : "false");
 
-              // Update displayed price with live nightly rate (item.rate is already per-night)
+              // Update displayed price with live nightly rate
+              // item.rate is the average per-night; use min from nightly breakdown if available
               if (item.available && item.rate > 0) {
-                var nightly = Math.round(item.rate);
+                var nightlyRates = (item.nightly || []).filter(function (n) { return n.rate > 0; });
+                var displayRate = nightlyRates.length
+                  ? Math.min.apply(null, nightlyRates.map(function (n) { return n.rate; }))
+                  : Math.round(item.rate);
                 var priceEl = card.querySelector(".mm-bk-room-card__price");
                 if (priceEl) {
-                  priceEl.innerHTML = "$" + nightly + '<span class="mm-bk-room-card__price-night"> / night</span>';
+                  priceEl.innerHTML = "$" + Math.round(displayRate) + '<span class="mm-bk-room-card__price-night"> / night</span>';
                 }
-                // Keep data-price in sync so total calculation is correct
+                // Keep data-price in sync — use average so totals are accurate
                 var btn = card.querySelector(".mm-bk-room-card__select");
-                if (btn) btn.setAttribute("data-price", String(nightly));
+                if (btn) btn.setAttribute("data-price", String(Math.round(item.rate)));
               }
             });
           }
