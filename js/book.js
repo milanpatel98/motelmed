@@ -1090,32 +1090,132 @@
       var now = new Date();
       return yr > now.getFullYear() || (yr === now.getFullYear() && mo >= now.getMonth() + 1);
     }
-    function isCvvValid(v) { return /^\d{3,4}$/.test(v.trim()); }
+    function isCvvValid(v, cardVal) {
+      var d = String(v || "").trim().replace(/\D/g, "");
+      if (!/^\d+$/.test(d)) return false;
+      var n = String(cardVal || "").replace(/\D/g, "");
+      var amex = /^3[47]/.test(n);
+      return amex ? d.length === 4 : d.length === 3;
+    }
+    function isPhoneValid(v) { return v.replace(/\D/g, "").length >= 10; }
+    function isZipValid(v) { return /^\d{5}(-\d{4})?$/.test(v.trim()); }
 
     var hint = document.getElementById("bk-book-hint");
+    var interacted = false;
+
+    function issueFor(id) {
+      var el = document.getElementById(id);
+      if (!el) return "A form field is missing from the page.";
+      var v = el.value;
+
+      switch (id) {
+        case "f-first":
+          if (!v.trim()) return "First name — add your legal first name.";
+          return null;
+        case "f-last":
+          if (!v.trim()) return "Last name — add your legal last name.";
+          return null;
+        case "f-card-name":
+          if (!v.trim()) return "Name on card — must match what’s printed on the card.";
+          return null;
+        case "f-addr-street":
+          if (!v.trim()) return "Street address — add billing street.";
+          return null;
+        case "f-addr-city":
+          if (!v.trim()) return "City — add billing city.";
+          return null;
+        case "f-email":
+          if (!v.trim()) return "Email — add your address (for confirmation).";
+          if (!isEmailValid(v)) return "Email — check for typos (use format like name@example.com).";
+          return null;
+        case "f-phone":
+          if (!v.trim()) return "Phone — add a number we can reach you on.";
+          if (!isPhoneValid(v)) return "Phone — enter at least 10 digits (country code is separate).";
+          return null;
+        case "f-card":
+          if (!v.trim()) return "Card number — enter the full number.";
+          if (!isCardValid(v)) return "Card number — too short (needs at least 13 digits).";
+          return null;
+        case "f-expiry":
+          if (!v.trim()) return "Expiry — add month and year.";
+          var m = v.replace(/\s/g, "").match(/^(\d{2})\/(\d{2})$/);
+          if (!m) return "Expiry — use format MM / YY (e.g. 04 / 28).";
+          var mo = parseInt(m[1], 10);
+          if (mo < 1 || mo > 12) return "Expiry — month must be between 01 and 12.";
+          if (!isExpiryValid(v)) return "Expiry — date is in the past or invalid.";
+          return null;
+        case "f-cvv": {
+          if (!v.trim()) return "CVV — add the security code from your card.";
+          var cardV = (document.getElementById("f-card") || {}).value || "";
+          if (!isCvvValid(v, cardV)) return "CVV — usually 3 digits on the back (4 on American Express).";
+          return null;
+        }
+        case "f-addr-state":
+          if (!v.trim()) return "State — add the 2-letter code (e.g. CA).";
+          if (v.trim().length !== 2) return "State — exactly 2 letters (e.g. CA, not Calif).";
+          return null;
+        case "f-addr-zip":
+          if (!v.trim()) return "ZIP code — add your billing ZIP.";
+          if (!isZipValid(v)) return "ZIP code — use 5 digits or ZIP+4 (e.g. 92025 or 92025-1234).";
+          return null;
+        default:
+          return null;
+      }
+    }
+
+    function setFieldInvalid(id, invalid) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var wrap = el.closest(".mm-bk-form__field");
+      if (wrap) wrap.classList.toggle("mm-bk-form__field--invalid", invalid);
+      if (invalid) el.setAttribute("aria-invalid", "true");
+      else el.removeAttribute("aria-invalid");
+    }
 
     function check() {
-      var ok = REQUIRED.every(function (id) {
-        var el = document.getElementById(id);
-        if (!el) return false;
-        var v = el.value;
-        if (id === "f-email")  return isEmailValid(v);
-        if (id === "f-card")   return isCardValid(v);
-        if (id === "f-expiry") return isExpiryValid(v);
-        if (id === "f-cvv")    return isCvvValid(v);
-        if (id === "f-addr-state") return v.trim().length === 2;
-        return v.trim().length > 0;
+      var issues = [];
+      var ok = true;
+      REQUIRED.forEach(function (id) {
+        var msg = issueFor(id);
+        var bad = msg !== null;
+        if (bad) {
+          ok = false;
+          issues.push(msg);
+        }
+        setFieldInvalid(id, bad && interacted);
       });
+
       btn.disabled = !ok;
-      if (hint) hint.classList.toggle("is-hidden", ok);
+
+      if (!hint) return;
+
+      hint.className = "mm-bk-book-hint" + (ok ? " mm-bk-book-hint--ok" : " mm-bk-book-hint--issues");
+      if (ok) {
+        hint.innerHTML = "All set — press <strong>Book Now</strong> to confirm your stay.";
+      } else if (issues.length) {
+        hint.innerHTML =
+          "<strong>Complete these to continue:</strong><ul><li>" +
+          issues.map(function (t) { return t.replace(/</g, "&lt;"); }).join("</li><li>") +
+          "</li></ul>";
+      } else {
+        hint.textContent = "Fill in all required fields above.";
+      }
     }
 
     REQUIRED.forEach(function (id) {
       var el = document.getElementById(id);
-      if (el) el.addEventListener("input", check);
+      if (!el) return;
+      el.addEventListener("input", function () {
+        interacted = true;
+        check();
+      });
+      el.addEventListener("blur", function () {
+        interacted = true;
+        check();
+      });
     });
 
-    check(); // run once on load (stays disabled)
+    check();
   }
 
   function bindBookNow() {

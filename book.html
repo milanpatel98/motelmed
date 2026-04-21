@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/site.css?v=1776277061" />
     <link rel="stylesheet" href="css/mm-topbar.css?v=20260422" />
     <link rel="stylesheet" href="css/mm-inertial-scroll.css?v=1" />
-    <link rel="stylesheet" href="css/book-page.css?v=20260422" />
+    <link rel="stylesheet" href="css/book-page.css?v=20260423" />
     <style>
       /* Critical calendar overrides — loaded inline to bypass cache */
       .mm-bk-cal__cell { height: 54px !important; min-height: 54px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; gap: 2px !important; }
@@ -894,7 +894,7 @@
                 <div class="mm-bk-cancel-notice" id="bk-cancel-notice" aria-live="polite"></div>
 
                 <button class="mm-bk-book-btn" id="bk-book-now" type="button" disabled>Book Now</button>
-                <p class="mm-bk-book-hint" id="bk-book-hint">Fill in all fields above to complete your booking</p>
+                <div class="mm-bk-book-hint" id="bk-book-hint" role="status" aria-live="polite"></div>
               </div>
             </div>
 
@@ -1018,6 +1018,6 @@
     <script src="js/lenis.min.js?v=1.1.18" crossorigin="anonymous"></script>
     <script src="js/mm-inertial-scroll.js?v=7"></script>
     <script src="js/mm-api.js?v=4"></script>
-    <script src="js/book.js?v=48"></script>
+    <script src="js/book.js?v=49"></script>
   </body>
 </html>

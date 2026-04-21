@@ -62,6 +62,36 @@ function setCached(key, data) {
   _cache.set(key, { data, ts: Date.now() });
 }
 
+/* ASI sometimes returns booleans as strings; non-empty strings are truthy in JS,
+   so never use `if (!cfResp.BookingStatus)` alone. */
+function asiConfirmSucceeded(resp) {
+  const s = resp.BookingStatus;
+  if (s === true || s === 1) return true;
+  if (s === false || s === 0) return false;
+  if (s == null || s === "") return false;
+  if (typeof s === "string") {
+    const t = s.trim().toLowerCase();
+    if (t === "true" || t === "1" || t === "success" || t === "confirmed") return true;
+    if (t === "false" || t === "0" || t === "no") return false;
+  }
+  return false;
+}
+
+function extractAsiBookingId(resp) {
+  const candidates = [
+    resp.BookingMasterId,
+    resp.BookingID,
+    resp.bookingMasterId,
+    resp.bookingId,
+  ];
+  for (const c of candidates) {
+    if (c == null || c === "") continue;
+    const n = typeof c === "number" ? c : parseInt(String(c), 10);
+    if (Number.isFinite(n) && n > 0) return n;
+  }
+  return null;
+}
+
 /* ── Date formatting ────────────────────────────────────────────────────── */
 function fmtASI(d) {
   // MM/DD/YYYY
@@ -304,18 +334,22 @@ async function handleBook({ checkin, checkout, adults, children, roomId, grandTo
 
   const cfResp = typeof cfRaw.d === "string" ? JSON.parse(cfRaw.d) : (cfRaw.d || {});
 
-  if (!cfResp.BookingStatus) {
+  if (!asiConfirmSucceeded(cfResp)) {
     const msg = cfResp.message || cfResp.Message || "ASI did not confirm the booking";
     throw new Error(msg);
   }
 
-  /* Extract booking ID — ASI may populate BookingMasterId or BookingID */
-  const bookingId = parseInt(cfResp.BookingMasterId || cfResp.BookingID || 0);
-  const refNumber = bookingId > 0
-    ? `ASI-${bookingId}`
-    : `MM-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
+  const bookingId = extractAsiBookingId(cfResp);
+  if (bookingId == null) {
+    console.error("[asi-proxy] ConfirmBooking succeeded flag but no booking ID:", JSON.stringify(cfResp).slice(0, 800));
+    throw new Error(
+      cfResp.message ||
+        cfResp.Message ||
+        "ASI did not return a booking number. The reservation may not have been created — please call the property."
+    );
+  }
 
-  return { success: true, refNumber, bookingId };
+  return { success: true, refNumber: `ASI-${bookingId}`, bookingId };
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

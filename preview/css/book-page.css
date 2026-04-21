@@ -1699,7 +1699,37 @@ body.mm-book-page header.mm-topbar .mm-lang {
 }
 
 .mm-bk-book-hint {
-  display: none; /* hidden on desktop; shown on mobile via media query */
+  display: block;
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--bk-muted);
+  margin: 14px 0 0;
+  max-width: 42em;
+}
+
+.mm-bk-book-hint.mm-bk-book-hint--ok {
+  color: #2d6a30;
+}
+
+.mm-bk-book-hint.mm-bk-book-hint--issues {
+  color: #9a3412;
+}
+
+.mm-bk-book-hint.mm-bk-book-hint--issues ul {
+  margin: 8px 0 0;
+  padding-left: 1.15em;
+}
+
+.mm-bk-book-hint.mm-bk-book-hint--issues li {
+  margin: 4px 0;
+}
+
+.mm-bk-form__field.mm-bk-form__field--invalid input,
+.mm-bk-form__field.mm-bk-form__field--invalid textarea,
+.mm-bk-form__field.mm-bk-form__field--invalid select {
+  border-color: #c2410c;
+  box-shadow: 0 0 0 1px rgba(194, 65, 12, 0.12);
 }
 
 
@@ -2115,14 +2145,10 @@ body.mm-book-page header.mm-topbar .mm-lang {
 
   /* Hint text under Book Now */
   .mm-bk-book-hint {
-    display: block;
-    text-align: center;
     font-size: 11px;
-    color: var(--bk-muted);
-    margin: 0 0 8px;
-    transition: opacity 0.2s;
+    margin: 10px 0 8px;
+    text-align: left;
   }
-  .mm-bk-book-hint.is-hidden { display: none; }
 
   /* Summary sidebar — below form */
   #bk-summary-s3 { margin-top: 28px; }
