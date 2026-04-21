@@ -1708,10 +1708,6 @@ body.mm-book-page header.mm-topbar .mm-lang {
   max-width: 42em;
 }
 
-.mm-bk-book-hint.mm-bk-book-hint--ok {
-  color: #2d6a30;
-}
-
 .mm-bk-book-hint.mm-bk-book-hint--issues {
   color: #9a3412;
 }

@@ -48,7 +48,7 @@ var MM_API = (function () {
   /* ── ASI Room Type ID map (confirmed from live GetRoomAvailability response) ──
      linktoRoomTypeMasterId values from reservation.asiwebres.com
      HotelID: 34134  |  HotelMasterID: 2270  |  HotelGUID: 77c9401ba7e640988f8410033a7434cc
-     Tax: 10% City Tax
+     Tax: 9% lodging tax (match ASI / book.js LODGING_TAX_PERCENT)
   ────────────────────────────────────────────────────────── */
   var ASI_ROOM_TYPE_IDS = {
     "queen"        : 13697,   // Queen Size Room
@@ -64,7 +64,7 @@ var MM_API = (function () {
      base    = standard weekday rate (USD) — confirmed from live API.
      Weekend auto-adjusts: +$20 Fri/Sat, +$10 Sun (approximation).
      unavail = specific dates blocked for that room type (YYYY-MM-DD).
-     Tax: 10% City Tax (added at checkout display, not charged by site).
+     Tax: 9% lodging tax (added at checkout display; keep in sync with ASI).
 
      IMPORTANT: room IDs here must match data-room-id attributes
      on the .mm-bk-room-card elements in book.html.

@@ -85,9 +85,11 @@
     return c / 100;
   }
 
-  /** City tax shown on ASI review: 10% of room/night subtotal (computed in cents). */
-  function cityTax10Cents(subtotalCents) {
-    return Math.round((subtotalCents * 10) / 100);
+  /** Lodging tax — keep in sync with ASI / PMS (percent of room subtotal, integer cents). */
+  var LODGING_TAX_PERCENT = 9;
+
+  function lodgingTaxCents(subtotalCents) {
+    return Math.round((subtotalCents * LODGING_TAX_PERCENT) / 100);
   }
 
   function fmtCents(c) {
@@ -869,7 +871,7 @@
         cur = addDays(cur, 1);
       }
 
-      var taxCents = cityTax10Cents(subtotalCents);
+      var taxCents = lodgingTaxCents(subtotalCents);
       var totalCents = subtotalCents + taxCents;
 
       setText(subRoomId, fmtCents(subtotalCents));
@@ -1149,7 +1151,7 @@
     function isZipValid(v) { return /^\d{5}(-\d{4})?$/.test(v.trim()); }
 
     var hint = document.getElementById("bk-book-hint");
-    var interacted = false;
+    var touched = {};
 
     function issueFor(id) {
       var el = document.getElementById(id);
@@ -1220,6 +1222,10 @@
       else el.removeAttribute("aria-invalid");
     }
 
+    function anyFieldTouched() {
+      return REQUIRED.some(function (id) { return touched[id]; });
+    }
+
     function check() {
       var issues = [];
       var ok = true;
@@ -1230,35 +1236,46 @@
           ok = false;
           issues.push(msg);
         }
-        setFieldInvalid(id, bad && interacted);
+        setFieldInvalid(id, bad && !!touched[id]);
       });
 
       btn.disabled = !ok;
 
       if (!hint) return;
 
-      hint.className = "mm-bk-book-hint" + (ok ? " mm-bk-book-hint--ok" : " mm-bk-book-hint--issues");
       if (ok) {
-        hint.innerHTML = "All set — press <strong>Book Now</strong> to confirm your stay.";
-      } else if (issues.length) {
+        hint.hidden = true;
+        hint.textContent = "";
+        hint.className = "mm-bk-book-hint";
+        return;
+      }
+
+      if (!anyFieldTouched()) {
+        hint.hidden = true;
+        hint.textContent = "";
+        hint.className = "mm-bk-book-hint";
+        return;
+      }
+
+      hint.hidden = false;
+
+      hint.className = "mm-bk-book-hint mm-bk-book-hint--issues";
+      if (issues.length) {
         hint.innerHTML =
-          "<strong>Complete these to continue:</strong><ul><li>" +
+          "<strong>Please fix the following:</strong><ul><li>" +
           issues.map(function (t) { return t.replace(/</g, "&lt;"); }).join("</li><li>") +
           "</li></ul>";
       } else {
-        hint.textContent = "Fill in all required fields above.";
+        hint.textContent = "Check the highlighted fields above.";
       }
     }
 
     REQUIRED.forEach(function (id) {
       var el = document.getElementById(id);
       if (!el) return;
-      el.addEventListener("input", function () {
-        interacted = true;
-        check();
-      });
+      el.addEventListener("input", check);
       el.addEventListener("blur", function () {
-        interacted = true;
+        touched[id] = true;
         check();
       });
     });
@@ -1283,7 +1300,7 @@
           cur = addDays(cur, 1);
         }
       }
-      var taxCents = cityTax10Cents(subtotalCents);
+      var taxCents = lodgingTaxCents(subtotalCents);
       var totalCents = subtotalCents + taxCents;
       var total = centsToMoney(totalCents);
 
@@ -1423,7 +1440,7 @@
         subtotalCents += dollarsToCents(rate);
         cur = addDays(cur, 1);
       }
-      var totalCents = subtotalCents + cityTax10Cents(subtotalCents);
+      var totalCents = subtotalCents + lodgingTaxCents(subtotalCents);
       totalEl.textContent = fmtCents(totalCents) + " (including taxes & fees)";
     }
   }
