@@ -59,6 +59,8 @@
     const track = document.createElement("div");
     track.className = "mm-slider__track";
     order.forEach((slideIdx, pos) => {
+      const wrap = document.createElement("div");
+      wrap.className = "mm-slider__slide-wrap";
       const im = document.createElement("img");
       im.className = "mm-slider__slide";
       im.src = slides[slideIdx];
@@ -66,7 +68,8 @@
       im.decoding = isDeckSlider ? "sync" : "async";
       im.loading = isDeckSlider ? "eager" : (pos === 0 ? "eager" : "lazy");
       im.draggable = false;
-      track.appendChild(im);
+      wrap.appendChild(im);
+      track.appendChild(wrap);
     });
     stage.appendChild(track);
 
@@ -216,6 +219,8 @@
 
         track.innerHTML = "";
         around.forEach((slideIdx, pos) => {
+          const wrap = document.createElement("div");
+          wrap.className = "mm-slider__slide-wrap";
           const im = document.createElement("img");
           im.className = "mm-slider__slide";
           im.src = slides[slideIdx];
@@ -223,7 +228,8 @@
           im.decoding = "sync";
           im.loading = "eager";
           im.draggable = false;
-          track.appendChild(im);
+          wrap.appendChild(im);
+          track.appendChild(wrap);
         });
 
         if (metaTrack) {

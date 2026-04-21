@@ -81,6 +81,12 @@ body.mm-home .v2-home .v2-hero__btn {
     }
     .v2-link:hover { opacity: 1; }
 
+    /* ── Word-blur split helper ─────────────────────────────────── */
+    .mm-word {
+      display: inline-block;
+      will-change: filter, opacity, transform;
+    }
+
     /* ── Scroll Reveal ───────────────────────────────────────────── */
     [data-reveal] {
       opacity: 0;
@@ -341,10 +347,11 @@ body.mm-home .v2-home .v2-hero__btn {
       justify-content: center;
     }
 
-    /* Image layers */
+    /* Image layers — dark base so the top bar reads before the first photo loads */
     .v2-hero__bg {
       position: absolute;
       inset: 0;
+      background-color: #0a0a0a;
     }
 
     .v2-hero__layer {
@@ -747,6 +754,7 @@ body.mm-home .v2-home .v2-hero__btn {
     }
 
     .v2-pool__img {
+      position: relative;
       overflow: hidden;
       background: #e0ddd8;
     }
@@ -1013,10 +1021,31 @@ body.mm-home .v2-home .v2-hero__btn {
       align-items: start;
       gap: 40px;
       border-top: 1px solid var(--border);
+      background: #ffffff;
     }
 
     @media (max-width: 760px) {
       .v2-footer { grid-template-columns: 1fr; text-align: center; }
+      .v2-footer__left { align-items: center; }
+    }
+
+    .v2-footer__left {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .v2-footer__logo-wrap {
+      display: inline-block;
+      margin-bottom: 18px;
+    }
+
+    .v2-footer__logo-mark {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      display: block;
+      opacity: 0.88;
     }
 
     .v2-footer__brand {
@@ -1054,14 +1083,40 @@ body.mm-home .v2-home .v2-hero__btn {
       font-size: 11px;
       color: var(--muted);
       line-height: 1.8;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 20px;
+    }
+
+    .v2-footer__book-btn {
+      display: inline-block;
+      padding: 14px 36px;
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      border: 1px solid rgba(10, 10, 10, 0.5);
+      transition: background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
+    }
+
+    .v2-footer__book-btn:hover {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    .v2-footer__insta {
+      display: inline-block;
     }
 
     @media (max-width: 760px) {
-      .v2-footer__end { text-align: center; }
+      .v2-footer__end { text-align: center; align-items: center; }
     }
 
     .v2-footer__copy {
-      margin-top: 8px;
       font-size: 10px;
       color: rgba(10,10,10,0.25);
     }

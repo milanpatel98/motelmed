@@ -1,8 +1,9 @@
 /*
  * Motel Mediteran preview — styled to match WordPress "Assembler" theme
  * (see ../site-export/theme.json + templates/home.html)
+ * Fonts load from each page’s <link>; do not @import Inter here — a second
+ * @font-face for "Inter" (variable vs static) caused inconsistent size/weight.
  */
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rye&display=swap");
 
 :root {
   /* theme.json palette */
@@ -804,7 +805,7 @@ body {
 .dir3-meta dd {
   margin: 6px 0 0;
   color: #1a2d4a;
-  font-weight: 550;
+  font-weight: 500;
 }
 
 .dir3-actions {
@@ -818,7 +819,7 @@ body {
   border-radius: 999px;
   padding: 11px 16px;
   font-size: 0.9rem;
-  font-weight: 650;
+  font-weight: 600;
 }
 
 .dir3-btn--primary {
@@ -1041,7 +1042,7 @@ a {
 
 .site-brand {
   font-size: var(--wp--preset--font-size--medium);
-  font-weight: 550;
+  font-weight: 500;
   line-height: 1.3;
   text-decoration: none;
   color: inherit;
@@ -1131,7 +1132,7 @@ a {
   justify-content: center;
   font-family: var(--wp--preset--font-family--inter);
   font-size: var(--wp--preset--font-size--small);
-  font-weight: 450;
+  font-weight: 500;
   padding: 16px 24px;
   border-radius: 0;
   border: 1px solid transparent;

@@ -11,19 +11,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/mm-topbar.css?v=20260455" />
+    <link rel="stylesheet" href="css/mm-topbar.css?v=20260422" />
+    <link rel="stylesheet" href="css/mm-inertial-scroll.css?v=1" />
     <link rel="stylesheet" href="css/mm-footer.css?v=7" />
-<link rel="stylesheet" href="css/rooms.css?v=r168" />
+<link rel="stylesheet" href="css/rooms.css?v=r171" />
     <!-- Do not set hero max-width: none — it kills the inset column. Suites chevrons + burger only. -->
-    <style>
-      .mm-shell-html body.mm-rooms button.mm-arrow {
-        background: none !important;
-        background-image: none !important;
-      }
-    </style>
     <!-- Menu chrome last so it always wins over page CSS -->
 <link rel="stylesheet" id="mm-menu-premium-css" href="css/mm-menu-premium.v3.css" />
 <script>
@@ -142,25 +137,15 @@
       <div class="mm-hero__media" data-mm-slider="hero">
         <div class="mm-hero__frame">
           <button class="mm-arrow mm-arrow--prev" type="button" aria-label="Previous image">
-            <img
-              class="mm-arrow__img"
-              src="assets/rooms/hero-arrow-prev.svg"
-              alt=""
-              width="59"
-              height="8"
-              decoding="async"
-            />
+            <svg class="mm-arrow__svg" viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M15 7l-6 6 6 6" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
           </button>
           <div class="mm-hero__stage"></div>
           <button class="mm-arrow mm-arrow--next" type="button" aria-label="Next image">
-            <img
-              class="mm-arrow__img"
-              src="assets/rooms/hero-arrow-next.svg"
-              alt=""
-              width="59"
-              height="8"
-              decoding="async"
-            />
+            <svg class="mm-arrow__svg" viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M15 7l-6 6 6 6" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
           </button>
         </div>
         <div class="mm-hero__below">
@@ -190,25 +175,15 @@
         <div class="mm-wide" data-mm-slider="suites">
           <div class="mm-wide__frame">
             <button class="mm-arrow mm-arrow--prev" type="button" aria-label="Previous suite">
-              <img
-                class="mm-arrow__img"
-                src="assets/rooms/suites-arrow-prev.svg"
-                alt=""
-                width="59"
-                height="8"
-                decoding="async"
-              />
+              <svg class="mm-arrow__svg" viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M15 7l-6 6 6 6" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </button>
             <div class="mm-wide__stage"></div>
             <button class="mm-arrow mm-arrow--next" type="button" aria-label="Next suite">
-              <img
-                class="mm-arrow__img"
-                src="assets/rooms/suites-arrow-next.svg"
-                alt=""
-                width="59"
-                height="8"
-                decoding="async"
-              />
+              <svg class="mm-arrow__svg" viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M15 7l-6 6 6 6" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </button>
           </div>
 
@@ -258,25 +233,15 @@
         <div class="mm-wide" data-mm-slider="rooms">
           <div class="mm-wide__frame">
             <button class="mm-arrow mm-arrow--prev" type="button" aria-label="Previous room">
-              <img
-                class="mm-arrow__img"
-                src="assets/rooms/suites-arrow-prev.svg"
-                alt=""
-                width="59"
-                height="8"
-                decoding="async"
-              />
+              <svg class="mm-arrow__svg" viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M15 7l-6 6 6 6" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </button>
             <div class="mm-wide__stage"></div>
             <button class="mm-arrow mm-arrow--next" type="button" aria-label="Next room">
-              <img
-                class="mm-arrow__img"
-                src="assets/rooms/suites-arrow-next.svg"
-                alt=""
-                width="59"
-                height="8"
-                decoding="async"
-              />
+              <svg class="mm-arrow__svg" viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M15 7l-6 6 6 6" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </button>
           </div>
 
@@ -453,11 +418,13 @@
       <p class="mm-footer__copy">© <span class="notranslate" translate="no">Motel Mediteran</span> · Escondido, California</p>
     </footer>
 
-    <script src="js/mm-lang.js?v=6"></script>
+    <script src="js/mm-lang.js?v=7"></script>
     <script src="js/mm-booking-dock.js?v=14"></script>
-    <script src="js/mm-booking-calendar.js?v=5"></script>
+    <script src="js/mm-booking-calendar.js?v=9"></script>
     <script src="js/mm-booking-guests.js?v=1"></script>
-    <script src="js/mm-topbar.js?v=17"></script>
+    <script src="js/mm-topbar.js?v=18"></script>
+    <script src="js/lenis.min.js?v=1.1.18" crossorigin="anonymous"></script>
+    <script src="js/mm-inertial-scroll.js?v=7"></script>
     <script src="js/rooms.js?v=r70"></script>
     <script>
   (function () {
@@ -467,6 +434,6 @@
     document.body.appendChild(s);
   })();
 </script>
-<script src="js/mm-chat-widget.js?v=46"></script>
+<script src="js/mm-chat-widget.js?v=47"></script>
   </body>
 </html>

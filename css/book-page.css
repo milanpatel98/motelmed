@@ -2237,3 +2237,36 @@ body.mm-book-page header.mm-topbar .mm-lang {
   font-size: 12px;
   letter-spacing: .05em;
 }
+
+/* ── API / network error banners (calendar + check availability) ── */
+.mm-bk-api-error {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #3d1515;
+  background: rgba(160, 45, 45, 0.09);
+  border: 1px solid rgba(120, 40, 40, 0.22);
+  border-radius: 6px;
+}
+.mm-bk-api-error--sidebar {
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+.mm-bk-api-error__text {
+  margin: 0 0 8px;
+}
+.mm-bk-api-error__hint {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.9;
+}
+.mm-bk-api-error a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.mm-bk-api-error[hidden] {
+  display: none !important;
+}

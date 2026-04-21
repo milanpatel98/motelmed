@@ -463,3 +463,13 @@ body.is-scrolled .mm-chat-btn .mm-chat-btn__dot {
     bottom: 20px;
   }
 }
+
+/* Hide widget while the nav menu is open or animating closed */
+body.mm-nav-open .mm-chat-btn,
+body.mm-nav-open .mm-chat-panel,
+body.mm-nav-closing .mm-chat-btn,
+body.mm-nav-closing .mm-chat-panel {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.15s ease !important;
+}

@@ -381,8 +381,21 @@
     // In mock mode fetchRatesForCalendar is instant; in live mode the
     // calendar renders only after the proxy responds.
     if (window.MMLoader) MMLoader.show("Loading rates…");
-    MM_API.fetchRatesForCalendar(function () {
+    MM_API.fetchRatesForCalendar(function (calErr) {
       if (window.MMLoader) MMLoader.hide();
+      var calBanner = document.getElementById("bk-cal-api-error");
+      if (calBanner) {
+        if (calErr) {
+          calBanner.hidden = false;
+          var t = calBanner.querySelector(".mm-bk-api-error__text");
+          if (t) {
+            t.textContent =
+              "We couldn’t load live nightly rates right now. You can still select dates and try Check Availability — or call us below.";
+          }
+        } else {
+          calBanner.hidden = true;
+        }
+      }
       renderCalendar();
       updateDateDisplay();
       updateCheckAvailBtn();
@@ -410,6 +423,7 @@
       if (!href || href === "#" || href.indexOf("book.html") !== -1) return;
       e.preventDefault();
       var dest = link.href;
+      if (window.MMLoader) MMLoader.show("Loading…");
       document.body.classList.add("mm-bk-exiting");
       setTimeout(function () { window.location.href = dest; }, 520);
     });
@@ -423,7 +437,8 @@
       el.classList.toggle("is-active", s === n);
     });
     updateStepNav(bookingSuccess);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (window.mmLenis) window.mmLenis.scrollTo(0, { lerp: 0.12 });
+    else window.scrollTo({ top: 0, behavior: "smooth" });
     if (n === 2) {
       // If the pre-selected room (from rooms page) is unavailable for these dates, drop it
       // so autoSelectCheapestRoom can fall back to the cheapest available option
@@ -711,36 +726,53 @@
           checkAvailBtn.disabled = false;
           if (window.MMLoader) MMLoader.hide();
 
+          var availBanner = document.getElementById("bk-avail-error");
           if (err) {
             console.error("Availability check failed:", err);
-            // Fall through to step 2 — room cards keep their HTML defaults
-          } else {
-            var nights = daysBetween(state.checkin, state.checkout);
-            // Update each room card's availability and live price from API response
-            results.forEach(function (item) {
+            if (availBanner) {
+              availBanner.hidden = false;
+              var at = availBanner.querySelector(".mm-bk-api-error__text");
+              if (at) {
+                at.textContent =
+                  "We couldn’t check availability right now. Please try again in a moment, or call us below.";
+              }
+            }
+            updateBookingBar();
+            return;
+          }
+          if (availBanner) availBanner.hidden = true;
+
+          // Update each room card's availability and live price from API response
+          results.forEach(function (item) {
               var card = document.querySelector(
                 ".mm-bk-room-card[data-room-id='" + item.roomId + "']"
               );
               if (!card) return;
               card.setAttribute("data-available", item.available ? "true" : "false");
 
-              // Update displayed price with live nightly rate
-              // item.rate is the average per-night; use min from nightly breakdown if available
+              var priceEl = card.querySelector(".mm-bk-room-card__price");
+              var fromEl  = card.querySelector(".mm-bk-room-card__from");
+              var taxEl   = card.querySelector(".mm-bk-room-card__taxes");
+
               if (item.available && item.rate > 0) {
+                // Update displayed price with live nightly rate
                 var nightlyRates = (item.nightly || []).filter(function (n) { return n.rate > 0; });
                 var displayRate = nightlyRates.length
                   ? Math.min.apply(null, nightlyRates.map(function (n) { return n.rate; }))
                   : Math.round(item.rate);
-                var priceEl = card.querySelector(".mm-bk-room-card__price");
-                if (priceEl) {
-                  priceEl.innerHTML = "$" + Math.round(displayRate) + '<span class="mm-bk-room-card__price-night"> / night</span>';
-                }
+                if (priceEl) priceEl.innerHTML = "$" + Math.round(displayRate) + '<span class="mm-bk-room-card__price-night"> / night</span>';
+                if (fromEl)  fromEl.style.display = "";
+                if (taxEl)   taxEl.style.display  = "";
                 // Keep data-price in sync — use average so totals are accurate
                 var btn = card.querySelector(".mm-bk-room-card__select");
                 if (btn) btn.setAttribute("data-price", String(Math.round(item.rate)));
+              } else if (!item.available) {
+                // Hide price when room is unavailable
+                if (priceEl) priceEl.style.display = "none";
+                if (fromEl)  fromEl.style.display  = "none";
+                if (taxEl)   taxEl.style.display   = "none";
               }
             });
-          }
 
           updateBookingBar();
           goToStep(2);
@@ -913,7 +945,7 @@
       card.classList.toggle("is-selected", isSelected);
     });
 
-    // Sort only on initial load: selected → available → unavailable
+    // Sort: selected first → available by price low→high → unavailable last
     if (sort) {
       cards.sort(function (a, b) {
         function rank(card) {
@@ -921,7 +953,17 @@
           if (card.getAttribute("data-available") === "false") return 2;
           return 1;
         }
-        return rank(a) - rank(b);
+        var ra = rank(a), rb = rank(b);
+        if (ra !== rb) return ra - rb;
+        // Within available (rank 1): sort by live price low → high
+        if (ra === 1) {
+          var btnA = a.querySelector(".mm-bk-room-card__select");
+          var btnB = b.querySelector(".mm-bk-room-card__select");
+          var pa = btnA ? parseInt(btnA.getAttribute("data-price"), 10) : 9999;
+          var pb = btnB ? parseInt(btnB.getAttribute("data-price"), 10) : 9999;
+          return pa - pb;
+        }
+        return 0;
       });
       cards.forEach(function (card) { container.appendChild(card); });
     }

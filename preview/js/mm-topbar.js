@@ -16,6 +16,19 @@
     sync();
   }
 
+  /* Home: sentinel flips is-scrolled on tiny scroll; keep bar transparent until hero leaves view */
+  const heroEl =
+    document.getElementById("heroScene") || document.getElementById("v2hero");
+  if (body.classList.contains("mm-home") && heroEl && "IntersectionObserver" in window) {
+    const heroIo = new IntersectionObserver(
+      ([entry]) => {
+        body.classList.toggle("mm-home-past-hero", !entry.isIntersecting);
+      },
+      { root: null, threshold: 0 }
+    );
+    heroIo.observe(heroEl);
+  }
+
   const nav = document.querySelector("[data-mm-nav]");
   const menuBtn = document.getElementById("mm-menu-btn");
   if (!nav || !menuBtn) return;

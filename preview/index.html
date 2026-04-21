@@ -10,18 +10,17 @@
 <meta name="description" content="Motel Mediteran — static 1:1 build from WordPress theme export (Assembler)." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Great+Vibes&family=Inter:wght@300;400;450;500;600;700&family=Rye&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Great+Vibes&family=Inter:wght@300;400;500;600;700;800&family=Rye&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="global-styles.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/WordPress/WordPress@6.6.2/wp-includes/css/dist/block-library/style.min.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/WordPress/WordPress@6.6.2/wp-includes/css/dist/block-library/theme.min.css" />
 <link rel="stylesheet" href="site-export-style.css" />
 <link rel="stylesheet" href="css/motel-map.css?v=ref23" />
 <link rel="stylesheet" href="wp-compat-1to1.css?v=ref66" />
-<link rel="stylesheet" href="css/mm-topbar.css?v=20260455" />
+<link rel="stylesheet" href="css/mm-topbar.css?v=20260421" />
 <link rel="stylesheet" href="css/mm-footer.css?v=7" />
-<link rel="stylesheet" href="css/mm-booking-calendar.css?v=3" />
+<link rel="stylesheet" href="css/mm-booking-calendar.css?v=7" />
 <link rel="stylesheet" href="css/mm-booking-guests.css?v=1" />
-<link rel="stylesheet" href="css/home-v2-main.css?v=15" />
+<link rel="stylesheet" href="css/home-v2-main.css?v=19" />
+<link rel="stylesheet" href="css/mm-inertial-scroll.css" />
 <!-- Menu chrome last so it always wins over page CSS -->
 <link rel="stylesheet" id="mm-menu-premium-css" href="css/mm-menu-premium.v3.css" />
 <script>
@@ -32,9 +31,9 @@
     el.href = el.href + sep + 'v=' + Date.now();
   })();
 </script>
-  <script src="js/mm-page-loader.js?v=3"></script>
+  <script src="js/mm-page-loader.js?v=5"></script>
 </head>
-<body class="mm-shell mm-home">
+<body class="mm-shell mm-home mm-texture-bg">
 <a class="skip-link" href="#main">Skip to content</a>
 
 <div class="mm-topbar-sentinel" aria-hidden="true"></div>
@@ -188,11 +187,11 @@
 
   <!-- ── Intro ──────────────────────────────────────────────────── -->
   <section class="v2-intro">
-    <div class="v2-intro__quote" data-reveal>
+    <div class="v2-intro__quote">
       <p>A place where comfort</p>
       <p>meets character.</p>
     </div>
-    <div class="v2-intro__body" data-reveal data-delay="2">
+    <div class="v2-intro__body">
       <p>Nestled in Escondido, California, Motel Mediteran offers thoughtfully appointed rooms, warm hospitality, and a calm retreat from the everyday — whether you're here for business, family, or simply to breathe.</p>
       <div class="v2-rule"></div>
       <a class="v2-link" href="amenities.html">Discover the property</a>
@@ -212,7 +211,7 @@
     <div class="v2-rooms__grid">
 
       <!-- Card 1: Deluxe King Suite — fireplace left, bedroom right -->
-      <div class="v2-room-card" data-reveal data-delay="1">
+      <div class="v2-room-card">
         <div class="v2-room-card__img">
           <img src="assets/motel-pics/Deluxe King suite with kitchen/5.png"  style="object-position:20% center"  alt="Deluxe King Suite — fireplace" class="is-active" />
           <img src="assets/motel-pics/Deluxe King suite with kitchen/6.png"  style="object-position:center center" alt="" />
@@ -230,7 +229,7 @@
       </div>
 
       <!-- Card 2: Deluxe King Suite (jacuzzi) — bed + mural headboard -->
-      <div class="v2-room-card" data-reveal data-delay="2">
+      <div class="v2-room-card">
         <div class="v2-room-card__img">
           <img src="assets/motel-pics/king room jacuzzi/3.png" style="object-position:35% center" alt="Deluxe King Suite — bedroom" class="is-active" />
         </div>
@@ -245,7 +244,7 @@
       </div>
 
       <!-- Card 3: Standard King — bed + mural headboard -->
-      <div class="v2-room-card" data-reveal data-delay="3">
+      <div class="v2-room-card">
         <div class="v2-room-card__img">
           <img src="assets/motel-pics/std king/1.png" style="object-position:60% center" alt="Standard King — bedroom" class="is-active" />
           <img src="assets/motel-pics/std king/2.png" style="object-position:55% center" alt="" />
@@ -329,22 +328,22 @@
       <a class="v2-link" href="gallery.html">View all photos</a>
     </div>
     <div class="v2-gallery__grid">
-      <div class="v2-gallery__item" data-reveal data-delay="1">
+      <div class="v2-gallery__item">
         <img src="assets/motel-pics/EXTERIOR PICS/5.png" alt="Motel Mediteran exterior" loading="lazy" />
       </div>
-      <div class="v2-gallery__item" data-reveal data-delay="2">
+      <div class="v2-gallery__item">
         <img src="assets/motel-pics/Deluxe King suite with kitchen/5.png" alt="Deluxe suite fireplace" loading="lazy" />
       </div>
-      <div class="v2-gallery__item" data-reveal data-delay="3">
+      <div class="v2-gallery__item">
         <img src="assets/motel-pics/POOL/pool.png" alt="Pool" loading="lazy" />
       </div>
-      <div class="v2-gallery__item" data-reveal data-delay="1">
+      <div class="v2-gallery__item">
         <img src="assets/motel-pics/EXTERIOR PICS/7.png" alt="Exterior" loading="lazy" />
       </div>
-      <div class="v2-gallery__item" data-reveal data-delay="2">
+      <div class="v2-gallery__item">
         <img src="assets/motel-pics/king room jacuzzi/3.png" alt="King room with jacuzzi" loading="lazy" />
       </div>
-      <div class="v2-gallery__item" data-reveal data-delay="3">
+      <div class="v2-gallery__item">
         <img src="assets/motel-pics/2 rooms kitchen suite/1.png" alt="Kitchen suite" loading="lazy" />
       </div>
     </div>
@@ -404,14 +403,17 @@
 
 <!-- ── Footer ─────────────────────────────────────────────────── -->
 <footer class="v2-footer">
-    <div>
+    <div class="v2-footer__left">
+      <a href="index.html" class="v2-footer__logo-wrap" aria-label="Motel Mediteran home">
+        <img src="assets/mm-logo-mark.png" alt="MM" class="v2-footer__logo-mark" />
+      </a>
       <p class="v2-footer__brand">Motel Mediteran
         <br><span style="font-family:var(--sans);font-size:11px;font-weight:300;color:var(--muted)">Escondido, California</span>
       </p>
       <p style="font-size:11px;color:var(--muted);margin-top:10px;line-height:1.7">
         425 W El Norte Pkwy<br>
         Escondido, CA 92026<br>
-        (760) 000-0000
+        (760) 743-2300
       </p>
     </div>
     <ul class="v2-footer__nav">
@@ -423,21 +425,21 @@
       <li><a href="faqs.html">FAQs</a></li>
       <li><a href="hotel-policies.html">Policies</a></li>
       <li><a href="accessibility.html">Accessibility</a></li>
-      <li><a href="book.html">Book Now</a></li>
     </ul>
     <div class="v2-footer__end">
-      <a href="https://www.instagram.com" aria-label="Instagram">
+      <a href="book.html" class="v2-footer__book-btn">Book Now</a>
+      <a href="https://www.instagram.com" aria-label="Instagram" class="v2-footer__insta">
         <img src="assets/icon-instagram.svg" alt="" style="width:18px;height:18px;display:inline-block;opacity:0.4;transition:opacity 0.3s" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=0.4" />
       </a>
       <p class="v2-footer__copy">© 2026 Motel Mediteran.<br>All rights reserved.</p>
     </div>
   </footer>
 
-<script src="js/mm-lang.js?v=6"></script>
+<script src="js/mm-lang.js?v=7"></script>
 <script src="js/mm-booking-dock.js?v=14"></script>
-<script src="js/mm-booking-calendar.js?v=5"></script>
+<script src="js/mm-booking-calendar.js?v=9"></script>
 <script src="js/mm-booking-guests.js?v=1"></script>
-<script src="js/mm-topbar.js?v=17"></script>
+<script src="js/mm-topbar.js?v=18"></script>
 <script>
   (function () {
     var s = document.createElement('script');
@@ -446,7 +448,11 @@
     document.body.appendChild(s);
   })();
 </script>
-<script src="js/mm-chat-widget.js?v=46"></script>
-<script src="js/home-v2-main.js?v=5"></script>
+<script src="js/mm-chat-widget.js?v=47"></script>
+<script src="js/lenis.min.js"></script>
+<script src="js/gsap.min.js"></script>
+<script src="js/ScrollTrigger.min.js"></script>
+<script src="js/mm-inertial-scroll.js"></script>
+<script src="js/home-v2-main.js?v=6"></script>
 </body>
 </html>

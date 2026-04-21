@@ -11,7 +11,7 @@
 
   /** Bump these when individual assets change */
   var VERSIONS = {
-    css: "17",
+    css: "18",
     mmData: "14",
     dataset: "13",
     datasetAuto: "13",

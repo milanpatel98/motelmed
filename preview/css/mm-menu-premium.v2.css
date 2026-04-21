@@ -16,28 +16,16 @@
   --mm-ease-reveal: cubic-bezier(0.76, 0, 0.24, 1);
   --mm-ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
   /* Shutter + page push — one timing curve everywhere */
-  --mm-push-duration-open: 2.1s;
-  --mm-push-duration-close: 1.75s;
+  --mm-push-duration-open: 0.72s;
+  --mm-push-duration-close: 0.62s;
   --mm-push-ease: cubic-bezier(0.28, 1, 0.35, 1);
   /* Same-logo travel timings (topbar slot <-> menu lockup) */
-  --mm-logo-flight-open: 2.65s;
-  --mm-logo-flight-close: 2.25s;
+  --mm-logo-flight-open: 0.60s;
+  --mm-logo-flight-close: 0.52s;
   --mm-logo-flight-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/*
- * Push-down paints “holes” above translated #main; body uses --paper (off-white).
- * Match shell background to menu chrome while open so no paper flash at the top edge.
- */
-html.mm-shell-html:has(body.mm-nav-open),
-html.mm-shell-html:has(body.mm-nav-closing) {
-  background-color: #121110;
-}
-
-body.mm-nav-open,
-body.mm-nav-closing {
-  background-color: #121110;
-}
+/* No page-push — panel overlays; background hacks removed. */
 
 /* ─────────────────────────────────────────────────────────────────
    1. Container — absolute inside the fixed topbar, clips panel
@@ -49,7 +37,7 @@ body.mm-nav-closing {
   left: 0;
   right: 0;
   bottom: auto !important;
-  height: calc(var(--mm-topbar-h, 104px) + var(--mm-menu-h) + env(safe-area-inset-top, 0px));
+  height: 100dvh;
   z-index: 205;                /* below topbar chrome, above page */
   overflow: hidden;
   pointer-events: none;
@@ -90,15 +78,18 @@ body.mm-nav-closing {
   /* Grain depth layer */
   isolation: isolate;
 
-  /* Garage shutter: whole panel (image + links + logo slot) translates with the push */
+  /* Garage shutter: whole panel translates in/out */
   transform: translate3d(0, -100%, 0);
   will-change: transform;
-  transition: transform var(--mm-push-duration-close) var(--mm-push-ease);
+  transition: transform var(--mm-push-duration-open) var(--mm-push-ease);
 }
 
 .mm-nav.is-open .mm-nav__panel {
   transform: translate3d(0, 0, 0);
-  transition: transform var(--mm-push-duration-open) var(--mm-push-ease);
+}
+
+body.mm-nav-closing .mm-nav__panel {
+  transition: transform var(--mm-push-duration-close) var(--mm-push-ease);
 }
 
 /* Grain texture over panel */
@@ -311,6 +302,11 @@ body.mm-shell.mm-logo-in-nav .mm-topbar__logo {
   list-style: none;
   margin: 0;
   padding: 0;
+  /* Reset mm-topbar.css overrides that bleed in on inner pages */
+  column-count: 1;
+  column-gap: normal;
+  width: auto;
+  max-width: none;
 }
 
 .mm-nav__item {
@@ -336,6 +332,11 @@ body.mm-shell.mm-logo-in-nav .mm-topbar__logo {
 
 .mm-nav__item a:hover,
 .mm-nav__item a[aria-current="page"] {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.mm-nav__item a:focus-visible {
+  outline: none;
   color: rgba(255, 255, 255, 0.95);
 }
 
@@ -394,29 +395,8 @@ body.mm-shell.mm-logo-in-nav .mm-topbar__logo {
 .mm-nav__book-cta:hover { border-color: rgba(255,255,255,0.55); color: #fff; }
 
 /* ─────────────────────────────────────────────────────────────────
-   7. Page push — content moves down when panel opens
+   7. Page push — removed; panel overlays the page (no parallax)
    ───────────────────────────────────────────────────────────────── */
-
-#main,
-.v2-footer,
-.mm-footer {
-  will-change: transform;
-  transition:
-    transform var(--mm-push-duration-open) var(--mm-push-ease);
-}
-
-body.mm-nav-open #main,
-body.mm-nav-open .v2-footer,
-body.mm-nav-open .mm-footer {
-  transform: translateY(var(--mm-menu-h));
-}
-
-body:not(.mm-nav-open) #main,
-body:not(.mm-nav-open) .v2-footer,
-body:not(.mm-nav-open) .mm-footer {
-  transition-duration: var(--mm-push-duration-close);
-  transition-timing-function: var(--mm-push-ease);
-}
 
 /* ─────────────────────────────────────────────────────────────────
    8. Topbar chrome — pinned above shutter (no fades)
@@ -430,13 +410,32 @@ body:not(.mm-nav-open) .mm-footer {
 
 /* Inner pages can keep legacy white topbar on open; force dark chrome for visible white cross. */
 body.mm-shell.mm-nav-open .mm-topbar,
-body.mm-shell.mm-nav-closing .mm-topbar,
 body.mm-shell.mm-logo-in-nav .mm-topbar {
   background-color: transparent !important;
   border-bottom-color: transparent !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+}
+
+/*
+ * mm-topbar.css sets background-color: var(--mm-paper) (#f8f8f6, cream) on texture-bg / rooms
+ * pages when the menu opens — white cross disappears on cream. Override with higher-specificity
+ * rules (adding .mm-shell lifts us above the 0,5,1 score of the topbar rule).
+ * Also suppress the ::after texture overlay that sits above the background.
+ */
+body.mm-shell.mm-nav-open.mm-texture-bg:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar,
+body.mm-shell.mm-nav-open.mm-rooms:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar,
+body.mm-shell.mm-nav-open.mm-room-detail:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar {
+  background-color: transparent !important;
+  border-bottom-color: transparent !important;
+  box-shadow: none !important;
+}
+
+body.mm-shell.mm-nav-open.mm-texture-bg:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar::after,
+body.mm-shell.mm-nav-open.mm-rooms:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar::after,
+body.mm-shell.mm-nav-open.mm-room-detail:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar::after {
+  content: none !important;
 }
 
 /* Premium open topbar: keep burger slot (overrides legacy stretch while menu is open). */
@@ -468,46 +467,32 @@ body.mm-shell.mm-nav-closing .mm-topbar__menu:focus-visible {
 }
 
 /*
- * Cross strokes: always white while menu is open.
- * mm-topbar.css uses currentColor for home+solid+open (dark on our dark menu);
- * hero uses body.mm-home:not(.is-scrolled) .mm-burger__line — beat both when mm-nav-open.
+ * Burger ↔ X is driven by mm-nav-open ONLY so the button toggles instantly
+ * on press, independent of the shutter/logo animations.
  */
 body.mm-home.mm-nav-open:not(.is-scrolled) .mm-burger__line,
 body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-burger__line,
-body.mm-shell.mm-nav-open .mm-burger__line,
-body.mm-shell.mm-nav-closing .mm-burger__line,
-body.mm-shell.mm-logo-in-nav .mm-burger__line {
+body.mm-shell.mm-nav-open .mm-burger__line {
   stroke: #ffffff !important;
 }
 
-/* Cross stays an “X” until the logo leaves the shutter (matches mm-topbar burger math) */
-body.mm-shell.mm-nav-open .mm-burger__shift--top,
-body.mm-shell.mm-nav-closing .mm-burger__shift--top,
-body.mm-shell.mm-logo-in-nav .mm-burger__shift--top {
+body.mm-shell.mm-nav-open .mm-burger__shift--top {
   transform: translate(0, 7.5px);
 }
 
-body.mm-shell.mm-nav-open .mm-burger__shift--bot,
-body.mm-shell.mm-nav-closing .mm-burger__shift--bot,
-body.mm-shell.mm-logo-in-nav .mm-burger__shift--bot {
+body.mm-shell.mm-nav-open .mm-burger__shift--bot {
   transform: translate(0, -7.5px);
 }
 
-body.mm-shell.mm-nav-open .mm-burger__spin--top,
-body.mm-shell.mm-nav-closing .mm-burger__spin--top,
-body.mm-shell.mm-logo-in-nav .mm-burger__spin--top {
+body.mm-shell.mm-nav-open .mm-burger__spin--top {
   transform: rotate(45deg);
 }
 
-body.mm-shell.mm-nav-open .mm-burger__spin--bot,
-body.mm-shell.mm-nav-closing .mm-burger__spin--bot,
-body.mm-shell.mm-logo-in-nav .mm-burger__spin--bot {
+body.mm-shell.mm-nav-open .mm-burger__spin--bot {
   transform: rotate(-45deg);
 }
 
-body.mm-shell.mm-nav-open .mm-burger__row--mid,
-body.mm-shell.mm-nav-closing .mm-burger__row--mid,
-body.mm-shell.mm-logo-in-nav .mm-burger__row--mid {
+body.mm-shell.mm-nav-open .mm-burger__row--mid {
   opacity: 0;
   pointer-events: none;
 }
@@ -603,12 +588,6 @@ body.mm-shell.mm-logo-in-nav .mm-topbar__lang {
    ───────────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  #main,
-  .v2-footer,
-  .mm-footer {
-    transition: none !important;
-  }
-
   .mm-nav__panel {
     transform: none !important;
     transition: none !important;

@@ -36,49 +36,49 @@
     return Math.max(0, window.innerWidth - document.documentElement.clientWidth);
   }
 
-  /** Restore scroll without smooth scrolling (site.css may set `html { scroll-behavior: smooth }`). */
-  function scrollToRestore(y) {
-    var root = document.documentElement;
-    var prevRoot = root.style.scrollBehavior;
-    root.style.scrollBehavior = 'auto';
-    window.scrollTo(0, y);
-    if (Math.abs(window.scrollY - y) > 1) {
-      root.scrollTop = y;
-      document.body.scrollTop = y;
-    }
-    requestAnimationFrame(function () {
-      root.style.scrollBehavior = prevRoot;
-    });
-  }
-
   function lockBodyScroll() {
     if (menuScrollLockY !== null) return;
     menuScrollLockY = window.scrollY || window.pageYOffset || 0;
-    var y = menuScrollLockY;
     var sbw = scrollbarWidth();
     if (sbw > 0) {
       document.body.style.paddingRight = sbw + 'px';
     }
     document.documentElement.style.overflow = 'hidden';
-    document.body.style.position = 'fixed';
-    document.body.style.top = '-' + y + 'px';
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
   }
 
   function unlockBodyScroll() {
     if (menuScrollLockY === null) return;
-    var y = menuScrollLockY;
     menuScrollLockY = null;
     document.body.style.paddingRight = '';
     document.documentElement.style.overflow = '';
-    document.body.style.removeProperty('position');
-    document.body.style.removeProperty('top');
-    document.body.style.removeProperty('left');
-    document.body.style.removeProperty('right');
-    document.body.style.removeProperty('width');
-    scrollToRestore(y);
+    document.body.style.overflow = '';
+  }
+
+  /**
+   * Full page navigations should not run closeMenu(): animating shut + scroll unlock
+   * while the browser is loading the next document causes a visible flash/jank.
+   * Same-tab loads to another document: let the browser navigate immediately.
+   */
+  function shouldSkipMenuCloseOnNavigate(e, anchor) {
+    if (e.defaultPrevented) return false;
+    if (e.button !== 0) return false;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return false;
+    var target = anchor.getAttribute('target');
+    if (target && target !== '_self') return false;
+    if (anchor.hasAttribute('download')) return false;
+    var href = anchor.getAttribute('href');
+    if (href == null || href === '' || href === '#' || /^\s*javascript:/i.test(href)) return false;
+    if (/^(mailto:|tel:|sms:)/i.test(href.trim())) return false;
+    try {
+      var next = new URL(anchor.href, window.location.href);
+      var cur = new URL(window.location.href);
+      if (next.origin !== cur.origin) return true;
+      if (next.pathname !== cur.pathname || next.search !== cur.search) return true;
+      return false;
+    } catch (err) {
+      return false;
+    }
   }
 
   function clearCloseShutterWatch() {
@@ -185,64 +185,54 @@
     document.body.classList.remove('mm-logo-in-nav');
   })();
 
-  function calcPanelH() {
-    var vh = window.innerHeight;
-    var isMobile = window.innerWidth < 720;
-    var topbarH =
-      parseFloat(
-        getComputedStyle(document.documentElement).getPropertyValue('--mm-topbar-h')
-      ) || 88;
-
-    var ratio = isMobile ? 0.78 : 0.62;
-    var minH = isMobile ? 380 : 360;
-    var maxH = isMobile ? 520 : 600;
-    var available = Math.max(260, vh - topbarH - 28);
-    var preferred = Math.max(minH, vh * ratio);
-    return Math.round(Math.max(260, Math.min(preferred, maxH, available)));
-  }
-
-  function applyPanelH() {
-    var h = calcPanelH();
-    document.documentElement.style.setProperty('--mm-menu-h', h + 'px');
-    nav.style.height = '';
-  }
-
-  applyPanelH();
-
   function openMenu() {
-    if (menuState === 'open' || menuState === 'opening' || menuState === 'closing') return;
+    if (menuState === 'open' || menuState === 'opening') return;
+    if (menuState === 'closing') {
+      /* Interrupt a close-in-progress cleanly */
+      clearCloseShutterWatch();
+      document.body.classList.remove('mm-nav-closing');
+    }
     menuState = 'opening';
-    clearCloseShutterWatch();
     shutterEpoch++;
-    document.body.classList.remove('mm-nav-closing');
     lastFocusedBeforeOpen = document.activeElement;
 
     var wasScrolled = document.body.classList.contains('is-scrolled');
     document.body.classList.toggle('mm-nav-solid-topbar', wasScrolled);
-
-    applyPanelH();
-
-    /* Same logo node leaves topbar and flies into menu lockup. */
-    runLogoFlight(moveLogoIntoMenu, '--mm-logo-flight-open', 2.65);
-    nav.classList.add('is-open');
-    nav.setAttribute('aria-hidden', 'false');
+    /* Entity A: burger switches to X immediately — no waiting */
     document.body.classList.add('mm-nav-open');
-    lockBodyScroll();
     menuBtn.setAttribute('aria-expanded', 'true');
     menuBtn.setAttribute('aria-label', 'Close menu');
+    /* Force topbar transparent + white cross via inline !important — beats any stylesheet cascade */
+    if (topbar) {
+      topbar.style.setProperty('background-color', 'transparent', 'important');
+      topbar.style.setProperty('border-bottom-color', 'transparent', 'important');
+      topbar.style.setProperty('box-shadow', 'none', 'important');
+      topbar.style.setProperty('backdrop-filter', 'none', 'important');
+    }
+    menuBtn.querySelectorAll('.mm-burger__line').forEach(function (l) {
+      l.style.setProperty('stroke', '#ffffff', 'important');
+    });
+    /* Scroll locked in the same frame so no layout jump */
+    lockBodyScroll();
+
+    /* Entity 2: shutter descends */
+    nav.classList.add('is-open');
+    nav.setAttribute('aria-hidden', 'false');
+
+    /* Entities B + C: logo / brand fly independently */
+    runLogoFlight(moveLogoIntoMenu, '--mm-logo-flight-open', 0.60);
 
     openDoneTimer = window.setTimeout(function () {
       if (menuState === 'opening') menuState = 'open';
       openDoneTimer = null;
-    }, parseDurationMs('--mm-push-duration-open', 2.1) + 120);
+    }, parseDurationMs('--mm-push-duration-open', 0.72) + 80);
 
     var firstLink = nav.querySelector('.mm-nav__col--primary a');
     if (firstLink) {
-      var ms = parseDurationMs('--mm-push-duration-open', 2.1) + 80;
       window.setTimeout(function () {
         if (!nav.classList.contains('is-open')) return;
         firstLink.focus({ preventScroll: true });
-      }, ms);
+      }, parseDurationMs('--mm-push-duration-open', 0.72) + 60);
     }
   }
 
@@ -254,19 +244,22 @@
 
     var epoch = shutterEpoch;
 
-    /* Closing phase keeps chrome state stable while panel reverses. */
-    document.body.classList.add('mm-nav-closing');
-
-    /* Start logo return immediately (independent entity, not post-shutter). */
-    runLogoFlight(moveLogoBackToTopbar, '--mm-logo-flight-close', 2.25);
-
+    /* Entity A: burger switches to hamburger immediately — no waiting */
     document.body.classList.remove('mm-nav-open');
     document.body.classList.remove('mm-nav-solid-topbar');
-    nav.classList.remove('is-open');
-    unlockBodyScroll();
-
     menuBtn.setAttribute('aria-expanded', 'false');
     menuBtn.setAttribute('aria-label', 'Open menu');
+    /* Reset burger stroke immediately so hamburger reverts to page's natural colour */
+    menuBtn.querySelectorAll('.mm-burger__line').forEach(function (l) {
+      l.style.removeProperty('stroke');
+    });
+    /* Restore topbar to its natural CSS state at close-start, not at close-end */
+    if (topbar) {
+      topbar.style.removeProperty('background-color');
+      topbar.style.removeProperty('border-bottom-color');
+      topbar.style.removeProperty('box-shadow');
+      topbar.style.removeProperty('backdrop-filter');
+    }
 
     var fromEscape = evt && evt.type === 'keydown' && evt.key === 'Escape';
     if (fromEscape) {
@@ -277,6 +270,12 @@
       lastFocusedBeforeOpen.focus({ preventScroll: true });
     }
 
+    /* Entity 2: shutter ascends; B + C fly back — scroll stays locked until done */
+    document.body.classList.add('mm-nav-closing');
+    void nav.offsetHeight;
+    nav.classList.remove('is-open');
+    runLogoFlight(moveLogoBackToTopbar, '--mm-logo-flight-close', 0.52);
+
     var panel = nav.querySelector('.mm-nav__panel');
 
     function finishShutter() {
@@ -284,6 +283,8 @@
       document.body.classList.remove('mm-nav-closing');
       nav.setAttribute('aria-hidden', 'true');
       menuState = 'closed';
+      /* Unlock scroll only after shutter is fully closed — prevents layout flash */
+      unlockBodyScroll();
     }
 
     if (!panel) {
@@ -304,7 +305,7 @@
 
     panel.addEventListener('transitionend', closePanelHandler);
 
-    var fallbackMs = parseDurationMs('--mm-push-duration-close', 1.75) + 150;
+    var fallbackMs = parseDurationMs('--mm-push-duration-close', 0.62) + 100;
     closeFallbackTimer = window.setTimeout(function () {
       closeFallbackTimer = null;
       if (closePanelHandler) {
@@ -327,7 +328,9 @@
 
   nav.querySelectorAll('a').forEach(function (a) {
     a.addEventListener('click', function (e) {
-      if (nav.classList.contains('is-open')) closeMenu(e);
+      if (!nav.classList.contains('is-open')) return;
+      if (shouldSkipMenuCloseOnNavigate(e, a)) return;
+      closeMenu(e);
     });
   });
 
@@ -353,13 +356,4 @@
     if (e.key === 'Escape' && nav.classList.contains('is-open')) closeMenu(e);
   });
 
-  var resizeTimer;
-  window.addEventListener(
-    'resize',
-    function () {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(applyPanelH, 120);
-    },
-    { passive: true }
-  );
 })();

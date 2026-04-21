@@ -121,7 +121,7 @@ body.mm-texture-bg > footer.mm-footer {
 }
 
 /* WP/block themes often set a solid header background — force clear bar at scroll top */
-body.mm-shell:not(.is-scrolled) .mm-topbar {
+body.mm-shell.mm-home:not(.is-scrolled) .mm-topbar {
   background-color: transparent !important;
   border-bottom-color: transparent !important;
   box-shadow: none !important;
@@ -585,6 +585,75 @@ body.mm-home:not(.is-scrolled) .mm-burger__line {
   stroke: #f4f4f2 !important;
 }
 
+/* Home: scrolled (sentinel) but hero (#heroScene/#v2hero) still on screen — stay transparent + light chrome */
+body.mm-shell.mm-home:not(.mm-home-past-hero).is-scrolled .mm-topbar {
+  background-color: transparent !important;
+  border-bottom-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body.mm-home:not(.mm-home-past-hero).is-scrolled .mm-topbar {
+  color: #f4f4f2;
+}
+
+body.mm-home:not(.mm-home-past-hero).is-scrolled .mm-topbar__logo {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #f4f4f2;
+}
+
+/* Location line reveals on scroll — keep white until hero section has left view */
+body.mm-home:not(.mm-home-past-hero).is-scrolled .mm-topbar__loc {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+body.mm-home:not(.mm-home-past-hero).is-scrolled .mm-topbar__phone {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+body.mm-home:not(.mm-home-past-hero).is-scrolled .mm-topbar__phone:hover {
+  opacity: 1;
+  color: #fff;
+}
+
+body.mm-home:not(.mm-home-past-hero).is-scrolled .mm-topbar__cta {
+  color: #f4f4f2;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+body.mm-home:not(.mm-home-past-hero).is-scrolled .mm-topbar__cta:hover {
+  background: #fff;
+  color: #0a0a0a;
+  border: 1px solid #fff;
+}
+
+body.mm-home:not(.mm-home-past-hero).is-scrolled .mm-lang {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+body.mm-home:not(.mm-home-past-hero).is-scrolled .mm-lang.is-active {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+body.mm-home:not(.mm-home-past-hero).is-scrolled .mm-lang__sep {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+body.mm-home:not(.mm-home-past-hero).is-scrolled .mm-burger__line {
+  stroke: #f4f4f2 !important;
+}
+
+body.mm-home:not(.mm-home-past-hero).is-scrolled .mm-topbar__menu:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.42);
+  outline-offset: 2px;
+}
+
+/* Phone is home-only */
+body.mm-shell:not(.mm-home) .mm-topbar__phone {
+  display: none !important;
+}
+
 /* Scroll lock while menu is open — see mm-topbar.js */
 body.mm-nav-open {
   overscroll-behavior: none;
@@ -678,22 +747,23 @@ body.mm-home.mm-nav-open.mm-nav-solid-topbar .mm-burger__line {
 }
 
 /* Transparent bar at scroll top: scroll-lock can leave a flat strip behind the burger — match body grain */
-body.mm-nav-open.mm-texture-bg:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar,
-body.mm-nav-open.mm-rooms:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar {
+/* :not(.mm-shell) scopes these to the legacy (non-premium) menu only; premium pages all have mm-shell */
+body:not(.mm-shell).mm-nav-open.mm-texture-bg:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar,
+body:not(.mm-shell).mm-nav-open.mm-rooms:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar {
   background-color: var(--mm-paper) !important;
   border-bottom-color: rgba(10, 10, 10, 0.1) !important;
   box-shadow: 0 1px 0 rgba(10, 10, 10, 0.06) !important;
 }
 
-body.mm-nav-open.mm-room-detail:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar {
+body:not(.mm-shell).mm-nav-open.mm-room-detail:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar {
   background-color: var(--rd-paper, var(--mm-paper)) !important;
   border-bottom-color: rgba(10, 10, 10, 0.1) !important;
   box-shadow: 0 1px 0 rgba(10, 10, 10, 0.06) !important;
 }
 
-body.mm-nav-open.mm-texture-bg:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar::after,
-body.mm-nav-open.mm-rooms:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar::after,
-body.mm-nav-open.mm-room-detail:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar::after {
+body:not(.mm-shell).mm-nav-open.mm-texture-bg:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar::after,
+body:not(.mm-shell).mm-nav-open.mm-rooms:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar::after,
+body:not(.mm-shell).mm-nav-open.mm-room-detail:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -704,9 +774,9 @@ body.mm-nav-open.mm-room-detail:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-
   z-index: 0;
 }
 
-body.mm-nav-open.mm-texture-bg:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar > *,
-body.mm-nav-open.mm-rooms:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar > *,
-body.mm-nav-open.mm-room-detail:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar > * {
+body:not(.mm-shell).mm-nav-open.mm-texture-bg:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar > *,
+body:not(.mm-shell).mm-nav-open.mm-rooms:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar > *,
+body:not(.mm-shell).mm-nav-open.mm-room-detail:not(.is-scrolled):not(.mm-nav-solid-topbar) .mm-topbar > * {
   position: relative;
   z-index: 1;
 }

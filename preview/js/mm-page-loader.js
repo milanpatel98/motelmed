@@ -2,17 +2,39 @@
    Motel Mediteran — Page Loader  (mm-page-loader.js)
 
    Loader only when needed:
-   • If the document is still parsing after ~400 ms, show the overlay
-     until DOM is ready to preview (DOMContentLoaded) — then fade out.
-   • Fast loads never mount the loader (no flash on quick sites).
+   • After ~400 ms, show the overlay if the page is not fully loaded yet
+     (covers slow HTML parse *and* fast DOM + slow fonts/images/scripts).
+   • If everything finishes before that, no loader (no flash on quick sites).
+   • When hiding, wait for first paint + web fonts so content doesn’t
+     flicker the moment the overlay drops.
    ============================================================= */
 (function () {
   "use strict";
 
   var slowShowMs = 400;
 
+  function afterPaintThen(fn) {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(fn);
+    });
+  }
+
+  function whenReadyToReveal(done) {
+    function run() {
+      afterPaintThen(function () {
+        setTimeout(done, 50);
+      });
+    }
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(run).catch(run);
+    } else {
+      run();
+    }
+  }
+
   // ── 1. Inject CSS ─────────────────────────────────────────────
   var css = [
+    "html{background:#f8f8f6;}",
     ".mm-pl{",
       "position:fixed;inset:0;z-index:99999;",
       "background:#f8f8f6;",
@@ -87,7 +109,8 @@
 
   var loaderVisible = false;
   var hideScheduled = false;
-  var slowTimer = null;
+  var slowTimer    = null;
+  var manualMode   = false; // true when shown via MMLoader.show(), not page-load logic
 
   function hide() {
     if (hideScheduled) return;
@@ -97,6 +120,7 @@
     }
     if (!el.parentNode) return;
     hideScheduled = true;
+    manualMode    = false;
     el.classList.add("mm-pl--hidden");
     loaderVisible = false;
     el.addEventListener("transitionend", function cleanup() {
@@ -107,18 +131,11 @@
 
   function tryShowSlow() {
     slowTimer = null;
-    if (document.readyState !== "loading") return;
+    // Show while subresources (fonts, images, deferred scripts) may still be loading,
+    // not only during HTML parsing — otherwise first paint often has no loader.
+    if (document.readyState === "complete") return;
     loaderVisible = true;
     mount();
-  }
-
-  function onReadyToPreview() {
-    if (slowTimer) {
-      clearTimeout(slowTimer);
-      slowTimer = null;
-    }
-    if (!loaderVisible) return;
-    setTimeout(hide, 120);
   }
 
   if (document.readyState === "complete") {
@@ -127,22 +144,13 @@
 
   slowTimer = setTimeout(tryShowSlow, slowShowMs);
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", onReadyToPreview);
-  } else {
-    // interactive (rare here) — cancel slow timer, no loader
-    if (slowTimer) {
-      clearTimeout(slowTimer);
-      slowTimer = null;
-    }
-  }
-
   window.addEventListener("load", function () {
     if (slowTimer) {
       clearTimeout(slowTimer);
       slowTimer = null;
     }
-    if (loaderVisible) setTimeout(hide, 120);
+    // Hide after full load + fonts/paint so images and deferred scripts are in too
+    if (loaderVisible && !manualMode) whenReadyToReveal(hide);
   });
 
   // ── Public API ─────────────────────────────────────────────────
@@ -153,9 +161,18 @@
     if (labelEl) labelEl.textContent = labelText || "Loading";
     hideScheduled = false;
     loaderVisible = true;
+    manualMode    = true;  // prevents window.load from auto-hiding this
     el.classList.remove("mm-pl--hidden");
     mount();
   }
 
   window.MMLoader = { show: show, hide: hide };
+
+  // Auto-show loader on any page when navigating to book.html
+  document.addEventListener("click", function (e) {
+    var link = e.target.closest("a[href]");
+    if (!link) return;
+    var href = link.getAttribute("href") || "";
+    if (href.indexOf("book.html") !== -1) show("Loading availability…");
+  }, true);
 })();

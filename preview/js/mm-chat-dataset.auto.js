@@ -3,7 +3,7 @@
  * Rebuild: node scripts/build-chat-dataset.cjs (runs on Netlify deploy)
  */
 window.MM_CHAT_DATASET_AUTO = {
-  generatedAt: "2026-04-17T11:25:02.752Z",
+  generatedAt: "2026-04-21T06:27:28.145Z",
   entryCount: 101,
   entries: [
   {

@@ -327,6 +327,8 @@ body.mm-room-detail > footer,
 }
 
 .rd-gallery__track {
+  position: relative;
+  z-index: 0;
   display: flex;
   height: 100%;
   will-change: transform;
@@ -337,8 +339,38 @@ body.mm-room-detail > footer,
   .rd-gallery__track { transition-duration: 0.01ms; }
 }
 
-.rd-gallery__slide {
+/* Edge fade per slide — moves with the photo */
+.rd-gallery__slide-wrap {
+  position: relative;
+  overflow: hidden;
   flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.rd-gallery__slide-wrap::before,
+.rd-gallery__slide-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: min(140px, 32%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.rd-gallery__slide-wrap::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.28) 0%, transparent 100%);
+}
+
+.rd-gallery__slide-wrap::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(0, 0, 0, 0.28) 0%, transparent 100%);
+}
+
+.rd-gallery__slide {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -362,41 +394,76 @@ body.mm-room-detail > footer,
   pointer-events: none;
 }
 
-/* Arrows — on the frame, half in / half out of the clip, black */
+/* Arrows — minimal stroke over imagery (scrims on each .rd-gallery__slide-wrap) */
 .rd-gallery__arrow {
+  --rd-arrow-icon: clamp(22px, 3vw, 28px);
   position: absolute;
   top: 50%;
-  background: none;
+  min-width: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
   border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0.9);
   cursor: pointer;
-  padding: 10px;
   z-index: 3;
   opacity: 1;
-  transition: transform 200ms ease, opacity 150ms ease;
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.35s ease, color 0.25s ease;
 }
 
-/* Center on the image edge, nudge on hover toward direction of travel */
+.rd-gallery__arrow:hover {
+  color: #fff;
+}
+
+.rd-gallery__arrow:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 4px;
+}
+
+.rd-gallery__arrow-svg {
+  width: var(--rd-arrow-icon);
+  height: var(--rd-arrow-icon);
+  display: block;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.45));
+}
+
+.rd-gallery__arrow--next .rd-gallery__arrow-svg {
+  transform: scaleX(-1);
+}
+
+/* Subtle idle fade until pointer enters gallery (keyboard: focus-within keeps full strength) */
+@media (hover: hover) and (pointer: fine) {
+  .rd-gallery__frame:not(:hover):not(:focus-within) .rd-gallery__arrow {
+    opacity: 0.52;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rd-gallery__arrow {
+    transition: transform 0.01ms, opacity 0.01ms, color 0.01ms;
+  }
+}
+
 .rd-gallery__arrow--prev {
-  left: 0;
-  transform: translate(-50%, -50%);
+  left: clamp(8px, 2vw, 20px);
+  transform: translateY(-50%);
 }
 .rd-gallery__arrow--prev:hover {
-  transform: translate(calc(-50% - 7px), -50%);
+  transform: translateY(-50%) translateX(-4px);
 }
 
 .rd-gallery__arrow--next {
-  right: 0;
-  transform: translate(50%, -50%);
+  right: clamp(8px, 2vw, 20px);
+  transform: translateY(-50%);
 }
 .rd-gallery__arrow--next:hover {
-  transform: translate(calc(50% + 7px), -50%);
-}
-
-.rd-gallery__arrow img {
-  display: block;
-  width: 76px;
-  height: auto;
-  filter: drop-shadow(0 0 2px rgba(255,255,255,0.6));
+  transform: translateY(-50%) translateX(4px);
 }
 
 /* Thumbnail filmstrip */
@@ -516,24 +583,15 @@ body.mm-room-detail > footer,
     aspect-ratio: 4 / 3;
   }
 
-  /* Arrows: smaller and fully inside the image on mobile */
-  .rd-gallery__arrow--prev {
-    left: 10px;
-    transform: translateY(-50%);
-  }
-  .rd-gallery__arrow--prev:hover {
-    transform: translateY(-50%) translateX(-4px);
-  }
-  .rd-gallery__arrow--next {
-    right: 10px;
-    transform: translateY(-50%);
-  }
-  .rd-gallery__arrow--next:hover {
-    transform: translateY(-50%) translateX(4px);
+  .rd-gallery__arrow {
+    --rd-arrow-icon: 19px;
   }
 
-  .rd-gallery__arrow img {
-    width: 44px;
+  .rd-gallery__arrow--prev {
+    left: 6px;
+  }
+  .rd-gallery__arrow--next {
+    right: 6px;
   }
 
   /* Thumbnails: consistent small height on mobile */

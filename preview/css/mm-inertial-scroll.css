@@ -1,0 +1,12 @@
+/**
+ * Lenis smooth / inertial scroll — base layer
+ * Overrides CSS `scroll-behavior: smooth` so Lenis controls easing (avoids fighting native smooth scroll).
+ */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis {
+  scroll-behavior: auto !important;
+}

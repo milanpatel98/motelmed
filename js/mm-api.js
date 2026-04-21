@@ -277,8 +277,16 @@ var MM_API = (function () {
         })
       })
       .then(function (r) {
-        if (!r.ok) throw new Error("Proxy error " + r.status);
-        return r.json();
+        return r.json().then(function (body) {
+          if (!r.ok) {
+            var msg = (body && body.message) ? body.message : ("Availability unavailable (" + r.status + ")");
+            throw new Error(msg);
+          }
+          if (body && body.error) {
+            throw new Error(body.message || String(body.error));
+          }
+          return body;
+        });
       })
       .then(function (rooms) { callback(null, rooms); })
       .catch(function (err)  { callback(err, null);   });
@@ -289,30 +297,51 @@ var MM_API = (function () {
         return callback(null);
       }
 
-      /* Call the proxy's calendar action.
-         The proxy fetches 90 days of rates from ASI in 30-day chunks,
-         caches the result on disk for 15 minutes, and returns a map:
-           { "queen": { "2026-05-01": 74, "2026-05-02": null, ... }, ... }
-         Null = sold-out / unavailable on that date.
-         We store this in _rateCache so getRateForDate() works instantly. */
-      var self = this;
+      var self   = this;
+      var LS_KEY = "mm_cal_rates_v1";
+      var LS_TTL = 15 * 60 * 1000; // 15 minutes
+
+      /* ── 1. Try localStorage first (saves Netlify function invocations) ── */
+      try {
+        var stored = localStorage.getItem(LS_KEY);
+        if (stored) {
+          var parsed = JSON.parse(stored);
+          if (parsed && parsed.ts && parsed.data && (Date.now() - parsed.ts < LS_TTL)) {
+            self._rateCache = parsed.data;
+            return callback(null);
+          }
+        }
+      } catch (e) { /* localStorage unavailable — fall through to network */ }
+
+      /* ── 2. Fetch from proxy (ASI via Netlify Function) ─────────────── */
       fetch(self._proxyUrl, {
         method : "POST",
         headers: { "Content-Type": "application/json" },
         body   : JSON.stringify({ action: "calendar" })
       })
       .then(function (r) {
-        if (!r.ok) throw new Error("Calendar proxy error " + r.status);
-        return r.json();
+        return r.json().then(function (body) {
+          if (!r.ok) {
+            var msg = (body && body.message) ? body.message : ("Rates unavailable (" + r.status + ")");
+            throw new Error(msg);
+          }
+          if (body && body.error) {
+            throw new Error(body.message || String(body.error));
+          }
+          return body;
+        });
       })
       .then(function (calData) {
-        self._rateCache = calData;   // { roomId: { "YYYY-MM-DD": rate|null } }
+        self._rateCache = calData;
+        /* Persist to localStorage so the next 15 min skip the proxy call */
+        try {
+          localStorage.setItem(LS_KEY, JSON.stringify({ ts: Date.now(), data: calData }));
+        } catch (e) {}
         callback(null);
       })
       .catch(function (err) {
-        /* Non-fatal: calendar won't show rates but booking still works */
         console.warn("MM_API: calendar pre-fetch failed —", err.message);
-        callback(null);
+        callback(err || new Error("Calendar request failed"));
       });
     },
 
@@ -557,8 +586,13 @@ var MM_API = (function () {
         })
       })
       .then(function (r) {
-        if (!r.ok) throw new Error("Proxy error " + r.status);
-        return r.json();
+        return r.json().then(function (body) {
+          if (!r.ok) {
+            var msg = (body && body.message) ? body.message : ("Booking unavailable (" + r.status + ")");
+            throw new Error(msg);
+          }
+          return body;
+        });
       })
       .then(function (data) {
         if (data.success) {

@@ -10,6 +10,7 @@
   if (!inEl || !outEl || !triggerIn || !triggerOut) return;
 
   var OPEN = "mm-book-cal--open";
+  var PAGE_LOCK = "mm-book-cal--lock";
   var today = startOfDay(new Date());
 
   /** 0 = next click is check-in; 1 = next click is check-out */
@@ -96,22 +97,59 @@
     if (!panel || !anchorEl) return;
     var rect = anchorEl.getBoundingClientRect();
     var margin = 10;
+    var vw = window.innerWidth;
+    var vh = window.innerHeight;
     var pw = panel.offsetWidth || 560;
-    var ph = panel.offsetHeight || 400;
+
     var cx = rect.left + rect.width / 2 - pw / 2;
-    cx = Math.max(margin, Math.min(cx, window.innerWidth - pw - margin));
+    cx = Math.max(margin, Math.min(cx, vw - pw - margin));
     panel.style.left = cx + "px";
 
-    var spaceBelow = window.innerHeight - rect.bottom - margin;
+    panel.style.maxHeight = "";
+    panel.style.top = "";
+    panel.style.bottom = "";
+
+    var spaceBelow = vh - rect.bottom - margin;
     var spaceAbove = rect.top - margin;
-    var preferUp = spaceBelow < ph + 24 && spaceAbove > spaceBelow;
-    if (preferUp) {
+    var openUp = spaceAbove > spaceBelow;
+
+    if (openUp) {
+      panel.style.bottom = vh - rect.top + margin + "px";
       panel.style.top = "auto";
-      panel.style.bottom = window.innerHeight - rect.top + margin + "px";
     } else {
       panel.style.top = rect.bottom + margin + "px";
       panel.style.bottom = "auto";
     }
+
+    var pr = panel.getBoundingClientRect();
+    if (pr.bottom > vh - margin) {
+      var shift = pr.bottom - (vh - margin);
+      if (openUp) {
+        panel.style.bottom = vh - rect.top + margin + shift + "px";
+      } else {
+        panel.style.top = rect.bottom + margin - shift + "px";
+      }
+    }
+    pr = panel.getBoundingClientRect();
+    if (pr.top < margin) {
+      panel.style.top = margin + "px";
+      panel.style.bottom = "auto";
+    }
+    pr = panel.getBoundingClientRect();
+    if (pr.bottom > vh - margin) {
+      panel.style.top = Math.max(margin, vh - margin - pr.height) + "px";
+      panel.style.bottom = "auto";
+    }
+  }
+
+  function lockPageScroll() {
+    document.documentElement.classList.add(PAGE_LOCK);
+    document.body.classList.add(PAGE_LOCK);
+  }
+
+  function unlockPageScroll() {
+    document.documentElement.classList.remove(PAGE_LOCK);
+    document.body.classList.remove(PAGE_LOCK);
   }
 
   function dayTime(d) {
@@ -248,6 +286,7 @@
   function closeCommitted() {
     root.classList.remove(OPEN);
     root.setAttribute("hidden", "");
+    unlockPageScroll();
     anchorEl = null;
     detachListeners();
     triggerIn.classList.remove("is-active");
@@ -325,6 +364,7 @@
 
     root.removeAttribute("hidden");
     root.classList.add(OPEN);
+    lockPageScroll();
     setTriggersActive();
     panel.setAttribute("aria-label", "Select check-in and check-out dates");
     render();

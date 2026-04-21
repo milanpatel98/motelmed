@@ -11,6 +11,12 @@
   pointer-events: auto;
 }
 
+html.mm-book-cal--lock,
+html.mm-book-cal--lock body {
+  overflow: hidden !important;
+  touch-action: none;
+}
+
 .mm-book-cal__backdrop {
   position: absolute;
   inset: 0;
@@ -22,8 +28,9 @@
   position: fixed;
   left: 0;
   top: 0;
+  display: flex;
+  flex-direction: column;
   width: min(640px, calc(100vw - 20px));
-  max-height: min(90vh, 520px);
   box-sizing: border-box;
   padding: 18px 20px 16px;
   color: rgba(254, 254, 254, 0.94);
@@ -42,10 +49,23 @@
     0 1px 0 rgba(255, 255, 255, 0.06) inset,
     0 28px 72px rgba(0, 0, 0, 0.55);
   z-index: 1;
-  overflow: auto;
+  overflow: visible;
+  isolation: isolate;
+}
+
+/* Portaled to body — theme/WP often sets button/h3 to body ink; keep calendar readable */
+.mm-book-cal__panel .mm-book-cal__grid-wrap h3 {
+  color: #f8f7f4 !important;
+}
+
+.mm-book-cal__panel .mm-book-cal__day {
+  color: #f5f4f2;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .mm-book-cal__nav-row {
+  flex-shrink: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -94,6 +114,7 @@
 }
 
 .mm-book-cal__grids {
+  flex-shrink: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px 20px;
@@ -116,7 +137,7 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-align: center;
-  color: rgba(255, 255, 255, 0.42);
+  color: rgba(255, 255, 255, 0.55);
   padding: 4px 0;
 }
 
@@ -198,6 +219,7 @@
 }
 
 .mm-book-cal__footer {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -255,5 +277,10 @@
 
   .mm-book-cal__grids {
     grid-template-columns: 1fr;
+  }
+
+  /* One month only — avoids stacking two months (no inner scroll) */
+  .mm-book-cal__grid-wrap + .mm-book-cal__grid-wrap {
+    display: none;
   }
 }

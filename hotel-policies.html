@@ -8,11 +8,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600&family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600&family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@500;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/site.css?v=ref8" />
-    <link rel="stylesheet" href="css/mm-topbar.css?v=20260455" />
+    <link rel="stylesheet" href="css/mm-topbar.css?v=20260422" />
+    <link rel="stylesheet" href="css/mm-inertial-scroll.css?v=1" />
     <link rel="stylesheet" href="css/mm-footer.css?v=7" />
 <link rel="stylesheet" href="css/hotel-policies.css?v=7" />
     <!-- Menu chrome last so it always wins over page CSS -->
@@ -25,7 +26,7 @@
     el.href = el.href + sep + "v=" + Date.now();
   })();
 </script>
-<script src="js/mm-page-loader.js?v=3"></script>
+<script src="js/mm-page-loader.js?v=5"></script>
 </head>
   <body class="mm-shell mm-texture-bg">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -308,11 +309,13 @@
       <p class="mm-footer__copy">© <span class="notranslate" translate="no">Motel Mediteran</span> · Escondido, California</p>
     </footer>
 
-    <script src="js/mm-lang.js?v=6"></script>
+    <script src="js/mm-lang.js?v=7"></script>
     <script src="js/mm-booking-dock.js?v=14"></script>
-    <script src="js/mm-booking-calendar.js?v=5"></script>
+    <script src="js/mm-booking-calendar.js?v=9"></script>
     <script src="js/mm-booking-guests.js?v=1"></script>
-    <script src="js/mm-topbar.js?v=17"></script>
+    <script src="js/mm-topbar.js?v=18"></script>
+    <script src="js/lenis.min.js?v=1.1.18" crossorigin="anonymous"></script>
+    <script src="js/mm-inertial-scroll.js?v=7"></script>
     <script>
   (function () {
     var s = document.createElement('script');
@@ -321,6 +324,6 @@
     document.body.appendChild(s);
   })();
 </script>
-<script src="js/mm-chat-widget.js?v=46"></script>
+<script src="js/mm-chat-widget.js?v=47"></script>
   </body>
 </html>

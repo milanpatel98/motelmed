@@ -143,9 +143,20 @@
     });
   }
 
+  /** Honest expectations: Google Translate; brand names often stay in English. */
+  function setLangGroupAria(wrap) {
+    if (!wrap) return;
+    wrap.setAttribute(
+      "aria-label",
+      "Language: English or Spanish (Google Translate; brand names and some labels may stay in English)"
+    );
+  }
+
   function syncButtonState() {
     bindLangButtons(document.querySelector(".mm-topbar__lang"));
     bindLangButtons(document.querySelector(".mm-nav__lang"));
+    setLangGroupAria(document.querySelector(".mm-topbar__lang"));
+    setLangGroupAria(document.querySelector(".mm-nav__lang"));
   }
 
   /**

@@ -9,11 +9,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/site.css?v=1776277061" />
-    <link rel="stylesheet" href="css/mm-topbar.css?v=20260455" />
+    <link rel="stylesheet" href="css/mm-topbar.css?v=20260422" />
+    <link rel="stylesheet" href="css/mm-inertial-scroll.css?v=1" />
     <link rel="stylesheet" href="css/book-page.css?v=20260422" />
     <style>
       /* Critical calendar overrides — loaded inline to bypass cache */
@@ -30,7 +31,7 @@
         .mm-bk-cal__month + .mm-bk-cal__month { display: none !important; }
       }
     </style>
-    <script src="js/mm-page-loader.js?v=3"></script>
+    <script src="js/mm-page-loader.js?v=5"></script>
 </head>
   <body class="mm-shell mm-texture-bg mm-book-page">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -91,6 +92,10 @@
             <!-- Left: Calendar -->
             <div class="mm-bk-cal-panel">
               <h1 class="mm-bk-cal__title">Select your dates</h1>
+              <div id="bk-cal-api-error" class="mm-bk-api-error" role="alert" hidden>
+                <p class="mm-bk-api-error__text"></p>
+                <p class="mm-bk-api-error__hint">Call <a href="tel:+17607432300">(760) 743-2300</a> to reserve.</p>
+              </div>
               <div class="mm-bk-cal__nav">
                 <button class="mm-bk-cal__arrow" id="bk-cal-prev" type="button" aria-label="Previous months">
                   <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -165,6 +170,11 @@
                   </select>
                 </div>
               </aside>
+
+              <div id="bk-avail-error" class="mm-bk-api-error mm-bk-api-error--sidebar" role="alert" hidden>
+                <p class="mm-bk-api-error__text"></p>
+                <p class="mm-bk-api-error__hint">Call <a href="tel:+17607432300">(760) 743-2300</a> to reserve.</p>
+              </div>
 
               <button class="mm-bk-check-avail" id="bk-check-avail" type="button">
                 Check Availability
@@ -1003,9 +1013,11 @@
       <p class="mm-book-bottom-strip__name notranslate" translate="no">Motel Mediteran</p>
     </aside>
 
-    <script src="js/mm-lang.js?v=6"></script>
-    <script src="js/mm-topbar.js?v=17"></script>
-    <script src="js/mm-api.js?v=3"></script>
-    <script src="js/book.js?v=45"></script>
+    <script src="js/mm-lang.js?v=7"></script>
+    <script src="js/mm-topbar.js?v=18"></script>
+    <script src="js/lenis.min.js?v=1.1.18" crossorigin="anonymous"></script>
+    <script src="js/mm-inertial-scroll.js?v=7"></script>
+    <script src="js/mm-api.js?v=4"></script>
+    <script src="js/book.js?v=48"></script>
   </body>
 </html>

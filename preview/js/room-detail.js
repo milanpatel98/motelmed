@@ -102,6 +102,8 @@
   // Build slides
   galleryTrack.innerHTML = "";
   photos.forEach((src, idx) => {
+    const wrap = document.createElement("div");
+    wrap.className = "rd-gallery__slide-wrap";
     const img = document.createElement("img");
     img.className = "rd-gallery__slide";
     img.src = src;
@@ -109,7 +111,8 @@
     img.loading = idx === 0 ? "eager" : "lazy";
     img.decoding = "async";
     img.draggable = false;
-    galleryTrack.appendChild(img);
+    wrap.appendChild(img);
+    galleryTrack.appendChild(wrap);
   });
 
   // Build thumbnails
