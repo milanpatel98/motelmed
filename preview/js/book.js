@@ -85,8 +85,8 @@
     return c / 100;
   }
 
-  /** Lodging tax — keep in sync with ASI / PMS (percent of room subtotal, integer cents). */
-  var LODGING_TAX_PERCENT = 9;
+  /** City tax — ASI Review page: "City Tax : 10 % (Room/Night)" on room subtotal (cents). */
+  var LODGING_TAX_PERCENT = 10;
 
   function lodgingTaxCents(subtotalCents) {
     return Math.round((subtotalCents * LODGING_TAX_PERCENT) / 100);
