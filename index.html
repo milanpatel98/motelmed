@@ -6,23 +6,69 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-<title>Motel Mediteran — Escondido, CA</title>
-<meta name="description" content="Motel Mediteran — static 1:1 build from WordPress theme export (Assembler)." />
+<title data-i18n="page.title.home">Motel Mediteran — Escondido, California | Near San Diego Zoo Safari Park</title>
+<!-- ─── SEO META — start ──────────────────────────────────── -->
+<meta name="description" data-i18n-content="meta.home.description" content="Quiet motel in central Escondido, CA. Outdoor pool, free Wi-Fi & parking. Minutes from San Diego Zoo Safari Park, SeaWorld, and Carlsbad beaches." />
+<link rel="canonical" href="https://motelmed.com/" />
+
+<!-- Geo / Local SEO -->
+<meta name="geo.region" content="US-CA" />
+<meta name="geo.placename" content="Escondido" />
+<meta name="geo.position" content="33.1077;-117.0865" />
+<meta name="ICBM" content="33.1077, -117.0865" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="hotel" />
+<meta property="og:site_name" content="Motel Mediteran" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="Motel Mediteran — Escondido, California | Near San Diego Zoo Safari Park" />
+<meta property="og:description" content="Quiet motel in central Escondido, CA. Outdoor pool, free Wi-Fi & parking. Minutes from San Diego Zoo Safari Park, SeaWorld, and Carlsbad beaches." />
+<meta property="og:url" content="https://motelmed.com/" />
+<meta property="og:image" content="https://motelmed.com/assets/og-image.png" />
+<meta property="og:image:alt" content="King Jacuzzi Suite with stone fireplace and jacuzzi at Motel Mediteran, Escondido" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Motel Mediteran — Escondido, California | Near San Diego Zoo Safari Park" />
+<meta name="twitter:description" content="Quiet motel in central Escondido, CA. Outdoor pool, free Wi-Fi & parking. Minutes from San Diego Zoo Safari Park, SeaWorld, and Carlsbad beaches." />
+<meta name="twitter:image" content="https://motelmed.com/assets/og-image.png" />
+<meta name="twitter:image:alt" content="King Jacuzzi Suite with stone fireplace and jacuzzi at Motel Mediteran, Escondido" />
+
+<!-- Theme -->
+<meta name="theme-color" content="#0a0a0a" />
+<!-- ─── SEO META — end ────────────────────────────────────── -->
+
+<!-- LCP preload — first hero image starts downloading immediately
+     (before JS discovers it), browser picks the right variant for viewport. -->
+<link rel="preload" as="image"
+  imagesrcset="assets/home-hero/hero-1-720w.webp 720w,
+               assets/home-hero/hero-1-1280w.webp 1280w,
+               assets/home-hero/hero-1-1920w.webp 1920w"
+  imagesizes="100vw"
+  fetchpriority="high" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Great+Vibes&family=Inter:wght@300;400;500;600;700;800&family=Rye&display=swap" rel="stylesheet" />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&family=Rye&display=swap" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&family=Rye&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&family=Rye&display=swap" rel="stylesheet" /></noscript>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png" />
 <link rel="stylesheet" href="global-styles.css" />
-<link rel="stylesheet" href="site-export-style.css" />
 <link rel="stylesheet" href="css/motel-map.css?v=ref23" />
-<link rel="stylesheet" href="wp-compat-1to1.css?v=ref66" />
-<link rel="stylesheet" href="css/mm-topbar.css?v=20260421" />
-<link rel="stylesheet" href="css/mm-footer.css?v=7" />
+<link rel="stylesheet" href="css/mm-topbar.css?v=20260531h" />
+<link rel="stylesheet" href="css/mm-footer.css?v=21" />
 <link rel="stylesheet" href="css/mm-booking-calendar.css?v=7" />
 <link rel="stylesheet" href="css/mm-booking-guests.css?v=1" />
-<link rel="stylesheet" href="css/home-v2-main.css?v=19" />
+<link rel="stylesheet" href="css/home-v2-main.css?v=74" />
 <link rel="stylesheet" href="css/mm-inertial-scroll.css" />
 <!-- Menu chrome last so it always wins over page CSS -->
-<link rel="stylesheet" id="mm-menu-premium-css" href="css/mm-menu-premium.v3.css" />
+<link rel="stylesheet" id="mm-menu-premium-css" href="css/mm-menu-premium.v3.css?v=5" />
 <script>
   (function () {
     var el = document.getElementById('mm-menu-premium-css');
@@ -31,19 +77,302 @@
     el.href = el.href + sep + 'v=' + Date.now();
   })();
 </script>
-  <script src="js/mm-page-loader.js?v=5"></script>
+
+<!-- ─── Schema.org JSON-LD — Hotel structured data for Google ─── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Hotel",
+      "@id": "https://motelmed.com/#hotel",
+      "name": "Motel Mediteran",
+      "alternateName": [
+        "Motel Mediteran Escondido",
+        "Mediteran Motel"
+      ],
+      "description": "Quiet, family-run motel in central Escondido, California. Outdoor pool, complimentary Wi-Fi, free parking, 24-hour front desk, kitchen suites, and ADA-accessible rooms. Minutes from San Diego Zoo Safari Park, SeaWorld, and Carlsbad beaches.",
+      "url": "https://motelmed.com/",
+      "logo": "https://motelmed.com/assets/favicon-512.png",
+      "image": [
+        "https://motelmed.com/assets/og-image.png"
+      ],
+      "telephone": "+1-760-743-2300",
+      "email": "info4motelmed@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "2336 S. Escondido Blvd",
+        "addressLocality": "Escondido",
+        "addressRegion": "CA",
+        "postalCode": "92025",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 33.1077,
+        "longitude": -117.0865
+      },
+      "checkinTime": "15:00",
+      "checkoutTime": "11:00",
+      "petsAllowed": false,
+      "smokingAllowed": false,
+      "currenciesAccepted": "USD",
+      "paymentAccepted": "Cash, Credit Card",
+      "priceRange": "$$",
+      "numberOfRooms": "30",
+      "amenityFeature": [
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Outdoor pool",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Free WiFi",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Free parking",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "24-hour front desk",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Guest laundry",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Smoke-free property",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Wheelchair accessible",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Microwave",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Refrigerator",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Flat-screen TV",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Hairdryer",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Iron and ironing board",
+          "value": true
+        }
+      ],
+      "containsPlace": [
+        {
+          "@type": "Suite",
+          "name": "Deluxe King Jacuzzi Suite, Fireplace, and Jacuzzi",
+          "bed": {
+            "@type": "BedDetails",
+            "numberOfBeds": 1,
+            "typeOfBed": "King"
+          }
+        },
+        {
+          "@type": "Suite",
+          "name": "2-Room Kitchen Suite",
+          "bed": {
+            "@type": "BedDetails",
+            "numberOfBeds": 1,
+            "typeOfBed": "King"
+          }
+        },
+        {
+          "@type": "Suite",
+          "name": "King Suite with Jacuzzi",
+          "bed": {
+            "@type": "BedDetails",
+            "numberOfBeds": 1,
+            "typeOfBed": "King"
+          }
+        },
+        {
+          "@type": "HotelRoom",
+          "name": "Standard King Room",
+          "bed": {
+            "@type": "BedDetails",
+            "numberOfBeds": 1,
+            "typeOfBed": "King"
+          }
+        },
+        {
+          "@type": "HotelRoom",
+          "name": "Standard Queen Room",
+          "bed": {
+            "@type": "BedDetails",
+            "numberOfBeds": 1,
+            "typeOfBed": "Queen"
+          }
+        },
+        {
+          "@type": "HotelRoom",
+          "name": "Two Queens Room",
+          "bed": {
+            "@type": "BedDetails",
+            "numberOfBeds": 2,
+            "typeOfBed": "Queen"
+          }
+        },
+        {
+          "@type": "HotelRoom",
+          "name": "ADA King Accessible Room",
+          "amenityFeature": {
+            "@type": "LocationFeatureSpecification",
+            "name": "Wheelchair accessible",
+            "value": true
+          }
+        },
+        {
+          "@type": "HotelRoom",
+          "name": "ADA Queen Accessible Room",
+          "amenityFeature": {
+            "@type": "LocationFeatureSpecification",
+            "name": "Wheelchair accessible",
+            "value": true
+          }
+        },
+        {
+          "@type": "HotelRoom",
+          "name": "ADA Double Queen Accessible Room",
+          "amenityFeature": {
+            "@type": "LocationFeatureSpecification",
+            "name": "Wheelchair accessible",
+            "value": true
+          }
+        }
+      ],
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Escondido, California"
+        },
+        {
+          "@type": "City",
+          "name": "San Marcos, California"
+        },
+        {
+          "@type": "City",
+          "name": "Carlsbad, California"
+        },
+        {
+          "@type": "City",
+          "name": "Rancho Bernardo, California"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "North San Diego County"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "LodgingBusiness",
+      "@id": "https://motelmed.com/#lodging",
+      "name": "Motel Mediteran",
+      "image": "https://motelmed.com/assets/og-image.png",
+      "url": "https://motelmed.com/",
+      "telephone": "+1-760-743-2300",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "2336 S. Escondido Blvd",
+        "addressLocality": "Escondido",
+        "addressRegion": "CA",
+        "postalCode": "92025",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 33.1077,
+        "longitude": -117.0865
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://motelmed.com/#org",
+      "name": "Motel Mediteran",
+      "url": "https://motelmed.com/",
+      "logo": "https://motelmed.com/assets/favicon-512.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-760-743-2300",
+        "contactType": "reservations",
+        "areaServed": "US",
+        "availableLanguage": [
+          "English",
+          "Spanish"
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://motelmed.com/#website",
+      "url": "https://motelmed.com/",
+      "name": "Motel Mediteran",
+      "description": "Quiet motel in central Escondido, CA — minutes from San Diego Zoo Safari Park",
+      "inLanguage": "en-US",
+      "publisher": {
+        "@id": "https://motelmed.com/#org"
+      }
+    }
+  ]
+}
+</script>
+<script src="js/mm-page-loader.js?v=8"></script>
+<link rel="stylesheet" href="css/cookie-banner.css?v=2" />
 </head>
 <body class="mm-shell mm-home mm-texture-bg">
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main" data-i18n="a11y.skipToContent">Skip to content</a>
 
 <div class="mm-topbar-sentinel" aria-hidden="true"></div>
 <div class="mm-topbar-spacer" aria-hidden="true"></div>
-<header class="mm-topbar" aria-label="Site header">
+<header class="mm-topbar" aria-label="Site header" data-i18n-aria-label="a11y.header.label">
   <button
     class="mm-topbar__menu"
     type="button"
     id="mm-menu-btn"
     aria-label="Open menu"
+    data-i18n-aria-label="topbar.menu.open"
     aria-expanded="false"
     aria-controls="mm-site-nav"
     aria-haspopup="true"
@@ -64,7 +393,7 @@
         </g>
     </svg>
   </button>
-  <a class="mm-topbar__brand notranslate" href="index.html" aria-label="Motel Mediteran Home">
+  <a class="mm-topbar__brand notranslate" href="index.html" aria-label="Motel Mediteran Home" data-i18n-aria-label="topbar.brand.aria">
     <span class="mm-topbar__logo" aria-hidden="true">MM</span>
     <span class="mm-topbar__loc">Escondido, California</span>
   </a>
@@ -72,22 +401,21 @@
     <a class="mm-topbar__phone" href="tel:+17607432300">(760) 743-2300</a>
     <a
       class="mm-topbar__cta"
-      href="book.html"
-     
-     
+      href="https://reservation.asiwebres.com/SearchAvailability.aspx?id=77c9401ba7e640988f8410033a7434cc" target="_blank" rel="noopener noreferrer"
+      data-i18n="common.checkAvailability"
       >Check availability</a
     >
-    <div class="mm-topbar__lang" aria-label="Language">
-      <button class="mm-lang is-active" type="button" data-mm-lang="en" aria-label="English">EN</button>
+    <div class="mm-topbar__lang" aria-label="Language" data-i18n-aria-label="topbar.langGroup">
+      <button class="mm-lang is-active" type="button" data-mm-lang="en" aria-label="English" data-i18n-aria-label="a11y.lang.en">EN</button>
       <span class="mm-lang__sep" aria-hidden="true"></span>
-      <button class="mm-lang" type="button" data-mm-lang="es" aria-label="Spanish">ES</button>
+      <button class="mm-lang" type="button" data-mm-lang="es" aria-label="Spanish" data-i18n-aria-label="a11y.lang.es">ES</button>
     </div>
   </div>
 </header>
 
-<div class="mm-nav" id="mm-site-nav" aria-hidden="true">
+<div class="mm-nav" id="mm-site-nav" aria-hidden="true" inert>
   <div class="mm-nav__panel" role="dialog" aria-modal="true"
-       aria-labelledby="mm-nav-title" aria-label="Site navigation">
+       aria-labelledby="mm-nav-title" aria-label="Site navigation" data-i18n-aria-label="nav.dialogTitle">
 
     <div class="mm-nav__cols">
 
@@ -107,25 +435,26 @@
       </div>
 
       <!-- ── Primary navigation (center) ─────────────────────────── -->
-      <nav class="mm-nav__col mm-nav__col--primary" aria-label="Main navigation">
+      <nav class="mm-nav__col mm-nav__col--primary" aria-label="Main navigation" data-i18n-aria-label="nav.mainAria">
         <ul class="mm-nav__list">
-          <li class="mm-nav__item"><a href="index.html" aria-current="page"><span>Home</span></a></li>
-          <li class="mm-nav__item"><a href="rooms.html" class="notranslate"><span>Rooms &amp; Suites</span></a></li>
-          <li class="mm-nav__item"><a href="gallery.html"><span>Gallery</span></a></li>
-          <li class="mm-nav__item"><a href="things-to-do.html"><span>Things To Do</span></a></li>
-          <li class="mm-nav__item"><a href="amenities.html"><span>Amenities</span></a></li>
-          <li class="mm-nav__item"><a href="directions.html"><span>Directions</span></a></li>
+          <li class="mm-nav__item"><a href="index.html" aria-current="page"><span data-i18n="nav.home">Home</span></a></li>
+          <li class="mm-nav__item"><a href="rooms.html"><span data-i18n="nav.rooms">Rooms &amp; Suites</span></a></li>
+          <li class="mm-nav__item"><a href="gallery.html"><span data-i18n="nav.gallery">Gallery</span></a></li>
+          <li class="mm-nav__item"><a href="things-to-do.html"><span data-i18n="nav.things">Things To Do</span></a></li>
+          <li class="mm-nav__item"><a href="amenities.html"><span data-i18n="nav.amenities">Amenities</span></a></li>
+          <li class="mm-nav__item"><a href="directions.html"><span data-i18n="nav.directions">Directions</span></a></li>
         </ul>
       </nav>
 
       <!-- ── Secondary links + CTA (right) ───────────────────────── -->
       <div class="mm-nav__col mm-nav__col--secondary">
         <ul class="mm-nav__secondary">
-          <li><a href="faqs.html">FAQs</a></li>
-          <li><a href="hotel-policies.html">Hotel Policies</a></li>
-          <li><a href="accessibility.html">Accessibility</a></li>
+          <li><a href="faqs.html" data-i18n="nav.faqs">FAQs</a></li>
+          <li><a href="hotel-policies.html" data-i18n="nav.policies">Hotel Policies</a></li>
+          <li><a href="accessibility.html" data-i18n="nav.accessibility">Accessibility</a></li>
+          <li><a href="privacy.html" data-i18n="nav.privacy">Privacy</a></li>
         </ul>
-        <a class="mm-nav__book-cta" href="book.html">Check Availability</a>
+        <a class="mm-nav__book-cta" href="https://reservation.asiwebres.com/SearchAvailability.aspx?id=77c9401ba7e640988f8410033a7434cc" target="_blank" rel="noopener noreferrer" data-i18n="common.checkAvailability">Check Availability</a>
       </div>
 
     </div>
@@ -144,57 +473,68 @@
 
 <main id="main" class="v2-home">
 <section class="v2-hero" id="v2hero">
-    <div class="v2-hero__bg" id="heroBg"></div>
+    <div class="v2-hero__bg" id="heroBg">
+      <img class="v2-hero__layer-static"
+           src="assets/home-hero/hero-1-1280w.webp"
+           srcset="assets/home-hero/hero-1-720w.webp 720w,
+                   assets/home-hero/hero-1-1280w.webp 1280w,
+                   assets/home-hero/hero-1-1920w.webp 1920w"
+           sizes="100vw"
+           fetchpriority="high"
+           decoding="async"
+           alt="Aerial view of historic downtown Escondido at sunset"
+           data-i18n-alt="hero.alt.downtownAerial" />
+    </div>
     <div class="v2-hero__overlay"></div>
 
     <div class="v2-hero__content" id="heroContent">
-      <p class="v2-hero__eyebrow">Escondido &middot; California</p>
+      <p class="v2-hero__eyebrow" data-i18n="home.hero.eyebrow">Escondido &middot; California</p>
       <h1 class="v2-hero__title">
         <span class="v2-hero__title-line">Motel</span>
         <span class="v2-hero__title-line">Mediteran</span>
       </h1>
       <div class="v2-hero__divider"></div>
-      <a class="v2-hero__btn" href="book.html">Reserve Your Stay</a>
+      <a class="v2-hero__btn" href="https://reservation.asiwebres.com/SearchAvailability.aspx?id=77c9401ba7e640988f8410033a7434cc" target="_blank" rel="noopener noreferrer" data-i18n="common.reserveYourStay">Reserve Your Stay</a>
     </div>
 
     <div class="v2-hero__scroll" aria-hidden="true">
-      <span>Scroll</span>
+      <span data-i18n="home.hero.scroll">Scroll</span>
       <div class="v2-hero__scroll-line"></div>
     </div>
   </section>
 
   <!-- ── Availability Bar ──────────────────────────────────────── -->
-  <section class="v2-avail" id="mm-booking-inline" role="search" aria-label="Check availability">
+  <section class="v2-avail" id="mm-booking-inline" role="search" data-i18n-aria-label="home.avail.aria" aria-label="Check availability">
     <div class="v2-avail__inner">
       <div class="v2-avail__field" id="bbCheckin">
-        <button type="button" class="v2-avail__hit" id="mm-book-hero-trigger-in" aria-label="Check in"></button>
-        <p class="v2-avail__label">Check In</p>
-        <p class="v2-avail__value is-placeholder" id="bbCheckinVal">Select date</p>
+        <button type="button" class="v2-avail__hit" id="mm-book-hero-trigger-in" data-i18n-aria-label="home.avail.checkInAria" aria-label="Check in"></button>
+        <p class="v2-avail__label" data-i18n="home.avail.checkInLabel">Check In</p>
+        <p class="v2-avail__value is-placeholder" id="bbCheckinVal" data-i18n="home.avail.selectDate">Select date</p>
       </div>
       <div class="v2-avail__field" id="bbCheckout">
-        <button type="button" class="v2-avail__hit" id="mm-book-hero-trigger-out" aria-label="Check out"></button>
-        <p class="v2-avail__label">Check Out</p>
-        <p class="v2-avail__value is-placeholder" id="bbCheckoutVal">Select date</p>
+        <button type="button" class="v2-avail__hit" id="mm-book-hero-trigger-out" data-i18n-aria-label="home.avail.checkOutAria" aria-label="Check out"></button>
+        <p class="v2-avail__label" data-i18n="home.avail.checkOutLabel">Check Out</p>
+        <p class="v2-avail__value is-placeholder" id="bbCheckoutVal" data-i18n="home.avail.selectDate">Select date</p>
       </div>
       <div class="v2-avail__field v2-avail__guests" id="bbGuests">
-        <button type="button" class="v2-avail__hit" id="mm-book-hero-trigger-guests" aria-label="Guests"></button>
-        <p class="v2-avail__label">Guests</p>
+        <button type="button" class="v2-avail__hit" id="mm-book-hero-trigger-guests" data-i18n-aria-label="home.avail.guestsAria" aria-label="Guests"></button>
+        <p class="v2-avail__label" data-i18n="home.avail.guestsLabel">Guests</p>
         <p class="v2-avail__value" id="bbGuestsVal">1 Room · 2 Guests</p>
       </div>
-      <a class="v2-avail__btn mm-booking-sync" href="book.html">Reserve</a>
+      <a class="v2-avail__btn mm-booking-sync" href="https://reservation.asiwebres.com/SearchAvailability.aspx?id=77c9401ba7e640988f8410033a7434cc" target="_blank" rel="noopener noreferrer" data-i18n="common.reserve">Reserve</a>
     </div>
   </section>
 
   <!-- ── Intro ──────────────────────────────────────────────────── -->
   <section class="v2-intro">
     <div class="v2-intro__quote">
-      <p>A place where comfort</p>
-      <p>meets character.</p>
+      <p data-i18n="home.intro.quote.line1">A place where comfort</p>
+      <p data-i18n="home.intro.quote.line2">meets character.</p>
     </div>
     <div class="v2-intro__body">
-      <p>Nestled in Escondido, California, Motel Mediteran offers thoughtfully appointed rooms, warm hospitality, and a calm retreat from the everyday — whether you're here for business, family, or simply to breathe.</p>
+      <p data-i18n="home.intro.body">Nestled in Escondido, California, Motel Mediteran offers thoughtfully appointed rooms, warm hospitality, and a calm retreat from the everyday — whether you're here for business, family, or simply to breathe.</p>
       <div class="v2-rule"></div>
-      <a class="v2-link" href="amenities.html">Discover the property</a>
+      <a class="v2-link" href="amenities.html" data-i18n="home.intro.discoverProperty">Discover the property</a>
     </div>
   </section>
 
@@ -202,43 +542,60 @@
   <section class="v2-rooms">
     <div class="v2-rooms__header" data-reveal>
       <div>
-        <p class="v2-label">Accommodations</p>
-        <h2>Find Your Room</h2>
+        <p class="v2-label" data-i18n="home.rooms.label">Accommodations</p>
+        <h2 data-i18n="home.rooms.h2">Find Your Room</h2>
       </div>
-      <a class="v2-link" href="rooms.html">View all rooms</a>
+      <a class="v2-link" href="rooms.html" data-i18n="home.rooms.viewAll">View all rooms</a>
     </div>
 
     <div class="v2-rooms__grid">
 
-      <!-- Card 1: Deluxe King Suite — fireplace left, bedroom right -->
+      <!-- Card 1: King Jacuzzi Suite — fireplace left, bedroom right -->
       <div class="v2-room-card">
         <div class="v2-room-card__img">
-          <img src="assets/motel-pics/Deluxe King suite with kitchen/5.png"  style="object-position:20% center"  alt="Deluxe King Suite — fireplace" class="is-active" />
-          <img src="assets/motel-pics/Deluxe King suite with kitchen/6.png"  style="object-position:center center" alt="" />
-          <img src="assets/motel-pics/Deluxe King suite with kitchen/2.png"  style="object-position:center center" alt="" />
-          <img src="assets/motel-pics/Deluxe King suite with kitchen/10.png" style="object-position:65% center"   alt="" />
+          <picture>
+            <source type="image/webp" srcset="assets/motel-pics/Deluxe King Jacuzzi suite/5-480w.webp 480w, assets/motel-pics/Deluxe King Jacuzzi suite/5-800w.webp 800w, assets/motel-pics/Deluxe King Jacuzzi suite/5.webp 1280w" sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 500px" />
+            <img src="assets/motel-pics/Deluxe King Jacuzzi suite/5.png"  style="object-position:20% center"  alt="King Jacuzzi Suite — fireplace" data-i18n-alt="home.alt.suiteFireplaceShort" class="is-active" width="1536" height="1024" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="assets/motel-pics/Deluxe King Jacuzzi suite/6-480w.webp 480w, assets/motel-pics/Deluxe King Jacuzzi suite/6-800w.webp 800w, assets/motel-pics/Deluxe King Jacuzzi suite/6.webp 1280w" sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 500px" />
+            <img src="assets/motel-pics/Deluxe King Jacuzzi suite/6.png"  style="object-position:center center" alt="Deluxe King Jacuzzi Suite fireplace with patterned armchairs" data-i18n-alt="home.alt.suiteFireplaceArmchairs" width="1024" height="1024" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="assets/motel-pics/Deluxe King Jacuzzi suite/2-480w.webp 480w, assets/motel-pics/Deluxe King Jacuzzi suite/2-800w.webp 800w, assets/motel-pics/Deluxe King Jacuzzi suite/2.webp 1280w" sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 500px" />
+            <img src="assets/motel-pics/Deluxe King Jacuzzi suite/2.png"  style="object-position:center center" alt="Deluxe King Jacuzzi Suite living room and dining area overview" data-i18n-alt="home.alt.suiteLivingOverview" width="1536" height="1024" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="assets/motel-pics/Deluxe King Jacuzzi suite/10-480w.webp 480w, assets/motel-pics/Deluxe King Jacuzzi suite/10-800w.webp 800w, assets/motel-pics/Deluxe King Jacuzzi suite/10.webp 1280w" sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 500px" />
+            <img src="assets/motel-pics/Deluxe King Jacuzzi suite/10.png" style="object-position:65% center"   alt="Deluxe King Jacuzzi Suite king bedroom with shuttered window" data-i18n-alt="home.alt.suiteKingBedroomShuttered" width="1536" height="1024" />
+          </picture>
         </div>
         <div class="v2-room-card__body">
-          <p class="v2-label">Suite</p>
-          <p class="v2-room-card__name">Deluxe King Suite with Kitchen</p>
+          <p class="v2-label" data-i18n="rooms.label.suite">Suite</p>
+          <p class="v2-room-card__name" data-i18n="rooms.suiteKitchen.name">Deluxe King Jacuzzi Suite</p>
           <div class="v2-room-card__meta">
-            <span class="v2-room-card__price">From $189 / night</span>
-            <a class="v2-room-card__link" href="room-detail.html?room=suite-kitchen">View Room</a>
+            <a class="v2-room-card__link" href="room-detail.html?room=suite-kitchen" data-i18n="common.viewRoom">View Room</a>
           </div>
         </div>
       </div>
 
-      <!-- Card 2: Deluxe King Suite (jacuzzi) — bed + mural headboard -->
+      <!-- Card 2: King Jacuzzi Suite (jacuzzi) — bed + mural headboard -->
       <div class="v2-room-card">
         <div class="v2-room-card__img">
-          <img src="assets/motel-pics/king room jacuzzi/3.png" style="object-position:35% center" alt="Deluxe King Suite — bedroom" class="is-active" />
+          <picture>
+            <source type="image/webp" srcset="assets/motel-pics/king room jacuzzi/3-480w.webp 480w, assets/motel-pics/king room jacuzzi/3-800w.webp 800w, assets/motel-pics/king room jacuzzi/3.webp 1280w" sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 500px" />
+            <img src="assets/motel-pics/king room jacuzzi/3.png" style="object-position:35% center" alt="King Jacuzzi Suite — bedroom" data-i18n-alt="home.alt.suiteBedroomShort" class="is-active" width="1537" height="1023" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="assets/motel-pics/king room jacuzzi/2-480w.webp 480w, assets/motel-pics/king room jacuzzi/2-800w.webp 800w, assets/motel-pics/king room jacuzzi/2.webp 1280w" sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 500px" />
+            <img src="assets/motel-pics/king room jacuzzi/2.png" style="object-position:center center" alt="King Jacuzzi Suite with coastal mural headboard and king bed" data-i18n-alt="home.alt.suiteJacuzziMural" width="1521" height="1034" />
+          </picture>
         </div>
         <div class="v2-room-card__body">
-          <p class="v2-label">Suite</p>
-          <p class="v2-room-card__name">Deluxe King Suite</p>
+          <p class="v2-label" data-i18n="rooms.label.suite">Suite</p>
+          <p class="v2-room-card__name" data-i18n="rooms.name.suiteJacuzziShort">King Jacuzzi Suite</p>
           <div class="v2-room-card__meta">
-            <span class="v2-room-card__price">From $149 / night</span>
-            <a class="v2-room-card__link" href="room-detail.html?room=suite-jacuzzi">View Room</a>
+            <a class="v2-room-card__link" href="room-detail.html?room=suite-jacuzzi" data-i18n="common.viewRoom">View Room</a>
           </div>
         </div>
       </div>
@@ -246,15 +603,20 @@
       <!-- Card 3: Standard King — bed + mural headboard -->
       <div class="v2-room-card">
         <div class="v2-room-card__img">
-          <img src="assets/motel-pics/std king/1.png" style="object-position:60% center" alt="Standard King — bedroom" class="is-active" />
-          <img src="assets/motel-pics/std king/2.png" style="object-position:55% center" alt="" />
+          <picture>
+            <source type="image/webp" srcset="assets/motel-pics/std king/1-480w.webp 480w, assets/motel-pics/std king/1-800w.webp 800w, assets/motel-pics/std king/1.webp 1280w" sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 500px" />
+            <img src="assets/motel-pics/std king/1.png" style="object-position:60% center" alt="Standard King — bedroom" data-i18n-alt="home.alt.kingBedroomShort" class="is-active" width="1537" height="1023" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="assets/motel-pics/std king/2-480w.webp 480w, assets/motel-pics/std king/2-800w.webp 800w, assets/motel-pics/std king/2.webp 1280w" sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 500px" />
+            <img src="assets/motel-pics/std king/2.png" style="object-position:55% center" alt="Standard King room with work desk, mirror, and king bed" data-i18n-alt="home.alt.kingDeskMirror" width="1448" height="1086" />
+          </picture>
         </div>
         <div class="v2-room-card__body">
-          <p class="v2-label">Standard</p>
-          <p class="v2-room-card__name">Standard King</p>
+          <p class="v2-label" data-i18n="rooms.label.standard">Standard</p>
+          <p class="v2-room-card__name" data-i18n="rooms.name.kingShort">Standard King</p>
           <div class="v2-room-card__meta">
-            <span class="v2-room-card__price">From $99 / night</span>
-            <a class="v2-room-card__link" href="room-detail.html?room=king">View Room</a>
+            <a class="v2-room-card__link" href="room-detail.html?room=king" data-i18n="common.viewRoom">View Room</a>
           </div>
         </div>
       </div>
@@ -266,13 +628,16 @@
   <section>
     <div class="v2-pool">
       <div class="v2-pool__img" data-reveal>
-        <img src="assets/motel-pics/POOL/pool.png" alt="Outdoor pool at Motel Mediteran" />
+        <picture>
+          <source type="image/webp" srcset="assets/motel-pics/POOL/pool-480w.webp 480w, assets/motel-pics/POOL/pool-800w.webp 800w, assets/motel-pics/POOL/pool.webp 1280w" sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 500px" />
+          <img src="assets/motel-pics/POOL/pool.png" alt="Outdoor pool at Motel Mediteran" data-i18n-alt="home.alt.poolAtMotel" width="1493" height="1054" />
+        </picture>
       </div>
       <div class="v2-pool__text" data-reveal data-delay="1">
-        <p class="v2-label v2-label--light">Amenities</p>
-        <h2>Everything you need</h2>
-        <p>Outdoor pool, high-speed WiFi, complimentary parking, 24-hour coffee in the office, and thoughtful touches — everything to make your stay effortless.</p>
-        <a class="v2-link" href="amenities.html">Explore amenities</a>
+        <p class="v2-label v2-label--light" data-i18n="home.amenities.label">Amenities</p>
+        <h2 data-i18n="home.amenities.h2">Everything you need</h2>
+        <p data-i18n="home.amenities.lead">Outdoor pool, high-speed WiFi, complimentary parking, 24-hour coffee in the office, and thoughtful touches — everything to make your stay effortless.</p>
+        <a class="v2-link" href="amenities.html" data-i18n="home.amenities.explore">Explore amenities</a>
       </div>
     </div>
 
@@ -283,8 +648,8 @@
           <path d="M3 21c1.4 1 2.8 1 4.2 0s2.8-1 4.2 0 2.8 1 4.2 0 2.8-1 4.2 0 2.8 1 4.2 0" />
           <path d="M6 14V8h3M6 10h3M18 14V8h-3M15 10h3" />
         </svg>
-        <p class="v2-amenity__name">Outdoor Pool</p>
-        <p class="v2-amenity__desc">Open year-round. Towels provided.</p>
+        <p class="v2-amenity__name" data-i18n="home.amenity.pool.label">Outdoor Pool</p>
+        <p class="v2-amenity__desc" data-i18n="home.amenity.pool.desc">Open year-round. Towels provided.</p>
       </div>
       <div class="v2-amenity" data-reveal data-delay="2">
         <svg class="v2-amenity__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
@@ -293,8 +658,8 @@
           <path d="M8.5 15.5a5 5 0 0 1 7 0" />
           <circle cx="12" cy="18.5" r="1.1" />
         </svg>
-        <p class="v2-amenity__name">High-Speed WiFi</p>
-        <p class="v2-amenity__desc">Complimentary throughout the property.</p>
+        <p class="v2-amenity__name" data-i18n="home.amenity.wifi.label">High-Speed WiFi</p>
+        <p class="v2-amenity__desc" data-i18n="home.amenity.wifi.desc">Complimentary throughout the property.</p>
       </div>
       <div class="v2-amenity" data-reveal data-delay="3">
         <svg class="v2-amenity__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
@@ -302,8 +667,8 @@
           <path d="M9 8h3.6a2.6 2.6 0 0 1 0 5.2H9z" />
           <path d="M9 13.2v4.8" />
         </svg>
-        <p class="v2-amenity__name">Free Parking</p>
-        <p class="v2-amenity__desc">Free on-site parking for guests.</p>
+        <p class="v2-amenity__name" data-i18n="home.amenity.parking.label">Free Parking</p>
+        <p class="v2-amenity__desc" data-i18n="home.amenity.parking.desc">Free on-site parking for guests.</p>
       </div>
       <div class="v2-amenity" data-reveal data-delay="4">
         <svg class="v2-amenity__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
@@ -312,8 +677,8 @@
           <path d="M8.5 7.5c0-1.2 1-2.2 2.2-2.2S13 6.3 13 7.5" />
           <path d="M7 7.5h7" />
         </svg>
-        <p class="v2-amenity__name">24-Hour Office Coffee</p>
-        <p class="v2-amenity__desc">Coffee available in the office 24 hours.</p>
+        <p class="v2-amenity__name" data-i18n="home.amenity.coffee.label">24-Hour Office Coffee</p>
+        <p class="v2-amenity__desc" data-i18n="home.amenity.coffee.desc">Coffee available in the office 24 hours.</p>
       </div>
     </div>
   </section>
@@ -322,124 +687,245 @@
   <section class="v2-gallery">
     <div class="v2-gallery__header" data-reveal>
       <div>
-        <p class="v2-label">Gallery</p>
-        <h2>A Closer Look</h2>
+        <p class="v2-label" data-i18n="home.gallery.label">Gallery</p>
+        <h2 data-i18n="home.gallery.h2">A Closer Look</h2>
       </div>
-      <a class="v2-link" href="gallery.html">View all photos</a>
+      <a class="v2-link" href="gallery.html" data-i18n="home.gallery.viewAll">View all photos</a>
     </div>
     <div class="v2-gallery__grid">
       <div class="v2-gallery__item">
-        <img src="assets/motel-pics/EXTERIOR PICS/5.png" alt="Motel Mediteran exterior" loading="lazy" />
+        <picture>
+          <source type="image/webp" srcset="assets/motel-pics/EXTERIOR PICS/5-480w.webp 480w, assets/motel-pics/EXTERIOR PICS/5-800w.webp 800w, assets/motel-pics/EXTERIOR PICS/5.webp 1280w" sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 500px" />
+          <img src="assets/motel-pics/EXTERIOR PICS/5.png" alt="Aerial view of the motel rooftop, pool, and surrounding neighborhood" data-i18n-alt="home.alt.aerialMotelRooftop" loading="lazy" width="871" height="586" />
+        </picture>
       </div>
       <div class="v2-gallery__item">
-        <img src="assets/motel-pics/Deluxe King suite with kitchen/5.png" alt="Deluxe suite fireplace" loading="lazy" />
+        <picture>
+          <source type="image/webp" srcset="assets/motel-pics/Deluxe King Jacuzzi suite/5-480w.webp 480w, assets/motel-pics/Deluxe King Jacuzzi suite/5-800w.webp 800w, assets/motel-pics/Deluxe King Jacuzzi suite/5.webp 1280w" sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 500px" />
+          <img src="assets/motel-pics/Deluxe King Jacuzzi suite/5.png" alt="King Jacuzzi Suite living area with stone fireplace and patterned armchairs" data-i18n-alt="home.alt.suiteLivingFireplace" loading="lazy" width="1536" height="1024" />
+        </picture>
       </div>
       <div class="v2-gallery__item">
-        <img src="assets/motel-pics/POOL/pool.png" alt="Pool" loading="lazy" />
+        <picture>
+          <source type="image/webp" srcset="assets/motel-pics/POOL/pool-480w.webp 480w, assets/motel-pics/POOL/pool-800w.webp 800w, assets/motel-pics/POOL/pool.webp 1280w" sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 500px" />
+          <img src="assets/motel-pics/POOL/pool.png" alt="Sun-lit outdoor swimming pool with patio loungers and palm trees" data-i18n-alt="home.alt.poolSunlitLoungers" loading="lazy" width="1493" height="1054" />
+        </picture>
       </div>
       <div class="v2-gallery__item">
-        <img src="assets/motel-pics/EXTERIOR PICS/7.png" alt="Exterior" loading="lazy" />
+        <picture>
+          <source type="image/webp" srcset="assets/motel-pics/EXTERIOR PICS/7-480w.webp 480w, assets/motel-pics/EXTERIOR PICS/7-800w.webp 800w, assets/motel-pics/EXTERIOR PICS/7.webp 1280w" sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 500px" />
+          <img src="assets/motel-pics/EXTERIOR PICS/7.png" alt="Roadside view of the motel sign and arched facade flanked by tall palm trees" data-i18n-alt="gallery.alt.roadsideSignPalms" loading="lazy" width="929" height="589" />
+        </picture>
       </div>
       <div class="v2-gallery__item">
-        <img src="assets/motel-pics/king room jacuzzi/3.png" alt="King room with jacuzzi" loading="lazy" />
+        <picture>
+          <source type="image/webp" srcset="assets/motel-pics/king room jacuzzi/3-480w.webp 480w, assets/motel-pics/king room jacuzzi/3-800w.webp 800w, assets/motel-pics/king room jacuzzi/3.webp 1280w" sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 500px" />
+          <img src="assets/motel-pics/king room jacuzzi/3.png" alt="Deluxe King Jacuzzi room with king bed, teal armchair, and balcony view" data-i18n-alt="gallery.alt.kingJacuzziLounge" loading="lazy" width="1537" height="1023" />
+        </picture>
       </div>
       <div class="v2-gallery__item">
-        <img src="assets/motel-pics/2 rooms kitchen suite/1.png" alt="Kitchen suite" loading="lazy" />
+        <picture>
+          <source type="image/webp" srcset="assets/motel-pics/2 rooms kitchen suite/1-480w.webp 480w, assets/motel-pics/2 rooms kitchen suite/1-800w.webp 800w, assets/motel-pics/2 rooms kitchen suite/1.webp 1280w" sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 500px" />
+          <img src="assets/motel-pics/2 rooms kitchen suite/1.png" alt="Two-room kitchen suite living and dining area with full appliances" data-i18n-alt="home.alt.twoRoomKitchenLivingDining" loading="lazy" width="1536" height="1024" />
+        </picture>
       </div>
     </div>
   </section>
 
-  <!-- ── Nearby ─────────────────────────────────────────────────── -->
-  <section class="v2-nearby">
-    <div class="v2-nearby__header" data-reveal>
-      <p class="v2-label">Explore</p>
-      <h2>What's Around</h2>
-    </div>
-    <div class="v2-nearby__grid">
-      <div class="v2-nearby-card" data-reveal data-delay="1">
-        <div class="v2-nearby-card__img">
-          <img src="assets/attractions/safari-park-zoo.jpg" alt="San Diego Zoo Safari Park" loading="lazy" />
-        </div>
-        <div class="v2-nearby-card__body">
-          <p class="v2-label">Nature</p>
-          <p class="v2-nearby-card__name">San Diego Zoo Safari Park</p>
-          <p class="v2-nearby-card__dist">15 min drive</p>
-        </div>
-      </div>
-      <div class="v2-nearby-card" data-reveal data-delay="2">
-        <div class="v2-nearby-card__img">
-          <img src="assets/attractions/safari-park-wedding-venue.jpg" alt="Safari Park Wedding Venue" loading="lazy" />
-        </div>
-        <div class="v2-nearby-card__body">
-          <p class="v2-label">Events</p>
-          <p class="v2-nearby-card__name">Safari Park Venue</p>
-          <p class="v2-nearby-card__dist">15 min drive</p>
-        </div>
-      </div>
-      <div class="v2-nearby-card" data-reveal data-delay="3">
-        <div class="v2-nearby-card__img">
-          <img src="assets/attractions/seaworld-san-diego.jpg" alt="SeaWorld San Diego" loading="lazy" />
-        </div>
-        <div class="v2-nearby-card__body">
-          <p class="v2-label">Entertainment</p>
-          <p class="v2-nearby-card__name">SeaWorld San Diego</p>
-          <p class="v2-nearby-card__dist">35 min drive</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- ── Place: nearby + CTA share one continuous map landscape ─── -->
+  <div class="v2-place">
 
-  <!-- ── CTA ────────────────────────────────────────────────────── -->
-  <section class="v2-cta">
-    <div class="v2-cta__bg" id="ctaBg"></div>
-    <div class="v2-cta__overlay"></div>
-    <div class="v2-cta__inner" data-reveal>
-      <p class="v2-label v2-label--light">Motel Mediteran</p>
-      <h2>Your escape begins here.</h2>
-      <a class="v2-cta__btn" href="book.html">Book Your Stay</a>
+    <!-- The map: scales with viewport width. JS positions its top so
+         the motel pixel lands at the center of .v2-cta. White areas
+         in the PNG are transparent — section backgrounds show through. -->
+    <div class="v2-place__map-wrap" aria-hidden="true">
+      <picture>
+        <source srcset="assets/escondido-map/escondido-map.webp?v=10" type="image/webp" />
+        <img class="v2-place__map" src="assets/escondido-map/escondido-map.png?v=10" alt="" width="3038" height="3692" />
+      </picture>
+
+      <!-- Place / city labels — calculated from actual coordinates -->
+      <span class="v2-place__city notranslate" translate="no" style="left:50%;top:62%;">Escondido</span>
+      <span class="v2-place__city notranslate" translate="no" style="left:14%;top:56%;">San Marcos</span>
+      <span class="v2-place__lake notranslate" translate="no" style="left:37.22%;top:90.16%;">Lake Hodges</span>
+
+      <!-- Freeway shields (I-15 + CA-78) are BAKED into the map image
+           itself — they're pixels in escondido-map.png, not DOM elements.
+           To re-place them: edit /tmp/bake_shields.py and re-run. -->
+
     </div>
-  </section>
+
+
+    <!-- Coordinate stamp anchored bottom-right of the wrapper -->
+    <div class="v2-place__coords" aria-hidden="true">
+      <span class="v2-place__coords-tick"></span>
+      <span class="v2-place__coords-lat">33.0935° N</span>
+      <span class="v2-place__coords-sep">·</span>
+      <span class="v2-place__coords-lon">117.0717° W</span>
+    </div>
+
+    <!-- ── Nearby (UPPER) — beige bg, cards on top of map ──────── -->
+    <section class="v2-nearby">
+      <div class="v2-nearby__header" data-reveal>
+        <p class="v2-label" data-i18n="home.nearby.label">Explore</p>
+        <h2 data-i18n="home.nearby.h2">What's Around</h2>
+      </div>
+      <!-- These 3 static attraction cards are the FALLBACK. js/events-nearby.js
+           swaps in live local events when the events Worker returns >=3; if it
+           fails or returns fewer, these stay. Keep them as the safety net. -->
+      <div class="v2-nearby__grid">
+        <div class="v2-nearby-card" data-reveal data-delay="1">
+          <div class="v2-nearby-card__img">
+            <picture>
+              <source srcset="assets/attractions/safari-park-zoo.webp" type="image/webp" />
+              <img src="assets/attractions/safari-park-zoo.jpg" alt="San Diego Zoo Safari Park" data-i18n-alt="proper.sanDiegoZooSafariPark" loading="lazy" width="1800" height="1012" />
+            </picture>
+          </div>
+          <div class="v2-nearby-card__body">
+            <p class="v2-label" data-i18n="home.nearby.cat.nature">Nature</p>
+            <p class="v2-nearby-card__name notranslate" translate="no">San Diego Zoo Safari Park</p>
+            <p class="v2-nearby-card__dist" data-i18n="home.nearby.drive.min15">15 min drive</p>
+          </div>
+        </div>
+        <div class="v2-nearby-card" data-reveal data-delay="2">
+          <div class="v2-nearby-card__img">
+            <picture>
+              <source srcset="assets/attractions/safari-park-wedding-venue.webp" type="image/webp" />
+              <img src="assets/attractions/safari-park-wedding-venue.jpg" alt="Safari Park Wedding Venue" data-i18n-alt="home.alt.safariParkWeddingVenue" loading="lazy" width="1024" height="682" />
+            </picture>
+          </div>
+          <div class="v2-nearby-card__body">
+            <p class="v2-label" data-i18n="home.nearby.cat.events">Events</p>
+            <p class="v2-nearby-card__name notranslate" translate="no">Safari Park Venue</p>
+            <p class="v2-nearby-card__dist" data-i18n="home.nearby.drive.min15">15 min drive</p>
+          </div>
+        </div>
+        <div class="v2-nearby-card" data-reveal data-delay="3">
+          <div class="v2-nearby-card__img">
+            <picture>
+              <source srcset="assets/attractions/seaworld-san-diego.webp" type="image/webp" />
+              <img src="assets/attractions/seaworld-san-diego.jpg" alt="SeaWorld San Diego" data-i18n-alt="home.alt.seaworldSanDiego" loading="lazy" width="1920" height="1200" />
+            </picture>
+          </div>
+          <div class="v2-nearby-card__body">
+            <p class="v2-label" data-i18n="home.nearby.cat.entertainment">Entertainment</p>
+            <p class="v2-nearby-card__name notranslate" translate="no">SeaWorld San Diego</p>
+            <p class="v2-nearby-card__dist" data-i18n="home.nearby.drive.min35">35 min drive</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA (LOWER) — transparent, pin centered on motel ────── -->
+    <section class="v2-cta">
+      <h2 class="v2-cta__title" data-i18n="home.cta.escape">Your escape begins here.</h2>
+
+      <span class="v2-cta__pin" role="img" aria-label="Motel Mediteran location" data-i18n-aria-label="home.cta.pinAria">
+        <span class="v2-cta__pin-pulse"></span>
+        <svg class="v2-cta__pin-mark" viewBox="0 0 20 20" aria-hidden="true">
+          <circle cx="10" cy="10" r="8" fill="#fff" stroke="#0a0a0a" stroke-width="1.5"/>
+          <circle cx="10" cy="10" r="3.5" fill="#0a0a0a"/>
+        </svg>
+      </span>
+      <span class="v2-cta__pin-label notranslate" translate="no" aria-hidden="true">Motel Mediteran</span>
+    </section>
+
+  </div>
 </main>
 
 <!-- ── Footer ─────────────────────────────────────────────────── -->
-<footer class="v2-footer">
-    <div class="v2-footer__left">
-      <a href="index.html" class="v2-footer__logo-wrap" aria-label="Motel Mediteran home">
-        <img src="assets/mm-logo-mark.png" alt="MM" class="v2-footer__logo-mark" />
-      </a>
-      <p class="v2-footer__brand">Motel Mediteran
-        <br><span style="font-family:var(--sans);font-size:11px;font-weight:300;color:var(--muted)">Escondido, California</span>
-      </p>
-      <p style="font-size:11px;color:var(--muted);margin-top:10px;line-height:1.7">
-        425 W El Norte Pkwy<br>
-        Escondido, CA 92026<br>
-        (760) 743-2300
-      </p>
-    </div>
-    <ul class="v2-footer__nav">
-      <li><a href="rooms.html">Rooms</a></li>
-      <li><a href="amenities.html">Amenities</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="things-to-do.html">Things To Do</a></li>
-      <li><a href="directions.html">Directions</a></li>
-      <li><a href="faqs.html">FAQs</a></li>
-      <li><a href="hotel-policies.html">Policies</a></li>
-      <li><a href="accessibility.html">Accessibility</a></li>
-    </ul>
-    <div class="v2-footer__end">
-      <a href="book.html" class="v2-footer__book-btn">Book Now</a>
-      <a href="https://www.instagram.com" aria-label="Instagram" class="v2-footer__insta">
-        <img src="assets/icon-instagram.svg" alt="" style="width:18px;height:18px;display:inline-block;opacity:0.4;transition:opacity 0.3s" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=0.4" />
-      </a>
-      <p class="v2-footer__copy">© 2026 Motel Mediteran.<br>All rights reserved.</p>
-    </div>
-  </footer>
+<footer class="mm-footer" aria-label="Site footer" data-i18n-aria-label="footer.label">
+      <div class="mm-footer__inner">
+        <div class="mm-footer__cols">
+          <!-- Brand column -->
+          <div class="mm-footer__brand-col">
+            <div class="mm-footer__logo" aria-hidden="true">MM</div>
+            <p class="mm-footer__brand"><span class="notranslate" translate="no">Motel Mediteran</span></p>
+            <p class="mm-footer__meta">
+              2336 S. Escondido Blvd<br />
+              Escondido, CA 92025<br />
+              <a href="tel:+17607432300">760-743-2300</a>
+            </p>
+            <div class="mm-footer__socials">
+              <a class="mm-footer__social mm-footer__social--ig" href="https://www.instagram.com/motelmediteran/" target="_blank" rel="noopener noreferrer" aria-label="Motel Mediteran on Instagram" data-i18n-aria-label="a11y.footer.brandAlt">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+                </svg>
+              </a>
+              <a class="mm-footer__social mm-footer__social--mail" href="mailto:info4motelmed@gmail.com" aria-label="Email Motel Mediteran">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M3.5 6.5L12 13L20.5 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
 
-<script src="js/mm-lang.js?v=7"></script>
-<script src="js/mm-booking-dock.js?v=14"></script>
-<script src="js/mm-booking-calendar.js?v=9"></script>
-<script src="js/mm-booking-guests.js?v=1"></script>
-<script src="js/mm-topbar.js?v=18"></script>
+          <!-- Explore column -->
+          <div class="mm-footer__col">
+            <h2 class="mm-footer__h" data-i18n="footer.explore">Explore</h2>
+            <ul class="mm-footer__links">
+              <li><a href="index.html" aria-current="page" data-i18n="nav.home">Home</a></li>
+              <li><a href="rooms.html" data-i18n="nav.rooms">Rooms &amp; Suites</a></li>
+              <li><a href="things-to-do.html" data-i18n="nav.things">Things to Do</a></li>
+              <li><a href="amenities.html" data-i18n="nav.amenities">Amenities</a></li>
+              <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+              <li><a href="directions.html" data-i18n="nav.directions">Directions</a></li>
+            </ul>
+          </div>
+
+          <!-- Helpful column -->
+          <div class="mm-footer__col">
+            <h2 class="mm-footer__h" data-i18n="footer.helpful">Helpful</h2>
+            <ul class="mm-footer__links">
+              <li><a href="faqs.html" data-i18n="nav.faqs">FAQs</a></li>
+              <li><a href="hotel-policies.html" data-i18n="nav.policies">Hotel Policies</a></li>
+              <li><a href="accessibility.html" data-i18n="nav.accessibility">Accessibility</a></li>
+              <li><a href="tel:+17607432300" data-i18n="footer.contactUs">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CTA row -->
+        <div class="mm-footer__cta-row">
+          <div class="mm-footer__cta-stack">
+            <span class="mm-footer__cta-eyebrow" data-i18n="footer.readyEyebrow">Ready when you are</span>
+            <a class="mm-footer__cta" href="https://reservation.asiwebres.com/SearchAvailability.aspx?id=77c9401ba7e640988f8410033a7434cc" target="_blank" rel="noopener noreferrer">
+              <span data-i18n="footer.bookRoom">Book a Room</span>
+              <span class="mm-footer__cta-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Bottom strip — DOM order: fine first, copy second.
+             Mobile (column): fine on top above divider, copy below — natural flow.
+             Desktop (row-reverse): copy on left, fine on right — flex visual flip. -->
+        <div class="mm-footer__strip">
+          <div class="mm-footer__fine">
+            <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
+            <span class="mm-footer__fine-dot" aria-hidden="true">·</span>
+            <a href="image-credits.html" data-i18n="footer.imageCredits">Image Credits</a>
+            <span class="mm-footer__fine-dot" aria-hidden="true">·</span>
+            <button type="button" data-mm-cookie-prefs data-i18n="footer.cookiePrefs">Cookie Preferences</button>
+            <span class="mm-footer__fine-dot" aria-hidden="true">·</span>
+            <a href="privacy.html#california" data-i18n="footer.doNotSell">Do Not Sell or Share My Personal Information</a>
+          </div>
+          <p class="mm-footer__copy" data-i18n-html="footer.copyShort">© 2026 <span class="notranslate" translate="no">Motel Mediteran</span> · Escondido, California</p>
+        </div>
+        <a class="mm-footer__craft notranslate" translate="no" href="https://www.theneuralhorn.com" target="_blank" rel="noopener noreferrer" aria-label="Crafted by The Neural Horn (opens in a new tab)">
+          <span class="mm-footer__craft-horn" aria-hidden="true"></span>
+          <span class="mm-footer__craft-line"><span class="mm-footer__craft-by">Crafted by</span><span class="mm-footer__craft-name">The Neural Horn</span></span>
+        </a>
+      </div>
+    </footer>
+
+<script src="js/mm-i18n.js?v=11" defer></script>
+<script src="js/mm-booking-dock.js?v=15" defer></script>
+<script src="js/mm-booking-calendar.js?v=10" defer></script>
+<script src="js/mm-booking-guests.js?v=1" defer></script>
+<script src="js/mm-topbar.js?v=21" defer></script>
 <script>
   (function () {
     var s = document.createElement('script');
@@ -448,11 +934,13 @@
     document.body.appendChild(s);
   })();
 </script>
-<script src="js/mm-chat-widget.js?v=47"></script>
-<script src="js/lenis.min.js"></script>
-<script src="js/gsap.min.js"></script>
-<script src="js/ScrollTrigger.min.js"></script>
-<script src="js/mm-inertial-scroll.js"></script>
-<script src="js/home-v2-main.js?v=6"></script>
-</body>
+<script src="js/marcos-frontend.js?v=9" defer></script>
+<script src="js/lenis.min.js" defer></script>
+<script src="js/gsap.min.js" defer></script>
+<script src="js/ScrollTrigger.min.js" defer></script>
+<script src="js/mm-inertial-scroll.js" defer></script>
+<script src="js/home-v2-main.js?v=10" defer></script>
+  <script src="js/events-nearby.js?v=2" defer></script>
+  <script src="js/cookie-banner.js?v=4" defer></script>
+  </body>
 </html>

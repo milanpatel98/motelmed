@@ -1,4 +1,5 @@
-/* Site-wide white footer bar — use with Cormorant + Inter (loaded on each page) */
+/* Site-wide footer — 3 columns + CTA + bottom strip.
+   Uses Cormorant Garamond + Inter (loaded on each page). */
 
 body.mm-shell > footer.mm-footer {
   position: relative;
@@ -9,162 +10,280 @@ body.mm-shell > footer.mm-footer {
   background: #fff;
   color: var(--mm-ink, #0a0a0a);
   border-top: 1px solid rgba(10, 10, 10, 0.1);
+  padding: 48px clamp(20px, 4vw, 56px) 0;
 }
 
 .mm-footer__inner {
-  max-width: 1100px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: clamp(40px, 5vw, 56px) var(--mm-shell-pad, 24px) clamp(32px, 4vw, 48px);
-  display: grid;
-  grid-template-columns: 1.1fr 1fr 1fr;
-  gap: clamp(24px, 4vw, 40px);
-  align-items: start;
   box-sizing: border-box;
 }
 
+.mm-footer__cols {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: clamp(24px, 3vw, 40px);
+}
+
+/* ───── Brand column ───── */
 .mm-footer__brand-col {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-/* Fine-tune horizontal alignment vs. footer text (PNG canvas padding) */
 footer.mm-footer .mm-footer__logo {
-  width: clamp(56px, 12vw, 72px);
-  max-width: none;
-  height: auto;
-  display: block;
-  margin: 0 0 14px;
-  object-fit: contain;
-  position: relative;
-  left: -10px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(10, 10, 10, 0.55);
+  color: var(--mm-ink, #0a0a0a);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  margin: 0 0 10px;
+  user-select: none;
+  text-decoration: none;
+  box-sizing: border-box;
 }
 
 .mm-footer__brand {
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(20px, 2vw, 26px);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin: 0 0 12px;
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0 0 16px;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
 }
 
 .mm-footer__meta {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.65;
-  color: rgba(10, 10, 10, 0.78);
-}
-
-.mm-footer__ig {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 14px;
-  padding: 2px;
-  line-height: 0;
-  text-decoration: none;
-  border-radius: 6px;
-  opacity: 0.85;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.mm-footer__ig:hover {
-  opacity: 1;
-  transform: translateY(-1px);
-}
-
-.mm-footer__ig:focus-visible {
-  outline: 2px solid rgba(10, 10, 10, 0.35);
-  outline-offset: 3px;
-}
-
-.mm-footer__ig-icon {
-  width: 22px;
-  height: 22px;
-  display: block;
+  margin: 0 0 20px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(10, 10, 10, 0.7);
 }
 
 .mm-footer__meta a {
-  color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.mm-footer__meta a:hover {
   color: var(--mm-ink, #0a0a0a);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
 }
 
+.mm-footer__meta a:hover,
+.mm-footer__meta a:focus-visible {
+  border-bottom-color: var(--mm-ink, #0a0a0a);
+  outline: none;
+}
+
+.mm-footer__socials {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mm-footer__social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(10, 10, 10, 0.7);
+  text-decoration: none;
+  padding: 2px;
+  transition: color 0.2s ease;
+}
+
+.mm-footer__social svg {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+.mm-footer__social:hover,
+.mm-footer__social:focus-visible {
+  color: var(--mm-ink, #0a0a0a);
+  outline: none;
+}
+
+.mm-footer__social:focus-visible {
+  outline: 2px solid var(--mm-ink, #0a0a0a);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* ───── Group columns (Explore + Helpful) ───── */
 .mm-footer__h {
-  margin: 0 0 14px;
-  font-size: 10px;
+  margin: 0 0 18px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(10, 10, 10, 0.55);
+  color: var(--mm-ink, #0a0a0a);
 }
 
 .mm-footer__links {
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-.mm-footer__links li {
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .mm-footer__links a {
+  display: inline-block;
   font-size: 13px;
-  color: rgba(10, 10, 10, 0.82);
+  color: rgba(10, 10, 10, 0.7);
   text-decoration: none;
   border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-.mm-footer__links a:hover {
+.mm-footer__links a:hover,
+.mm-footer__links a:focus-visible {
   color: var(--mm-ink, #0a0a0a);
-  border-bottom-color: rgba(10, 10, 10, 0.35);
+  outline: none;
+  border-bottom-color: var(--mm-ink, #0a0a0a);
 }
 
-.mm-footer__note {
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.65;
-  color: rgba(10, 10, 10, 0.72);
+.mm-footer__links a[aria-current="page"] {
+  color: var(--mm-ink, #0a0a0a);
+  font-weight: 600;
 }
 
-.mm-footer__book {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 12px 22px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
+/* ───── CTA row (above bottom strip) ───── */
+.mm-footer__cta-row {
+  max-width: 1240px;
+  margin: 40px auto 28px;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mm-footer__cta-stack {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.mm-footer__cta-eyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  text-decoration: none;
-  color: var(--mm-ink, #0a0a0a);
-  border: 1px solid rgba(10, 10, 10, 0.35);
-  border-radius: 999px;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.mm-footer__book:hover {
-  background: var(--mm-ink, #0a0a0a);
-  color: #fff;
-  border-color: var(--mm-ink, #0a0a0a);
-}
-
-.mm-footer__copy {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 var(--mm-shell-pad, 24px) clamp(28px, 4vw, 40px);
-  font-size: 12px;
-  color: rgba(10, 10, 10, 0.5);
+  /* 0.70 alpha = ~6.3:1 contrast on cream bg (WCAG AA needs 4.5:1) */
+  color: rgba(10, 10, 10, 0.70);
+  margin: 0;
   text-align: center;
 }
 
-/* Interior pages: invisible 1px anchor next to header (legacy hook for optional scroll UI). */
+.mm-footer__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 32px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  background: var(--mm-ink, #0a0a0a);
+  border: 1px solid var(--mm-ink, #0a0a0a);
+  border-radius: 0;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.mm-footer__cta:hover,
+.mm-footer__cta:focus-visible {
+  background: transparent;
+  color: var(--mm-ink, #0a0a0a);
+  outline: none;
+}
+
+.mm-footer__cta:hover .mm-footer__cta-arrow {
+  transform: translateX(4px);
+}
+
+.mm-footer__cta-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+/* ───── Bottom legal strip ─────
+   DOM order: fine first, copy second.
+   Desktop uses row-reverse so copy renders on the LEFT (the conventional
+   spot) and fine on the RIGHT. On mobile, the column natural-flow puts
+   fine on top above the divider, copy below — DOM matches visual. */
+.mm-footer__strip {
+  margin: 0;
+  padding: 22px 0;
+  border-top: 1px solid rgba(10, 10, 10, 0.12);
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.mm-footer__copy {
+  font-size: 12px;
+  color: rgba(10, 10, 10, 0.7);
+  margin: 0;
+}
+
+.mm-footer__fine {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  font-size: 11px;
+  color: rgba(10, 10, 10, 0.65);
+}
+
+.mm-footer__fine a,
+.mm-footer__fine button {
+  color: rgba(10, 10, 10, 0.65);
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 6px 0;
+  margin: 0;
+  font: inherit;
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: inherit;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mm-footer__fine a:hover,
+.mm-footer__fine button:hover,
+.mm-footer__fine a:focus-visible,
+.mm-footer__fine button:focus-visible {
+  color: var(--mm-ink, #0a0a0a);
+  outline: none;
+  border-bottom-color: var(--mm-ink, #0a0a0a);
+}
+
+.mm-footer__fine-dot {
+  color: rgba(10, 10, 10, 0.25);
+}
+
+/* ───── Legacy sentinel hook (kept for compatibility) ───── */
 .mm-booking-inline.mm-booking-inline--sentinel {
   height: 1px;
   width: 100%;
@@ -176,8 +295,259 @@ footer.mm-footer .mm-footer__logo {
   opacity: 0;
 }
 
-@media (max-width: 860px) {
-  .mm-footer__inner {
-    grid-template-columns: 1fr;
+/* ───── Responsive ───── */
+@media (max-width: 900px) {
+  .mm-footer__cols {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .mm-footer {
+    padding: 24px 18px 0;
+  }
+
+  /* Brand col spans full width; Explore + Helpful share a 2-col row */
+  .mm-footer__cols {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 22px;
+  }
+
+  /* Brand row — logo on left, socials on right, name + address below */
+  .mm-footer__brand-col {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "logo  socials"
+      "name  name"
+      "meta  meta";
+    column-gap: 14px;
+    row-gap: 10px;
+    align-items: center;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(10, 10, 10, 0.08);
+  }
+
+  footer.mm-footer .mm-footer__logo {
+    grid-area: logo;
+    margin: 0;
+    width: 40px;
+    height: 40px;
+    font-size: 11px;
+  }
+
+  .mm-footer__brand {
+    grid-area: name;
+    font-size: 20px;
+    margin: 0;
+  }
+
+  .mm-footer__meta {
+    grid-area: meta;
+    margin: 0;
+    font-size: 12.5px;
+    line-height: 1.55;
+  }
+
+  .mm-footer__socials {
+    grid-area: socials;
+    justify-self: end;
+    gap: 6px;
+  }
+
+  /* WCAG 2.5.5 — ≥44×44 touch targets on mobile */
+  .mm-footer__social {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 9px;
+  }
+
+  .mm-footer__social svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* Column headers tighten */
+  .mm-footer__h {
+    margin: 0 0 12px;
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+  }
+
+  .mm-footer__links {
+    gap: 8px;
+  }
+
+  .mm-footer__links a {
+    padding: 4px 0;
+    font-size: 12.5px;
+    min-height: 28px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Mobile CTA — full-width primary action */
+  .mm-footer__cta-row {
+    margin: 24px auto 18px;
+    justify-content: stretch;
+  }
+
+  .mm-footer__cta-stack {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .mm-footer__cta {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    min-height: 46px;
+  }
+
+  /* Bottom strip — DOM order (fine → copy) already matches mobile
+     visual (fine on top above divider, copy below). No CSS `order`
+     hacks needed → screen reader reads in visual order. */
+  .mm-footer__strip {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+    border-top: 0;
+  }
+
+  .mm-footer__fine {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 10px;
+    padding: 16px 0 14px;
+    border-bottom: 1px solid rgba(10, 10, 10, 0.12);
+    font-size: 10.5px;
+  }
+
+  .mm-footer__fine a,
+  .mm-footer__fine button {
+    padding: 4px 0;
+    min-height: 28px;
+    font-size: 10.5px;
+    white-space: nowrap;
+  }
+
+  .mm-footer__copy {
+    width: 100%;
+    text-align: center;
+    padding: 14px 0 20px;
+    margin: 0;
+    font-size: 11.5px;
+  }
+}
+
+/* WCAG 2.3.3 — respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .mm-footer__social,
+  .mm-footer__cta,
+  .mm-footer__cta-arrow,
+  .mm-footer__links a,
+  .mm-footer__fine a,
+  .mm-footer__fine button,
+  .mm-footer__meta a {
+    transition: none !important;
+  }
+
+  .mm-footer__cta:hover .mm-footer__cta-arrow {
+    transform: none;
+  }
+}
+
+/* ───── Studio credit: horn over "Crafted by The Neural Horn" ───── */
+.mm-footer__craft {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 11px;
+  padding: 26px 0 8px;
+  color: rgba(10, 10, 10, 0.55);
+  text-decoration: none;
+  transition: color 0.35s ease;
+}
+
+.mm-footer__craft:focus-visible {
+  outline: none;
+}
+
+.mm-footer__craft-horn {
+  display: block;
+  width: 52px;
+  height: 18px;
+  background: currentColor;
+  -webkit-mask: url("../assets/neural-horn.svg") center / contain no-repeat;
+  mask: url("../assets/neural-horn.svg") center / contain no-repeat;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), color 0.35s ease;
+}
+
+.mm-footer__craft-line {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.mm-footer__craft-name {
+  position: relative;
+  font-weight: 500;
+  color: rgba(10, 10, 10, 0.8);
+  transition: color 0.35s ease;
+}
+
+/* underline draws in from the left on hover */
+.mm-footer__craft-name::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mm-footer__craft:hover,
+.mm-footer__craft:focus-visible,
+.mm-footer__craft:hover .mm-footer__craft-name,
+.mm-footer__craft:focus-visible .mm-footer__craft-name {
+  color: var(--mm-ink, #0a0a0a);
+}
+
+.mm-footer__craft:hover .mm-footer__craft-horn,
+.mm-footer__craft:focus-visible .mm-footer__craft-horn {
+  transform: translateY(-3px) scale(1.06);
+}
+
+.mm-footer__craft:hover .mm-footer__craft-name::after,
+.mm-footer__craft:focus-visible .mm-footer__craft-name::after {
+  transform: scaleX(1);
+}
+
+.mm-footer__craft:active .mm-footer__craft-horn {
+  transform: translateY(-1px) scale(1);
+  transition-duration: 0.12s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mm-footer__craft,
+  .mm-footer__craft-horn,
+  .mm-footer__craft-name,
+  .mm-footer__craft-name::after {
+    transition: none;
   }
 }
